@@ -9,21 +9,39 @@ module Gen
   autoload :Codeg, 'gen/codeg.rb'
 
   def generate
-    generate_module
-
+    autoload_entries = []
     Db.full_db.each do |raw_name, xml|
       generate_class(raw_name, xml)
+      autoload_entries << generate_autoload(raw_name)
     end
+    txt = ['module Cda']
+    txt.concat(autoload_entries)
+    txt << 'end'
+    fwrite('lib/cda/autoloads.rb', txt.join("\n"))
+  end
+
+  def generate_autoload(name)
+    name = Namings.mk_class_name(name)
+    file_name = class_file_name(name)
+    "autoload :#{name}, 'cda/#{file_name}'"
   end
 
   def generate_class(raw_name, db)
     class_name = Namings.mk_class_name(raw_name)
     attributes = Meta.elements(db).map do |el|
-      Codeg.generate_attribute(el[:name], el[:type], {}) if el[:name].present?
+      if el[:name].present?
+        Codeg.generate_attribute(el[:name],
+                                 Namings.mk_class_name(el[:type]),
+                                 {})
+      end
     end
     attributes << "#Attributes"
     attributes += Meta.attributes(db).map do |attr|
-      Codeg.generate_attribute(attr[:name], attr[:type], {})
+      if attr[:type].present?
+        Codeg.generate_attribute(attr[:name],
+                                 Namings.mk_class_name(attr[:type]),
+                                 {})
+      end
     end
     class_definition = Codeg.gklass('Cda', class_name, nil, attributes.compact.join("\n"))
     fwrite(Pth.base_path(class_file_name(class_name)), class_definition)
@@ -36,20 +54,12 @@ module Gen
   def generate_part(dir, classes)
     ensure_directory_for(dir)
     write_classes_to_dir(dir, classes)
-    generate_autoloads_by_dir(dir)
   end
 
   def write_classes_to_dir(dir, classes)
     classes.each do |class_name, code|
       fwrite(Pth.base_path(dir, "#{class_name.underscore}.rb"), code)
     end
-  end
-
-  def generate_module
-    lines = ['module Cda']
-    lines << 'end'
-
-    fwrite(Pth.from_root_path("lib/cda.rb"), lines.join("\n"))
   end
 
   def ensure_directory_for(dir)
