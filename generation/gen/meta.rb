@@ -1,30 +1,36 @@
 module Gen::Meta
   def ref(node)
-    attr(node, :ref)
+    node[:ref]
   end
 
   def name(node)
-    attr(node, :name)
+    node[:name]
   end
 
   def type(node)
-    attr(node, :type)
+    node[:type]
   end
 
   def elements(node)
     node.xpath('./sequence/element')
   end
 
+  def attributes(node)
+    node.xpath('./attribute')
+  end
+
   def type_desc(node)
-    desc = node.xpath('./annotation/documentation')
+    node.xpath('./annotation/documentation')
     .map(&:text)
     .join
     .chomp
-    desc if desc.present?
+    .presence
   end
 
   def base_type(node)
-    node = node.xpath('./complexContent/extension').first || node.xpath('./simpleContent/extension').first || node.xpath('./complexContent/restriction').first
+    node = node.xpath('./complexContent/extension').first ||
+           node.xpath('./simpleContent/extension').first ||
+           node.xpath('./complexContent/restriction').first
     base = node && node[:base]
     base && base.gsub(/^xsd:/,'')
   end
@@ -51,8 +57,5 @@ module Gen::Meta
 
   private
 
-  def attr(node, attr)
-    node[attr]
-  end
   extend self
 end

@@ -4,6 +4,7 @@ module Gen::Namings
   end
 
   def mk_class_name(name)
+    name = name.sub('POCD_MT000040.','')
     if name =~ /^[_A-Z0-9]+$/
       name.downcase.camelize
     else

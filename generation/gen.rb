@@ -8,171 +8,144 @@ module Gen
   autoload :Pth, 'gen/pth.rb'
   autoload :Codeg, 'gen/codeg.rb'
 
-  def generate_all
-    ['2.3','2.3.1','2.4', '2.5', '2.5.1', '2.6', '2.7', '2.7.1'].each do |ver|
-      generate(ver)
+  def generate
+    generate_module
+
+    Db.full_db.each do |raw_name, xml|
+      generate_class(raw_name, xml)
     end
   end
 
-  def generate(version)
-    generate_module(version)
-
-    Db.full_db(version).tap do |db|
-      generate_part(version, 'base_datatypes',
-                    base_datatypes(version, db))
-      generate_part(version, 'datatypes',
-                    datatypes(version, db))
-      generate_part(version, 'segments',
-                    segments(version, db))
-      generate_part(version, 'messages',
-                    messages(version, db))
+  def generate_class(raw_name, db)
+    class_name = Namings.mk_class_name(raw_name)
+    attributes = Meta.elements(db).map do |el|
+      Codeg.generate_attribute(el[:name], el[:type], {}) if el[:name].present?
     end
+    attributes << "#Attributes"
+    attributes += Meta.attributes(db).map do |attr|
+      Codeg.generate_attribute(attr[:name], attr[:type], {})
+    end
+    class_definition = Codeg.gklass('Cda', class_name, nil, attributes.compact.join("\n"))
+    fwrite(Pth.base_path(class_file_name(class_name)), class_definition)
   end
 
-  def generate_part(version, dir, classes)
-    ensure_directory_for(version, dir)
-    write_classes_to_dir(version, dir, classes)
-    generate_autoloads_by_dir(version, dir)
+  def class_file_name(class_name)
+    class_name.underscore + '.rb'
   end
 
-  def write_classes_to_dir(version, dir, classes)
+  def generate_part(dir, classes)
+    ensure_directory_for(dir)
+    write_classes_to_dir(dir, classes)
+    generate_autoloads_by_dir(dir)
+  end
+
+  def write_classes_to_dir(dir, classes)
     classes.each do |class_name, code|
-      fwrite(Pth.base_path(version, dir, "#{class_name.underscore}.rb"), code)
+      fwrite(Pth.base_path(dir, "#{class_name.underscore}.rb"), code)
     end
   end
 
-  def generate_module(version)
-    ver = Namings.version_name(version)
-    lines = ['module HealthSeven']
-    lines<< "module #{ver.upcase}"
-    lines<< %w[base_datatypes datatypes segments messages].map do |dir|
-      "require 'health_seven/#{version}/#{dir}.rb'"
-    end
-    lines<< 'class AnyType < ::HealthSeven::SimpleType; end'
-    lines<< 'class AnyHL7Segment < ::HealthSeven::Segment; end'
-    lines<< "end\nend"
+  def generate_module
+    lines = ['module Cda']
+    lines << 'end'
 
-    fwrite(Pth.from_root_path("lib/health_seven/#{ver}.rb"), lines.join("\n"))
-end
-
-def ensure_directory_for(version, dir)
-  FileUtils.rm_rf(Pth.base_path(version, dir))
-  FileUtils.mkdir_p(Pth.base_path(version, dir))
-end
-
-
-def messages(version, db)
-  Db.messages_db(version)
-  .each_with_object({}) do |(name, message), acc|
-    class_name = Namings.mk_class_name(name)
-    acc[class_name] = Codeg.gklass(Namings.module_name(version),
-                                   class_name,
-                                   '::HealthSeven::Message',
-                                   generate_class_recursively(db, Db.find_type_by_el(db, message)))
+    fwrite(Pth.from_root_path("lib/cda.rb"), lines.join("\n"))
   end
-end
 
-def datatypes(version, db)
-  Db.datatypes_db(version)
-  .select { |n, t| Meta.complex_type?(t) && Meta.root_datatype?(n)}
-  .each_with_object({}) do |(name, tp), acc|
+  def ensure_directory_for(dir)
+    FileUtils.rm_rf(Pth.base_path(dir))
+    FileUtils.mkdir_p(Pth.base_path(dir))
+  end
+
+  def datatypes(db)
+    Db.datatypes_db
+    .select { |n, t| Meta.complex_type?(t) && Meta.root_datatype?(n)}
+    .each_with_object({}) do |(name, tp), acc|
     class_name = Namings.mk_class_name(name)
-    acc[class_name] = Codeg.gklass(Namings.module_name(version),
+    acc[class_name] = Codeg.gklass(Namings.module_name,
                                    class_name,
                                    '::HealthSeven::DataType',
                                    generate_class_body(db, tp))
+    end
   end
-end
 
-def base_datatypes(version, db)
-  Db.datatypes_db(version)
-  .select { |n, t| Meta.root_datatype?(n) && ! Meta.complex_type?(t)}
-  .each_with_object({}) do |(name, tp), acc|
-    class_name = Namings.mk_class_name(name)
-    acc[class_name] = Codeg.gklass(Namings.module_name(version),
-                                   class_name,
-                                   '::HealthSeven::SimpleType',
-                                   generate_class_body(db, tp))
+  def base_datatypes(db)
+    Db.datatypes_db
+    .select { |n, t| Meta.root_datatype?(n) && ! Meta.complex_type?(t)}
+    .each_with_object({}) do |(name, tp), acc|
+      class_name = Namings.mk_class_name(name)
+      acc[class_name] = Codeg.gklass(Namings.module_name,
+                                     class_name,
+                                     '::HealthSeven::SimpleType',
+                                     generate_class_body(db, tp))
+    end
   end
-end
 
-def segments(version, db)
-  Db.segments_db(version)
-  .each_with_object({}) do |(name, el), acc|
-    class_name = Namings.mk_class_name(name)
-    acc[class_name] = Codeg.gklass(Namings.module_name(version),
-                                   class_name,
-                                   '::HealthSeven::Segment',
-                                   generate_class_body(db, Db.find_type_by_el(db, el)))
+  def fwrite(path, content)
+    open(path, 'w'){|f| f<< content }
   end
-end
 
-def fwrite(path, content)
-  open(path, 'w'){|f| f<< content }
-end
+  def generate_attribute_by_el_ref(db, el_ref)
+    tp = Db.find_type_by_el(db, el_ref)
+    Codeg.generate_attribute(
+      Namings.normalize_name(Meta.type_desc(tp) || Meta.ref(el_ref) || Meta.name(el_ref), Meta.ref(el_ref) || Meta.name(el_ref)),
+      Namings.mk_class_name(Meta.base_type(tp) || Meta.name(tp).split('.').first),
+      meta_options(el_ref).merge(comment: Meta.type_desc(tp))
+    )
+  end
 
-
-def generate_attribute_by_el_ref(db, el_ref)
-  tp = Db.find_type_by_el(db, el_ref)
-  Codeg.generate_attribute(
-    Namings.normalize_name(Meta.type_desc(tp) || Meta.ref(el_ref) || Meta.name(el_ref), Meta.ref(el_ref) || Meta.name(el_ref)),
-    Namings.mk_class_name(Meta.base_type(tp) || Meta.name(tp).split('.').first),
-    meta_options(el_ref).merge(comment: Meta.type_desc(tp))
-  )
-end
-
-def generate_class_recursively(db, tp)
-  Meta.elements(tp).map do |el_ref|
-    if Meta.ref(el_ref) == "ED"
-      next "# TODO: Encapsulated data segment"
-    elsif Meta.nested_type?(el_ref)
-      type_class_name = Namings.mk_class_name(Meta.nested_type_name(el_ref))
-      [
-        Codeg.gklass(nil,
-                     type_class_name,
+  def generate_class_recursively(db, tp)
+    Meta.elements(tp).map do |el_ref|
+      if Meta.ref(el_ref) == "ED"
+        next "# TODO: Encapsulated data segment"
+      elsif Meta.nested_type?(el_ref)
+        type_class_name = Namings.mk_class_name(Meta.nested_type_name(el_ref))
+        [
+          Codeg.gklass(nil,
+                       type_class_name,
                      '::HealthSeven::SegmentGroup',
                      generate_class_recursively(db, Db.find_type_by_el(db, el_ref))),
-        Codeg.generate_attribute(type_class_name.underscore, type_class_name, meta_options(el_ref))
-      ].join("\n")
-    else
-      generate_attribute_by_el_ref(db, el_ref)
-    end
-  end.join("\n")
-end
-
-def meta_options(el_ref)
-  # minOccurs: el_ref[:minOccurs] || "0",
-  { position: Meta.ref(el_ref) }.tap do |res|
-    res[:require] = true if el_ref[:minOccurs] && el_ref[:minOccurs] == '1'
-    res[:multiple] = true if el_ref[:maxOccurs] == 'unbounded'
+                     Codeg.generate_attribute(type_class_name.underscore, type_class_name, meta_options(el_ref))
+        ].join("\n")
+      else
+        generate_attribute_by_el_ref(db, el_ref)
+      end
+    end.join("\n")
   end
-end
 
-def generate_class_body(db, tp)
-  Meta.elements(tp).map do |el_ref|
-    if Meta.ref(el_ref) == "ED"
-      next "# TODO: Encapsulated data segment"
+  def meta_options(el_ref)
+    # minOccurs: el_ref[:minOccurs] || "0",
+    { position: Meta.ref(el_ref) }.tap do |res|
+      res[:require] = true if el_ref[:minOccurs] && el_ref[:minOccurs] == '1'
+      res[:multiple] = true if el_ref[:maxOccurs] == 'unbounded'
     end
-    generate_attribute_by_el_ref(db, el_ref)
-  end.compact.join("\n")
-end
+  end
 
-def autoloads(version, dir)
-  lines =["module #{Namings.module_name(version)}"]
-  lines<<["  base_dir = File.dirname(__FILE__)"]
-  lines<< Dir[dir + "/*.rb"].sort.map do |file|
-    file_basename = File.basename(file, '.rb')
-    rel_path = "#{File.basename(dir)}/#{file_basename}"
+  def generate_class_body(db, tp)
+    Meta.elements(tp).map do |el_ref|
+      if Meta.ref(el_ref) == "ED"
+        next "# TODO: Encapsulated data segment"
+      end
+      generate_attribute_by_el_ref(db, el_ref)
+    end.compact.join("\n")
+  end
+
+  def autoloads(dir)
+    lines =["module #{Namings.module_name}"]
+    lines<<["  base_dir = File.dirname(__FILE__)"]
+    lines<< Dir[dir + "/*.rb"].sort.map do |file|
+      file_basename = File.basename(file, '.rb')
+      rel_path = "#{File.basename(dir)}/#{file_basename}"
       class_name = Namings.mk_class_name(file_basename)
     "  autoload :#{class_name}, base_dir + '/#{rel_path}'"
-  end
-  lines<<"end"
-  lines.join("\n")
+    end
+    lines<<"end"
+    lines.join("\n")
   end
 
-  def generate_autoloads_by_dir(version, dir)
-    fwrite(Pth.base_path(version, "#{dir}.rb"),
-           autoloads(version, Pth.base_path(version, dir)))
+  def generate_autoloads_by_dir(dir)
+    fwrite(Pth.base_path("#{dir}.rb"),
+           autoloads(Pth.base_path(dir)))
   end
 
   extend self

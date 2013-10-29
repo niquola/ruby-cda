@@ -3,9 +3,9 @@ module Gen::Pth
     File.dirname(__FILE__) + "/../../#{path}"
   end
 
-  def base_path(version, *dirs)
+  def base_path(*dirs)
     path = dirs.join('/')
-    from_root_path("lib/health_seven/#{version}/#{path}")
+    from_root_path("lib/cda/#{path}")
   end
 
   extend self

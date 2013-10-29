@@ -1,25 +1,10 @@
 
 module Gen
   module Db
-    def full_db(version)
-      Dir[Pth.from_root_path("vendor/#{version}/**/*.xsd")].reduce({}) do |acc, file|
-        acc[:types] = types_index(file, acc[:types] || {})
-        acc[:els] = elements_index(file, acc[:els] || {})
+    def full_db
+      Dir[Pth.from_root_path("xsd/*")].reduce({}) do |acc, file|
+        acc = types_index(file, acc || {})
         acc
-      end
-    end
-
-    def segments_db(version)
-      elements_index(Pth.from_root_path("vendor/#{version}/segments.xsd"))
-    end
-
-    def datatypes_db(version)
-      types_index(Pth.from_root_path("vendor/#{version}/datatypes.xsd"))
-    end
-
-    def messages_db(version)
-      index_for(['/schema/group/choice/element'], Pth.from_root_path("vendor/#{version}/messages.xsd")) do |el|
-        Meta.ref(el)
       end
     end
 
