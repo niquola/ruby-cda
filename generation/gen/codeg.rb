@@ -12,16 +12,25 @@ module Gen
       content.join("\n")
     end
 
+    def gmodule(name, body)
+      content = []
+      content << "module #{name}"
+      content << indent(body, 2)
+      content << "end"
+      content.join("\n")
+    end
+
     def generate_attribute(aname, type, opts)
-      if opts[:multiple]
-        aname = aname.pluralize
+      if opts.delete :multiple
         type = "Array[#{type}]"
       end
 
       res = []
       comment = opts.delete(:comment)
-      res<< "# #{comment.gsub(/\s+$/,'')}" if comment.present?
-      res<< "attribute :#{Namings.normalize_name(aname)}, #{type}"#, #{hash_to_str(opts)}"
+      res << "# #{comment.gsub(/\s+$/,'')}" if comment.present?
+
+      attr = ["attribute :#{Namings.normalize_name(aname)}", type, hash_to_str(opts).presence]
+      res << attr.compact.join(', ')
       res.join("\n")
     end
 
@@ -34,9 +43,7 @@ module Gen
     end
 
     def hash_to_str(hash)
-      hash.map do |k,v|
-    "#{k}: #{v.inspect}"
-      end.join(', ')
+      hash.map { |k,v| "#{k}: #{v.inspect}" }.join(', ')
     end
     extend self
   end

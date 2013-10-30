@@ -3,9 +3,9 @@ require 'tmpdir'
 
 describe Gen do
   include described_class
+  before(:all) { generate }
 
   it 'should generat at least Act, Section and Observation' do
-    generate
     $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
     require 'cda'
     require 'virtus'
@@ -16,5 +16,11 @@ describe Gen do
       Cda::Section
       Cda::Observation
     end.not_to raise_error
+
+  end
+
+  it 'should generate hierarchy of classes' do
+    Cda::PIVL_TS.should < Cda::SXCM_TS
+    Cda::ST.should < Cda::ED
   end
 end

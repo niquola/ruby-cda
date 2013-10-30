@@ -12,11 +12,11 @@ module Gen::Meta
   end
 
   def elements(node)
-    node.xpath('./sequence/element')
+    node.xpath('.//sequence/element')
   end
 
   def attributes(node)
-    node.xpath('./attribute')
+    node.xpath('.//attribute')
   end
 
   def type_desc(node)
@@ -25,6 +25,10 @@ module Gen::Meta
     .join
     .chomp
     .presence
+  end
+
+  def simple_type(node)
+    node.xpath('./simpleType/restriction').first
   end
 
   def base_type(node)
@@ -37,6 +41,10 @@ module Gen::Meta
 
   def complex_type?(node)
     node.name == 'complexType'
+  end
+
+  def simple_type?(node)
+    node.name == 'simpleType'
   end
 
   def root_datatype?(name)

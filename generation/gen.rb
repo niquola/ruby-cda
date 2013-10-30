@@ -8,154 +8,177 @@ module Gen
   autoload :Pth, 'gen/pth.rb'
   autoload :Codeg, 'gen/codeg.rb'
 
+=begin
   def generate
-    autoload_entries = []
-    Db.full_db.each do |raw_name, xml|
-      generate_class(raw_name, xml)
-      autoload_entries << generate_autoload(raw_name)
+    cleanup
+    db = Db.full_db
+    #p inference db[:types]
+    db[:types].each { |raw_name, xml| generate_class(raw_name, xml, db[:elements]) }
+    generate_autoloads(db[:types].keys.sort.reduce([]) { |autoload_entries, raw_name|
+      register_class(raw_name, autoload_entries)
+    })
+  end
+=end
+
+  def generate
+    cleanup
+    db = Db.full_db
+    definitions = db[:types].map { |raw_name, xml| define_class(raw_name, xml, db[:elements]) }
+    fwrite 'types.txt', db[:types].keys.sort_by(&:upcase).join("\n")
+    definitions.each do |df|
+      class_name = Namings.mk_class_name df[:name]
+      if class_name == 'St'
+        p df
+      end
+      ancestor = df[:ancestor].present? ? Namings.mk_class_name(df[:ancestor]) : nil
+      fappend(Pth.base_path(class_file_name(class_name)),
+            Codeg.gklass('Cda', class_name, ancestor, ''))
     end
-    txt = ['module Cda']
-    txt.concat(autoload_entries)
-    txt << 'end'
-    fwrite('lib/cda/autoloads.rb', txt.join("\n"))
+    generate_autoloads(db[:types].keys.sort.reduce([]) { |autoload_entries, raw_name|
+      register_class(raw_name, autoload_entries)
+    })
   end
 
-  def generate_autoload(name)
+=begin
+  {
+    name: 'Observation',
+    attributes: {},
+    ancestor: '',
+    multiple: true
+  }
+
+  {
+    name: 'user-name',
+    type: 'User',
+    opts: { annotations: {}, multiple: true }
+  }
+=end
+  def define_class(raw_name, xml, elemsdb)
+    if xml.name == 'complexType'
+      ancestor = xml.xpath('.//extension|.//restriction').first.try :[], :base
+      {
+        ancestor: ancestor,
+        attributes: {}#attributes()
+      }
+    elsif xml.name == 'simpleType'
+      case
+      when restriction = xml.xpath('./restriction').first
+        { ancestor: restriction[:base] }
+      when list = xml.xpath('./list').first
+        { ancestor: list[:itemType], multiple: true }
+      when union = xml.xpath('./union').first
+        { ancestor: nil, union: union[:memberTypes] } #.split(/\s+/).first }
+      end
+    else
+      raise xml.name
+    end.merge(name: raw_name)
+  end
+
+  def cleanup
+    `rm -r lib/cda`
+    `mkdir lib/cda`
+  end
+
+  def inference(types)
+    acc = types.reduce({}) do |acc, (name, xml)|
+      acc[name] = if xml.name == 'simpleType'
+                    case
+                    when restriction = xml.xpath('./restriction').first
+                      { name: restriction[:base] }
+                    when list = xml.xpath('./list').first
+                      { name: list[:itemType], multiple: true }
+                    when union = xml.xpath('./union').first
+                      { name: union[:memberTypes].split(/\s+/).first }
+                    end
+                  end
+      acc
+    end
+
+    find = ->(k) { (t = acc[k]) ? find[t[:name]] : k }
+    acc.each { |k, v|
+      if (f = find[k]) && f != k
+        puts "f: %s; k: %s; a[f]: %s" % [f, k, acc[f]].map(&:inspect)
+        acc[k] = { name: f, multiple: acc[f].try(:[], :multiple) || acc[k][:multiple] }
+      end
+    }
+  end
+
+  def register_class(name, acc)
     name = Namings.mk_class_name(name)
     file_name = class_file_name(name)
-    "autoload :#{name}, 'cda/#{file_name}'"
+    acc << "autoload :#{name}, 'cda/#{file_name}'"
   end
 
-  def generate_class(raw_name, db)
-    class_name = Namings.mk_class_name(raw_name)
-    attributes = Meta.elements(db).map do |el|
-      if el[:name].present?
-        Codeg.generate_attribute(el[:name],
-                                 Namings.mk_class_name(el[:type]),
-                                 {})
+  def generate_autoloads(entries)
+    fwrite("lib/cda/autoloads.rb", Codeg.gmodule('Cda', entries.join("\n")))
+  end
+
+  #def define_class(xml, class_name, elemsdb)
+  #  Codeg.gklass('Cda', class_name, nil, attributes(xml, elemsdb).join("\n"))
+  #end
+
+  def attributes(xml, elems)
+    elements = Meta.elements(xml).map { |el| 
+      if ref = Meta.ref(el)
+        process_reference(ref, elems)
+      else
+        process_element(el)
       end
+    }
+    attributes = Meta.attributes(xml).map { |attr| process_attribute(attr) }
+
+    (elements + attributes).compact.sort_by(&:first).map { |a| Codeg.generate_attribute(*a) }
+  end
+
+  def logsimple(el, header)
+    if Meta.simple_type?(el)
+      fappend('lib/cda/simple.xml', [header, el.to_xml].join("\n"))
     end
-    attributes << "#Attributes"
-    attributes += Meta.attributes(db).map do |attr|
-      if attr[:type].present?
-        Codeg.generate_attribute(attr[:name],
-                                 Namings.mk_class_name(attr[:type]),
-                                 {})
-      end
+  end
+
+  def process_element(el)
+    logsimple(el, 'element')
+    [Meta.name(el), Namings.mk_class_name(rmns Meta.type(el)), meta_options(el)]
+  end
+
+  def process_reference(ref, elems)
+    if el = elems[rmns(ref)]
+      process_element el
+    else
+      raise "Not found: #{ref.inspect}"
     end
-    class_definition = Codeg.gklass('Cda', class_name, nil, attributes.compact.join("\n"))
-    fwrite(Pth.base_path(class_file_name(class_name)), class_definition)
+  end
+
+  def meta_options(el)
+    {}.tap do |opts|
+      opts[:multiple] = true if el[:maxOccurs] == 'unbounded'
+    end
+  end
+
+  def rmns(type)
+    type.split(':').last
+  end
+
+  def process_attribute(attr)
+    logsimple(attr, 'attribute')
+    if attr[:type].present?
+      [attr[:name], Namings.mk_class_name(attr[:type]), meta_options(attr).merge(annotations: { kind: :attribute })]
+    elsif st = Meta.simple_type(attr)
+      fappend 'attributes.xml', st.to_xml
+      [attr[:name], Namings.mk_class_name(st[:base]), {}]
+    end
   end
 
   def class_file_name(class_name)
     class_name.underscore + '.rb'
   end
 
-  def generate_part(dir, classes)
-    ensure_directory_for(dir)
-    write_classes_to_dir(dir, classes)
-  end
-
-  def write_classes_to_dir(dir, classes)
-    classes.each do |class_name, code|
-      fwrite(Pth.base_path(dir, "#{class_name.underscore}.rb"), code)
-    end
-  end
-
-  def ensure_directory_for(dir)
-    FileUtils.rm_rf(Pth.base_path(dir))
-    FileUtils.mkdir_p(Pth.base_path(dir))
-  end
-
-  def datatypes(db)
-    Db.datatypes_db
-    .select { |n, t| Meta.complex_type?(t) && Meta.root_datatype?(n)}
-    .each_with_object({}) do |(name, tp), acc|
-    class_name = Namings.mk_class_name(name)
-    acc[class_name] = Codeg.gklass(Namings.module_name,
-                                   class_name,
-                                   '::HealthSeven::DataType',
-                                   generate_class_body(db, tp))
-    end
-  end
-
-  def base_datatypes(db)
-    Db.datatypes_db
-    .select { |n, t| Meta.root_datatype?(n) && ! Meta.complex_type?(t)}
-    .each_with_object({}) do |(name, tp), acc|
-      class_name = Namings.mk_class_name(name)
-      acc[class_name] = Codeg.gklass(Namings.module_name,
-                                     class_name,
-                                     '::HealthSeven::SimpleType',
-                                     generate_class_body(db, tp))
-    end
-  end
-
   def fwrite(path, content)
-    open(path, 'w'){|f| f<< content }
+    open(path, 'w') { |f| f << content }
   end
 
-  def generate_attribute_by_el_ref(db, el_ref)
-    tp = Db.find_type_by_el(db, el_ref)
-    Codeg.generate_attribute(
-      Namings.normalize_name(Meta.type_desc(tp) || Meta.ref(el_ref) || Meta.name(el_ref), Meta.ref(el_ref) || Meta.name(el_ref)),
-      Namings.mk_class_name(Meta.base_type(tp) || Meta.name(tp).split('.').first),
-      meta_options(el_ref).merge(comment: Meta.type_desc(tp))
-    )
-  end
-
-  def generate_class_recursively(db, tp)
-    Meta.elements(tp).map do |el_ref|
-      if Meta.ref(el_ref) == "ED"
-        next "# TODO: Encapsulated data segment"
-      elsif Meta.nested_type?(el_ref)
-        type_class_name = Namings.mk_class_name(Meta.nested_type_name(el_ref))
-        [
-          Codeg.gklass(nil,
-                       type_class_name,
-                     '::HealthSeven::SegmentGroup',
-                     generate_class_recursively(db, Db.find_type_by_el(db, el_ref))),
-                     Codeg.generate_attribute(type_class_name.underscore, type_class_name, meta_options(el_ref))
-        ].join("\n")
-      else
-        generate_attribute_by_el_ref(db, el_ref)
-      end
-    end.join("\n")
-  end
-
-  def meta_options(el_ref)
-    # minOccurs: el_ref[:minOccurs] || "0",
-    { position: Meta.ref(el_ref) }.tap do |res|
-      res[:require] = true if el_ref[:minOccurs] && el_ref[:minOccurs] == '1'
-      res[:multiple] = true if el_ref[:maxOccurs] == 'unbounded'
-    end
-  end
-
-  def generate_class_body(db, tp)
-    Meta.elements(tp).map do |el_ref|
-      if Meta.ref(el_ref) == "ED"
-        next "# TODO: Encapsulated data segment"
-      end
-      generate_attribute_by_el_ref(db, el_ref)
-    end.compact.join("\n")
-  end
-
-  def autoloads(dir)
-    lines =["module #{Namings.module_name}"]
-    lines<<["  base_dir = File.dirname(__FILE__)"]
-    lines<< Dir[dir + "/*.rb"].sort.map do |file|
-      file_basename = File.basename(file, '.rb')
-      rel_path = "#{File.basename(dir)}/#{file_basename}"
-      class_name = Namings.mk_class_name(file_basename)
-    "  autoload :#{class_name}, base_dir + '/#{rel_path}'"
-    end
-    lines<<"end"
-    lines.join("\n")
-  end
-
-  def generate_autoloads_by_dir(dir)
-    fwrite(Pth.base_path("#{dir}.rb"),
-           autoloads(Pth.base_path(dir)))
+  def fappend(path, content)
+    open(path, 'a') { |f| f.puts content }
   end
 
   extend self

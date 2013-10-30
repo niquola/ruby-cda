@@ -1,18 +1,20 @@
 module Gen::Namings
-  def version_name(version)
-    "v#{version.gsub('.','_')}"
-  end
-
   def mk_class_name(name)
     name = name.sub('POCD_MT000040.','')
+    name = name.sub(/^x_/, 'X')
     if (bt = base_type(name))
       return bt
     end
-    if name =~ /^[_A-Z0-9]+$/
-      name.downcase.camelize
-    else
-      name.gsub(/[^\w]/,'_').camelize
+
+    return name if name == name.upcase
+
+    names = name.split('.')
+    if names.size > 1
+      name = names.map { |x| mk_class_name(x) }.join('')
     end
+
+    name[0] = name[0].upcase
+    name
   end
 
   def base_type(type)
@@ -21,7 +23,7 @@ module Gen::Namings
       'xs:decimal' => 'Numeric',
       'xs:float' => 'Float',
       'xs:integer' => 'Integer',
-      'xs:boolean' => 'Boolean',
+      'xs:boolean' => '::Virtus::Attribute::Boolean',
       'xs:base64Binary' => 'String',
       'xs:NMTOKEN' => 'String',
       'xs:NMTOKENS' => 'Array[String]',
@@ -38,20 +40,8 @@ module Gen::Namings
     "HealthSeven::V#{version.gsub('.', '_')}"
   end
 
-  def normalize_name(name, nonsemantic = nil)
-    nname = name.downcase.chomp
-    .gsub(/\(e\.g\..*\)$/,'')
-    .gsub(/[^\w]/,'_')
-    .gsub(/_+/,'_')
-    .gsub(/_$/,'')
-
-    if nname.empty? && nonsemantic.present?
-      normalize_name(nonsemantic)
-    elsif nname.present?
-      nname
-    else
-      raise "Ups empty name"
-    end
+  def normalize_name(name)
+    name.underscore
   end
 
   extend self

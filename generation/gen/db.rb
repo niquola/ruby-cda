@@ -3,7 +3,8 @@ module Gen
   module Db
     def full_db
       Dir[Pth.from_root_path("xsd/*")].reduce({}) do |acc, file|
-        acc = types_index(file, acc || {})
+        acc[:types] = types_index(file, acc[:types] || {})
+        acc[:elements] = elements_index(file, acc[:elements] || {})
         acc
       end
     end
