@@ -13,7 +13,10 @@ describe Gen do
 
   it 'should generat at least Act and Section' do
     expect do
-      Dir["#{File.dirname(__FILE__)}/../lib/cda/**/*rb"].each { |f| require f }
+      Dir["#{File.dirname(__FILE__)}/../lib/cda/**/*rb"].each do |file|
+        next if file =~ /autoloads/
+        require file
+      end
       Cda::Act
       Cda::Section
     end.not_to raise_error
