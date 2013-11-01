@@ -7,8 +7,11 @@ require_relative 'gen'
 module CcdGen
   extend self
   def templates
-    doc = Nokogiri::XML.parse(File.open('xsd/Consolidation.xml')).remove_namespaces!
     doc.xpath("//Template")
+  end
+
+  def doc
+    Nokogiri::XML.parse(File.open('xsd/Consolidation.xml')).remove_namespaces!
   end
 
   def generate
@@ -27,10 +30,11 @@ module CcdGen
 
   def mk_class(template)
     ancestor = '::Cda::' + Gen::Namings.mk_class_name(template[:contextType])
-    title_comment = "##{template[:title]}\n"
-    attributes = mk_attributes(constraints(template.xpath('./Constraint')))
+    include_dsl = "include Ccd::Dsl"
+    attributes = mk_attributes(template.xpath('./Constraint'))
+    body = [include_dsl, attributes].join("\n")
 
-    Gen::Codeg.gklass('Ccd', class_name(template), ancestor, title_comment + attributes)
+    Gen::Codeg.gklass('Ccd', class_name(template), ancestor, body)
   end
 
   def class_name(template)
@@ -38,7 +42,39 @@ module CcdGen
   end
 
   def mk_attributes(constraints)
-    ''
+    constraints.map { |c| mk_attribute(c) }.flatten.join("\n")
+  end
+
+  def dump
+    templates.map do |template|
+      {
+        name: (template[:bookmark]),
+        ancestor: template[:contextType],
+        constraints: constraints(template.xpath('./Constraint'))
+      }
+    end
+  end
+
+  def mk_attribute(constraint, name = nil)
+    name = [name, name(constraint)].compact.join('.')
+    comment = comment(constraint)
+    params = ["'#{name}'"]
+    params << "cardinality: '#{constraint[:cardinality]}'" if constraint[:cardinality]
+    acc = ["##{comment}", "constraint #{params.join(', ')}\n"]
+
+    constraint.xpath('./Constraint').reduce(acc) do |acc, c|
+      acc << mk_attribute(c, name)
+    end
+    acc.compact
+  end
+
+  def comment(constraint)
+    constraint.xpath('./NarrativeText').first.try(:text)
+  end
+
+  def name(el)
+    return nil if el[:context].nil?
+    el[:context].sub('@','')
   end
 
   def constraints(elems, level = 0)
@@ -49,8 +85,8 @@ module CcdGen
         level: level,
         cardinality: el[:cardinality],
         comment: comment(el),
-        value_set: value_set(el),
         schematron_test: schematron_test(el),
+        values: values(el),
         constraints: constraints(el.xpath('./Constraint'), level + 1)
       }.delete_if { |k, v| v.blank? }
     end
@@ -63,9 +99,14 @@ module CcdGen
     end
   end
 
-  def value_set(el)
-    if vs = el.xpath('./ValueSet').first
-      vs.attributes.reduce({}) { |a, (k,v)| a[k] = v.text; a }
+  def values(el)
+    el.xpath('./*[not(self::Constraint)]').reduce(Hash.new { |h, k| h[k] = {}}) do |acc, node|
+      acc[node.name][:text] = node.text if node.text.present?
+      attrs = node.attributes.reduce({}) { |acc, (k, attr)| acc[attr.name] = attr.value; acc }
+      if attrs.present?
+        acc[node.name][:attributes] = attrs
+      end
+      acc
     end
   end
 

@@ -8,7 +8,6 @@ describe CcdGen do
     generate
     $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
     require 'cda'
-    require 'ccd'
   end
 
   example do
