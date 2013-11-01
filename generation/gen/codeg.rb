@@ -1,13 +1,15 @@
 module Gen
   module Codeg
-    def gklass(mod, name, parent)
+    def gklass(mod, name, parent, body = '')
       initial_indent = mod ? 2 : 0
       content = []
       content << "module #{mod}" if mod
       content << indent("class #{name}", initial_indent)
       content.last << " < #{parent}" if parent
       content << indent('include Virtus.model', initial_indent + 2)
-      if block_given?
+      if body
+        content << indent(body, initial_indent + 2)
+      elsif block_given?
         content << yield.map do |attribute|
           indent(attribute, initial_indent + 2)
         end.join("\n")
