@@ -22,4 +22,11 @@ describe Gen::Namings do
     mk_class_name('POCD_MT000040.InfrastructureRoot.typeId').should == 'InfrastructureRootTypeId'
     mk_class_name('x_ActClassDocumentEntryOrganizer').should == 'XActClassDocumentEntryOrganizer'
   end
+
+  example do
+    mk_ccd_class_name('E_Drug_Vehicle').should == 'DrugVehicle'
+    mk_ccd_class_name('D_US_Realm_Header').should == 'USRealmHeader'
+    mk_ccd_class_name('S_Complications_(OpNote)').should == 'ComplicationsOpNote'
+    mk_ccd_class_name('S_Allergies_Section_entries_optional').should == 'AllergiesSectionEntriesOptional'
+  end
 end

@@ -17,6 +17,17 @@ module Gen::Namings
     name
   end
 
+  def mk_class_fname(class_name)
+    class_name.underscore + '.rb'
+  end
+
+  def mk_ccd_class_name(name)
+    name.sub(/^[A-Z]_/,'').split(/[()_]/).map { |chunk|
+      chunk[0] = chunk[0].upcase if chunk != ''
+      chunk
+    }.join
+  end
+
   def base_type(type)
     {
       'xs:string' => 'String',
