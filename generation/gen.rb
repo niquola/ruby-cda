@@ -13,15 +13,15 @@ module Gen
     db = Db.full_db
     definitions = db[:types].map do |raw_name, xml|
       define_class(raw_name, xml, db[:elements])
-    end
-    # fwrite 'types.txt', db[:types].keys.sort_by(&:upcase).join("\n")
-    definitions.sort_by do |node|
+    end.sort_by do |node|
       case node[:type]
       when :simple  then 0
       when :complex then 1
       else 2
       end
-    end.each do |definition|
+    end
+    # fwrite 'types.txt', db[:types].keys.sort_by(&:upcase).join("\n")
+    definitions.each do |definition|
       class_name = Namings.mk_class_name definition[:name]
       ancestor = if definition[:ancestor].present?
                    Namings.mk_class_name(definition[:ancestor])
@@ -29,11 +29,13 @@ module Gen
       plain_text = Codeg.gklass('Cda', class_name, ancestor) do
         definition.try(:[], :attributes) || []
       end
-      fappend(Pth.base_path(class_file_name(class_name)), plain_text)
+      path = Pth.base_path(definition[:type], class_file_name(class_name))
+      fappend(path, plain_text)
     end
-    generate_autoloads(db[:types].keys.sort.reduce([]) { |autoload_entries, raw_name|
-      register_class(raw_name, autoload_entries)
-    })
+    xxx = definitions.reduce([]) do |accumulator, definition|
+      register_class(definition[:name], definition[:type], accumulator)
+    end
+    generate_autoloads(xxx)
   end
 
   def define_class(raw_name, xml, elemsdb)
@@ -87,10 +89,10 @@ module Gen
     }
   end
 
-  def register_class(name, acc)
+  def register_class(name, type, accumulator)
     name = Namings.mk_class_name(name)
     file_name = class_file_name(name)
-    acc << "autoload :#{name}, 'cda/#{file_name}'"
+    accumulator << "autoload :#{name}, 'cda/#{type}/#{file_name}'"
   end
 
   def generate_autoloads(entries)
@@ -164,11 +166,21 @@ module Gen
   end
 
   def fwrite(path, content)
+    create_dir_for_path(path)
     open(path, 'w') { |f| f << content }
   end
 
   def fappend(path, content)
+    create_dir_for_path(path)
     open(path, 'a') { |f| f.puts content }
+  end
+
+  def create_dir_for_path(path)
+    dir = File.dirname(path)
+
+    unless File.directory?(dir)
+      FileUtils.mkdir_p(dir)
+    end
   end
 
   extend self
