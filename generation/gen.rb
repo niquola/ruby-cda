@@ -8,57 +8,41 @@ module Gen
   autoload :Pth, 'gen/pth.rb'
   autoload :Codeg, 'gen/codeg.rb'
 
-=begin
   def generate
     cleanup
     db = Db.full_db
-    #p inference db[:types]
-    db[:types].each { |raw_name, xml| generate_class(raw_name, xml, db[:elements]) }
-    generate_autoloads(db[:types].keys.sort.reduce([]) { |autoload_entries, raw_name|
-      register_class(raw_name, autoload_entries)
-    })
-  end
-=end
-
-  def generate
-    cleanup
-    db = Db.full_db
-    definitions = db[:types].map { |raw_name, xml| define_class(raw_name, xml, db[:elements]) }
-    fwrite 'types.txt', db[:types].keys.sort_by(&:upcase).join("\n")
-    definitions.each do |df|
-      class_name = Namings.mk_class_name df[:name]
-      if class_name == 'St'
-        p df
+    definitions = db[:types].map do |raw_name, xml|
+      define_class(raw_name, xml, db[:elements])
+    end
+    # fwrite 'types.txt', db[:types].keys.sort_by(&:upcase).join("\n")
+    definitions.sort_by do |node|
+      case node[:type]
+      when :simple  then 0
+      when :complex then 1
+      else 2
       end
-      ancestor = df[:ancestor].present? ? Namings.mk_class_name(df[:ancestor]) : nil
-      fappend(Pth.base_path(class_file_name(class_name)),
-            Codeg.gklass('Cda', class_name, ancestor, ''))
+    end.each do |definition|
+      class_name = Namings.mk_class_name definition[:name]
+      ancestor = if definition[:ancestor].present?
+                   Namings.mk_class_name(definition[:ancestor])
+                 end
+      plain_text = Codeg.gklass('Cda', class_name, ancestor) do
+        definition.try(:[], :attributes) || []
+      end
+      fappend(Pth.base_path(class_file_name(class_name)), plain_text)
     end
     generate_autoloads(db[:types].keys.sort.reduce([]) { |autoload_entries, raw_name|
       register_class(raw_name, autoload_entries)
     })
   end
 
-=begin
-  {
-    name: 'Observation',
-    attributes: {},
-    ancestor: '',
-    multiple: true
-  }
-
-  {
-    name: 'user-name',
-    type: 'User',
-    opts: { annotations: {}, multiple: true }
-  }
-=end
   def define_class(raw_name, xml, elemsdb)
     if xml.name == 'complexType'
       ancestor = xml.xpath('.//extension|.//restriction').first.try :[], :base
       {
         ancestor: ancestor,
-        attributes: {}#attributes()
+        type: :complex,
+        attributes: attributes(xml, elemsdb)
       }
     elsif xml.name == 'simpleType'
       case
@@ -68,7 +52,7 @@ module Gen
         { ancestor: list[:itemType], multiple: true }
       when union = xml.xpath('./union').first
         { ancestor: nil, union: union[:memberTypes] } #.split(/\s+/).first }
-      end
+      end.merge(type: :simple)
     else
       raise xml.name
     end.merge(name: raw_name)
@@ -97,7 +81,7 @@ module Gen
     find = ->(k) { (t = acc[k]) ? find[t[:name]] : k }
     acc.each { |k, v|
       if (f = find[k]) && f != k
-        puts "f: %s; k: %s; a[f]: %s" % [f, k, acc[f]].map(&:inspect)
+        puts 'f: %s; k: %s; a[f]: %s' % [f, k, acc[f]].map(&:inspect)
         acc[k] = { name: f, multiple: acc[f].try(:[], :multiple) || acc[k][:multiple] }
       end
     }
@@ -110,24 +94,22 @@ module Gen
   end
 
   def generate_autoloads(entries)
-    fwrite("lib/cda/autoloads.rb", Codeg.gmodule('Cda', entries.join("\n")))
+    fwrite('lib/cda/autoloads.rb', Codeg.gmodule('Cda', entries.join("\n")))
   end
 
-  #def define_class(xml, class_name, elemsdb)
-  #  Codeg.gklass('Cda', class_name, nil, attributes(xml, elemsdb).join("\n"))
-  #end
-
-  def attributes(xml, elems)
-    elements = Meta.elements(xml).map { |el| 
+  def attributes(xml, elemsdb)
+    elements = Meta.elements(xml).map { |el|
       if ref = Meta.ref(el)
-        process_reference(ref, elems)
+        process_reference(ref, elemsdb)
       else
         process_element(el)
       end
     }
     attributes = Meta.attributes(xml).map { |attr| process_attribute(attr) }
 
-    (elements + attributes).compact.sort_by(&:first).map { |a| Codeg.generate_attribute(*a) }
+    (elements + attributes).compact.sort_by(&:first).map do |a|
+      Codeg.generate_attribute(*a)
+    end
   end
 
   def logsimple(el, header)
@@ -141,8 +123,8 @@ module Gen
     [Meta.name(el), Namings.mk_class_name(rmns Meta.type(el)), meta_options(el)]
   end
 
-  def process_reference(ref, elems)
-    if el = elems[rmns(ref)]
+  def process_reference(ref, elemsdb)
+    if el = elemsdb[rmns(ref)]
       process_element el
     else
       raise "Not found: #{ref.inspect}"
@@ -160,12 +142,20 @@ module Gen
   end
 
   def process_attribute(attr)
-    logsimple(attr, 'attribute')
+    # logsimple(attr, 'attribute')
     if attr[:type].present?
-      [attr[:name], Namings.mk_class_name(attr[:type]), meta_options(attr).merge(annotations: { kind: :attribute })]
+      [
+       attr[:name],
+       Namings.mk_class_name(attr[:type]),
+       meta_options(attr).merge(annotations: { kind: :attribute })
+      ]
     elsif st = Meta.simple_type(attr)
-      fappend 'attributes.xml', st.to_xml
-      [attr[:name], Namings.mk_class_name(st[:base]), {}]
+      # fappend 'attributes.xml', st.to_xml
+      [
+       attr[:name],
+       Namings.mk_class_name(st[:base]),
+       {}
+      ]
     end
   end
 

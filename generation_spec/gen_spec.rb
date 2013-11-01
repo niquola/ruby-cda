@@ -3,24 +3,34 @@ require 'tmpdir'
 
 describe Gen do
   include described_class
-  before(:all) { generate }
 
-  it 'should generat at least Act, Section and Observation' do
+  before(:all) do
+    require 'virtus'
+    generate
     $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
     require 'cda'
-    require 'virtus'
+  end
 
+  it 'should generat at least Act and Section' do
     expect do
       Dir["#{File.dirname(__FILE__)}/../lib/cda/**/*rb"].each { |f| require f }
       Cda::Act
       Cda::Section
-      Cda::Observation
     end.not_to raise_error
-
   end
 
   it 'should generate hierarchy of classes' do
     Cda::PIVL_TS.should < Cda::SXCM_TS
     Cda::ST.should < Cda::ED
+  end
+
+  context 'Cda::Observation' do
+    it 'should be generated' do
+      expect { Cda::Observation }.not_to raise_error
+    end
+
+    it 'should generate at least value attributes for observation' do
+      Cda::Observation.new.should respond_to(:value)
+    end
   end
 end
