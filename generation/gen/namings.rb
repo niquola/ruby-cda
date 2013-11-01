@@ -23,7 +23,7 @@ module Gen::Namings
       'xs:decimal' => 'Numeric',
       'xs:float' => 'Float',
       'xs:integer' => 'Integer',
-      'xs:boolean' => '::Virtus::Attribute::Boolean',
+      'xs:boolean' => 'String', # FIXME: Sound be boolean '::Virtus::Attribute::Boolean',
       'xs:base64Binary' => 'String',
       'xs:NMTOKEN' => 'String',
       'xs:NMTOKENS' => 'Array[String]',
