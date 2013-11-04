@@ -34,7 +34,10 @@ module CcdGen
     attributes = mk_attributes(template.xpath('./Constraint'))
     body = [include_dsl, attributes].join("\n")
 
-    Gen::Codeg.gklass('Ccd', class_name(template), ancestor, body)
+    Gen::Codeg.gklass('Ccd',
+                      module: class_name(template),
+                      ancestor: ancestor,
+                      body: body)
   end
 
   def class_name(template)

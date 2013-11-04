@@ -1,21 +1,25 @@
 module Gen
   module Codeg
-    def gklass(mod, name, parent, body = '')
-      initial_indent = mod ? 2 : 0
+    def gklass(name, opts = {})
+      module_name = opts[:module]
+      ancestor    = opts[:ancestor]
+      body        = opts[:body]
+
       content = []
-      content << "module #{mod}" if mod
-      content << indent("class #{name}", initial_indent)
-      content.last << " < #{parent}" if parent
-      content << indent('include Virtus.model', initial_indent + 2)
-      if body
-        content << indent(body, initial_indent + 2)
+      content << "class #{name}"
+      content.last << " < #{ancestor}" if ancestor
+      content << indent('include Virtus.model', 2)
+      if body.present?
+        content << indent(body, 2)
       elsif block_given?
-        content << yield.map do |attribute|
-          indent(attribute, initial_indent + 2)
-        end.join("\n")
+        content << yield(2)
       end
-      content << indent('end', initial_indent)
-      content << 'end' if mod
+      content << 'end'
+      if module_name.present?
+        content = content.map { |row| indent(row, 2) }
+        content.unshift( "module #{module_name}")
+        content.push('end')
+      end
       content.join("\n")
     end
 
@@ -28,6 +32,7 @@ module Gen
     end
 
     def generate_attribute(aname, type, opts)
+      type = (Object.constants.include?(type.to_sym) ? '' : 'Cda::') + type
       if opts.delete :multiple
         type = "Array[#{type}]"
       end

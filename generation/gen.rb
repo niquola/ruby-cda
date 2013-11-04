@@ -22,20 +22,28 @@ module Gen
     end
     # fwrite 'types.txt', db[:types].keys.sort_by(&:upcase).join("\n")
     definitions.each do |definition|
-      class_name = Namings.mk_class_name definition[:name]
+      class_name = Namings.mk_class_name(definition[:name])
+      full_class_name = 'Cda::' + class_name
       ancestor = if definition[:ancestor].present?
-                   Namings.mk_class_name(definition[:ancestor])
+                   ancestor = Namings.mk_class_name(definition[:ancestor])
+                   (Object.constants.include?(ancestor.to_sym) ? '' : 'Cda::') +
+                     ancestor
                  end
-      plain_text = Codeg.gklass('Cda', class_name, ancestor) do
-        definition.try(:[], :attributes) || []
+      plain_text = Codeg.gklass(full_class_name,
+                                ancestor: ancestor) do |number_of_indentation|
+        attributes = definition.try(:[], :attributes) || []
+        attributes.map do |attribute|
+          indent = ' ' * (number_of_indentation)
+          indent + attribute
+        end.join("\n")
       end
       path = Pth.base_path(definition[:type], class_file_name(class_name))
       fappend(path, plain_text)
     end
-    xxx = definitions.reduce([]) do |accumulator, definition|
+    autoload_entries = definitions.reduce([]) do |accumulator, definition|
       register_class(definition[:name], definition[:type], accumulator)
     end
-    generate_autoloads(xxx)
+    generate_autoloads(autoload_entries)
   end
 
   def define_class(raw_name, xml, elemsdb)
