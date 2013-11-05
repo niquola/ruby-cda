@@ -31,8 +31,18 @@ module Gen
       content.join("\n")
     end
 
+    def to_prefix_type(type_name)
+      return type_name if Object.constants.include?(type_name.to_sym)
+      'Cda::' + type_name
+    end
+
     def generate_attribute(aname, type, opts)
-      type = (Object.constants.include?(type.to_sym) ? '' : 'Cda::') + type
+      # if type.start_with?('Array')
+      #   type = type.sub(/^Array\[/, '').sub(/\]$/, '')
+      #   'Array[' + to_prefix_type(type) + ']'
+      unless type.start_with?('Array')
+        type = to_prefix_type(type)
+      end
       if opts.delete :multiple
         type = "Array[#{type}]"
       end
