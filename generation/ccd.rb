@@ -60,10 +60,20 @@ module CcdGen
 
   def mk_attribute(constraint, name = nil)
     name = [name, name(constraint)].compact.join('.')
-    comment = comment(constraint)
+    comments = [comment(constraint)]
     params = ["'#{name}'"]
     params << "cardinality: '#{constraint[:cardinality]}'" if constraint[:cardinality]
-    acc = ["##{comment}", "constraint #{params.join(', ')}\n"]
+    if sch = schematron_test(constraint)
+      comments << "schematron_test: %Q{#{sch}}"
+    end
+    if vc = single_value_code(constraint)
+      params << "value: '#{vc}'"
+    end
+    if vs = value_set(constraint)
+      params << "value_set: '#{vs}'"
+    end
+    acc = comments.map { |c| "##{c}" }
+    acc << "constraint #{params.join(', ')}\n"
 
     constraint.xpath('./Constraint').reduce(acc) do |acc, c|
       acc << mk_attribute(c, name)
@@ -98,8 +108,27 @@ module CcdGen
   def schematron_test(el)
     if test = el.xpath('./SchematronTest').first
       #test.text.gsub(/&gt; | &lt;/x, "&gt;" => '>', "&lt;" => '<')
-      CGI.unescapeHTML(test.text)
+      CGI.unescapeHTML(test.text).gsub("\n", ' ')
     end
+  end
+
+  def single_value_code(constraint)
+    if vc = constraint.xpath('./SingleValueCode').first
+      notice_once(vc.inspect, 'single_value_code')
+      vc['code']
+    end
+  end
+
+  def value_set(constraint)
+    if vs = constraint.xpath('./ValueSet').first
+      vs['oid']
+    end
+  end
+
+  def notice_once(value, key)
+    @keys ||= {}
+    puts value unless @keys.key?(key)
+    @keys[key] = value
   end
 
   def values(el)
