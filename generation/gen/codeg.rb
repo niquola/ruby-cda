@@ -20,7 +20,7 @@ module Gen
         content.unshift( "module #{module_name}")
         content.push('end')
       end
-      content.join("\n")
+      content.join("\n").split("\n").map { |s| s.rstrip }.join("\n")
     end
 
     def gmodule(name, body)

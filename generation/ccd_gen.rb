@@ -30,12 +30,12 @@ module CcdGen
 
   def mk_class(template)
     ancestor = '::Cda::' + Gen::Namings.mk_class_name(template[:contextType])
-    include_dsl = "include Ccd::Dsl"
+    include_dsl = "extend ::Ccd::Dsl"
     attributes = mk_attributes(template.xpath('./Constraint'))
     body = [include_dsl, attributes].join("\n")
 
-    Gen::Codeg.gklass('Ccd',
-                      module: class_name(template),
+    Gen::Codeg.gklass(class_name(template),
+                      module: 'Ccd',
                       ancestor: ancestor,
                       body: body)
   end
@@ -62,22 +62,26 @@ module CcdGen
     name = [name, name(constraint)].compact.join('.')
     comments = [comment(constraint)]
     params = ["'#{name}'"]
-    params << "cardinality: '#{constraint[:cardinality]}'" if constraint[:cardinality]
+
+    if card = constraint[:cardinality]
+      params << "cardinality: '#{card}'"
+    end
+
     if sch = schematron_test(constraint)
       comments << "schematron_test: %Q{#{sch}}"
     end
+
     if vc = single_value_code(constraint)
       params << "value: '#{vc}'"
     end
-    if vs = value_set(constraint)
-      params << "value_set: '#{vs}'"
-    end
+
     acc = comments.map { |c| "##{c}" }
     acc << "constraint #{params.join(', ')}\n"
 
     constraint.xpath('./Constraint').reduce(acc) do |acc, c|
       acc << mk_attribute(c, name)
     end
+
     acc.compact
   end
 
@@ -113,7 +117,7 @@ module CcdGen
   end
 
   def single_value_code(constraint)
-    if vc = constraint.xpath('./SingleValueCode').first
+    if vc = constraint.xpath('./SingleValueCode | ./ValueSet').first
       notice_once(vc.inspect, 'single_value_code')
       vc['code']
     end
