@@ -68,7 +68,7 @@ module CcdGen
     end
 
     if sch = schematron_test(constraint)
-      comments << "schematron_test: %Q{#{sch}}"
+      #comments << "schematron_test: %Q{#{sch}}"
     end
 
     if vc = single_value_code(constraint)
