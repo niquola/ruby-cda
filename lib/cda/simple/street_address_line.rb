@@ -1,4 +1,3 @@
-class Cda::StreetAddressLine
-  include Virtus.model
+class Cda::StreetAddressLine < String
 
 end

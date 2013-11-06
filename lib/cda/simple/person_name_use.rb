@@ -1,4 +1,3 @@
-class Cda::PersonNameUse
-  include Virtus.model
+class Cda::PersonNameUse < String
 
 end

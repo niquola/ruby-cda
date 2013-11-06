@@ -1,4 +1,3 @@
-class Cda::ParticipationType
-  include Virtus.model
+class Cda::ParticipationType < String
 
 end

@@ -1,4 +1,3 @@
-class Cda::Int
-  include Virtus.model
+class Cda::Int < Integer
 
 end

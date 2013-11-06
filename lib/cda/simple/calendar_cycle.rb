@@ -1,4 +1,3 @@
-class Cda::CalendarCycle
-  include Virtus.model
+class Cda::CalendarCycle < String
 
 end

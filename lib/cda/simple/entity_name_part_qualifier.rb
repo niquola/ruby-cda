@@ -1,4 +1,3 @@
-class Cda::EntityNamePartQualifier
-  include Virtus.model
+class Cda::EntityNamePartQualifier < String
 
 end

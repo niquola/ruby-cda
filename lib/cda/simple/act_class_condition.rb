@@ -1,4 +1,3 @@
-class Cda::ActClassCondition
-  include Virtus.model
+class Cda::ActClassCondition < String
 
 end

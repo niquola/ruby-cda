@@ -1,4 +1,3 @@
-class Cda::EntityClassMaterial
-  include Virtus.model
+class Cda::EntityClassMaterial < String
 
 end

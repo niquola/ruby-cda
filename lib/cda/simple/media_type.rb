@@ -1,4 +1,3 @@
-class Cda::MediaType
-  include Virtus.model
+class Cda::MediaType < String
 
 end

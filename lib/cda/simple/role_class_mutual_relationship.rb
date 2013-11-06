@@ -1,4 +1,3 @@
-class Cda::RoleClassMutualRelationship
-  include Virtus.model
+class Cda::RoleClassMutualRelationship < String
 
 end

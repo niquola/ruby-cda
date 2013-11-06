@@ -1,4 +1,3 @@
-class Cda::EntityClassLivingSubject
-  include Virtus.model
+class Cda::EntityClassLivingSubject < String
 
 end

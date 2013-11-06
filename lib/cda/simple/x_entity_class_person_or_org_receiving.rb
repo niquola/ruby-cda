@@ -1,4 +1,3 @@
-class Cda::XEntityClassPersonOrOrgReceiving
-  include Virtus.model
+class Cda::XEntityClassPersonOrOrgReceiving < String
 
 end

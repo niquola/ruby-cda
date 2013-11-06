@@ -1,4 +1,3 @@
-class Cda::TelecommunicationAddressUse
-  include Virtus.model
+class Cda::TelecommunicationAddressUse < String
 
 end

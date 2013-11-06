@@ -1,4 +1,3 @@
-class Cda::Probability
-  include Virtus.model
+class Cda::Probability < Float
 
 end

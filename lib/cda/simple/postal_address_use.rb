@@ -1,4 +1,3 @@
-class Cda::PostalAddressUse
-  include Virtus.model
+class Cda::PostalAddressUse < String
 
 end

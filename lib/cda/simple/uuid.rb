@@ -1,4 +1,3 @@
-class Cda::Uuid
-  include Virtus.model
+class Cda::Uuid < String
 
 end

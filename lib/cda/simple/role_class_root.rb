@@ -1,4 +1,3 @@
-class Cda::RoleClassRoot
-  include Virtus.model
+class Cda::RoleClassRoot < String
 
 end

@@ -1,4 +1,3 @@
-class Cda::ParticipationTargetDirect
-  include Virtus.model
+class Cda::ParticipationTargetDirect < String
 
 end

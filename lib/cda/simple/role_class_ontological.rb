@@ -1,4 +1,3 @@
-class Cda::RoleClassOntological
-  include Virtus.model
+class Cda::RoleClassOntological < String
 
 end

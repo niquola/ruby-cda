@@ -1,4 +1,3 @@
-class Cda::AddressPartType
-  include Virtus.model
+class Cda::AddressPartType < String
 
 end

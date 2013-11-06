@@ -1,4 +1,3 @@
-class Cda::RoleClassPartitive
-  include Virtus.model
+class Cda::RoleClassPartitive < String
 
 end

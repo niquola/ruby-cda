@@ -1,4 +1,3 @@
-class Cda::CalendarCycleTwoLetter
-  include Virtus.model
+class Cda::CalendarCycleTwoLetter < String
 
 end

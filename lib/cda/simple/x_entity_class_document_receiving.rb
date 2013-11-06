@@ -1,4 +1,3 @@
-class Cda::XEntityClassDocumentReceiving
-  include Virtus.model
+class Cda::XEntityClassDocumentReceiving < String
 
 end

@@ -1,4 +1,3 @@
-class Cda::Bin
-  include Virtus.model
+class Cda::Bin < String
 
 end

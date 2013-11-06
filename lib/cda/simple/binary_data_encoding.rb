@@ -1,4 +1,3 @@
-class Cda::BinaryDataEncoding
-  include Virtus.model
+class Cda::BinaryDataEncoding < String
 
 end

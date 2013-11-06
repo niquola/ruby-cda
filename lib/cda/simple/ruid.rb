@@ -1,4 +1,3 @@
-class Cda::Ruid
-  include Virtus.model
+class Cda::Ruid < String
 
 end

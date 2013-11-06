@@ -1,4 +1,3 @@
-class Cda::RoleClassRelationshipFormal
-  include Virtus.model
+class Cda::RoleClassRelationshipFormal < String
 
 end

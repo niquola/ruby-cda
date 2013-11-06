@@ -1,4 +1,3 @@
-class Cda::ActMoodCompletionTrack
-  include Virtus.model
+class Cda::ActMoodCompletionTrack < String
 
 end

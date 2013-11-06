@@ -1,4 +1,3 @@
-class Cda::PersonNamePartQualifier
-  include Virtus.model
+class Cda::PersonNamePartQualifier < String
 
 end

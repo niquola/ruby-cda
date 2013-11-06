@@ -1,4 +1,3 @@
-class Cda::ActClass
-  include Virtus.model
+class Cda::ActClass < String
 
 end

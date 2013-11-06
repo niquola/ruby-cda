@@ -1,4 +1,3 @@
-class Cda::StrucDocBr
-  include Virtus.model
+class Cda::StrucDocBr < String
 
 end

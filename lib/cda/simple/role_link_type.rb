@@ -1,4 +1,3 @@
-class Cda::RoleLinkType
-  include Virtus.model
+class Cda::RoleLinkType < String
 
 end

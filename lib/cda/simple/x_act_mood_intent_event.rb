@@ -1,4 +1,3 @@
-class Cda::XActMoodIntentEvent
-  include Virtus.model
+class Cda::XActMoodIntentEvent < String
 
 end

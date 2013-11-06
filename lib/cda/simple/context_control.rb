@@ -1,4 +1,3 @@
-class Cda::ContextControl
-  include Virtus.model
+class Cda::ContextControl < String
 
 end

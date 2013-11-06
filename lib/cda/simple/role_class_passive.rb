@@ -1,4 +1,3 @@
-class Cda::RoleClassPassive
-  include Virtus.model
+class Cda::RoleClassPassive < String
 
 end

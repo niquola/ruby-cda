@@ -1,4 +1,3 @@
-class Cda::ActClassObservation
-  include Virtus.model
+class Cda::ActClassObservation < String
 
 end

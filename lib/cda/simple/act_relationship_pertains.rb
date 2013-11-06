@@ -1,4 +1,3 @@
-class Cda::ActRelationshipPertains
-  include Virtus.model
+class Cda::ActRelationshipPertains < String
 
 end

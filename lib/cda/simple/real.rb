@@ -1,4 +1,3 @@
-class Cda::Real
-  include Virtus.model
+class Cda::Real < String
 
 end

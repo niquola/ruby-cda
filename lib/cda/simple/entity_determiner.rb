@@ -1,4 +1,3 @@
-class Cda::EntityDeterminer
-  include Virtus.model
+class Cda::EntityDeterminer < String
 
 end

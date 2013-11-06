@@ -1,4 +1,3 @@
-class Cda::NullFlavor
-  include Virtus.model
+class Cda::NullFlavor < String
 
 end

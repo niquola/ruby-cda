@@ -1,4 +1,3 @@
-class Cda::ActRelationshipConditional
-  include Virtus.model
+class Cda::ActRelationshipConditional < String
 
 end
