@@ -29,9 +29,10 @@ module Gen
                      'Cda::ANY' #workaround to break circular dependency
                    else
                      ancestor = Namings.mk_class_name(definition[:ancestor])
-                     unless Object.constants.include?(ancestor.to_sym)
+                     unless Codeg.primitive?(ancestor)
                        ancestor = 'Cda::' + ancestor
                      end
+                     ancestor
                    end
                  end
       plain_text = Codeg.gklass(full_class_name,
@@ -53,7 +54,7 @@ module Gen
 
   def define_class(raw_name, xml, elemsdb)
     if xml.name == 'complexType'
-      ancestor = xml.xpath('.//extension|.//restriction').first.try :[], :base
+      ancestor = xml.xpath('./complexContent/extension|./complexContent/restriction').first.try :[], :base
       {
         ancestor: ancestor,
         type: :complex,
@@ -66,7 +67,7 @@ module Gen
       when list = xml.xpath('./list').first
         { ancestor: list[:itemType], multiple: true }
       when union = xml.xpath('./union').first
-        { ancestor: nil, union: union[:memberTypes] } #.split(/\s+/).first }
+        { ancestor: 'String', union: union[:memberTypes] } #.split(/\s+/).first }
       end.merge(type: :simple)
     else
       raise xml.name

@@ -8,7 +8,7 @@ module Gen
       content = []
       content << "class #{name}"
       content.last << " < #{ancestor}" if ancestor
-      content << indent('include Virtus.model', 2)
+      content << indent('include Virtus.model', 2) unless primitive?(ancestor)
       if body.present?
         content << indent(body, 2)
       elsif block_given?
@@ -23,6 +23,10 @@ module Gen
       content.join("\n").split("\n").map { |s| s.rstrip }.join("\n")
     end
 
+    def primitive?(type)
+      Object.constants.include?(type.try :to_sym)
+    end
+
     def gmodule(name, body)
       content = []
       content  << "module #{name}"
@@ -32,7 +36,7 @@ module Gen
     end
 
     def to_prefix_type(type_name)
-      return type_name if Object.constants.include?(type_name.to_sym)
+      return type_name if primitive?(type_name)
       'Cda::' + type_name
     end
 
