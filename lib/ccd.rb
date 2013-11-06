@@ -1,5 +1,5 @@
 module Ccd
-  autoload :Dsl, 'lib/dsl.rb'
+  autoload :Dsl, 'dsl.rb'
 end
 
 require 'ccd/autoloads'
