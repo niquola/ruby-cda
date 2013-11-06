@@ -8,7 +8,7 @@ module Gen
       content = []
       content << "class #{name}"
       content.last << " < #{ancestor}" if ancestor
-      content << indent('include Virtus.model', 2) unless primitive?(ancestor)
+      content << indent('include Virtus.model', 2) unless stdlib_type?(ancestor)
       if body.present?
         content << indent(body, 2)
       elsif block_given?
@@ -23,7 +23,7 @@ module Gen
       content.join("\n").split("\n").map { |s| s.rstrip }.join("\n")
     end
 
-    def primitive?(type)
+    def stdlib_type?(type)
       Object.constants.include?(type.try :to_sym)
     end
 
@@ -36,17 +36,19 @@ module Gen
     end
 
     def to_prefix_type(type_name)
-      return type_name if primitive?(type_name)
+      return type_name if stdlib_type?(type_name)
       'Cda::' + type_name
     end
 
     def generate_attribute(aname, type, opts)
-      # if type.start_with?('Array')
-      #   type = type.sub(/^Array\[/, '').sub(/\]$/, '')
-      #   'Array[' + to_prefix_type(type) + ']'
+      if type == 'ANY'
+        type = 'Object'
+      end
+
       unless type.start_with?('Array')
         type = to_prefix_type(type)
       end
+
       if opts.delete :multiple
         type = "Array[#{type}]"
       end

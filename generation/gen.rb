@@ -29,7 +29,7 @@ module Gen
                      'Cda::ANY' #workaround to break circular dependency
                    else
                      ancestor = Namings.mk_class_name(definition[:ancestor])
-                     unless Codeg.primitive?(ancestor)
+                     unless Codeg.stdlib_type?(ancestor)
                        ancestor = 'Cda::' + ancestor
                      end
                      ancestor

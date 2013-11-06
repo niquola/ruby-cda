@@ -29,5 +29,5 @@ class Cda::Observation
   attribute :template_id, Array[Cda::II]
   attribute :text, Cda::ED
   attribute :type_id, Cda::InfrastructureRootTypeId
-  attribute :value, Array[Cda::ANY]
+  attribute :value, Array[Object]
 end

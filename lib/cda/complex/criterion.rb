@@ -8,5 +8,5 @@ class Cda::Criterion
   attribute :template_id, Array[Cda::II]
   attribute :text, Cda::ED
   attribute :type_id, Cda::InfrastructureRootTypeId
-  attribute :value, Cda::ANY
+  attribute :value, Object
 end
