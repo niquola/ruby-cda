@@ -38,6 +38,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Vital Sign Observation (templateId:2.16.840.1.113883.10.20.22.4.27) (CONF:15946).
     constraint 'component.observation', cardinality: '1..1'
 
-    Ccd.load_extension('VitalSignsOrganizer')
+    Ccd.load_extension('vital_signs_organizer.rb')
   end
 end

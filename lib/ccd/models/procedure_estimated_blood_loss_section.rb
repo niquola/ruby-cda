@@ -26,6 +26,6 @@ module Ccd
     #The Estimated Blood Loss section SHALL include a statement providing an estimate of the amount of blood lost during the procedure, even if the estimate is text, such as "minimal" or "none"
     constraint ''
 
-    Ccd.load_extension('ProcedureEstimatedBloodLossSection')
+    Ccd.load_extension('procedure_estimated_blood_loss_section.rb')
   end
 end

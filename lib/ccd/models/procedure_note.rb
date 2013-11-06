@@ -200,6 +200,6 @@ module Ccd
     #A consent, if present, SHALL be represented as ClinicalDocument/authorization/consent.
     constraint ''
 
-    Ccd.load_extension('ProcedureNote')
+    Ccd.load_extension('procedure_note.rb')
   end
 end

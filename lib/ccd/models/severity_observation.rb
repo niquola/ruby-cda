@@ -41,6 +41,6 @@ module Ccd
     #SHALL contain exactly one [1..1] value with @xsi:type="CD", where the code SHALL be selected from ValueSet Problem Severity 2.16.840.1.113883.3.88.12.3221.6.8 DYNAMIC (CONF:7356).
     constraint 'value', cardinality: '1..1'
 
-    Ccd.load_extension('SeverityObservation')
+    Ccd.load_extension('severity_observation.rb')
   end
 end

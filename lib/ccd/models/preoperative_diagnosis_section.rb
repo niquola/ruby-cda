@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Preoperative Diagnosis (templateId:2.16.840.1.113883.10.20.22.4.65) (CONF:15504).
     constraint 'entry.act', cardinality: '1..1'
 
-    Ccd.load_extension('PreoperativeDiagnosisSection')
+    Ccd.load_extension('preoperative_diagnosis_section.rb')
   end
 end

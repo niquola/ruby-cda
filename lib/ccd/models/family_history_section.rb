@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Family History Organizer (templateId:2.16.840.1.113883.10.20.22.4.45) (CONF:15471).
     constraint 'entry.organizer', cardinality: '1..1'
 
-    Ccd.load_extension('FamilyHistorySection')
+    Ccd.load_extension('family_history_section.rb')
   end
 end

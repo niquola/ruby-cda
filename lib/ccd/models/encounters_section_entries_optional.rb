@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Encounter Activities (templateId:2.16.840.1.113883.10.20.22.4.49) (CONF:15465).
     constraint 'entry.encounter', cardinality: '1..1'
 
-    Ccd.load_extension('EncountersSectionEntriesOptional')
+    Ccd.load_extension('encounters_section_entries_optional.rb')
   end
 end

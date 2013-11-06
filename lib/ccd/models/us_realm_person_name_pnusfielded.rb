@@ -11,6 +11,6 @@ module Ccd
     #The string SHALL NOT contain name parts
     constraint 'name'
 
-    Ccd.load_extension('USRealmPersonNamePNUSFIELDED')
+    Ccd.load_extension('us_realm_person_name_pnusfielded.rb')
   end
 end

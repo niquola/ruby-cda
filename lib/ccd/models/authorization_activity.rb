@@ -29,6 +29,6 @@ module Ccd
     #	The target of an authorization activity MAY contain one or more performer, to indicate the providers that have been authorized to provide treatment
     constraint 'entryRelationship'
 
-    Ccd.load_extension('AuthorizationActivity')
+    Ccd.load_extension('authorization_activity.rb')
   end
 end

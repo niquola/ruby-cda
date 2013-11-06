@@ -92,6 +92,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Assessment Scale Observation (templateId:2.16.840.1.113883.10.20.22.4.69) (CONF:14464).
     constraint 'entryRelationship.observation', cardinality: '1..1'
 
-    Ccd.load_extension('FunctionalStatusProblemObservation')
+    Ccd.load_extension('functional_status_problem_observation.rb')
   end
 end

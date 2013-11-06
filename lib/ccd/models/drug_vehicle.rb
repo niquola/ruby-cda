@@ -32,6 +32,6 @@ module Ccd
     #	This playingEntity/name MAY be used for the vehicle name in text, such as Normal Saline
     constraint 'playingEntity.name'
 
-    Ccd.load_extension('DrugVehicle')
+    Ccd.load_extension('drug_vehicle.rb')
   end
 end

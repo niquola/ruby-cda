@@ -92,6 +92,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Highest Pressure Ulcer Stage (templateId:2.16.840.1.113883.10.20.22.4.77) (CONF:16782).
     constraint 'entry.observation', cardinality: '1..1'
 
-    Ccd.load_extension('FunctionalStatusSection')
+    Ccd.load_extension('functional_status_section.rb')
   end
 end

@@ -53,6 +53,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Quantity Measurement Observation (templateId:2.16.840.1.113883.10.20.6.2.14) (CONF:15942).
     constraint 'entryRelationship.observation', cardinality: '1..1'
 
-    Ccd.load_extension('TextObservation')
+    Ccd.load_extension('text_observation.rb')
   end
 end

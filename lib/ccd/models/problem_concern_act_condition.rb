@@ -44,6 +44,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Problem Observation (templateId:2.16.840.1.113883.10.20.22.4.4) (CONF:15980).
     constraint 'entryRelationship.observation', cardinality: '1..1'
 
-    Ccd.load_extension('ProblemConcernActCondition')
+    Ccd.load_extension('problem_concern_act_condition.rb')
   end
 end

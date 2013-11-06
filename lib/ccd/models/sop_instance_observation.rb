@@ -74,6 +74,6 @@ module Ccd
     #This entryRelationship SHALL be present if the referenced DICOM object is a multiframe object and the reference does not apply to all frames
     constraint 'entryRelationship'
 
-    Ccd.load_extension('SOPInstanceObservation')
+    Ccd.load_extension('sop_instance_observation.rb')
   end
 end

@@ -56,6 +56,6 @@ module Ccd
     #MAY contain zero or one [0..1] author (CONF:7310).
     constraint 'author', cardinality: '0..1'
 
-    Ccd.load_extension('VitalSignObservation')
+    Ccd.load_extension('vital_sign_observation.rb')
   end
 end

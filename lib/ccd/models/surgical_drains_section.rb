@@ -26,6 +26,6 @@ module Ccd
     #   If the Surgical Drains section is present, there SHALL be a statement providing details of the drains placed or SHALL explicitly state there were no drains placed.
     constraint ''
 
-    Ccd.load_extension('SurgicalDrainsSection')
+    Ccd.load_extension('surgical_drains_section.rb')
   end
 end

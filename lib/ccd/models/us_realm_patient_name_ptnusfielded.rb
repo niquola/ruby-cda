@@ -35,6 +35,6 @@ module Ccd
     #SHALL NOT have mixed content except for white space
     constraint ''
 
-    Ccd.load_extension('USRealmPatientNamePTNUSFIELDED')
+    Ccd.load_extension('us_realm_patient_name_ptnusfielded.rb')
   end
 end

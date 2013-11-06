@@ -26,6 +26,6 @@ module Ccd
     #A DICOM Object Catalog SHALL be present if the document contains references to DICOM Images. If present, it SHALL be the first section in the document.
     constraint ''
 
-    Ccd.load_extension('DICOMObjectCatalogSectionDCM121')
+    Ccd.load_extension('dicom_object_catalog_section_dcm121.rb')
   end
 end

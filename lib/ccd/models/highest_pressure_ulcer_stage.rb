@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] value (CONF:14733).
     constraint 'value', cardinality: '1..1'
 
-    Ccd.load_extension('HighestPressureUlcerStage')
+    Ccd.load_extension('highest_pressure_ulcer_stage.rb')
   end
 end

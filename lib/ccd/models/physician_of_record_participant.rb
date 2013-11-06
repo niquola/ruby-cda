@@ -38,6 +38,6 @@ module Ccd
     #SHALL contain exactly one [1..1] templateId/@root="2.16.840.1.113883.10.20.6.2.2" (CONF:8440).
     constraint 'templateId/root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.6.2.2'
 
-    Ccd.load_extension('PhysicianOfRecordParticipant')
+    Ccd.load_extension('physician_of_record_participant.rb')
   end
 end

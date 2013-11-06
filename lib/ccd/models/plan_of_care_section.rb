@@ -62,6 +62,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Instructions (templateId:2.16.840.1.113883.10.20.22.4.20) (CONF:16751).
     constraint 'entry.act', cardinality: '1..1'
 
-    Ccd.load_extension('PlanOfCareSection')
+    Ccd.load_extension('plan_of_care_section.rb')
   end
 end

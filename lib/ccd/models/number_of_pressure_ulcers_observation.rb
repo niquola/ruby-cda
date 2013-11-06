@@ -56,6 +56,6 @@ module Ccd
     #This observation SHALL contain exactly one [1..1] value with @xsi:type="CD", where the code SHOULD be selected from ValueSet Pressure Ulcer Stage 2.16.840.1.113883.11.20.9.35 STATIC (CONF:14725).
     constraint 'entryRelationship.observation.value', cardinality: '1..1'
 
-    Ccd.load_extension('NumberOfPressureUlcersObservation')
+    Ccd.load_extension('number_of_pressure_ulcers_observation.rb')
   end
 end

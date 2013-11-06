@@ -29,6 +29,6 @@ module Ccd
     #There SHALL be a statement providing details of the complication(s) or it SHALL explicitly state there were no complications.
     constraint ''
 
-    Ccd.load_extension('ComplicationsSection')
+    Ccd.load_extension('complications_section.rb')
   end
 end

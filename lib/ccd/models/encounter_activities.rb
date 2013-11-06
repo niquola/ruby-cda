@@ -77,6 +77,6 @@ module Ccd
     #MAY contain zero or one [0..1] sdtc:dischargeDispositionCode, which SHALL be selected from ValueSet 2.16.840.1.113883.3.88.12.80.33 NUBC UB-04 FL17-Patient Status DYNAMIC or, if access to NUBC is unavailable, from CodeSystem 2.16.840.1.113883.12.112 HL7 Discharge Disposition. The prefix sdtc: SHALL be bound to the namespace “urn:hl7-org:sdtc”. The use of the namespace provides a necessary extension to CDA R2 for the use of the dischargeDispositionCode element
     constraint ''
 
-    Ccd.load_extension('EncounterActivities')
+    Ccd.load_extension('encounter_activities.rb')
   end
 end

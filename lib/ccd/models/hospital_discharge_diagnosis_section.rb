@@ -26,6 +26,6 @@ module Ccd
     #The entry, if present, SHALL contain exactly one [1..1] Hospital Discharge Diagnosis (templateId:2.16.840.1.113883.10.20.22.4.33) (CONF:15489).
     constraint 'entry.act', cardinality: '1..1'
 
-    Ccd.load_extension('HospitalDischargeDiagnosisSection')
+    Ccd.load_extension('hospital_discharge_diagnosis_section.rb')
   end
 end

@@ -38,6 +38,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Cognitive Status Result Observation (templateId:2.16.840.1.113883.10.20.22.4.74) (CONF:14381).
     constraint 'component.observation', cardinality: '1..1'
 
-    Ccd.load_extension('CognitiveStatusResultOrganizer')
+    Ccd.load_extension('cognitive_status_result_organizer.rb')
   end
 end

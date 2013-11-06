@@ -26,6 +26,6 @@ module Ccd
     #The entry, if present, SHALL contain exactly one [1..1] Medication Activity (templateId:2.16.840.1.113883.10.20.22.4.16) (CONF:15499).
     constraint 'entry.substanceAdministration', cardinality: '1..1'
 
-    Ccd.load_extension('MedicationsAdministeredSection')
+    Ccd.load_extension('medications_administered_section.rb')
   end
 end

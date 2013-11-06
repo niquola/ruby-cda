@@ -29,6 +29,6 @@ module Ccd
     #Such entryRelationships SHALL contain exactly one [1..1] Problem Observation (templateId:2.16.840.1.113883.10.20.22.4.4) (CONF:15583).
     constraint 'entryRelationship.observation', cardinality: '1..1'
 
-    Ccd.load_extension('PostprocedureDiagnosis')
+    Ccd.load_extension('postprocedure_diagnosis.rb')
   end
 end

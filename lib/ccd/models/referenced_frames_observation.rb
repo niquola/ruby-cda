@@ -23,6 +23,6 @@ module Ccd
     #This entryRelationship SHALL contain exactly one [1..1] Boundary Observation (templateId:2.16.840.1.113883.10.20.6.2.11) (CONF:15923).
     constraint 'entryRelationship.observation', cardinality: '1..1'
 
-    Ccd.load_extension('ReferencedFramesObservation')
+    Ccd.load_extension('referenced_frames_observation.rb')
   end
 end

@@ -26,6 +26,6 @@ module Ccd
     #	The Implants section SHALL include a statement providing details of the implants placed, or assert no implants were placed
     constraint ''
 
-    Ccd.load_extension('ProcedureImplantsSection')
+    Ccd.load_extension('procedure_implants_section.rb')
   end
 end

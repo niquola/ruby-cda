@@ -197,6 +197,6 @@ module Ccd
     #A description of the coverage plan SHALL contain one or more act/id, to represent the plan identifier, and an act/text with the name of the plan
     constraint 'entryRelationship'
 
-    Ccd.load_extension('PolicyActivity')
+    Ccd.load_extension('policy_activity.rb')
   end
 end

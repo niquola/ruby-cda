@@ -41,6 +41,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Result Observation (templateId:2.16.840.1.113883.10.20.22.4.2) (CONF:14850).
     constraint 'component.observation', cardinality: '1..1'
 
-    Ccd.load_extension('ResultOrganizer')
+    Ccd.load_extension('result_organizer.rb')
   end
 end

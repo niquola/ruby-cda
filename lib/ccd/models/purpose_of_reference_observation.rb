@@ -26,6 +26,6 @@ module Ccd
     #SHOULD contain zero or one [0..1] value with @xsi:type="CD", where the code SHOULD be selected from ValueSet DICOMPurposeOfReference 2.16.840.1.113883.11.20.9.28 DYNAMIC (CONF:9273).
     constraint 'value', cardinality: '0..1'
 
-    Ccd.load_extension('PurposeOfReferenceObservation')
+    Ccd.load_extension('purpose_of_reference_observation.rb')
   end
 end

@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Allergy Problem Act (templateId:2.16.840.1.113883.10.20.22.4.30) (CONF:15446).
     constraint 'entry.act', cardinality: '1..1'
 
-    Ccd.load_extension('AllergiesSectionEntriesRequired')
+    Ccd.load_extension('allergies_section_entries_required.rb')
   end
 end

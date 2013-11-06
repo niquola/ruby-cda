@@ -44,6 +44,6 @@ module Ccd
     #SHOULD contain zero or one [0..1] manufacturerOrganization (CONF:9012).
     constraint 'manufacturerOrganization', cardinality: '0..1'
 
-    Ccd.load_extension('ImmunizationMedicationInformation')
+    Ccd.load_extension('immunization_medication_information.rb')
   end
 end

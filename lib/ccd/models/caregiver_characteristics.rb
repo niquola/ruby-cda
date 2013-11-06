@@ -50,6 +50,6 @@ module Ccd
     #This participantRole SHALL contain exactly one [1..1] @classCode="CAREGIVER" (CONF:14229).
     constraint 'participant.participantRole.classCode', cardinality: '1..1', value: 'CAREGIVER'
 
-    Ccd.load_extension('CaregiverCharacteristics')
+    Ccd.load_extension('caregiver_characteristics.rb')
   end
 end

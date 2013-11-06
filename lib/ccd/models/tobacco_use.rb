@@ -38,6 +38,6 @@ module Ccd
     #This value SHALL contain exactly one [1..1] @code, which SHALL be selected from ValueSet Tobacco Use 2.16.840.1.113883.11.20.9.41 DYNAMIC (CONF:16563).
     constraint 'value.code', cardinality: '1..1'
 
-    Ccd.load_extension('TobaccoUse')
+    Ccd.load_extension('tobacco_use.rb')
   end
 end

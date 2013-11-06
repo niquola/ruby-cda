@@ -14,6 +14,6 @@ module Ccd
     #	If more precise than day, SHOULD include time-zone offset
     constraint ''
 
-    Ccd.load_extension('USRealmDateAndTimeDTMUSFIELDED')
+    Ccd.load_extension('us_realm_date_and_time_dtmusfielded.rb')
   end
 end

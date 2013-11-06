@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Non-Medicinal Supply Activity (templateId:2.16.840.1.113883.10.20.22.4.50) (CONF:15497).
     constraint 'entry.supply', cardinality: '1..1'
 
-    Ccd.load_extension('MedicalEquipmentSection')
+    Ccd.load_extension('medical_equipment_section.rb')
   end
 end

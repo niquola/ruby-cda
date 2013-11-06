@@ -128,6 +128,6 @@ module Ccd
     #SHALL contain exactly one [1..1] code/@code, which SHALL be selected from ValueSet ProgressNoteDocumentTypeCode 2.16.840.1.113883.11.20.8.1 DYNAMIC (CONF:7589).
     constraint 'code/code', cardinality: '1..1'
 
-    Ccd.load_extension('ProgressNote')
+    Ccd.load_extension('progress_note.rb')
   end
 end

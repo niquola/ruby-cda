@@ -26,6 +26,6 @@ module Ccd
     #The entry, if present, SHALL contain exactly one [1..1] Problem Concern Act (Condition) (templateId:2.16.840.1.113883.10.20.22.4.3) (CONF:15505).
     constraint 'entry.act', cardinality: '1..1'
 
-    Ccd.load_extension('ProblemSectionEntriesOptional')
+    Ccd.load_extension('problem_section_entries_optional.rb')
   end
 end

@@ -17,6 +17,6 @@ module Ccd
     #SHALL contain at least one [1..*] value with @xsi:type="INT" (CONF:9285).
     constraint 'value', cardinality: '1..*'
 
-    Ccd.load_extension('BoundaryObservation')
+    Ccd.load_extension('boundary_observation.rb')
   end
 end

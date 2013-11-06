@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Coverage Activity (templateId:2.16.840.1.113883.10.20.22.4.60) (CONF:15501).
     constraint 'entry.act', cardinality: '1..1'
 
-    Ccd.load_extension('PayersSection')
+    Ccd.load_extension('payers_section.rb')
   end
 end

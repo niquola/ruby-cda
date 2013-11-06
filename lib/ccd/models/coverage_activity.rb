@@ -44,6 +44,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Policy Activity (templateId:2.16.840.1.113883.10.20.22.4.61) (CONF:15528).
     constraint 'entryRelationship.act', cardinality: '1..1'
 
-    Ccd.load_extension('CoverageActivity')
+    Ccd.load_extension('coverage_activity.rb')
   end
 end

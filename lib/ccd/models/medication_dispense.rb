@@ -68,6 +68,6 @@ module Ccd
     #A supply act SHALL contain one product/Medication Information or one product/Immunization Medication Information template
     constraint ''
 
-    Ccd.load_extension('MedicationDispense')
+    Ccd.load_extension('medication_dispense.rb')
   end
 end

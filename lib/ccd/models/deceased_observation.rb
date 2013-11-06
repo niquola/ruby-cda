@@ -50,6 +50,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Problem Observation (templateId:2.16.840.1.113883.10.20.22.4.4) (CONF:14870).
     constraint 'entryRelationship.observation', cardinality: '1..1'
 
-    Ccd.load_extension('DeceasedObservation')
+    Ccd.load_extension('deceased_observation.rb')
   end
 end

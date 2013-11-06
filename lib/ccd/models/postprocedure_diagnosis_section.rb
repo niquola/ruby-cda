@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Postprocedure Diagnosis (templateId:2.16.840.1.113883.10.20.22.4.51) (CONF:15503).
     constraint 'entry.act', cardinality: '1..1'
 
-    Ccd.load_extension('PostprocedureDiagnosisSection')
+    Ccd.load_extension('postprocedure_diagnosis_section.rb')
   end
 end

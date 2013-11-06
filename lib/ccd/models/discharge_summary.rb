@@ -137,6 +137,6 @@ module Ccd
     #
     constraint 'component', cardinality: '0..1'
 
-    Ccd.load_extension('DischargeSummary')
+    Ccd.load_extension('discharge_summary.rb')
   end
 end

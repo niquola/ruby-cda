@@ -44,6 +44,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Tobacco Use (templateId:2.16.840.1.113883.10.20.22.4.85) (CONF:16817).
     constraint 'entry.observation', cardinality: '1..1'
 
-    Ccd.load_extension('SocialHistorySection')
+    Ccd.load_extension('social_history_section.rb')
   end
 end

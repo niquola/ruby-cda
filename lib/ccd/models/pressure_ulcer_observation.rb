@@ -149,6 +149,6 @@ module Ccd
     #This observation SHALL contain exactly one [1..1] value with @xsi:type="PQ" (CONF:14630).
     constraint 'entryRelationship.observation.value', cardinality: '1..1'
 
-    Ccd.load_extension('PressureUlcerObservation')
+    Ccd.load_extension('pressure_ulcer_observation.rb')
   end
 end

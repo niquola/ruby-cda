@@ -23,6 +23,6 @@ module Ccd
     #This subject SHALL contain exactly one [1..1] name (CONF:15347).
     constraint 'subject.name', cardinality: '1..1'
 
-    Ccd.load_extension('FetusSubjectContext')
+    Ccd.load_extension('fetus_subject_context.rb')
   end
 end

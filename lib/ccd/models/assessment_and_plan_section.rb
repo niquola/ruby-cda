@@ -23,6 +23,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Plan of Care Activity Act (templateId:2.16.840.1.113883.10.20.22.4.39) (CONF:15448).
     constraint 'entry.act', cardinality: '1..1'
 
-    Ccd.load_extension('AssessmentAndPlanSection')
+    Ccd.load_extension('assessment_and_plan_section.rb')
   end
 end

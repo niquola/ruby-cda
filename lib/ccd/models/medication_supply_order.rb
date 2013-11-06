@@ -65,6 +65,6 @@ module Ccd
     #The entryRelationship, if present, SHALL contain exactly one [1..1] Instructions (templateId:2.16.840.1.113883.10.20.22.4.20) (CONF:16095).
     constraint 'entryRelationship.act', cardinality: '1..1'
 
-    Ccd.load_extension('MedicationSupplyOrder')
+    Ccd.load_extension('medication_supply_order.rb')
   end
 end

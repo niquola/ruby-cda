@@ -14,6 +14,6 @@ module Ccd
     #Either assignedPerson or assignedAuthoringDevice SHALL be present
     constraint ''
 
-    Ccd.load_extension('ObserverContext')
+    Ccd.load_extension('observer_context.rb')
   end
 end

@@ -29,6 +29,6 @@ module Ccd
     #SHALL NOT have mixed content except for white space
     constraint ''
 
-    Ccd.load_extension('USRealmAddressADUSFIELDED')
+    Ccd.load_extension('us_realm_address_adusfielded.rb')
   end
 end

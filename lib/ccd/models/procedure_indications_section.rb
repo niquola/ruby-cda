@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Indication (templateId:2.16.840.1.113883.10.20.22.4.19) (CONF:15508).
     constraint 'entry.observation', cardinality: '1..1'
 
-    Ccd.load_extension('ProcedureIndicationsSection')
+    Ccd.load_extension('procedure_indications_section.rb')
   end
 end

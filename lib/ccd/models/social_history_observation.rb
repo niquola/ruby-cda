@@ -47,6 +47,6 @@ module Ccd
     #Observation/value can be any data type. Where Observation/value is a physical quantity, the unit of measure SHALL be expressed using a valid Unified Code for Units of Measure (UCUM) expression.
     constraint 'value'
 
-    Ccd.load_extension('SocialHistoryObservation')
+    Ccd.load_extension('social_history_observation.rb')
   end
 end

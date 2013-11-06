@@ -23,6 +23,6 @@ module Ccd
     #SHALL contain exactly one [1..1] text (CONF:8163).
     constraint 'text', cardinality: '1..1'
 
-    Ccd.load_extension('MedicalGeneralHistorySection')
+    Ccd.load_extension('medical_general_history_section.rb')
   end
 end

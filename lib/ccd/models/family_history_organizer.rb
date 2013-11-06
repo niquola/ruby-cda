@@ -65,6 +65,6 @@ module Ccd
     #Such components SHALL contain exactly one [1..1] Family History Observation (templateId:2.16.840.1.113883.10.20.22.4.46) (CONF:16888).
     constraint 'component.observation', cardinality: '1..1'
 
-    Ccd.load_extension('FamilyHistoryOrganizer')
+    Ccd.load_extension('family_history_organizer.rb')
   end
 end

@@ -74,6 +74,6 @@ module Ccd
     #This observationRange SHALL NOT contain [0..0] code (CONF:7152).
     constraint 'referenceRange.observationRange.code', cardinality: '0..0'
 
-    Ccd.load_extension('ResultObservation')
+    Ccd.load_extension('result_observation.rb')
   end
 end

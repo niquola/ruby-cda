@@ -95,6 +95,6 @@ module Ccd
     #This observationRange SHALL NOT contain [0..0] code
     constraint 'referenceRange.observationRange'
 
-    Ccd.load_extension('FunctionalStatusResultObservation')
+    Ccd.load_extension('functional_status_result_observation.rb')
   end
 end

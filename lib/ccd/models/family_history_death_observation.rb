@@ -35,6 +35,6 @@ module Ccd
     #This value SHALL contain exactly one [1..1] @code="419099009" Dead (CodeSystem: SNOMED CT 2.16.840.1.113883.6.96 STATIC) (CONF:26470).
     constraint 'value.code', cardinality: '1..1', value: '419099009'
 
-    Ccd.load_extension('FamilyHistoryDeathObservation')
+    Ccd.load_extension('family_history_death_observation.rb')
   end
 end

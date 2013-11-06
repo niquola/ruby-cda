@@ -26,6 +26,6 @@ module Ccd
     #Procedure Context SHALL be represented with the procedure or act elements depending on the nature of the procedure.
     constraint ''
 
-    Ccd.load_extension('ProcedureContext')
+    Ccd.load_extension('procedure_context.rb')
   end
 end

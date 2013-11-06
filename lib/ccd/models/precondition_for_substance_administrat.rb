@@ -17,6 +17,6 @@ module Ccd
     #SHOULD contain zero or one [0..1] value with @xsi:type="CD" (CONF:7369).
     constraint 'value', cardinality: '0..1'
 
-    Ccd.load_extension('PreconditionForSubstanceAdministrat')
+    Ccd.load_extension('precondition_for_substance_administrat.rb')
   end
 end

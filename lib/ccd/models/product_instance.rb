@@ -26,6 +26,6 @@ module Ccd
     #This scopingEntity SHALL contain at least one [1..*] id (CONF:7908).
     constraint 'scopingEntity.id', cardinality: '1..*'
 
-    Ccd.load_extension('ProductInstance')
+    Ccd.load_extension('product_instance.rb')
   end
 end

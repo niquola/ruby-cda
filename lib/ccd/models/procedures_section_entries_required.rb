@@ -41,6 +41,6 @@ module Ccd
     #There SHALL be at least one procedure, observation or act entry conformant to Procedure Activity Procedure template, Procedure Activity Observation template or Procedure Activity Act template in the Procedure Section.
     constraint ''
 
-    Ccd.load_extension('ProceduresSectionEntriesRequired')
+    Ccd.load_extension('procedures_section_entries_required.rb')
   end
 end

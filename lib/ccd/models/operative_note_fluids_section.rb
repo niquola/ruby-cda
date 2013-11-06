@@ -26,6 +26,6 @@ module Ccd
     #  If the Operative Note Fluids section is present, there SHALL be a statement providing details of the fluids administered or SHALL explicitly state there were no fluids administered.
     constraint ''
 
-    Ccd.load_extension('OperativeNoteFluidsSection')
+    Ccd.load_extension('operative_note_fluids_section.rb')
   end
 end

@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Problem Observation (templateId:2.16.840.1.113883.10.20.22.4.4) (CONF:15476).
     constraint 'entry.observation', cardinality: '1..1'
 
-    Ccd.load_extension('HistoryOfPastIllnessSection')
+    Ccd.load_extension('history_of_past_illness_section.rb')
   end
 end

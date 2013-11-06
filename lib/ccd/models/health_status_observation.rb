@@ -41,6 +41,6 @@ module Ccd
     #SHALL contain exactly one [1..1] value with @xsi:type="CD", where the code SHALL be selected from ValueSet HealthStatus 2.16.840.1.113883.1.11.20.12 DYNAMIC (CONF:9075).
     constraint 'value', cardinality: '1..1'
 
-    Ccd.load_extension('HealthStatusObservation')
+    Ccd.load_extension('health_status_observation.rb')
   end
 end

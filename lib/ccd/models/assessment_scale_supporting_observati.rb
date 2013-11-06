@@ -38,6 +38,6 @@ module Ccd
     #If xsi:type="CD" , MAY have a translation code to further specify the source if the instrument has an applicable code system and valueSet for the integer (CONF:14639).
     constraint 'value'
 
-    Ccd.load_extension('AssessmentScaleSupportingObservati')
+    Ccd.load_extension('assessment_scale_supporting_observati.rb')
   end
 end

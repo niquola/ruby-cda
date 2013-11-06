@@ -20,6 +20,6 @@ module Ccd
     #SHALL contain exactly one [1..1] text (CONF:7847).
     constraint 'text', cardinality: '1..1'
 
-    Ccd.load_extension('ReasonForReferralSection')
+    Ccd.load_extension('reason_for_referral_section.rb')
   end
 end

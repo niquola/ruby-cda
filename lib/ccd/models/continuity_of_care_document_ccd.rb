@@ -116,6 +116,6 @@ module Ccd
     #
     constraint '', cardinality: '0..1'
 
-    Ccd.load_extension('ContinuityOfCareDocumentCCD')
+    Ccd.load_extension('continuity_of_care_document_ccd.rb')
   end
 end

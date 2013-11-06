@@ -179,6 +179,6 @@ module Ccd
     #
     constraint '', cardinality: '0..1'
 
-    Ccd.load_extension('DiagnosticImagingReport')
+    Ccd.load_extension('diagnostic_imaging_report.rb')
   end
 end

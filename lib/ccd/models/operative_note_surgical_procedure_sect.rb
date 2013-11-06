@@ -26,6 +26,6 @@ module Ccd
     #  If the surgical procedure section is present there SHALL be text indicating the procedure performed.
     constraint ''
 
-    Ccd.load_extension('OperativeNoteSurgicalProcedureSect')
+    Ccd.load_extension('operative_note_surgical_procedure_sect.rb')
   end
 end

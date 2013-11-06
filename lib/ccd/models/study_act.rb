@@ -56,6 +56,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Series Act (templateId:2.16.840.1.113883.10.20.22.4.63) (CONF:15937).
     constraint 'entryRelationship.act', cardinality: '1..1'
 
-    Ccd.load_extension('StudyAct')
+    Ccd.load_extension('study_act.rb')
   end
 end

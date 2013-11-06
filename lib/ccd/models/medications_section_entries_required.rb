@@ -29,6 +29,6 @@ module Ccd
     #If medication use is unknown, the appropriate nullFlavor MAY be present (see unknown information in Section 1)
     constraint 'entry.nullFlavor', cardinality: '0..1'
 
-    Ccd.load_extension('MedicationsSectionEntriesRequired')
+    Ccd.load_extension('medications_section_entries_required.rb')
   end
 end

@@ -119,6 +119,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Severity Observation (templateId:2.16.840.1.113883.10.20.22.4.8) (CONF:16344).
     constraint 'entryRelationship.observation', cardinality: '1..1'
 
-    Ccd.load_extension('SubstanceOrDeviceAllergyIntolera')
+    Ccd.load_extension('substance_or_device_allergy_intolera.rb')
   end
 end

@@ -38,6 +38,6 @@ module Ccd
     #This value SHALL contain exactly one [1..1] @code, which SHALL be selected from ValueSet Current Smoking Status 2.16.840.1.113883.11.20.9.38 STATIC 2012-07-01 (CONF:14817).
     constraint 'value.code', cardinality: '1..1'
 
-    Ccd.load_extension('SmokingStatusObservation')
+    Ccd.load_extension('smoking_status_observation.rb')
   end
 end

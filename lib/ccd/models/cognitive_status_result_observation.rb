@@ -98,6 +98,6 @@ module Ccd
     #This observationRange SHALL NOT contain [0..0] code (CONF:14269).
     constraint 'referenceRange.observationRange.code', cardinality: '0..0'
 
-    Ccd.load_extension('CognitiveStatusResultObservation')
+    Ccd.load_extension('cognitive_status_result_observation.rb')
   end
 end

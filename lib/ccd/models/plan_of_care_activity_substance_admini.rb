@@ -17,6 +17,6 @@ module Ccd
     #SHALL contain at least one [1..*] id (CONF:8575).
     constraint 'id', cardinality: '1..*'
 
-    Ccd.load_extension('PlanOfCareActivitySubstanceAdmini')
+    Ccd.load_extension('plan_of_care_activity_substance_admini.rb')
   end
 end

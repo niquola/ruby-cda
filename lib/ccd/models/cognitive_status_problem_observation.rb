@@ -86,6 +86,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Assessment Scale Observation (templateId:2.16.840.1.113883.10.20.22.4.69) (CONF:14468).
     constraint 'entryRelationship.observation', cardinality: '1..1'
 
-    Ccd.load_extension('CognitiveStatusProblemObservation')
+    Ccd.load_extension('cognitive_status_problem_observation.rb')
   end
 end

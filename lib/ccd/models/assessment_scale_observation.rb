@@ -74,6 +74,6 @@ module Ccd
     #This reference/@value SHALL begin with a '#' and SHALL point to its corresponding narrative (using the approach defined in CDA Release 2, section 4.3.5.1)
     constraint 'referenceRange.observationRange.text.reference.value'
 
-    Ccd.load_extension('AssessmentScaleObservation')
+    Ccd.load_extension('assessment_scale_observation.rb')
   end
 end

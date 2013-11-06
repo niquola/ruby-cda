@@ -32,6 +32,6 @@ module Ccd
     #SHALL contain exactly one [1..1] value with @xsi:type="TS" (CONF:450).
     constraint 'value', cardinality: '1..1'
 
-    Ccd.load_extension('EstimatedDateOfDelivery')
+    Ccd.load_extension('estimated_date_of_delivery.rb')
   end
 end

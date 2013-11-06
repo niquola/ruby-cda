@@ -38,6 +38,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Functional Status Result Observation (templateId:2.16.840.1.113883.10.20.22.4.67) (CONF:14368).
     constraint 'component.observation', cardinality: '1..1'
 
-    Ccd.load_extension('FunctionalStatusResultOrganizer')
+    Ccd.load_extension('functional_status_result_organizer.rb')
   end
 end

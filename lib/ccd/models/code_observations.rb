@@ -44,6 +44,6 @@ module Ccd
     #Code Observations SHALL be rendered into section/text in separate paragraphs
     constraint ''
 
-    Ccd.load_extension('CodeObservations')
+    Ccd.load_extension('code_observations.rb')
   end
 end

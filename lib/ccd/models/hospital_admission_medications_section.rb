@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Admission Medication (templateId:2.16.840.1.113883.10.20.22.4.36) (CONF:15484).
     constraint 'entry.act', cardinality: '1..1'
 
-    Ccd.load_extension('HospitalAdmissionMedicationsSection')
+    Ccd.load_extension('hospital_admission_medications_section.rb')
   end
 end

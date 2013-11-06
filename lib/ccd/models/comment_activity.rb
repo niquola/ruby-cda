@@ -65,6 +65,6 @@ module Ccd
     #	Data elements defined elsewhere in the specification SHALL NOT be recorded using the Comment Activity
     constraint ''
 
-    Ccd.load_extension('CommentActivity')
+    Ccd.load_extension('comment_activity.rb')
   end
 end

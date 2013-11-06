@@ -47,6 +47,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Estimated Date of Delivery (templateId:2.16.840.1.113883.10.20.15.3.1) (CONF:15584).
     constraint 'entryRelationship.observation', cardinality: '1..1'
 
-    Ccd.load_extension('PregnancyObservation')
+    Ccd.load_extension('pregnancy_observation.rb')
   end
 end

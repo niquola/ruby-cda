@@ -47,6 +47,6 @@ module Ccd
     #This custodian/assignedCustodian/representedCustodianOrganization SHALL contain exactly one [1..1] addr (CONF:7651).
     constraint 'custodian/assignedCustodian/representedCustodianOrganization.addr', cardinality: '1..1'
 
-    Ccd.load_extension('UnstructuredDocument')
+    Ccd.load_extension('unstructured_document.rb')
   end
 end

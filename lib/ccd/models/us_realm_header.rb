@@ -578,6 +578,6 @@ module Ccd
     #This encompassingEncounter SHALL contain exactly one [1..1] effectiveTime (CONF:9958).
     constraint 'componentOf.encompassingEncounter.effectiveTime', cardinality: '1..1'
 
-    Ccd.load_extension('USRealmHeader')
+    Ccd.load_extension('us_realm_header.rb')
   end
 end

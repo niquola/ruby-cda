@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Immunization Activity (templateId:2.16.840.1.113883.10.20.22.4.52) (CONF:15494).
     constraint 'entry.substanceAdministration', cardinality: '1..1'
 
-    Ccd.load_extension('ImmunizationsSectionEntriesOptional')
+    Ccd.load_extension('immunizations_section_entries_optional.rb')
   end
 end

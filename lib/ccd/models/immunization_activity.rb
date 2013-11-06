@@ -143,6 +143,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Precondition for Substance Administration (templateId:2.16.840.1.113883.10.20.22.4.25) (CONF:15548).
     constraint 'precondition.criterion', cardinality: '1..1'
 
-    Ccd.load_extension('ImmunizationActivity')
+    Ccd.load_extension('immunization_activity.rb')
   end
 end

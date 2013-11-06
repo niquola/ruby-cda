@@ -137,6 +137,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Medication Activity (templateId:2.16.840.1.113883.10.20.22.4.16) (CONF:15602).
     constraint 'entryRelationship.substanceAdministration', cardinality: '1..1'
 
-    Ccd.load_extension('ProcedureActivityAct')
+    Ccd.load_extension('procedure_activity_act.rb')
   end
 end

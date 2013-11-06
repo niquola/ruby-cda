@@ -155,6 +155,6 @@ module Ccd
     #
     constraint 'component', cardinality: '0..1'
 
-    Ccd.load_extension('HistoryAndPhysical')
+    Ccd.load_extension('history_and_physical.rb')
   end
 end

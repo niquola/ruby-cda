@@ -38,6 +38,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Procedure Activity Act (templateId:2.16.840.1.113883.10.20.22.4.12) (CONF:15511).
     constraint 'entry.act', cardinality: '1..1'
 
-    Ccd.load_extension('ProceduresSectionEntriesOptional')
+    Ccd.load_extension('procedures_section_entries_optional.rb')
   end
 end

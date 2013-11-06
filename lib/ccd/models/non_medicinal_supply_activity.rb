@@ -38,6 +38,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Product Instance (templateId:2.16.840.1.113883.10.20.22.4.37) (CONF:15900).
     constraint 'participant.participantRole', cardinality: '1..1'
 
-    Ccd.load_extension('NonMedicinalSupplyActivity')
+    Ccd.load_extension('non_medicinal_supply_activity.rb')
   end
 end

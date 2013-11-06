@@ -35,6 +35,6 @@ module Ccd
     #SHALL contain exactly one [1..1] SOP Instance Observation (templateId:2.16.840.1.113883.10.20.6.2.8) (CONF:15916).
     constraint 'entryRelationship.observation', cardinality: '1..1'
 
-    Ccd.load_extension('QuantityMeasurementObservation')
+    Ccd.load_extension('quantity_measurement_observation.rb')
   end
 end

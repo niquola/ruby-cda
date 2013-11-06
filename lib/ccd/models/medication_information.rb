@@ -41,6 +41,6 @@ module Ccd
     #MAY contain zero or one [0..1] manufacturerOrganization (CONF:7416).
     constraint 'manufacturerOrganization', cardinality: '0..1'
 
-    Ccd.load_extension('MedicationInformation')
+    Ccd.load_extension('medication_information.rb')
   end
 end

@@ -53,6 +53,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Family History Death Observation (templateId:2.16.840.1.113883.10.20.22.4.47) (CONF:15527).
     constraint 'entryRelationship.observation', cardinality: '1..1'
 
-    Ccd.load_extension('FamilyHistoryObservation')
+    Ccd.load_extension('family_history_observation.rb')
   end
 end

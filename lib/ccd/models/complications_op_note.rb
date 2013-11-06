@@ -26,6 +26,6 @@ module Ccd
     #Such entries SHALL contain exactly one [1..1] Problem Observation (templateId:2.16.840.1.113883.10.20.22.4.4) (CONF:8050).
     constraint 'entry', cardinality: '1..1'
 
-    Ccd.load_extension('ComplicationsOpNote')
+    Ccd.load_extension('complications_op_note.rb')
   end
 end

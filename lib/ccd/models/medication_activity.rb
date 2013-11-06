@@ -167,6 +167,6 @@ module Ccd
     #Medication Activity SHOULD include doseQuantity OR rateQuantity
     constraint ''
 
-    Ccd.load_extension('MedicationActivity')
+    Ccd.load_extension('medication_activity.rb')
   end
 end

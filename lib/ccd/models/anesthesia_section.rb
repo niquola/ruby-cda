@@ -32,6 +32,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Medication Activity (templateId:2.16.840.1.113883.10.20.22.4.16) (CONF:26454).
     constraint 'entry.substanceAdministration', cardinality: '1..1'
 
-    Ccd.load_extension('AnesthesiaSection')
+    Ccd.load_extension('anesthesia_section.rb')
   end
 end

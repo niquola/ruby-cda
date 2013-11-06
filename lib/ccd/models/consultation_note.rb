@@ -143,6 +143,6 @@ module Ccd
     #	SHALL NOT include a combined Chief Complaint and Reason for Visit Section with either a Chief Complaint Section or a Reason for Visit Section
     constraint 'component'
 
-    Ccd.load_extension('ConsultationNote')
+    Ccd.load_extension('consultation_note.rb')
   end
 end

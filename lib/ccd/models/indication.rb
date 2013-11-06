@@ -44,6 +44,6 @@ module Ccd
     #The value, if present, SHOULD contain zero or one [0..1] @code, which SHOULD be selected from ValueSet Problem 2.16.840.1.113883.3.88.12.3221.7.4 DYNAMIC (CONF:15985).
     constraint 'value.code', cardinality: '0..1'
 
-    Ccd.load_extension('Indication')
+    Ccd.load_extension('indication.rb')
   end
 end

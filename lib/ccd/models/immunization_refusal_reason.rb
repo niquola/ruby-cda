@@ -26,6 +26,6 @@ module Ccd
     #This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19104).
     constraint 'statusCode.code', cardinality: '1..1', value: 'completed'
 
-    Ccd.load_extension('ImmunizationRefusalReason')
+    Ccd.load_extension('immunization_refusal_reason.rb')
   end
 end

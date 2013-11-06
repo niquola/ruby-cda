@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Plan of Care Activity Procedure (templateId:2.16.840.1.113883.10.20.22.4.41) (CONF:15502).
     constraint 'entry.procedure', cardinality: '1..1'
 
-    Ccd.load_extension('PlannedProcedureSection')
+    Ccd.load_extension('planned_procedure_section.rb')
   end
 end

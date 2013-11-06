@@ -29,6 +29,6 @@ module Ccd
     #The playingEntity, if present, MAY contain zero or one [0..1] name (CONF:16037).
     constraint 'playingEntity.name', cardinality: '0..1'
 
-    Ccd.load_extension('ServiceDeliveryLocation')
+    Ccd.load_extension('service_delivery_location.rb')
   end
 end

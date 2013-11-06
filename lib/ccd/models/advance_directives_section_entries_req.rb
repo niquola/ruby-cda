@@ -26,6 +26,6 @@ module Ccd
     #SHALL contain exactly one [1..1] Advance Directive Observation (templateId:2.16.840.1.113883.10.20.22.4.48) (CONF:15445).
     constraint 'entry.observation', cardinality: '1..1'
 
-    Ccd.load_extension('AdvanceDirectivesSectionEntriesReq')
+    Ccd.load_extension('advance_directives_section_entries_req.rb')
   end
 end

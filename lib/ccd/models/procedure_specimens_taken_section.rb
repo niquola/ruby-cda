@@ -26,6 +26,6 @@ module Ccd
     #The Procedure Specimens Taken section SHALL list all specimens removed or SHALL explicitly state that no specimens were taken
     constraint ''
 
-    Ccd.load_extension('ProcedureSpecimensTakenSection')
+    Ccd.load_extension('procedure_specimens_taken_section.rb')
   end
 end

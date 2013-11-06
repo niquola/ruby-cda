@@ -107,6 +107,6 @@ module Ccd
     #If a URL is referenced, then it SHOULD have a corresponding linkHTML element in narrative block.
     constraint 'reference.externalDocument.text.reference'
 
-    Ccd.load_extension('AdvanceDirectiveObservation')
+    Ccd.load_extension('advance_directive_observation.rb')
   end
 end
