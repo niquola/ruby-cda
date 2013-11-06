@@ -15,24 +15,26 @@ module CcdGen
   end
 
   def generate
-    `rm -r lib/ccd`
-    `mkdir lib/ccd`
+    prefix = 'lib/ccd/models'
+    `rm -fr #{prefix}`
+    `mkdir -p #{prefix}`
     autoload_entries = []
     templates.each do |template|
-      class_body = mk_class(template)
       class_name = class_name(template)
-      class_file_name = File.join('lib/ccd', Gen::Namings.mk_class_fname(class_name))
+      class_body = mk_class(template, File.basename(class_name))
+      class_file_name = File.join("#{prefix}/", Gen::Namings.mk_class_fname(class_name))
       fwrite(class_file_name, class_body)
       autoload_entries << "autoload :#{class_name}, '#{class_file_name.sub(/^lib\//, '')}'"
     end
     fwrite('lib/ccd/autoloads.rb', Gen::Codeg.gmodule('Ccd', autoload_entries.sort.join("\n")))
   end
 
-  def mk_class(template)
+  def mk_class(template, filename)
     ancestor = '::Cda::' + Gen::Namings.mk_class_name(template[:contextType])
     include_dsl = "extend ::Ccd::Dsl"
     attributes = mk_attributes(template.xpath('./Constraint'))
-    body = [include_dsl, attributes].join("\n")
+    extension = "Ccd.load_extension('#{filename}')"
+    body = [include_dsl, attributes, extension].join("\n")
 
     Gen::Codeg.gklass(class_name(template),
                       module: 'Ccd',
