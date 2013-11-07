@@ -5,6 +5,6 @@ class Cda::CD < Cda::ANY
   attribute :code_system_version, Cda::St, annotations: {:kind=>:attribute}
   attribute :display_name, Cda::St, annotations: {:kind=>:attribute}
   attribute :original_text, Cda::ED
-  attribute :qualifier, Array[Cda::CR]
-  attribute :translation, Array[Cda::CD]
+  attribute :qualifier, Array[Cda::CR], annotations: {:multiple=>true}
+  attribute :translation, Array[Cda::CD], annotations: {:multiple=>true}
 end

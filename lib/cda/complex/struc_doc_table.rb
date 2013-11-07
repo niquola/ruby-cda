@@ -10,7 +10,7 @@ class Cda::StrucDocTable
   attribute :rules, String
   attribute :style_code, Array[String], annotations: {:kind=>:attribute}
   attribute :summary, String, annotations: {:kind=>:attribute}
-  attribute :tbody, Array[Cda::StrucDocTbody]
+  attribute :tbody, Array[Cda::StrucDocTbody], annotations: {:multiple=>true}
   attribute :tfoot, Cda::StrucDocTfoot
   attribute :thead, Cda::StrucDocThead
   attribute :width, String, annotations: {:kind=>:attribute}

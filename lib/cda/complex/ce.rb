@@ -6,5 +6,5 @@ class Cda::CE < Cda::CD
   attribute :display_name, Cda::St, annotations: {:kind=>:attribute}
   attribute :original_text, Cda::ED
   attribute :qualifier, Cda::CR
-  attribute :translation, Array[Cda::CD]
+  attribute :translation, Array[Cda::CD], annotations: {:multiple=>true}
 end

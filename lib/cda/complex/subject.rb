@@ -3,9 +3,9 @@ class Cda::Subject
   attribute :awareness_code, Cda::CE
   attribute :context_control_code, Cda::ContextControl, annotations: {:kind=>:attribute}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute}
-  attribute :realm_code, Array[Cda::CS]
+  attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true}
   attribute :related_subject, Cda::RelatedSubject
-  attribute :template_id, Array[Cda::II]
+  attribute :template_id, Array[Cda::II], annotations: {:multiple=>true}
   attribute :type_code, Cda::ParticipationTargetSubject, annotations: {:kind=>:attribute}
   attribute :type_id, Cda::InfrastructureRootTypeId
 end

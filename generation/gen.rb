@@ -157,7 +157,10 @@ module Gen
 
   def meta_options(el)
     {}.tap do |opts|
-      opts[:multiple] = true if el[:maxOccurs] == 'unbounded'
+      if el[:maxOccurs] == 'unbounded'
+        opts[:multiple] = true
+        opts[:annotations] = { multiple: true }
+      end
     end
   end
 
@@ -171,7 +174,7 @@ module Gen
       [
        attr[:name],
        Namings.mk_class_name(attr[:type]),
-       meta_options(attr).merge(annotations: { kind: :attribute })
+       meta_options(attr).deep_merge(annotations: { kind: :attribute })
       ]
     elsif st = Meta.simple_type(attr)
       # fappend 'attributes.xml', st.to_xml

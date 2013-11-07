@@ -1,4 +1,4 @@
 class Cda::TEL < Cda::URL
   attribute :use, Cda::Set_TelecommunicationAddressUse, annotations: {:kind=>:attribute}
-  attribute :useable_period, Array[Cda::SXCM_TS]
+  attribute :useable_period, Array[Cda::SXCM_TS], annotations: {:multiple=>true}
 end
