@@ -1,11 +1,11 @@
 class Cda::StrucDocLinkHtml
   include Virtus.model
-  attribute :id, String, annotations: {:kind=>:attribute}
-  attribute :href, String, annotations: {:kind=>:attribute}
-  attribute :language, String, annotations: {:kind=>:attribute}
-  attribute :name, String, annotations: {:kind=>:attribute}
-  attribute :rel, String, annotations: {:kind=>:attribute}
-  attribute :rev, String, annotations: {:kind=>:attribute}
-  attribute :style_code, Array[String], annotations: {:kind=>:attribute}
-  attribute :title, String, annotations: {:kind=>:attribute}
+  attribute :id, String, annotations: {:kind=>:attribute, :class=>"String"}
+  attribute :href, String, annotations: {:kind=>:attribute, :class=>"String"}
+  attribute :language, String, annotations: {:kind=>:attribute, :class=>"String"}
+  attribute :name, String, annotations: {:kind=>:attribute, :class=>"String"}
+  attribute :rel, String, annotations: {:kind=>:attribute, :class=>"String"}
+  attribute :rev, String, annotations: {:kind=>:attribute, :class=>"String"}
+  attribute :style_code, Array[String], annotations: {:kind=>:attribute, :class=>"Array[String]"}
+  attribute :title, String, annotations: {:kind=>:attribute, :class=>"String"}
 end

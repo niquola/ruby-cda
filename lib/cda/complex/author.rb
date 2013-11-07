@@ -1,12 +1,12 @@
 class Cda::Author
   include Virtus.model
-  attribute :assigned_author, Cda::AssignedAuthor
-  attribute :context_control_code, Cda::ContextControl, annotations: {:kind=>:attribute}
-  attribute :function_code, Cda::CE
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute}
-  attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true}
-  attribute :template_id, Array[Cda::II], annotations: {:multiple=>true}
-  attribute :time, Cda::TS
-  attribute :type_code, Cda::ParticipationType, annotations: {:kind=>:attribute}
-  attribute :type_id, Cda::InfrastructureRootTypeId
+  attribute :assigned_author, Cda::AssignedAuthor, annotations: {:class=>"Cda::AssignedAuthor"}
+  attribute :context_control_code, Cda::ContextControl, annotations: {:kind=>:attribute, :class=>"Cda::ContextControl"}
+  attribute :function_code, Cda::CE, annotations: {:class=>"Cda::CE"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}
+  attribute :template_id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}
+  attribute :time, Cda::TS, annotations: {:class=>"Cda::TS"}
+  attribute :type_code, Cda::ParticipationType, annotations: {:kind=>:attribute, :class=>"Cda::ParticipationType"}
+  attribute :type_id, Cda::InfrastructureRootTypeId, annotations: {:class=>"Cda::InfrastructureRootTypeId"}
 end

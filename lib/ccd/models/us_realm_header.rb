@@ -185,6 +185,7 @@ module Ccd
     constraint 'record_target.patient_role.provider_organization.id', cardinality: '1..*'
 
     #Such ids SHOULD contain zero or one [0..1] @root="2.16.840.1.113883.4.6" National Provider Identifier (CONF:16820).
+
     constraint 'record_target.patient_role.provider_organization.id.root', cardinality: '0..1', value: '2.16.840.1.113883.4.6'
 
     #The providerOrganization, if present, SHALL contain at least one [1..*] name (CONF:5419).

@@ -1,10 +1,10 @@
 class Cda::Person
   include Virtus.model
-  attribute :class_code, Cda::EntityClass, annotations: {:kind=>:attribute}
-  attribute :determiner_code, Cda::EntityDeterminer, annotations: {:kind=>:attribute}
-  attribute :name, Array[Cda::PN], annotations: {:multiple=>true}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute}
-  attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true}
-  attribute :template_id, Array[Cda::II], annotations: {:multiple=>true}
-  attribute :type_id, Cda::InfrastructureRootTypeId
+  attribute :class_code, Cda::EntityClass, annotations: {:kind=>:attribute, :class=>"Cda::EntityClass"}
+  attribute :determiner_code, Cda::EntityDeterminer, annotations: {:kind=>:attribute, :class=>"Cda::EntityDeterminer"}
+  attribute :name, Array[Cda::PN], annotations: {:multiple=>true, :class=>"Cda::PN"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}
+  attribute :template_id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}
+  attribute :type_id, Cda::InfrastructureRootTypeId, annotations: {:class=>"Cda::InfrastructureRootTypeId"}
 end

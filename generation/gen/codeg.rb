@@ -49,6 +49,8 @@ module Gen
         type = to_prefix_type(type)
       end
 
+      opts.deep_merge! annotations: { class: type }
+
       if opts.delete :multiple
         type = "Array[#{type}]"
       end

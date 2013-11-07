@@ -1,6 +1,6 @@
 class Cda::GLIST_TS < Cda::ANY
-  attribute :denominator, Cda::Int, annotations: {:kind=>:attribute}
-  attribute :head, Cda::TS
-  attribute :increment, Cda::PQ
-  attribute :period, Cda::Int, annotations: {:kind=>:attribute}
+  attribute :denominator, Cda::Int, annotations: {:kind=>:attribute, :class=>"Cda::Int"}
+  attribute :head, Cda::TS, annotations: {:class=>"Cda::TS"}
+  attribute :increment, Cda::PQ, annotations: {:class=>"Cda::PQ"}
+  attribute :period, Cda::Int, annotations: {:kind=>:attribute, :class=>"Cda::Int"}
 end

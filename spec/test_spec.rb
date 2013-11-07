@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..')
 require 'virtus'
-require 'lib/dsl'
+require 'lib/ccd/dsl'
 require 'spec/stubs/base'
 
 describe Derived do

@@ -1,3 +1,3 @@
 class Cda::URL < Cda::ANY
-  attribute :value, Cda::Url, annotations: {:kind=>:attribute}
+  attribute :value, Cda::Url, annotations: {:kind=>:attribute, :class=>"Cda::Url"}
 end

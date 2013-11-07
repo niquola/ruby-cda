@@ -1,9 +1,9 @@
 class Cda::ReferenceRange
   include Virtus.model
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute}
-  attribute :observation_range, Cda::ObservationRange
-  attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true}
-  attribute :template_id, Array[Cda::II], annotations: {:multiple=>true}
-  attribute :type_code, Cda::ActRelationshipType, annotations: {:kind=>:attribute}
-  attribute :type_id, Cda::InfrastructureRootTypeId
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :observation_range, Cda::ObservationRange, annotations: {:class=>"Cda::ObservationRange"}
+  attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}
+  attribute :template_id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}
+  attribute :type_code, Cda::ActRelationshipType, annotations: {:kind=>:attribute, :class=>"Cda::ActRelationshipType"}
+  attribute :type_id, Cda::InfrastructureRootTypeId, annotations: {:class=>"Cda::InfrastructureRootTypeId"}
 end
