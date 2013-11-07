@@ -3,10 +3,10 @@ module Ccd
     include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] templateId (CONF:8375).
-    constraint 'templateId', cardinality: '1..1'
+    constraint 'template_id', cardinality: '1..1'
 
     #This templateId SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.1.4" (CONF:10040).
-    constraint 'templateId.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.1.4'
+    constraint 'template_id.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.1.4'
 
     #SHALL contain exactly one [1..1] code (CONF:17176).
     constraint 'code', cardinality: '1..1'
@@ -15,46 +15,46 @@ module Ccd
     constraint 'code.code', cardinality: '1..1'
 
     #SHALL contain at least one [1..*] inFulfillmentOf (CONF:8382).
-    constraint 'inFulfillmentOf', cardinality: '1..*'
+    constraint 'in_fulfillment_of', cardinality: '1..*'
 
     #Such inFulfillmentOfs SHALL contain exactly one [1..1] order (CONF:8385).
-    constraint 'inFulfillmentOf.order', cardinality: '1..1'
+    constraint 'in_fulfillment_of.order', cardinality: '1..1'
 
     #This order SHALL contain at least one [1..*] id (CONF:9102).
-    constraint 'inFulfillmentOf.order.id', cardinality: '1..*'
+    constraint 'in_fulfillment_of.order.id', cardinality: '1..*'
 
     #SHALL contain exactly one [1..1] componentOf (CONF:8386).
-    constraint 'componentOf', cardinality: '1..1'
+    constraint 'component_of', cardinality: '1..1'
 
     #This componentOf SHALL contain exactly one [1..1] encompassingEncounter (CONF:8387).
-    constraint 'componentOf.encompassingEncounter', cardinality: '1..1'
+    constraint 'component_of.encompassing_encounter', cardinality: '1..1'
 
     #This encompassingEncounter SHALL contain exactly one [1..1] id (CONF:8388).
-    constraint 'componentOf.encompassingEncounter.id', cardinality: '1..1'
+    constraint 'component_of.encompassing_encounter.id', cardinality: '1..1'
 
     #This encompassingEncounter SHALL contain exactly one [1..1] effectiveTime (CONF:8389).
-    constraint 'componentOf.encompassingEncounter.effectiveTime', cardinality: '1..1'
+    constraint 'component_of.encompassing_encounter.effective_time', cardinality: '1..1'
 
     #The content of effectiveTime SHALL be a conformant US Realm Date and Time (DT.US.FIELDED) (2.16.840.1.113883.10.20.22.5.4)
-    constraint 'componentOf.encompassingEncounter.effectiveTime'
+    constraint 'component_of.encompassing_encounter.effective_time'
 
     #This encompassingEncounter MAY contain zero or one [0..1] responsibleParty (CONF:8391).
-    constraint 'componentOf.encompassingEncounter.responsibleParty', cardinality: '0..1'
+    constraint 'component_of.encompassing_encounter.responsible_party', cardinality: '0..1'
 
     #The responsibleParty element records  only the party responsible for the encounter, not necessarily the entire episode of care.
-    constraint 'componentOf.encompassingEncounter.responsibleParty'
+    constraint 'component_of.encompassing_encounter.responsible_party'
 
     #The responsibleParty element, if present, SHALL contain an assignedEntity element which SHALL contain an assignedPerson element, a representedOrganization element, or both.
-    constraint 'componentOf.encompassingEncounter.responsibleParty'
+    constraint 'component_of.encompassing_encounter.responsible_party'
 
     #This encompassingEncounter MAY contain zero or more [0..*] encounterParticipant (CONF:8392).
-    constraint 'componentOf.encompassingEncounter.encounterParticipant', cardinality: '0..*'
+    constraint 'component_of.encompassing_encounter.encounter_participant', cardinality: '0..*'
 
     #The encounterParticipant element, if present, records only participants in the encounter, not necessarily in the entire episode of care.
-    constraint 'componentOf.encompassingEncounter.encounterParticipant'
+    constraint 'component_of.encompassing_encounter.encounter_participant'
 
     #An encounterParticipant element, if present, SHALL contain an assignedEntity element which SHALL contain an assignedPerson element,  a representedOrganization element, or both.
-    constraint 'componentOf.encompassingEncounter.encounterParticipant'
+    constraint 'component_of.encompassing_encounter.encounter_participant'
 
     #SHALL contain exactly one [1..1] component (CONF:8397).
     constraint 'component', cardinality: '1..1'

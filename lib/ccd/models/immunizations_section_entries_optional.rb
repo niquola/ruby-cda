@@ -3,10 +3,10 @@ module Ccd
     include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] templateId (CONF:7965) such that it
-    constraint 'templateId', cardinality: '1..1'
+    constraint 'template_id', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.2.2" (CONF:10399).
-    constraint 'templateId.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.2.2'
+    constraint 'template_id.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.2.2'
 
     #SHALL contain exactly one [1..1] code (CONF:15367).
     constraint 'code', cardinality: '1..1'
@@ -24,7 +24,7 @@ module Ccd
     constraint 'entry', cardinality: '0..*'
 
     #SHALL contain exactly one [1..1] Immunization Activity (templateId:2.16.840.1.113883.10.20.22.4.52) (CONF:15494).
-    constraint 'entry.substanceAdministration', cardinality: '1..1'
+    constraint 'entry.substance_administration', cardinality: '1..1'
 
     Ccd.load_extension('immunizations_section_entries_optional.rb')
   end

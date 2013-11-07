@@ -3,16 +3,16 @@ module Ccd
     include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:14806).
-    constraint 'classCode', cardinality: '1..1', value: 'OBS'
+    constraint 'class_code', cardinality: '1..1', value: 'OBS'
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:14807).
-    constraint 'moodCode', cardinality: '1..1', value: 'EVN'
+    constraint 'mood_code', cardinality: '1..1', value: 'EVN'
 
     #SHALL contain exactly one [1..1] templateId (CONF:14815) such that it
-    constraint 'templateId', cardinality: '1..1'
+    constraint 'template_id', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.4.78" (CONF:14816).
-    constraint 'templateId.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.4.78'
+    constraint 'template_id.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.4.78'
 
     #SHALL contain exactly one [1..1] code (CONF:19170).
     constraint 'code', cardinality: '1..1'
@@ -21,16 +21,16 @@ module Ccd
     constraint 'code.code', cardinality: '1..1', value: 'ASSERTION'
 
     #SHALL contain exactly one [1..1] statusCode (CONF:14809).
-    constraint 'statusCode', cardinality: '1..1'
+    constraint 'status_code', cardinality: '1..1'
 
     #This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19116).
-    constraint 'statusCode.code', cardinality: '1..1', value: 'completed'
+    constraint 'status_code.code', cardinality: '1..1', value: 'completed'
 
     #SHALL contain exactly one [1..1] effectiveTime (CONF:14814).
-    constraint 'effectiveTime', cardinality: '1..1'
+    constraint 'effective_time', cardinality: '1..1'
 
     #This effectiveTime SHALL contain exactly one [1..1] low (CONF:14818).
-    constraint 'effectiveTime.low', cardinality: '1..1'
+    constraint 'effective_time.low', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] value with @xsi:type="CD" (CONF:14810).
     constraint 'value', cardinality: '1..1'

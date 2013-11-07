@@ -3,10 +3,10 @@ module Ccd
     include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] templateId (CONF:7588) such that it
-    constraint 'templateId', cardinality: '1..1'
+    constraint 'template_id', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.1.9" (CONF:10052).
-    constraint 'templateId.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.1.9'
+    constraint 'template_id.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.1.9'
 
     #SHALL contain exactly one [1..1] code (CONF:17189).
     constraint 'code', cardinality: '1..1'
@@ -15,52 +15,52 @@ module Ccd
     constraint 'code.code', cardinality: '1..1'
 
     #SHOULD contain zero or one [0..1] documentationOf (CONF:7603).
-    constraint 'documentationOf', cardinality: '0..1'
+    constraint 'documentation_of', cardinality: '0..1'
 
     #The documentationOf, if present, SHALL contain exactly one [1..1] serviceEvent (CONF:7604).
-    constraint 'documentationOf.serviceEvent', cardinality: '1..1'
+    constraint 'documentation_of.service_event', cardinality: '1..1'
 
     #This serviceEvent SHALL contain exactly one [1..1] @classCode="PCPR" Care Provision (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:26420).
-    constraint 'documentationOf.serviceEvent.classCode', cardinality: '1..1', value: 'PCPR'
+    constraint 'documentation_of.service_event.class_code', cardinality: '1..1', value: 'PCPR'
 
     #This serviceEvent SHALL contain exactly one [1..1] templateId (CONF:9480) such that it
-    constraint 'documentationOf.serviceEvent.templateId', cardinality: '1..1'
+    constraint 'documentation_of.service_event.template_id', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.21.3.1" (CONF:10068).
-    constraint 'documentationOf.serviceEvent.templateId.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.21.3.1'
+    constraint 'documentation_of.service_event.template_id.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.21.3.1'
 
     #This serviceEvent SHOULD contain zero or one [0..1] effectiveTime (CONF:9481).
-    constraint 'documentationOf.serviceEvent.effectiveTime', cardinality: '0..1'
+    constraint 'documentation_of.service_event.effective_time', cardinality: '0..1'
 
     #	The serviceEvent/effectiveTime element SHOULD be present with effectiveTime/low element
-    constraint 'documentationOf.serviceEvent.effectiveTime'
+    constraint 'documentation_of.service_event.effective_time'
 
     #	If a width element is not present, the serviceEvent SHALL include effectiveTime/high
-    constraint 'documentationOf.serviceEvent.effectiveTime'
+    constraint 'documentation_of.service_event.effective_time'
 
     #The content of effectiveTime SHALL be a conformant US Realm Date and Time (DT.US.FIELDED) (2.16.840.1.113883.10.20.22.5.4)
-    constraint 'documentationOf.serviceEvent.effectiveTime'
+    constraint 'documentation_of.service_event.effective_time'
 
     #SHALL contain exactly one [1..1] componentOf (CONF:7595).
-    constraint 'componentOf', cardinality: '1..1'
+    constraint 'component_of', cardinality: '1..1'
 
     #This componentOf SHALL contain exactly one [1..1] encompassingEncounter (CONF:7596).
-    constraint 'componentOf.encompassingEncounter', cardinality: '1..1'
+    constraint 'component_of.encompassing_encounter', cardinality: '1..1'
 
     #This encompassingEncounter SHALL contain at least one [1..*] id (CONF:7597).
-    constraint 'componentOf.encompassingEncounter.id', cardinality: '1..*'
+    constraint 'component_of.encompassing_encounter.id', cardinality: '1..*'
 
     #This encompassingEncounter SHALL contain exactly one [1..1] effectiveTime (CONF:7598).
-    constraint 'componentOf.encompassingEncounter.effectiveTime', cardinality: '1..1'
+    constraint 'component_of.encompassing_encounter.effective_time', cardinality: '1..1'
 
     #This effectiveTime SHALL contain exactly one [1..1] low (CONF:7599).
-    constraint 'componentOf.encompassingEncounter.effectiveTime.low', cardinality: '1..1'
+    constraint 'component_of.encompassing_encounter.effective_time.low', cardinality: '1..1'
 
     #The content of effectiveTime SHALL be a conformant US Realm Date and Time (DT.US.FIELDED) (2.16.840.1.113883.10.20.22.5.4)
-    constraint 'componentOf.encompassingEncounter.effectiveTime'
+    constraint 'component_of.encompassing_encounter.effective_time'
 
     #This encompassingEncounter SHALL contain exactly one [1..1] location/healthCareFacility/id (CONF:7611).
-    constraint 'componentOf.encompassingEncounter.location/healthCareFacility/id', cardinality: '1..1'
+    constraint 'component_of.encompassing_encounter.location/health_care_facility/id', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] component (CONF:9591).
     constraint 'component', cardinality: '1..1'

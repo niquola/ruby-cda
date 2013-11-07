@@ -18,13 +18,13 @@ module Ccd
     constraint 'city', cardinality: '1..1'
 
     #SHOULD contain zero or one [0..1] postalCode, which SHOULD be selected from ValueSet PostalCode 2.16.840.1.113883.3.88.12.80.2 DYNAMIC (CONF:7294).
-    constraint 'postalCode', cardinality: '0..1'
+    constraint 'postal_code', cardinality: '0..1'
 
     #PostalCode is required if the country is US. If country is not specified, it's assumed to be US. If country is something other than US, the postalCode MAY be present but MAY be bound to different vocabularies
-    constraint 'postalCode'
+    constraint 'postal_code'
 
     #SHALL contain at least one and not more than 4 streetAddressLine (CONF:7291).
-    constraint 'streetAddressLine', cardinality: '1..4'
+    constraint 'street_address_line', cardinality: '1..4'
 
     #SHALL NOT have mixed content except for white space
     constraint ''

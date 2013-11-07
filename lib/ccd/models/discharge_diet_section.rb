@@ -3,10 +3,10 @@ module Ccd
     include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] templateId (CONF:7975) such that it
-    constraint 'templateId', cardinality: '1..1'
+    constraint 'template_id', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] @root="1.3.6.1.4.1.19376.1.5.3.1.3.33" (CONF:10455).
-    constraint 'templateId.root', cardinality: '1..1', value: '1.3.6.1.4.1.19376.1.5.3.1.3.33'
+    constraint 'template_id.root', cardinality: '1..1', value: '1.3.6.1.4.1.19376.1.5.3.1.3.33'
 
     #SHALL contain exactly one [1..1] code (CONF:15459).
     constraint 'code', cardinality: '1..1'

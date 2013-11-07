@@ -3,19 +3,19 @@ module Ccd
     include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7121).
-    constraint 'classCode', cardinality: '1..1'
+    constraint 'class_code', cardinality: '1..1'
 
     #	SHOULD contain zero or one [0..1] @classCode="CLUSTER" Cluster (CodeSystem: 2.16.840.1.113883.5.6 HL7ActClass) OR SHOULD contain zero or one [0..1] @classCode="BATTERY" Battery (CodeSystem: 2.16.840.1.113883.5.6 HL7ActClass)
-    constraint 'classCode'
+    constraint 'class_code'
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:7122).
-    constraint 'moodCode', cardinality: '1..1', value: 'EVN'
+    constraint 'mood_code', cardinality: '1..1', value: 'EVN'
 
     #SHALL contain exactly one [1..1] templateId (CONF:7126) such that it
-    constraint 'templateId', cardinality: '1..1'
+    constraint 'template_id', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.4.1" (CONF:9134).
-    constraint 'templateId.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.4.1'
+    constraint 'template_id.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.4.1'
 
     #SHALL contain at least one [1..*] id (CONF:7127).
     constraint 'id', cardinality: '1..*'
@@ -30,10 +30,10 @@ module Ccd
     constraint 'code'
 
     #SHALL contain exactly one [1..1] statusCode (CONF:7123).
-    constraint 'statusCode', cardinality: '1..1'
+    constraint 'status_code', cardinality: '1..1'
 
     #This statusCode SHALL contain exactly one [1..1] @code, which SHALL be selected from ValueSet Result Status 2.16.840.1.113883.11.20.9.39 STATIC (CONF:14848).
-    constraint 'statusCode.code', cardinality: '1..1'
+    constraint 'status_code.code', cardinality: '1..1'
 
     #SHALL contain at least one [1..*] component (CONF:7124) such that it
     constraint 'component', cardinality: '1..*'

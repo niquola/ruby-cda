@@ -3,10 +3,10 @@ module Ccd
     include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] templateId (CONF:8404) such that it
-    constraint 'templateId', cardinality: '1..1'
+    constraint 'template_id', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.1.5" (CONF:10042).
-    constraint 'templateId.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.1.5'
+    constraint 'template_id.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.1.5'
 
     #SHALL contain exactly one [1..1] code (CONF:14833).
     constraint 'code', cardinality: '1..1'
@@ -18,91 +18,91 @@ module Ccd
     constraint 'informant', cardinality: '0..0'
 
     #MAY contain zero or more [0..*] informationRecipient (CONF:8411).
-    constraint 'informationRecipient', cardinality: '0..*'
+    constraint 'information_recipient', cardinality: '0..*'
 
     #The physician requesting the imaging procedure (ClincalDocument/participant[@typeCode=REF]/associatedEntity), if present, SHOULD also be recorded as an informationRecipient, unless in the local setting another physician (such as the attending physician for an inpatient) is known to be the appropriate recipient of the report.
-    constraint 'informationRecipient'
+    constraint 'information_recipient'
 
     #When no referring physician is present, as in the case of self-referred screening examinations allowed by law, the intendedRecipient MAY be absent. The intendedRecipient MAY also be the health chart of the patient, in which case the receivedOrganization SHALL be the scoping organization of that chart.
-    constraint 'informationRecipient'
+    constraint 'information_recipient'
 
     #MAY contain zero or one [0..1] participant (CONF:8414) such that it
     constraint 'participant', cardinality: '0..1'
 
     #SHALL contain exactly one [1..1] assignedPerson (CONF:8415).
-    constraint 'participant.assignedPerson', cardinality: '1..1'
+    constraint 'participant.assigned_person', cardinality: '1..1'
 
     #This assignedPerson SHALL contain exactly one [1..1] name (CONF:9406).
-    constraint 'participant.assignedPerson.name', cardinality: '1..1'
+    constraint 'participant.assigned_person.name', cardinality: '1..1'
 
     #The content of name SHALL be a conformant US Realm Person Name (PN.US.FIELDED) (2.16.840.1.113883.10.20.22.5.1.1)
-    constraint 'participant.assignedPerson.name'
+    constraint 'participant.assigned_person.name'
 
     #SHALL contain exactly one [1..1] documentationOf (CONF:8416) such that it
-    constraint 'documentationOf', cardinality: '1..1'
+    constraint 'documentation_of', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] serviceEvent (CONF:8431).
-    constraint 'documentationOf.serviceEvent', cardinality: '1..1'
+    constraint 'documentation_of.service_event', cardinality: '1..1'
 
     #This serviceEvent SHALL contain exactly one [1..1] @classCode="ACT" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8430).
-    constraint 'documentationOf.serviceEvent.classCode', cardinality: '1..1', value: 'ACT'
+    constraint 'documentation_of.service_event.class_code', cardinality: '1..1', value: 'ACT'
 
     #This serviceEvent SHOULD contain zero or more [0..*] id (CONF:8418).
-    constraint 'documentationOf.serviceEvent.id', cardinality: '0..*'
+    constraint 'documentation_of.service_event.id', cardinality: '0..*'
 
     #This serviceEvent SHALL contain exactly one [1..1] code (CONF:8419).
-    constraint 'documentationOf.serviceEvent.code', cardinality: '1..1'
+    constraint 'documentation_of.service_event.code', cardinality: '1..1'
 
     #The value of serviceEvent/code SHALL NOT conflict with the ClininicalDocument/code. When transforming from DICOM SR documents that do not contain a procedure code, an appropriate nullFlavor SHALL be used on serviceEvent/code.
-    constraint 'documentationOf.serviceEvent.code'
+    constraint 'documentation_of.service_event.code'
 
     #This serviceEvent SHOULD contain zero or more [0..*] Physician Reading Study Performer (templateId:2.16.840.1.113883.10.20.6.2.1) (CONF:8422).
-    constraint 'documentationOf.serviceEvent.performer', cardinality: '0..*'
+    constraint 'documentation_of.service_event.performer', cardinality: '0..*'
 
     #MAY contain zero or one [0..1] relatedDocument (CONF:8432) such that it
-    constraint 'relatedDocument', cardinality: '0..1'
+    constraint 'related_document', cardinality: '0..1'
 
     #When a Diagnostic Imaging Report has been transformed from a DICOM SR document, relatedDocument/@typeCode SHALL be XFRM, and relatedDocument/parentDocument/id SHALL contain the SOP Instance UID of the original DICOM SR document.
-    constraint 'relatedDocument'
+    constraint 'related_document'
 
     #SHALL contain exactly one [1..1] id (CONF:10030).
-    constraint 'relatedDocument.id', cardinality: '1..1'
+    constraint 'related_document.id', cardinality: '1..1'
 
     #This id MAY contain zero or one [0..1] componentOf (CONF:8434).
-    constraint 'relatedDocument.id.componentOf', cardinality: '0..1'
+    constraint 'related_document.id.component_of', cardinality: '0..1'
 
     #The componentOf, if present, SHALL contain exactly one [1..1] encompassingEncounter (CONF:8449).
-    constraint 'relatedDocument.id.componentOf.encompassingEncounter', cardinality: '1..1'
+    constraint 'related_document.id.component_of.encompassing_encounter', cardinality: '1..1'
 
     #This encompassingEncounter SHALL contain at least one [1..*] id (CONF:8435).
-    constraint 'relatedDocument.id.componentOf.encompassingEncounter.id', cardinality: '1..*'
+    constraint 'related_document.id.component_of.encompassing_encounter.id', cardinality: '1..*'
 
     #In the case of transformed DICOM SR documents, an appropriate null flavor MAY be used if the id is unavailable.
-    constraint 'relatedDocument.id.componentOf.encompassingEncounter.id'
+    constraint 'related_document.id.component_of.encompassing_encounter.id'
 
     #This encompassingEncounter SHALL contain exactly one [1..1] effectiveTime (CONF:8437).
-    constraint 'relatedDocument.id.componentOf.encompassingEncounter.effectiveTime', cardinality: '1..1'
+    constraint 'related_document.id.component_of.encompassing_encounter.effective_time', cardinality: '1..1'
 
     #The content of effectiveTime SHALL be a conformant US Realm Date and Time (DT.US.FIELDED) (2.16.840.1.113883.10.20.22.5.4)
-    constraint 'relatedDocument.id.componentOf.encompassingEncounter.effectiveTime'
+    constraint 'related_document.id.component_of.encompassing_encounter.effective_time'
 
     #This encompassingEncounter MAY contain zero or one [0..1] responsibleParty (CONF:8438).
-    constraint 'relatedDocument.id.componentOf.encompassingEncounter.responsibleParty', cardinality: '0..1'
+    constraint 'related_document.id.component_of.encompassing_encounter.responsible_party', cardinality: '0..1'
 
     #The responsibleParty, if present, SHALL contain exactly one [1..1] assignedEntity (CONF:9407).
-    constraint 'relatedDocument.id.componentOf.encompassingEncounter.responsibleParty.assignedEntity', cardinality: '1..1'
+    constraint 'related_document.id.component_of.encompassing_encounter.responsible_party.assigned_entity', cardinality: '1..1'
 
     #SHOULD contain zero or one [0..1] assignedPerson OR SHOULD contain zero or one [0..1] representedOrganization
-    constraint 'relatedDocument.id.componentOf.encompassingEncounter.responsibleParty.assignedEntity'
+    constraint 'related_document.id.component_of.encompassing_encounter.responsible_party.assigned_entity'
 
     #
-    constraint 'relatedDocument.id.componentOf.encompassingEncounter', cardinality: '0..1'
+    constraint 'related_document.id.component_of.encompassing_encounter', cardinality: '0..1'
 
     #	OIDs SHALL be represented in dotted decimal notation, where each decimal number is either 0 or starts with a nonzero digit. More formally, an OID SHALL be in the form ([0-2])(.([1-9][0-9]*|0))+
-    constraint 'relatedDocument.id'
+    constraint 'related_document.id'
 
     #	OIDs SHALL be no more than 64 characters in length
-    constraint 'relatedDocument.id'
+    constraint 'related_document.id'
 
     #SHALL contain exactly one [1..1] component (CONF:14907).
     constraint 'component', cardinality: '1..1'

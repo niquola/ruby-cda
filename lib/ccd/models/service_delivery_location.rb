@@ -3,13 +3,13 @@ module Ccd
     include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="SDLOC" (CodeSystem: RoleCode 2.16.840.1.113883.5.111 STATIC) (CONF:7758).
-    constraint 'classCode', cardinality: '1..1', value: 'SDLOC'
+    constraint 'class_code', cardinality: '1..1', value: 'SDLOC'
 
     #SHALL contain exactly one [1..1] templateId (CONF:7635) such that it
-    constraint 'templateId', cardinality: '1..1'
+    constraint 'template_id', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.4.32" (CONF:10524).
-    constraint 'templateId.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.4.32'
+    constraint 'template_id.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.4.32'
 
     #SHALL contain exactly one [1..1] code, which SHALL be selected from ValueSet HealthcareServiceLocation 2.16.840.1.113883.1.11.20275 STATIC (CONF:16850).
     constraint 'code', cardinality: '1..1'
@@ -21,13 +21,13 @@ module Ccd
     constraint 'telecom', cardinality: '0..*'
 
     #MAY contain zero or one [0..1] playingEntity (CONF:7762).
-    constraint 'playingEntity', cardinality: '0..1'
+    constraint 'playing_entity', cardinality: '0..1'
 
     #The playingEntity, if present, SHALL contain exactly one [1..1] @classCode="PLC" (CodeSystem: EntityClass 2.16.840.1.113883.5.41 STATIC) (CONF:7763).
-    constraint 'playingEntity.classCode', cardinality: '1..1', value: 'PLC'
+    constraint 'playing_entity.class_code', cardinality: '1..1', value: 'PLC'
 
     #The playingEntity, if present, MAY contain zero or one [0..1] name (CONF:16037).
-    constraint 'playingEntity.name', cardinality: '0..1'
+    constraint 'playing_entity.name', cardinality: '0..1'
 
     Ccd.load_extension('service_delivery_location.rb')
   end

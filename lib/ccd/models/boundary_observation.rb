@@ -3,10 +3,10 @@ module Ccd
     include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9282).
-    constraint 'classCode', cardinality: '1..1', value: 'OBS'
+    constraint 'class_code', cardinality: '1..1', value: 'OBS'
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9283).
-    constraint 'moodCode', cardinality: '1..1', value: 'EVN'
+    constraint 'mood_code', cardinality: '1..1', value: 'EVN'
 
     #SHALL contain exactly one [1..1] code (CONF:9284).
     constraint 'code', cardinality: '1..1'

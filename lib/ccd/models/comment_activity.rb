@@ -3,16 +3,16 @@ module Ccd
     include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="ACT" Act (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9425).
-    constraint 'classCode', cardinality: '1..1', value: 'ACT'
+    constraint 'class_code', cardinality: '1..1', value: 'ACT'
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:9426).
-    constraint 'moodCode', cardinality: '1..1', value: 'EVN'
+    constraint 'mood_code', cardinality: '1..1', value: 'EVN'
 
     #SHALL contain exactly one [1..1] templateId (CONF:9427) such that it
-    constraint 'templateId', cardinality: '1..1'
+    constraint 'template_id', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.4.64" (CONF:10491).
-    constraint 'templateId.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.4.64'
+    constraint 'template_id.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.4.64'
 
     #SHALL contain exactly one [1..1] code (CONF:9428).
     constraint 'code', cardinality: '1..1'
@@ -21,7 +21,7 @@ module Ccd
     constraint 'code.code', cardinality: '1..1', value: '48767-8'
 
     #This code SHALL contain exactly one [1..1] @codeSystem="2.16.840.1.113883.6.1" (CodeSystem: LOINC 2.16.840.1.113883.6.1) (CONF:26501).
-    constraint 'code.codeSystem', cardinality: '1..1', value: '2.16.840.1.113883.6.1'
+    constraint 'code.code_system', cardinality: '1..1', value: '2.16.840.1.113883.6.1'
 
     #SHALL contain exactly one [1..1] text (CONF:9430).
     constraint 'text', cardinality: '1..1'
@@ -45,22 +45,22 @@ module Ccd
     constraint 'author.time', cardinality: '1..1'
 
     #The author, if present, SHALL contain exactly one [1..1] assignedAuthor (CONF:9435).
-    constraint 'author.assignedAuthor', cardinality: '1..1'
+    constraint 'author.assigned_author', cardinality: '1..1'
 
     #This assignedAuthor SHALL contain exactly one [1..1] id (CONF:9436).
-    constraint 'author.assignedAuthor.id', cardinality: '1..1'
+    constraint 'author.assigned_author.id', cardinality: '1..1'
 
     #This assignedAuthor SHALL contain exactly one [1..1] addr (CONF:9437).
-    constraint 'author.assignedAuthor.addr', cardinality: '1..1'
+    constraint 'author.assigned_author.addr', cardinality: '1..1'
 
     #The content of addr SHALL be a conformant US Realm Address (AD.US.FIELDED) (2.16.840.1.113883.10.20.22.5.2)
-    constraint 'author.assignedAuthor.addr'
+    constraint 'author.assigned_author.addr'
 
     #SHALL include assignedPerson/name or representedOrganization/name
-    constraint 'author.assignedAuthor'
+    constraint 'author.assigned_author'
 
     #An  assignedPerson/name SHALL be a conformant US Realm Person Name (PN.US.FIELDED) (2.16.840.1.113883.10.20.22.5.1.1)
-    constraint 'author.assignedAuthor'
+    constraint 'author.assigned_author'
 
     #	Data elements defined elsewhere in the specification SHALL NOT be recorded using the Comment Activity
     constraint ''

@@ -93,7 +93,7 @@ module CcdGen
 
   def name(el)
     return nil if el[:context].nil?
-    el[:context].sub('@','')
+    Gen::Namings.normalize_name(el[:context].sub('@',''))
   end
 
   def constraints(elems, level = 0)

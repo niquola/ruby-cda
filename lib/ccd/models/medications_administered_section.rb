@@ -3,10 +3,10 @@ module Ccd
     include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] templateId (CONF:8152) such that it
-    constraint 'templateId', cardinality: '1..1'
+    constraint 'template_id', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.2.38" (CONF:10405).
-    constraint 'templateId.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.2.38'
+    constraint 'template_id.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.2.38'
 
     #SHALL contain exactly one [1..1] code (CONF:15383).
     constraint 'code', cardinality: '1..1'
@@ -24,7 +24,7 @@ module Ccd
     constraint 'entry', cardinality: '0..*'
 
     #The entry, if present, SHALL contain exactly one [1..1] Medication Activity (templateId:2.16.840.1.113883.10.20.22.4.16) (CONF:15499).
-    constraint 'entry.substanceAdministration', cardinality: '1..1'
+    constraint 'entry.substance_administration', cardinality: '1..1'
 
     Ccd.load_extension('medications_administered_section.rb')
   end

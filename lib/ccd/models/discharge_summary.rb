@@ -3,10 +3,10 @@ module Ccd
     include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] templateId (CONF:8463) such that it
-    constraint 'templateId', cardinality: '1..1'
+    constraint 'template_id', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.1.8" (CONF:10044).
-    constraint 'templateId.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.1.8'
+    constraint 'template_id.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.1.8'
 
     #SHALL contain exactly one [1..1] code (CONF:17178).
     constraint 'code', cardinality: '1..1'
@@ -24,28 +24,28 @@ module Ccd
     constraint 'participant'
 
     #SHALL contain exactly one [1..1] componentOf (CONF:8471).
-    constraint 'componentOf', cardinality: '1..1'
+    constraint 'component_of', cardinality: '1..1'
 
     #This componentOf SHALL contain exactly one [1..1] encompassingEncounter (CONF:8472).
-    constraint 'componentOf.encompassingEncounter', cardinality: '1..1'
+    constraint 'component_of.encompassing_encounter', cardinality: '1..1'
 
     #This encompassingEncounter SHALL contain exactly one [1..1] effectiveTime/low (CONF:8473).
-    constraint 'componentOf.encompassingEncounter.effectiveTime/low', cardinality: '1..1'
+    constraint 'component_of.encompassing_encounter.effective_time/low', cardinality: '1..1'
 
     #This encompassingEncounter SHALL contain exactly one [1..1] effectiveTime/high (CONF:8475).
-    constraint 'componentOf.encompassingEncounter.effectiveTime/high', cardinality: '1..1'
+    constraint 'component_of.encompassing_encounter.effective_time/high', cardinality: '1..1'
 
     #The dischargeDispositionCode SHALL be present where the value of code SHOULD be selected from ValueSet 2.16.840.1.113883.3.88.12.80.33 NUBC UB-04 FL17-Patient Status DYNAMIC (www.nubc.org)
-    constraint 'componentOf.encompassingEncounter'
+    constraint 'component_of.encompassing_encounter'
 
     #The dischargeDispositionCode, @displayName, or NUBC UB-04 Print Name, SHALL be displayed when the document is rendered
-    constraint 'componentOf.encompassingEncounter'
+    constraint 'component_of.encompassing_encounter'
 
     #The encounterParticipant elements MAY be present. If present, the encounterParticipant/assignedEntity element SHALL have at least one assignedPerson or representedOrganization element present.
-    constraint 'componentOf.encompassingEncounter'
+    constraint 'component_of.encompassing_encounter'
 
     #The responsibleParty element MAY be present. If present, the responsibleParty/assignedEntity element SHALL have at least one assignedPerson or representedOrganization element present.
-    constraint 'componentOf.encompassingEncounter'
+    constraint 'component_of.encompassing_encounter'
 
     #SHALL contain exactly one [1..1] component (CONF:9539).
     constraint 'component', cardinality: '1..1'

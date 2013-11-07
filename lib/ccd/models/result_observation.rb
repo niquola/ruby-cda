@@ -3,16 +3,16 @@ module Ccd
     include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7130).
-    constraint 'classCode', cardinality: '1..1', value: 'OBS'
+    constraint 'class_code', cardinality: '1..1', value: 'OBS'
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:7131).
-    constraint 'moodCode', cardinality: '1..1', value: 'EVN'
+    constraint 'mood_code', cardinality: '1..1', value: 'EVN'
 
     #SHALL contain exactly one [1..1] templateId (CONF:7136) such that it
-    constraint 'templateId', cardinality: '1..1'
+    constraint 'template_id', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.4.2" (CONF:9138).
-    constraint 'templateId.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.4.2'
+    constraint 'template_id.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.4.2'
 
     #SHALL contain at least one [1..*] id (CONF:7137).
     constraint 'id', cardinality: '1..*'
@@ -39,40 +39,40 @@ module Ccd
     constraint 'text.reference.value'
 
     #SHALL contain exactly one [1..1] statusCode (CONF:7134).
-    constraint 'statusCode', cardinality: '1..1'
+    constraint 'status_code', cardinality: '1..1'
 
     #This statusCode SHALL contain exactly one [1..1] @code, which SHALL be selected from ValueSet Result Status 2.16.840.1.113883.11.20.9.39 STATIC (CONF:14849).
-    constraint 'statusCode.code', cardinality: '1..1'
+    constraint 'status_code.code', cardinality: '1..1'
 
     #SHALL contain exactly one [1..1] effectiveTime (CONF:7140).
-    constraint 'effectiveTime', cardinality: '1..1'
+    constraint 'effective_time', cardinality: '1..1'
 
     #Represents clinically effective time of the measurement, which may be when the measurement was performed (e.g., a BP measurement), or may be when sample was taken (and measured some time afterwards).
-    constraint 'effectiveTime'
+    constraint 'effective_time'
 
     #SHALL contain exactly one [1..1] value (CONF:7143).
     constraint 'value', cardinality: '1..1'
 
     #SHOULD contain zero or more [0..*] interpretationCode (CONF:7147).
-    constraint 'interpretationCode', cardinality: '0..*'
+    constraint 'interpretation_code', cardinality: '0..*'
 
     #MAY contain zero or one [0..1] methodCode (CONF:7148).
-    constraint 'methodCode', cardinality: '0..1'
+    constraint 'method_code', cardinality: '0..1'
 
     #MAY contain zero or one [0..1] targetSiteCode (CONF:7153).
-    constraint 'targetSiteCode', cardinality: '0..1'
+    constraint 'target_site_code', cardinality: '0..1'
 
     #MAY contain zero or one [0..1] author (CONF:7149).
     constraint 'author', cardinality: '0..1'
 
     #SHOULD contain zero or more [0..*] referenceRange (CONF:7150).
-    constraint 'referenceRange', cardinality: '0..*'
+    constraint 'reference_range', cardinality: '0..*'
 
     #The referenceRange, if present, SHALL contain exactly one [1..1] observationRange (CONF:7151).
-    constraint 'referenceRange.observationRange', cardinality: '1..1'
+    constraint 'reference_range.observation_range', cardinality: '1..1'
 
     #This observationRange SHALL NOT contain [0..0] code (CONF:7152).
-    constraint 'referenceRange.observationRange.code', cardinality: '0..0'
+    constraint 'reference_range.observation_range.code', cardinality: '0..0'
 
     Ccd.load_extension('result_observation.rb')
   end
