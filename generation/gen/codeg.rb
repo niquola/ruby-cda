@@ -8,7 +8,7 @@ module Gen
       content = []
       content << "class #{name}"
       content.last << " < #{ancestor}" if ancestor
-      content << indent('include Virtus.model', 2) unless stdlib_type?(ancestor)
+      content << indent('include Virtus.model', 2) unless ancestor
       if body.present?
         content << indent(body, 2)
       elsif block_given?

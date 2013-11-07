@@ -1,5 +1,4 @@
 class Cda::ED < Cda::BIN
-  include Virtus.model
   attribute :compression, Cda::CompressionAlgorithm, annotations: {:kind=>:attribute}
   attribute :integrity_check, Cda::Bin, annotations: {:kind=>:attribute}
   attribute :integrity_check_algorithm, Cda::IntegrityCheckAlgorithm, annotations: {:kind=>:attribute}

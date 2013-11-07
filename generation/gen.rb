@@ -49,7 +49,7 @@ module Gen
     autoload_entries = definitions.reduce([]) do |accumulator, definition|
       register_class(definition[:name], definition[:type], accumulator)
     end
-    generate_autoloads(autoload_entries)
+    generate_autoloads(autoload_entries.sort)
   end
 
   def define_class(raw_name, xml, elemsdb)
