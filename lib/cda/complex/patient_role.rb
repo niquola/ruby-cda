@@ -1,5 +1,4 @@
-class Cda::PatientRole
-  include Virtus.model
+class Cda::PatientRole < Cda::Base
   attribute :addr, Array[Cda::AD], annotations: {:multiple=>true, :class=>"Cda::AD"}
   attribute :class_code, Cda::RoleClass, annotations: {:kind=>:attribute, :class=>"Cda::RoleClass"}
   attribute :id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}

@@ -1,5 +1,4 @@
-class Cda::Order
-  include Virtus.model
+class Cda::Order < Cda::Base
   attribute :class_code, Cda::ActClassRoot, annotations: {:kind=>:attribute, :class=>"Cda::ActClassRoot"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}

@@ -1,5 +1,4 @@
-class Cda::RegionOfInterest
-  include Virtus.model
+class Cda::RegionOfInterest < Cda::Base
   attribute :id, String, annotations: {:kind=>:attribute, :class=>"String"}
   attribute :author, Array[Cda::Author], annotations: {:multiple=>true, :class=>"Cda::Author"}
   attribute :class_code, Cda::ActClass, annotations: {:kind=>:attribute, :class=>"Cda::ActClass"}

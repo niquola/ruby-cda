@@ -1,5 +1,4 @@
-class Cda::EntryRelationship
-  include Virtus.model
+class Cda::EntryRelationship < Cda::Base
   attribute :context_conduction_ind, Cda::Bl, annotations: {:kind=>:attribute, :class=>"Cda::Bl"}
   attribute :inversion_ind, Cda::Bl, annotations: {:kind=>:attribute, :class=>"Cda::Bl"}
   attribute :negation_ind, Cda::Bl, annotations: {:kind=>:attribute, :class=>"Cda::Bl"}

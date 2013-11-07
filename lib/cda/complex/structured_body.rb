@@ -1,5 +1,4 @@
-class Cda::StructuredBody
-  include Virtus.model
+class Cda::StructuredBody < Cda::Base
   attribute :class_code, Cda::ActClass, annotations: {:kind=>:attribute, :class=>"Cda::ActClass"}
   attribute :component, Array[Cda::Component3], annotations: {:multiple=>true, :class=>"Cda::Component3"}
   attribute :confidentiality_code, Cda::CE, annotations: {:class=>"Cda::CE"}

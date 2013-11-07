@@ -1,5 +1,4 @@
-class Cda::RelatedDocument
-  include Virtus.model
+class Cda::RelatedDocument < Cda::Base
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :parent_document, Cda::ParentDocument, annotations: {:class=>"Cda::ParentDocument"}
   attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}

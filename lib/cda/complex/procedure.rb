@@ -1,5 +1,4 @@
-class Cda::Procedure
-  include Virtus.model
+class Cda::Procedure < Cda::Base
   attribute :approach_site_code, Array[Cda::CD], annotations: {:multiple=>true, :class=>"Cda::CD"}
   attribute :author, Array[Cda::Author], annotations: {:multiple=>true, :class=>"Cda::Author"}
   attribute :class_code, Cda::ActClass, annotations: {:kind=>:attribute, :class=>"Cda::ActClass"}

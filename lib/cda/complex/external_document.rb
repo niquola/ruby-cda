@@ -1,5 +1,4 @@
-class Cda::ExternalDocument
-  include Virtus.model
+class Cda::ExternalDocument < Cda::Base
   attribute :class_code, Cda::ActClassDocument, annotations: {:kind=>:attribute, :class=>"Cda::ActClassDocument"}
   attribute :code, Cda::CD, annotations: {:class=>"Cda::CD"}
   attribute :id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}

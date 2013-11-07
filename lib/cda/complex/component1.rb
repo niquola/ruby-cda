@@ -1,5 +1,4 @@
-class Cda::Component1
-  include Virtus.model
+class Cda::Component1 < Cda::Base
   attribute :encompassing_encounter, Cda::EncompassingEncounter, annotations: {:class=>"Cda::EncompassingEncounter"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}

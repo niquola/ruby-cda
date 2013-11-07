@@ -1,5 +1,4 @@
-class Cda::Custodian
-  include Virtus.model
+class Cda::Custodian < Cda::Base
   attribute :assigned_custodian, Cda::AssignedCustodian, annotations: {:class=>"Cda::AssignedCustodian"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}

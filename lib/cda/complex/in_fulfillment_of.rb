@@ -1,5 +1,4 @@
-class Cda::InFulfillmentOf
-  include Virtus.model
+class Cda::InFulfillmentOf < Cda::Base
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :order, Cda::Order, annotations: {:class=>"Cda::Order"}
   attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}

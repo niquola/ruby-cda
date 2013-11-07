@@ -1,5 +1,4 @@
-class Cda::MaintainedEntity
-  include Virtus.model
+class Cda::MaintainedEntity < Cda::Base
   attribute :class_code, Cda::RoleClass, annotations: {:kind=>:attribute, :class=>"Cda::RoleClass"}
   attribute :effective_time, Cda::IVL_TS, annotations: {:class=>"Cda::IVL_TS"}
   attribute :maintaining_person, Cda::Person, annotations: {:class=>"Cda::Person"}

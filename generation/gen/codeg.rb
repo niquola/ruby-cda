@@ -7,8 +7,8 @@ module Gen
 
       content = []
       content << "class #{name}"
-      content.last << " < #{ancestor}" if ancestor
-      content << indent('include Virtus.model', 2) unless ancestor
+      ancestor ||= 'Cda::Base'
+      content.last << " < #{ancestor}"
       if body.present?
         content << indent(body, 2)
       elsif block_given?

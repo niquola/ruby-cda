@@ -1,5 +1,4 @@
-class Cda::AuthoringDevice
-  include Virtus.model
+class Cda::AuthoringDevice < Cda::Base
   attribute :as_maintained_entity, Array[Cda::MaintainedEntity], annotations: {:multiple=>true, :class=>"Cda::MaintainedEntity"}
   attribute :class_code, Cda::EntityClassDevice, annotations: {:kind=>:attribute, :class=>"Cda::EntityClassDevice"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}

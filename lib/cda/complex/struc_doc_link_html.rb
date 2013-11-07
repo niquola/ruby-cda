@@ -1,5 +1,4 @@
-class Cda::StrucDocLinkHtml
-  include Virtus.model
+class Cda::StrucDocLinkHtml < Cda::Base
   attribute :id, String, annotations: {:kind=>:attribute, :class=>"String"}
   attribute :href, String, annotations: {:kind=>:attribute, :class=>"String"}
   attribute :language, String, annotations: {:kind=>:attribute, :class=>"String"}

@@ -1,5 +1,4 @@
-class Cda::Supply
-  include Virtus.model
+class Cda::Supply < Cda::Base
   attribute :author, Array[Cda::Author], annotations: {:multiple=>true, :class=>"Cda::Author"}
   attribute :class_code, Cda::ActClassSupply, annotations: {:kind=>:attribute, :class=>"Cda::ActClassSupply"}
   attribute :code, Cda::CD, annotations: {:class=>"Cda::CD"}

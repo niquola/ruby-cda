@@ -1,5 +1,4 @@
-class Cda::SpecimenRole
-  include Virtus.model
+class Cda::SpecimenRole < Cda::Base
   attribute :class_code, Cda::RoleClassSpecimen, annotations: {:kind=>:attribute, :class=>"Cda::RoleClassSpecimen"}
   attribute :id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}

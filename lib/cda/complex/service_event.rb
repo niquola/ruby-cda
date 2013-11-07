@@ -1,5 +1,4 @@
-class Cda::ServiceEvent
-  include Virtus.model
+class Cda::ServiceEvent < Cda::Base
   attribute :class_code, Cda::ActClassRoot, annotations: {:kind=>:attribute, :class=>"Cda::ActClassRoot"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :effective_time, Cda::IVL_TS, annotations: {:class=>"Cda::IVL_TS"}

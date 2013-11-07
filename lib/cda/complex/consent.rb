@@ -1,5 +1,4 @@
-class Cda::Consent
-  include Virtus.model
+class Cda::Consent < Cda::Base
   attribute :class_code, Cda::ActClass, annotations: {:kind=>:attribute, :class=>"Cda::ActClass"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}

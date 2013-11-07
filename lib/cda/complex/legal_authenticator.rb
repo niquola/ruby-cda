@@ -1,5 +1,4 @@
-class Cda::LegalAuthenticator
-  include Virtus.model
+class Cda::LegalAuthenticator < Cda::Base
   attribute :assigned_entity, Cda::AssignedEntity, annotations: {:class=>"Cda::AssignedEntity"}
   attribute :context_control_code, Cda::ContextControl, annotations: {:kind=>:attribute, :class=>"Cda::ContextControl"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}

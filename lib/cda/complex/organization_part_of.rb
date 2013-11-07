@@ -1,5 +1,4 @@
-class Cda::OrganizationPartOf
-  include Virtus.model
+class Cda::OrganizationPartOf < Cda::Base
   attribute :class_code, Cda::RoleClass, annotations: {:kind=>:attribute, :class=>"Cda::RoleClass"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :effective_time, Cda::IVL_TS, annotations: {:class=>"Cda::IVL_TS"}

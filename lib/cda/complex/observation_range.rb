@@ -1,5 +1,4 @@
-class Cda::ObservationRange
-  include Virtus.model
+class Cda::ObservationRange < Cda::Base
   attribute :class_code, Cda::ActClassObservation, annotations: {:kind=>:attribute, :class=>"Cda::ActClassObservation"}
   attribute :code, Cda::CD, annotations: {:class=>"Cda::CD"}
   attribute :interpretation_code, Cda::CE, annotations: {:class=>"Cda::CE"}

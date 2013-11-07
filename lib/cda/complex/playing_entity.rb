@@ -1,5 +1,4 @@
-class Cda::PlayingEntity
-  include Virtus.model
+class Cda::PlayingEntity < Cda::Base
   attribute :birth_time, Cda::TS, annotations: {:class=>"Cda::TS"}
   attribute :class_code, Cda::EntityClassRoot, annotations: {:kind=>:attribute, :class=>"Cda::EntityClassRoot"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}

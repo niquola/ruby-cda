@@ -1,5 +1,4 @@
-class Cda::Participant2
-  include Virtus.model
+class Cda::Participant2 < Cda::Base
   attribute :awareness_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :context_control_code, Cda::ContextControl, annotations: {:kind=>:attribute, :class=>"Cda::ContextControl"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}

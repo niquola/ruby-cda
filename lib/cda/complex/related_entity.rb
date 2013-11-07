@@ -1,5 +1,4 @@
-class Cda::RelatedEntity
-  include Virtus.model
+class Cda::RelatedEntity < Cda::Base
   attribute :addr, Array[Cda::AD], annotations: {:multiple=>true, :class=>"Cda::AD"}
   attribute :class_code, Cda::RoleClassMutualRelationship, annotations: {:kind=>:attribute, :class=>"Cda::RoleClassMutualRelationship"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}

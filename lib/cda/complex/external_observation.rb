@@ -1,5 +1,4 @@
-class Cda::ExternalObservation
-  include Virtus.model
+class Cda::ExternalObservation < Cda::Base
   attribute :class_code, Cda::ActClassObservation, annotations: {:kind=>:attribute, :class=>"Cda::ActClassObservation"}
   attribute :code, Cda::CD, annotations: {:class=>"Cda::CD"}
   attribute :id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}

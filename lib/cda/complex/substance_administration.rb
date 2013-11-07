@@ -1,5 +1,4 @@
-class Cda::SubstanceAdministration
-  include Virtus.model
+class Cda::SubstanceAdministration < Cda::Base
   attribute :administration_unit_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :approach_site_code, Array[Cda::CD], annotations: {:multiple=>true, :class=>"Cda::CD"}
   attribute :author, Array[Cda::Author], annotations: {:multiple=>true, :class=>"Cda::Author"}

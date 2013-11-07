@@ -1,5 +1,4 @@
-class Cda::LanguageCommunication
-  include Virtus.model
+class Cda::LanguageCommunication < Cda::Base
   attribute :language_code, Cda::CS, annotations: {:class=>"Cda::CS"}
   attribute :mode_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}

@@ -1,5 +1,4 @@
-class Cda::ManufacturedProduct
-  include Virtus.model
+class Cda::ManufacturedProduct < Cda::Base
   attribute :class_code, Cda::RoleClassManufacturedProduct, annotations: {:kind=>:attribute, :class=>"Cda::RoleClassManufacturedProduct"}
   attribute :id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}
   attribute :manufacturer_organization, Cda::Organization, annotations: {:class=>"Cda::Organization"}

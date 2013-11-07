@@ -1,5 +1,4 @@
-class Cda::Author
-  include Virtus.model
+class Cda::Author < Cda::Base
   attribute :assigned_author, Cda::AssignedAuthor, annotations: {:class=>"Cda::AssignedAuthor"}
   attribute :context_control_code, Cda::ContextControl, annotations: {:kind=>:attribute, :class=>"Cda::ContextControl"}
   attribute :function_code, Cda::CE, annotations: {:class=>"Cda::CE"}

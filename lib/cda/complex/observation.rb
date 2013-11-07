@@ -1,5 +1,4 @@
-class Cda::Observation
-  include Virtus.model
+class Cda::Observation < Cda::Base
   attribute :author, Array[Cda::Author], annotations: {:multiple=>true, :class=>"Cda::Author"}
   attribute :class_code, Cda::ActClassObservation, annotations: {:kind=>:attribute, :class=>"Cda::ActClassObservation"}
   attribute :code, Cda::CD, annotations: {:class=>"Cda::CD"}

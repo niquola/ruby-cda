@@ -1,5 +1,4 @@
-class Cda::StrucDocTitle
-  include Virtus.model
+class Cda::StrucDocTitle < Cda::Base
   attribute :id, String, annotations: {:kind=>:attribute, :class=>"String"}
   attribute :language, String, annotations: {:kind=>:attribute, :class=>"String"}
   attribute :media_type, String, annotations: {:kind=>:attribute, :class=>"String"}

@@ -1,5 +1,4 @@
-class Cda::EncounterParticipant
-  include Virtus.model
+class Cda::EncounterParticipant < Cda::Base
   attribute :assigned_entity, Cda::AssignedEntity, annotations: {:class=>"Cda::AssignedEntity"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}

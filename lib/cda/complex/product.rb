@@ -1,5 +1,4 @@
-class Cda::Product
-  include Virtus.model
+class Cda::Product < Cda::Base
   attribute :manufactured_product, Cda::ManufacturedProduct, annotations: {:class=>"Cda::ManufacturedProduct"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}

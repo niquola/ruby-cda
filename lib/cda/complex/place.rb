@@ -1,5 +1,4 @@
-class Cda::Place
-  include Virtus.model
+class Cda::Place < Cda::Base
   attribute :addr, Cda::AD, annotations: {:class=>"Cda::AD"}
   attribute :class_code, Cda::EntityClassPlace, annotations: {:kind=>:attribute, :class=>"Cda::EntityClassPlace"}
   attribute :determiner_code, Cda::EntityDeterminer, annotations: {:kind=>:attribute, :class=>"Cda::EntityDeterminer"}

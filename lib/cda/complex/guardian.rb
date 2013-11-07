@@ -1,5 +1,4 @@
-class Cda::Guardian
-  include Virtus.model
+class Cda::Guardian < Cda::Base
   attribute :addr, Array[Cda::AD], annotations: {:multiple=>true, :class=>"Cda::AD"}
   attribute :class_code, Cda::RoleClass, annotations: {:kind=>:attribute, :class=>"Cda::RoleClass"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}

@@ -1,5 +1,4 @@
-class Cda::IntendedRecipient
-  include Virtus.model
+class Cda::IntendedRecipient < Cda::Base
   attribute :addr, Array[Cda::AD], annotations: {:multiple=>true, :class=>"Cda::AD"}
   attribute :class_code, Cda::XInformationRecipientRole, annotations: {:kind=>:attribute, :class=>"Cda::XInformationRecipientRole"}
   attribute :id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}

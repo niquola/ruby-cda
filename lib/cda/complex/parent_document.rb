@@ -1,5 +1,4 @@
-class Cda::ParentDocument
-  include Virtus.model
+class Cda::ParentDocument < Cda::Base
   attribute :class_code, Cda::ActClinicalDocument, annotations: {:kind=>:attribute, :class=>"Cda::ActClinicalDocument"}
   attribute :code, Cda::CD, annotations: {:class=>"Cda::CD"}
   attribute :id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}

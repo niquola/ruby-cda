@@ -1,5 +1,4 @@
-class Cda::Entity
-  include Virtus.model
+class Cda::Entity < Cda::Base
   attribute :class_code, Cda::EntityClassRoot, annotations: {:kind=>:attribute, :class=>"Cda::EntityClassRoot"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :desc, Cda::ED, annotations: {:class=>"Cda::ED"}

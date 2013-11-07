@@ -1,5 +1,4 @@
-class Cda::NonXMLBody
-  include Virtus.model
+class Cda::NonXMLBody < Cda::Base
   attribute :class_code, Cda::ActClass, annotations: {:kind=>:attribute, :class=>"Cda::ActClass"}
   attribute :confidentiality_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :language_code, Cda::CS, annotations: {:class=>"Cda::CS"}

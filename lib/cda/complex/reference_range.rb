@@ -1,5 +1,4 @@
-class Cda::ReferenceRange
-  include Virtus.model
+class Cda::ReferenceRange < Cda::Base
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :observation_range, Cda::ObservationRange, annotations: {:class=>"Cda::ObservationRange"}
   attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}

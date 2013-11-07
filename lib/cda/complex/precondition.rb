@@ -1,5 +1,4 @@
-class Cda::Precondition
-  include Virtus.model
+class Cda::Precondition < Cda::Base
   attribute :criterion, Cda::Criterion, annotations: {:class=>"Cda::Criterion"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}

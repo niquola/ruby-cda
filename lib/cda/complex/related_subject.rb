@@ -1,5 +1,4 @@
-class Cda::RelatedSubject
-  include Virtus.model
+class Cda::RelatedSubject < Cda::Base
   attribute :addr, Array[Cda::AD], annotations: {:multiple=>true, :class=>"Cda::AD"}
   attribute :class_code, Cda::XDocumentSubject, annotations: {:kind=>:attribute, :class=>"Cda::XDocumentSubject"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}

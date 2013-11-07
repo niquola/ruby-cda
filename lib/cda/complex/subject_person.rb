@@ -1,5 +1,4 @@
-class Cda::SubjectPerson
-  include Virtus.model
+class Cda::SubjectPerson < Cda::Base
   attribute :administrative_gender_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :birth_time, Cda::TS, annotations: {:class=>"Cda::TS"}
   attribute :class_code, Cda::EntityClass, annotations: {:kind=>:attribute, :class=>"Cda::EntityClass"}

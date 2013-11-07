@@ -1,5 +1,4 @@
-class Cda::RecordTarget
-  include Virtus.model
+class Cda::RecordTarget < Cda::Base
   attribute :context_control_code, Cda::ContextControl, annotations: {:kind=>:attribute, :class=>"Cda::ContextControl"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :patient_role, Cda::PatientRole, annotations: {:class=>"Cda::PatientRole"}

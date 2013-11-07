@@ -1,5 +1,4 @@
-class Cda::CustodianOrganization
-  include Virtus.model
+class Cda::CustodianOrganization < Cda::Base
   attribute :addr, Cda::AD, annotations: {:class=>"Cda::AD"}
   attribute :class_code, Cda::EntityClassOrganization, annotations: {:kind=>:attribute, :class=>"Cda::EntityClassOrganization"}
   attribute :determiner_code, Cda::EntityDeterminer, annotations: {:kind=>:attribute, :class=>"Cda::EntityDeterminer"}

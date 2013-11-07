@@ -1,5 +1,4 @@
-class Cda::StrucDocThead
-  include Virtus.model
+class Cda::StrucDocThead < Cda::Base
   attribute :id, String, annotations: {:kind=>:attribute, :class=>"String"}
   attribute :align, String, annotations: {:class=>"String"}
   attribute :char, String, annotations: {:kind=>:attribute, :class=>"String"}

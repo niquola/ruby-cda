@@ -1,5 +1,4 @@
-class Cda::Organizer
-  include Virtus.model
+class Cda::Organizer < Cda::Base
   attribute :author, Array[Cda::Author], annotations: {:multiple=>true, :class=>"Cda::Author"}
   attribute :class_code, Cda::XActClassDocumentEntryOrganizer, annotations: {:kind=>:attribute, :class=>"Cda::XActClassDocumentEntryOrganizer"}
   attribute :code, Cda::CD, annotations: {:class=>"Cda::CD"}

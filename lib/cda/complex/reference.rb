@@ -1,5 +1,4 @@
-class Cda::Reference
-  include Virtus.model
+class Cda::Reference < Cda::Base
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}
   attribute :seperatable_ind, Cda::BL, annotations: {:class=>"Cda::BL"}

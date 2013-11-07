@@ -1,5 +1,4 @@
-class Cda::Birthplace
-  include Virtus.model
+class Cda::Birthplace < Cda::Base
   attribute :class_code, Cda::RoleClass, annotations: {:kind=>:attribute, :class=>"Cda::RoleClass"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :place, Cda::Place, annotations: {:class=>"Cda::Place"}

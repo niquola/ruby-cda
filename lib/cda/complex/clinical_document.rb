@@ -1,5 +1,4 @@
-class Cda::ClinicalDocument
-  include Virtus.model
+class Cda::ClinicalDocument < Cda::Base
   attribute :authenticator, Array[Cda::Authenticator], annotations: {:multiple=>true, :class=>"Cda::Authenticator"}
   attribute :author, Array[Cda::Author], annotations: {:multiple=>true, :class=>"Cda::Author"}
   attribute :authorization, Array[Cda::Authorization], annotations: {:multiple=>true, :class=>"Cda::Authorization"}

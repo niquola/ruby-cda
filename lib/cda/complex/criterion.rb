@@ -1,5 +1,4 @@
-class Cda::Criterion
-  include Virtus.model
+class Cda::Criterion < Cda::Base
   attribute :class_code, Cda::ActClassObservation, annotations: {:kind=>:attribute, :class=>"Cda::ActClassObservation"}
   attribute :code, Cda::CD, annotations: {:class=>"Cda::CD"}
   attribute :mood_code, Cda::ActMood, annotations: {:kind=>:attribute, :class=>"Cda::ActMood"}

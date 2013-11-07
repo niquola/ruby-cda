@@ -1,5 +1,4 @@
-class Cda::InformationRecipient
-  include Virtus.model
+class Cda::InformationRecipient < Cda::Base
   attribute :intended_recipient, Cda::IntendedRecipient, annotations: {:class=>"Cda::IntendedRecipient"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}

@@ -1,5 +1,4 @@
-class Cda::Participant1
-  include Virtus.model
+class Cda::Participant1 < Cda::Base
   attribute :associated_entity, Cda::AssociatedEntity, annotations: {:class=>"Cda::AssociatedEntity"}
   attribute :context_control_code, Cda::ContextControl, annotations: {:kind=>:attribute, :class=>"Cda::ContextControl"}
   attribute :function_code, Cda::CE, annotations: {:class=>"Cda::CE"}

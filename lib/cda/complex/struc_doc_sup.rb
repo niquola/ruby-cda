@@ -1,4 +1,3 @@
-class Cda::StrucDocSup
-  include Virtus.model
+class Cda::StrucDocSup < Cda::Base
 
 end

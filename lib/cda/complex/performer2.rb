@@ -1,5 +1,4 @@
-class Cda::Performer2
-  include Virtus.model
+class Cda::Performer2 < Cda::Base
   attribute :assigned_entity, Cda::AssignedEntity, annotations: {:class=>"Cda::AssignedEntity"}
   attribute :mode_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}

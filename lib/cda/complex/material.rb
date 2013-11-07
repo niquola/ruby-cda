@@ -1,5 +1,4 @@
-class Cda::Material
-  include Virtus.model
+class Cda::Material < Cda::Base
   attribute :class_code, Cda::EntityClassManufacturedMaterial, annotations: {:kind=>:attribute, :class=>"Cda::EntityClassManufacturedMaterial"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :determiner_code, Cda::EntityDeterminerDetermined, annotations: {:kind=>:attribute, :class=>"Cda::EntityDeterminerDetermined"}

@@ -1,5 +1,4 @@
-class Cda::Act
-  include Virtus.model
+class Cda::Act < Cda::Base
   attribute :author, Array[Cda::Author], annotations: {:multiple=>true, :class=>"Cda::Author"}
   attribute :class_code, Cda::XActClassDocumentEntryAct, annotations: {:kind=>:attribute, :class=>"Cda::XActClassDocumentEntryAct"}
   attribute :code, Cda::CD, annotations: {:class=>"Cda::CD"}

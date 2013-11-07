@@ -1,5 +1,4 @@
-class Cda::StrucDocTfoot
-  include Virtus.model
+class Cda::StrucDocTfoot < Cda::Base
   attribute :id, String, annotations: {:kind=>:attribute, :class=>"String"}
   attribute :align, String, annotations: {:class=>"String"}
   attribute :char, String, annotations: {:kind=>:attribute, :class=>"String"}

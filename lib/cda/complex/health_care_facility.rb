@@ -1,5 +1,4 @@
-class Cda::HealthCareFacility
-  include Virtus.model
+class Cda::HealthCareFacility < Cda::Base
   attribute :class_code, Cda::RoleClassServiceDeliveryLocation, annotations: {:kind=>:attribute, :class=>"Cda::RoleClassServiceDeliveryLocation"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}

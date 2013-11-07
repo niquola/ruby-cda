@@ -1,5 +1,4 @@
-class Cda::EncompassingEncounter
-  include Virtus.model
+class Cda::EncompassingEncounter < Cda::Base
   attribute :class_code, Cda::ActClass, annotations: {:kind=>:attribute, :class=>"Cda::ActClass"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :discharge_disposition_code, Cda::CE, annotations: {:class=>"Cda::CE"}

@@ -1,5 +1,4 @@
-class Cda::Organization
-  include Virtus.model
+class Cda::Organization < Cda::Base
   attribute :addr, Array[Cda::AD], annotations: {:multiple=>true, :class=>"Cda::AD"}
   attribute :as_organization_part_of, Cda::OrganizationPartOf, annotations: {:class=>"Cda::OrganizationPartOf"}
   attribute :class_code, Cda::EntityClassOrganization, annotations: {:kind=>:attribute, :class=>"Cda::EntityClassOrganization"}

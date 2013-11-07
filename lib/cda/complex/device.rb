@@ -1,5 +1,4 @@
-class Cda::Device
-  include Virtus.model
+class Cda::Device < Cda::Base
   attribute :class_code, Cda::EntityClassDevice, annotations: {:kind=>:attribute, :class=>"Cda::EntityClassDevice"}
   attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :determiner_code, Cda::EntityDeterminer, annotations: {:kind=>:attribute, :class=>"Cda::EntityDeterminer"}

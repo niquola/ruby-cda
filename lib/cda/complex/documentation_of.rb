@@ -1,5 +1,4 @@
-class Cda::DocumentationOf
-  include Virtus.model
+class Cda::DocumentationOf < Cda::Base
   attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}
   attribute :service_event, Cda::ServiceEvent, annotations: {:class=>"Cda::ServiceEvent"}

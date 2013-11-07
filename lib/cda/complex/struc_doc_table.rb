@@ -1,5 +1,4 @@
-class Cda::StrucDocTable
-  include Virtus.model
+class Cda::StrucDocTable < Cda::Base
   attribute :id, String, annotations: {:kind=>:attribute, :class=>"String"}
   attribute :border, String, annotations: {:kind=>:attribute, :class=>"String"}
   attribute :caption, Cda::StrucDocCaption, annotations: {:class=>"Cda::StrucDocCaption"}
