@@ -1,6 +1,5 @@
 module Ccd
   class PhysicianReadingStudyPerformer < ::Cda::Performer1
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @typeCode="PRF" Performer (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8424).
     constraint 'type_code', cardinality: '1..1', value: 'PRF'

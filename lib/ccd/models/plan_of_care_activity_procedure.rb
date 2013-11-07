@@ -1,6 +1,5 @@
 module Ccd
   class PlanOfCareActivityProcedure < ::Cda::Procedure
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="PROC" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8568).
     constraint 'class_code', cardinality: '1..1', value: 'PROC'

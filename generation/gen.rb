@@ -67,7 +67,15 @@ module Gen
       when list = xml.xpath('./list').first
         { ancestor: list[:itemType], multiple: true }
       when union = xml.xpath('./union').first
-        { ancestor: 'String', union: union[:memberTypes] } #.split(/\s+/).first }
+        ancestor_type = case union.attributes['memberTypes'].value
+                        when /decimal/, /double/
+                          'Float'
+                        when /string/
+                          'String'
+                        else
+                          'String'
+                        end
+        { ancestor: ancestor_type, union: union[:memberTypes] }
       end.merge(type: :simple)
     else
       raise xml.name

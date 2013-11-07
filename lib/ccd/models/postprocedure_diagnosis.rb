@@ -1,6 +1,5 @@
 module Ccd
   class PostprocedureDiagnosis < ::Cda::Act
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="ACT" (CONF:8756).
     constraint 'class_code', cardinality: '1..1', value: 'ACT'

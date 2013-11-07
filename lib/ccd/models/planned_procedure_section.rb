@@ -1,6 +1,5 @@
 module Ccd
   class PlannedProcedureSection < ::Cda::Section
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] templateId (CONF:8082) such that it
     constraint 'template_id', cardinality: '1..1'

@@ -1,6 +1,5 @@
 module Ccd
   class ResultOrganizer < ::Cda::Organizer
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7121).
     constraint 'class_code', cardinality: '1..1'

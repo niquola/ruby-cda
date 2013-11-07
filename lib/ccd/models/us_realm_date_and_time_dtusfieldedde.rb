@@ -1,6 +1,5 @@
 module Ccd
   class USRealmDateAndTimeDTUSFIELDEDDE < ::Cda::IVL_TS
-    include Virtus.model
     extend ::Ccd::Dsl
     #	SHALL be precise to the day
     constraint '', cardinality: '1..1'

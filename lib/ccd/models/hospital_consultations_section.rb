@@ -1,6 +1,5 @@
 module Ccd
   class HospitalConsultationsSection < ::Cda::Section
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] templateId (CONF:9915) such that it
     constraint 'template_id', cardinality: '1..1'

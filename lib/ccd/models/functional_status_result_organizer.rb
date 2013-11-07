@@ -1,6 +1,5 @@
 module Ccd
   class FunctionalStatusResultOrganizer < ::Cda::Organizer
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="CLUSTER", which SHALL be selected from CodeSystem HL7ActClass (2.16.840.1.113883.5.6) STATIC (CONF:14355).
     constraint 'class_code', cardinality: '1..1', value: 'CLUSTER'

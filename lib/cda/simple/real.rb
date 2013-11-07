@@ -1,3 +1,3 @@
-class Cda::Real < String
+class Cda::Real < Float
 
 end

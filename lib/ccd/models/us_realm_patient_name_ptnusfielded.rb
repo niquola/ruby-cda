@@ -1,6 +1,5 @@
 module Ccd
   class USRealmPatientNamePTNUSFIELDED < ::Cda::PN
-    include Virtus.model
     extend ::Ccd::Dsl
     #MAY contain zero or one [0..1] @use, which SHALL be selected from ValueSet EntityNameUse 2.16.840.1.113883.1.11.15913 STATIC 2005-05-01 (CONF:7154).
     constraint 'use', cardinality: '0..1'

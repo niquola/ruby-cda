@@ -1,6 +1,5 @@
 module Ccd
   class USRealmAddressADUSFIELDED < ::Cda::AD
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHOULD contain zero or one [0..1] @use, which SHALL be selected from ValueSet PostalAddressUse 2.16.840.1.113883.1.11.10637 STATIC 2005-05-01 (CONF:7290).
     constraint 'use', cardinality: '0..1'

@@ -1,6 +1,5 @@
 module Ccd
   class ServiceDeliveryLocation < ::Cda::ParticipantRole
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="SDLOC" (CodeSystem: RoleCode 2.16.840.1.113883.5.111 STATIC) (CONF:7758).
     constraint 'class_code', cardinality: '1..1', value: 'SDLOC'

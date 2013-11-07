@@ -1,6 +1,5 @@
 module Ccd
   class ConsultationNote < ::Cda::ClinicalDocument
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] templateId (CONF:8375).
     constraint 'template_id', cardinality: '1..1'

@@ -1,6 +1,5 @@
 module Ccd
   class USRealmHeader < ::Cda::ClinicalDocument
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] realmCode="US" (CONF:16791).
     constraint 'realm_code', cardinality: '1..1', value: 'US'

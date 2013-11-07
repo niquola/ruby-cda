@@ -1,6 +1,5 @@
 module Ccd
   class ReferencedFramesObservation < ::Cda::Observation
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="ROIBND" Bounded Region of Interest (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9276).
     constraint 'class_code', cardinality: '1..1', value: 'ROIBND'

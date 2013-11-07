@@ -1,6 +1,5 @@
 module Ccd
   class USRealmPersonNamePNUSFIELDED < ::Cda::PN
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] name (CONF:9368).
     constraint 'name', cardinality: '1..1'

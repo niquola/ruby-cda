@@ -1,6 +1,5 @@
 module Ccd
   class ProductInstance < ::Cda::ParticipantRole
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="MANU" Manufactured Product (CodeSystem: RoleClass 2.16.840.1.113883.5.110 STATIC) (CONF:7900).
     constraint 'class_code', cardinality: '1..1', value: 'MANU'

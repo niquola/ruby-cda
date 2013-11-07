@@ -1,6 +1,5 @@
 module Ccd
   class MedicationInformation < ::Cda::ManufacturedProduct
-    include Virtus.model
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="MANU" (CodeSystem: RoleClass 2.16.840.1.113883.5.110 STATIC) (CONF:7408).
     constraint 'class_code', cardinality: '1..1', value: 'MANU'
