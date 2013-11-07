@@ -8,6 +8,7 @@ describe CcdGen do
     generate
     $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
     $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..')
+    require 'virtus_annotations'
     require 'cda'
     require 'ccd'
   end

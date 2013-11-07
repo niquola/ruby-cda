@@ -24,7 +24,7 @@ describe Ccd do
   end
 
   context 'merge' do
-    let(:converter) { Object.new.extend Ccd::Dsl }
+    let(:converter) { Ccd::Dsl::System }
     context '.object_to_hash' do
       example do
         converter.object_to_hash([a: { b: 1 }]).should == { 0 => { a: { b: 1 } } }
@@ -54,9 +54,5 @@ describe Ccd do
         converter.merge_json(x,y).should == z
       end
     end
-  end
-
-  example do
-    p Ccd::USRealmHeader.attribute_class(Ccd::USRealmHeader, 'record_target')
   end
 end

@@ -29,7 +29,50 @@ module Ccd
       end
     end
 
+    def dump(path)
+      `mkdir -p #{path}`
+      File.open(File.join(path, "#{self.name.underscore}.yml"), 'w') do |f|
+        f.puts defaults.to_yaml
+      end
+    end
+
     #private
+    module System
+      extend self
+      def merge_json(x, y)
+        hash_to_object object_to_hash(x).deep_merge(object_to_hash(y))
+      end
+
+      def hash_to_object(hash)
+        return hash unless Hash === hash
+        is_array = hash.keys.all? { |x| x.is_a?(Integer) }
+        acc = is_array ? [] : {}
+        hash.reduce(acc) { |acc, (k, v)| acc[k] = hash_to_object(v); acc }
+      end
+
+      def object_to_hash(object)
+        case object
+        when Array
+          if object.size == 1
+            value = object_to_hash(object[0])
+            Hash.new { |h, k| k.is_a?(Integer) ? h[k] = value : nil }.merge(0 => value)
+          else
+            object.each_with_index.reduce({}) do |acc, (elem, index)|
+              acc[index] = object_to_hash(elem)
+            acc
+            end
+          end
+        when Hash
+          object.reduce({}) do |acc, (key, value)|
+            acc[key] = object_to_hash(value)
+          acc
+          end
+        else
+          object
+        end
+      end
+
+    end
 
     def defaults
       @defaults || {}
@@ -46,7 +89,12 @@ module Ccd
     end
 
     def save_default_value(name, value)
-      @defaults = merge_json(@defaults || {}, inference(name.split('.'), value))
+      @defaults = System.merge_json(@defaults || {}, inference(name.split('.'), value))
+    end
+
+    def save_cardinality(name, value)
+      @cardinalities ||= {}
+      @cardinalities[name] = value
     end
 
     def inference(path, value, context = self)
@@ -60,39 +108,6 @@ module Ccd
       end
     end
 
-    def merge_json(x, y)
-      hash_to_object object_to_hash(x).deep_merge(object_to_hash(y))
-    end
-
-    def hash_to_object(hash)
-      return hash unless Hash === hash
-      is_array = hash.keys.all? { |x| x.is_a?(Integer) }
-      acc = is_array ? [] : {}
-      hash.reduce(acc) { |acc, (k, v)| acc[k] = hash_to_object(v); acc }
-    end
-
-    def object_to_hash(object)
-      case object
-      when Array
-        if object.size == 1
-          value = object_to_hash(object[0])
-          Hash.new { |h, k| k.is_a?(Integer) ? h[k] = value : nil }.merge(0 => value)
-        else
-          object.each_with_index.reduce({}) do |acc, (elem, index)|
-            acc[index] = object_to_hash(elem)
-            acc
-          end
-        end
-      when Hash
-        object.reduce({}) do |acc, (key, value)|
-          acc[key] = object_to_hash(value)
-          acc
-        end
-      else
-        object
-      end
-    end
-
     def attribute_class(context, attribute)
       annotations(context, attribute)[:class].constantize
     end
@@ -103,11 +118,6 @@ module Ccd
 
     def annotations(context, attribute)
       context.attribute_set[attribute.to_sym].annotations
-    end
-
-    def save_cardinality(name, value)
-      @cardinalities ||= {}
-      @cardinalities[name] = value
     end
   end
 end
