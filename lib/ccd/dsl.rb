@@ -1,6 +1,7 @@
 require 'active_support/core_ext'
 module Ccd
   module Dsl
+    attr_reader :constraints
 
     class CardinalityError < Exception
       def initialize(obj, name)
@@ -18,26 +19,25 @@ module Ccd
       name = args.shift
       @constraints ||= {}
       @constraints[name] = opts
-      save_default_value(name, opts[:value]) if opts[:value]
-      save_cardinality(name, opts[:cardinality]) if opts[:cardinality]
+      save_default_value(name, opts[:value]) if opts[:value].present? && opts[:cardinality] == '1..1'
+      #save_cardinality(name, opts[:cardinality]) if opts[:cardinality]
     end
 
     def build(attrs = {}, &block)
-      new(attrs.with_indifferent_access.merge(defaults)).tap do |object|
+      new(Utility.mk_class(Utility.merge_json(attrs.with_indifferent_access, defaults))).tap do |object|
         yield(object) if block_given?
         #validate!(object)
       end
     end
 
     def dump(path)
-      `mkdir -p #{path}`
       File.open(File.join(path, "#{self.name.underscore}.yml"), 'w') do |f|
         f.puts defaults.to_yaml
       end
     end
 
     #private
-    module System
+    module Utility
       extend self
       def merge_json(x, y)
         hash_to_object object_to_hash(x).deep_merge(object_to_hash(y))
@@ -72,6 +72,28 @@ module Ccd
         end
       end
 
+      def mk_class(attrs)
+        res = attrs.reduce({}) do |acc, (k, v)|
+          acc[k] = 
+          case v
+          when Hash
+            mk_class(v)
+          when Array
+            v.map { |vv| mk_class(vv) }
+          else
+            v
+          end
+        acc
+        end
+
+        if res.key?(:_type)
+          res.delete(:_type).constantize.new res
+        else
+          res
+        end
+      end
+
+
     end
 
     def defaults
@@ -89,7 +111,7 @@ module Ccd
     end
 
     def save_default_value(name, value)
-      @defaults = System.merge_json(@defaults || {}, inference(name.split('.'), value))
+      @defaults = Utility.merge_json(@defaults || {}, inference(name.split('.'), value))
     end
 
     def save_cardinality(name, value)
@@ -98,6 +120,8 @@ module Ccd
     end
 
     def inference(path, value, context = self)
+      #puts if self == context
+      #puts "inference(#{path}, #{value}, #{context})"
       return value if path.blank?
       name = path.shift
       value = inference(path, value, attribute_class(context, name))

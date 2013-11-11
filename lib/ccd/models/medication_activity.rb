@@ -2,169 +2,169 @@ module Ccd
   class MedicationActivity < ::Cda::SubstanceAdministration
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="SBADM" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7496).
-    constraint 'class_code', cardinality: '1..1', value: 'SBADM'
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"SBADM"}
 
     #SHALL contain exactly one [1..1] @moodCode, which SHALL be selected from ValueSet MoodCodeEvnInt 2.16.840.1.113883.11.20.9.18 STATIC 2011-04-03 (CONF:7497).
-    constraint 'mood_code', cardinality: '1..1'
+    constraint 'mood_code', {:cardinality=>"1..1"}
 
     #SHALL contain exactly one [1..1] templateId (CONF:7499) such that it
-    constraint 'template_id', cardinality: '1..1'
+    constraint 'template_id', {:cardinality=>"1..1"}
 
     #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.4.16" (CONF:10504).
-    constraint 'template_id.root', cardinality: '1..1', value: '2.16.840.1.113883.10.20.22.4.16'
+    constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.22.4.16"}
 
     #SHALL contain at least one [1..*] id (CONF:7500).
-    constraint 'id', cardinality: '1..*'
+    constraint 'id', {:cardinality=>"1..*"}
 
     #MAY contain zero or one [0..1] code (CONF:7506).
-    constraint 'code', cardinality: '0..1'
+    constraint 'code', {:cardinality=>"0..1"}
 
     #SHOULD contain zero or one [0..1] text (CONF:7501).
-    constraint 'text', cardinality: '0..1'
+    constraint 'text', {:cardinality=>"0..1"}
 
     #The text, if present, SHOULD contain zero or one [0..1] reference (CONF:15977).
-    constraint 'text.reference', cardinality: '0..1'
+    constraint 'text.reference', {:cardinality=>"0..1"}
 
     #The reference, if present, SHOULD contain zero or one [0..1] @value (CONF:15978).
-    constraint 'text.reference.value', cardinality: '0..1'
+    constraint 'text.reference.value', {:cardinality=>"0..1"}
 
     #This reference/@value SHALL begin with a '#' and SHALL point to its corresponding narrative (using the approach defined in CDA Release 2, section 4.3.5.1)
-    constraint 'text.reference.value'
+    constraint 'text.reference.value', {}
 
     #SHALL contain exactly one [1..1] statusCode (CONF:7507).
-    constraint 'status_code', cardinality: '1..1'
+    constraint 'status_code', {:cardinality=>"1..1"}
 
     #SHALL contain exactly one [1..1] effectiveTime (CONF:7508) such that it
-    constraint 'effective_time', cardinality: '1..1'
+    constraint 'effective_time', {:cardinality=>"1..1"}
 
     #SHALL contain exactly one [1..1] low (CONF:7511).
-    constraint 'effective_time.low', cardinality: '1..1'
+    constraint 'effective_time.low', {:cardinality=>"1..1"}
 
     #SHALL contain exactly one [1..1] high (CONF:7512).
-    constraint 'effective_time.high', cardinality: '1..1'
+    constraint 'effective_time.high', {:cardinality=>"1..1"}
 
     #SHOULD contain zero or one [0..1] effectiveTime (CONF:7513) such that it
-    constraint 'effective_time', cardinality: '0..1'
+    constraint 'effective_time', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @operator="A" (CONF:9106).
-    constraint 'effective_time.operator', cardinality: '1..1', value: 'A'
+    constraint 'effective_time.operator', {:cardinality=>"1..1", :value=>"A"}
 
     #	SHALL contain exactly one [1..1] @xsi:type=”PIVL_TS” or “EIVL_TS”
-    constraint 'effective_time'
+    constraint 'effective_time', {}
 
     #MAY contain zero or one [0..1] repeatNumber (CONF:7555).
-    constraint 'repeat_number', cardinality: '0..1'
+    constraint 'repeat_number', {:cardinality=>"0..1"}
 
     #In "INT" (intent) mood, the repeatNumber defines the number of allowed administrations. For example, a repeatNumber of "3" means that the substance can be administered up to 3 times. In "EVN" (event) mood, the repeatNumber is the number of occurrences. For example, a repeatNumber of "3" in a substance administration event means that the current administration is the 3rd in a series.
-    constraint 'repeat_number'
+    constraint 'repeat_number', {}
 
     #MAY contain zero or one [0..1] routeCode, which SHALL be selected from ValueSet Medication Route FDA 2.16.840.1.113883.3.88.12.3221.8.7 DYNAMIC (CONF:7514).
-    constraint 'route_code', cardinality: '0..1'
+    constraint 'route_code', {:cardinality=>"0..1"}
 
     #MAY contain zero or one [0..1] approachSiteCode, where the code SHALL be selected from ValueSet Body Site 2.16.840.1.113883.3.88.12.3221.8.9 DYNAMIC (CONF:7515).
-    constraint 'approach_site_code', cardinality: '0..1'
+    constraint 'approach_site_code', {:cardinality=>"0..1"}
 
     #SHOULD contain zero or one [0..1] doseQuantity (CONF:7516).
-    constraint 'dose_quantity', cardinality: '0..1'
+    constraint 'dose_quantity', {:cardinality=>"0..1"}
 
     #The doseQuantity, if present, SHOULD contain zero or one [0..1] @unit, which SHALL be selected from ValueSet UnitsOfMeasureCaseSensitive 2.16.840.1.113883.1.11.12839 DYNAMIC (CONF:7526).
-    constraint 'dose_quantity.unit', cardinality: '0..1'
+    constraint 'dose_quantity.unit', {:cardinality=>"0..1"}
 
     #Pre-coordinated consumable: If the consumable code is a pre-coordinated unit dose (e.g. "metoprolol 25mg tablet") then doseQuantity is a unitless number that indicates the number of products given per administration (e.g. "2", meaning 2 x "metoprolol 25mg tablet").
-    constraint 'dose_quantity'
+    constraint 'dose_quantity', {}
 
     #Not pre-coordinated consumable: If the consumable code is not pre-coordinated (e.g. is simply "metoprolol"), then doseQuantity must represent a physical quantity with @unit, e.g. "25" and "mg", specifying the amount of product given per administration.
-    constraint 'dose_quantity'
+    constraint 'dose_quantity', {}
 
     #MAY contain zero or one [0..1] rateQuantity (CONF:7517).
-    constraint 'rate_quantity', cardinality: '0..1'
+    constraint 'rate_quantity', {:cardinality=>"0..1"}
 
     #The rateQuantity, if present, SHALL contain exactly one [1..1] @unit, which SHALL be selected from ValueSet UnitsOfMeasureCaseSensitive 2.16.840.1.113883.1.11.12839 DYNAMIC (CONF:7525).
-    constraint 'rate_quantity.unit', cardinality: '1..1'
+    constraint 'rate_quantity.unit', {:cardinality=>"1..1"}
 
     #MAY contain zero or one [0..1] maxDoseQuantity (CONF:7518).
-    constraint 'max_dose_quantity', cardinality: '0..1'
+    constraint 'max_dose_quantity', {:cardinality=>"0..1"}
 
     #MAY contain zero or one [0..1] administrationUnitCode, which SHALL be selected from ValueSet Medication Product Form Value Set 2.16.840.1.113883.3.88.12.3221.8.11 DYNAMIC (CONF:7519).
-    constraint 'administration_unit_code', cardinality: '0..1'
+    constraint 'administration_unit_code', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] consumable (CONF:7520).
-    constraint 'consumable', cardinality: '1..1'
+    constraint 'consumable', {:cardinality=>"1..1"}
 
     #This consumable SHALL contain exactly one [1..1] Medication Information (templateId:2.16.840.1.113883.10.20.22.4.23) (CONF:16085).
-    constraint 'consumable.manufactured_product', cardinality: '1..1'
+    constraint 'consumable.manufactured_product', {:cardinality=>"1..1"}
 
     #MAY contain zero or one [0..1] performer (CONF:7522).
-    constraint 'performer', cardinality: '0..1'
+    constraint 'performer', {:cardinality=>"0..1"}
 
     #MAY contain zero or more [0..*] participant (CONF:7523) such that it
-    constraint 'participant', cardinality: '0..*'
+    constraint 'participant', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="CSM" (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:7524).
-    constraint 'participant.type_code', cardinality: '1..1', value: 'CSM'
+    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>"CSM"}
 
     #SHALL contain exactly one [1..1] Drug Vehicle (templateId:2.16.840.1.113883.10.20.22.4.24) (CONF:16086).
-    constraint 'participant.participant_role', cardinality: '1..1'
+    constraint 'participant.participant_role', {:cardinality=>"1..1"}
 
     #MAY contain zero or more [0..*] entryRelationship (CONF:7536) such that it
-    constraint 'entry_relationship', cardinality: '0..*'
+    constraint 'entry_relationship', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="RSON" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7537).
-    constraint 'entry_relationship.type_code', cardinality: '1..1', value: 'RSON'
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"RSON"}
 
     #SHALL contain exactly one [1..1] Indication (templateId:2.16.840.1.113883.10.20.22.4.19) (CONF:16087).
-    constraint 'entry_relationship.observation', cardinality: '1..1'
+    constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
 
     #MAY contain zero or one [0..1] entryRelationship (CONF:7539) such that it
-    constraint 'entry_relationship', cardinality: '0..1'
+    constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="SUBJ" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7540).
-    constraint 'entry_relationship.type_code', cardinality: '1..1', value: 'SUBJ'
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"SUBJ"}
 
     #SHALL contain exactly one [1..1] @inversionInd="true" True (CONF:7542).
-    constraint 'entry_relationship.inversion_ind', cardinality: '1..1', value: 'true'
+    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>"true"}
 
     #SHALL contain exactly one [1..1] Instructions (templateId:2.16.840.1.113883.10.20.22.4.20) (CONF:16088).
-    constraint 'entry_relationship.act', cardinality: '1..1'
+    constraint 'entry_relationship.act', {:cardinality=>"1..1"}
 
     #MAY contain zero or one [0..1] entryRelationship (CONF:7543) such that it
-    constraint 'entry_relationship', cardinality: '0..1'
+    constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="REFR" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7547).
-    constraint 'entry_relationship.type_code', cardinality: '1..1', value: 'REFR'
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"REFR"}
 
     #SHALL contain exactly one [1..1] Medication Supply Order (templateId:2.16.840.1.113883.10.20.22.4.17) (CONF:16089).
-    constraint 'entry_relationship.supply', cardinality: '1..1'
+    constraint 'entry_relationship.supply', {:cardinality=>"1..1"}
 
     #MAY contain zero or more [0..*] entryRelationship (CONF:7549) such that it
-    constraint 'entry_relationship', cardinality: '0..*'
+    constraint 'entry_relationship', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="REFR" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7553).
-    constraint 'entry_relationship.type_code', cardinality: '1..1', value: 'REFR'
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"REFR"}
 
     #SHALL contain exactly one [1..1] Medication Dispense (templateId:2.16.840.1.113883.10.20.22.4.18) (CONF:16090).
-    constraint 'entry_relationship.supply', cardinality: '1..1'
+    constraint 'entry_relationship.supply', {:cardinality=>"1..1"}
 
     #MAY contain zero or one [0..1] entryRelationship (CONF:7552) such that it
-    constraint 'entry_relationship', cardinality: '0..1'
+    constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="CAUS" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7544).
-    constraint 'entry_relationship.type_code', cardinality: '1..1', value: 'CAUS'
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"CAUS"}
 
     #SHALL contain exactly one [1..1] Reaction Observation (templateId:2.16.840.1.113883.10.20.22.4.9) (CONF:16091).
-    constraint 'entry_relationship.observation', cardinality: '1..1'
+    constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
 
     #MAY contain zero or more [0..*] precondition (CONF:7546) such that it
-    constraint 'precondition', cardinality: '0..*'
+    constraint 'precondition', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="PRCN" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7550).
-    constraint 'precondition.type_code', cardinality: '1..1', value: 'PRCN'
+    constraint 'precondition.type_code', {:cardinality=>"1..1", :value=>"PRCN"}
 
     #SHALL contain exactly one [1..1] Precondition for Substance Administration (templateId:2.16.840.1.113883.10.20.22.4.25) (CONF:16092).
-    constraint 'precondition.criterion', cardinality: '1..1'
+    constraint 'precondition.criterion', {:cardinality=>"1..1"}
 
     #Medication Activity SHOULD include doseQuantity OR rateQuantity
-    constraint ''
+    constraint '', {}
 
     Ccd.load_extension('medication_activity.rb')
   end

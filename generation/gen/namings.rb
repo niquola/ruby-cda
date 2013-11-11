@@ -52,7 +52,7 @@ module Gen::Namings
   end
 
   def normalize_name(name)
-    name.underscore
+    name.gsub('/', '.').underscore
   end
 
   extend self

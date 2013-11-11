@@ -2,31 +2,31 @@ module Ccd
   class USRealmAddressADUSFIELDED < ::Cda::AD
     extend ::Ccd::Dsl
     #SHOULD contain zero or one [0..1] @use, which SHALL be selected from ValueSet PostalAddressUse 2.16.840.1.113883.1.11.10637 STATIC 2005-05-01 (CONF:7290).
-    constraint 'use', cardinality: '0..1'
+    constraint 'use', {:cardinality=>"0..1"}
 
     #SHOULD contain zero or one [0..1] country, which SHALL be selected from ValueSet Country 2.16.840.1.113883.3.88.12.80.63 DYNAMIC (CONF:7295).
-    constraint 'country', cardinality: '0..1'
+    constraint 'country', {:cardinality=>"0..1"}
 
     #SHOULD contain zero or one [0..1] state (ValueSet: StateValueSet 2.16.840.1.113883.3.88.12.80.1 DYNAMIC) (CONF:7293).
-    constraint 'state', cardinality: '0..1'
+    constraint 'state', {:cardinality=>"0..1"}
 
     #	State is required if the country is US. If country is not specified, it's assumed to be US. If country is something other than US, the state MAY be present but MAY be bound to different vocabularies.
-    constraint 'state'
+    constraint 'state', {}
 
     #SHALL contain exactly one [1..1] city (CONF:7292).
-    constraint 'city', cardinality: '1..1'
+    constraint 'city', {:cardinality=>"1..1"}
 
     #SHOULD contain zero or one [0..1] postalCode, which SHOULD be selected from ValueSet PostalCode 2.16.840.1.113883.3.88.12.80.2 DYNAMIC (CONF:7294).
-    constraint 'postal_code', cardinality: '0..1'
+    constraint 'postal_code', {:cardinality=>"0..1"}
 
     #PostalCode is required if the country is US. If country is not specified, it's assumed to be US. If country is something other than US, the postalCode MAY be present but MAY be bound to different vocabularies
-    constraint 'postal_code'
+    constraint 'postal_code', {}
 
     #SHALL contain at least one and not more than 4 streetAddressLine (CONF:7291).
-    constraint 'street_address_line', cardinality: '1..4'
+    constraint 'street_address_line', {:cardinality=>"1..4"}
 
     #SHALL NOT have mixed content except for white space
-    constraint ''
+    constraint '', {}
 
     Ccd.load_extension('us_realm_address_adusfielded.rb')
   end

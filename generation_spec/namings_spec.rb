@@ -3,12 +3,7 @@ require_relative 'gen_spec_helper'
 describe Gen::Namings do
   include described_class
   example do
-    pending
-
-    normalize_name('Family Name').should == 'family_name'
-    normalize_name('Suffix (e.g., JR or III)').should == 'suffix'
-
-    normalize_name('???????', 'ups').should == 'ups'
+    normalize_name("associated_entity/class_code").should == 'associated_entity.class_code'
   end
 
   example do

@@ -32,7 +32,7 @@ module CcdGen
   def mk_class(template, filename)
     ancestor = '::Cda::' + Gen::Namings.mk_class_name(template[:contextType])
     include_dsl = "extend ::Ccd::Dsl"
-    attributes = mk_attributes(template.xpath('./Constraint'))
+    attributes = mk_attributes(class_name(template), template.xpath('./Constraint'))
     extension = "Ccd.load_extension('#{filename}')"
     body = [include_dsl, attributes, extension].join("\n")
 
@@ -46,8 +46,10 @@ module CcdGen
     Gen::Namings.mk_ccd_class_name(template[:bookmark])
   end
 
-  def mk_attributes(constraints)
-    constraints.map { |c| mk_attribute(c) }.flatten.join("\n")
+  def mk_attributes(class_name, constraints)
+    groups = constraints.group_by { |c| name(c) }.delete_if { |n, v| v.size == 1 }
+
+    constraints.map { |c| mk_attribute(class_name, c) }.flatten.join("\n")
   end
 
   def dump
@@ -60,31 +62,38 @@ module CcdGen
     end
   end
 
-  def mk_attribute(constraint, name = nil)
+  def mk_attribute(class_name, constraint, name = nil)
     name = [name, name(constraint)].compact.join('.')
+    old_name = name
     comments = [comment(constraint)]
-    params = ["'#{name}'"]
+    params = {}
 
     if card = constraint[:cardinality]
-      params << "cardinality: '#{card}'"
+      params.merge! cardinality: card
     end
 
     if sch = schematron_test(constraint)
       #comments << "schematron_test: %Q{#{sch}}"
     end
 
-    if vc = single_value_code(constraint)
-      params << "value: '#{vc}'"
+    if value = value(constraint)
+      params.merge! value: value
+      name = patch_name(class_name, name)
     end
 
+    params = ["'#{name}'", pretty_hash(params)]
     acc = comments.map { |c| "##{c}" }
     acc << "constraint #{params.join(', ')}\n"
 
     constraint.xpath('./Constraint').reduce(acc) do |acc, c|
-      acc << mk_attribute(c, name)
+      acc << mk_attribute(class_name, c, old_name)
     end
 
     acc.compact
+  end
+
+  def pretty_hash(hash)
+    hash.inspect
   end
 
   def comment(constraint)
@@ -118,11 +127,23 @@ module CcdGen
     end
   end
 
-  def single_value_code(constraint)
-    if vc = constraint.xpath('./SingleValueCode | ./ValueSet').first
-      notice_once(vc.inspect, 'single_value_code')
-      vc['code']
+  def value(constraint)
+    if vc = constraint.xpath('./SingleValueCode').first
+      attrs = { code: vc['code'], display_name: vc['displayName'] }
+      if cs = constraint.xpath('./CodeSystem').first
+        attrs.merge! code_system: cs['oid']
+      end
+      attrs.delete_if{ |k, v| v.nil? }
+      if attrs.keys == [:code] || attribute?(constraint)
+        attrs[:code]
+      else
+        attrs
+      end
     end
+  end
+
+  def attribute?(constraint)
+    constraint['context'].starts_with?('@')
   end
 
   def value_set(constraint)
@@ -151,6 +172,18 @@ module CcdGen
   def comment(el)
     if nt = el.xpath('./NarrativeText').first
       nt.text
+    end
+  end
+
+  def patch_name(class_name, name)
+    #return name
+    case [class_name, name]
+    when ['PolicyActivity', 'performer']
+      'performer.type_code'
+    when ['USRealmHeader', 'realm_code']
+      'realm_code.code'
+    else
+      name
     end
   end
 
