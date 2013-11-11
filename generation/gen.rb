@@ -12,7 +12,7 @@ module Gen
     cleanup
     db = Db.full_db
     definitions = db[:types].map do |raw_name, xml|
-      define_class(raw_name, xml, db[:elements])
+      define_class(raw_name, xml, db[:elements], all_types: db[:types])
     end.sort_by do |node|
       case node[:type]
       when :simple  then 0
@@ -52,13 +52,15 @@ module Gen
     generate_autoloads(autoload_entries.sort)
   end
 
-  def define_class(raw_name, xml, elemsdb)
+  def define_class(raw_name, xml, elemsdb, opts = {})
+    all_types = opts[:all_types]
     if xml.name == 'complexType'
       ancestor = xml.xpath('./complexContent/extension|./complexContent/restriction').first.try :[], :base
       {
         ancestor: ancestor,
         type: :complex,
-        attributes: attributes(xml, elemsdb)
+        attributes: attributes(xml, elemsdb,
+                               is_base_type: base_type?(raw_name, all_types))
       }
     elsif xml.name == 'simpleType'
       case
@@ -80,6 +82,10 @@ module Gen
     else
       raise xml.name
     end.merge(name: raw_name)
+  end
+
+  def base_type?(type_name, all_types)
+    all_types.keys.include?(type_name.downcase)
   end
 
   def cleanup
@@ -121,7 +127,8 @@ module Gen
     fwrite('lib/cda/autoloads.rb', Codeg.gmodule('Cda', entries.join("\n")))
   end
 
-  def attributes(xml, elemsdb)
+  def attributes(xml, elemsdb, opts = {})
+    is_base_type = opts[:is_base_type]
     elements = Meta.elements(xml).map { |el|
       if ref = Meta.ref(el)
         process_reference(ref, elemsdb)
@@ -130,10 +137,17 @@ module Gen
       end
     }
     attributes = Meta.attributes(xml).map { |attr| process_attribute(attr) }
+    if is_base_type
+      attributes << text_attribute
+    end
 
     (elements + attributes).compact.map do |a|
       Codeg.generate_attribute(*a)
     end
+  end
+
+  def text_attribute
+    process_attribute(name: '_text', type: 'String')
   end
 
   def logsimple(el, header)
