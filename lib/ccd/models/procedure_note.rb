@@ -20,10 +20,10 @@ module Ccd
     constraint 'participant.type_code', {:cardinality=>"1..1", :value=>"IND"}
 
     #SHALL contain exactly one [1..1] functionCode="PCP" Primary Care Physician (CodeSystem: participationFunction 2.16.840.1.113883.5.88 STATIC) (CONF:8506).
-    constraint 'participant.function_code', {:cardinality=>"1..1", :value=>{:code=>"PCP", :display_name=>"Primary Care Physician", :code_system=>"2.16.840.1.113883.5.88"}}
+    constraint 'participant.function_code', {:cardinality=>"1..1", :value=>{:code=>"PCP", :display_name=>"Primary Care Physician", :code_system=>"2.16.840.1.113883.5.88", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] associatedEntity/@classCode="PROV" Provider (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8507).
-    constraint 'participant.associated_entity.class_code', {:cardinality=>"1..1", :value=>{:code=>"PROV", :display_name=>"Provider", :code_system=>"2.16.840.1.113883.5.90"}}
+    constraint 'participant.associated_entity.class_code', {:cardinality=>"1..1", :value=>{:code=>"PROV", :display_name=>"Provider", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
 
     #This associatedEntity/@classCode SHALL contain exactly one [1..1] associatedPerson (CONF:8508).
     constraint 'participant.associated_entity.class_code.associated_person', {:cardinality=>"1..1"}

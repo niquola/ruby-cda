@@ -44,7 +44,7 @@ module Ccd
     constraint 'effective_time', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] value="182904002" Drug treatment unknown (CodeSystem: SNOMED CT 2.16.840.1.113883.6.96 STATIC) (CONF:7564).
-    constraint 'value', {:cardinality=>"1..1", :value=>{:code=>"182904002", :display_name=>"Drug treatment unknown", :code_system=>"2.16.840.1.113883.6.96"}}
+    constraint 'value', {:cardinality=>"1..1", :value=>{:code=>"182904002", :display_name=>"Drug treatment unknown", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
 
     Ccd.load_extension('medication_use_none_known_deprecated.rb')
   end

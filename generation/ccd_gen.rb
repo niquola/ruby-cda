@@ -134,6 +134,9 @@ module CcdGen
         attrs.merge! code_system: cs['oid']
       end
       attrs.delete_if{ |k, v| v.nil? }
+      if attrs.keys.to_set == [:code, :display_name, :code_system].to_set
+        attrs.merge! _type: 'Cda::CV'
+      end
       if attrs.keys == [:code] || attribute?(constraint)
         attrs[:code]
       else

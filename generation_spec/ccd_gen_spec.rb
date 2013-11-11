@@ -62,6 +62,11 @@ describe CcdGen do
   end
 
   example do
+    md = Ccd::MedicationUseNoneKnownDeprecated.build
+    md.value.should == [Cda::CV.new(:code=>"182904002", :display_name=>"Drug treatment unknown", :code_system=>"2.16.840.1.113883.6.96")]
+  end
+
+  example do
     ro = Ccd::ResultObservation.build
     #ro.template_id.first.root.should == {:code=>"2.16.840.1.113883.10.20.22.4.2"}.with_indifferent_access
     ro.template_id.first.root.should == '2.16.840.1.113883.10.20.22.4.2'

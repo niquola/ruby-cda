@@ -68,7 +68,7 @@ module Ccd
     constraint 'performer.assigned_entity.represented_organization.name', {:cardinality=>"0..1"}
 
     #SHOULD contain zero or one [0..1] performer="PRF" Performer (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8961) such that it
-    constraint 'performer.type_code', {:cardinality=>"0..1", :value=>{:code=>"PRF", :display_name=>"Performer", :code_system=>"2.16.840.1.113883.5.90"}}
+    constraint 'performer.type_code', {:cardinality=>"0..1", :value=>{:code=>"PRF", :display_name=>"Performer", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:16810).
     constraint 'performer.template_id', {:cardinality=>"1..1"}
