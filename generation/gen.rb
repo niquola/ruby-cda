@@ -131,7 +131,7 @@ module Gen
     }
     attributes = Meta.attributes(xml).map { |attr| process_attribute(attr) }
 
-    (elements + attributes).compact.sort_by(&:first).map do |a|
+    (elements + attributes).compact.map do |a|
       Codeg.generate_attribute(*a)
     end
   end
