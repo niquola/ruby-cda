@@ -2,7 +2,7 @@ module Ccd
   class ServiceDeliveryLocation < ::Cda::ParticipantRole
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="SDLOC" (CodeSystem: RoleCode 2.16.840.1.113883.5.111 STATIC) (CONF:7758).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"SDLOC", :code_system=>"2.16.840.1.113883.5.111"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"SDLOC"}
 
     # SHALL contain exactly one [1..1] templateId (CONF:7635) such that it
     constraint 'template_id', {:cardinality=>"1..1"}

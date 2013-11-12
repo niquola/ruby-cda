@@ -2,10 +2,10 @@ module Ccd
   class FamilyHistoryOrganizer < ::Cda::Organizer
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="CLUSTER" Cluster (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8600).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"CLUSTER", :display_name=>"Cluster", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"CLUSTER"}
 
     # SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:8601).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
 
     # SHALL contain exactly one [1..1] templateId (CONF:8604) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -23,7 +23,7 @@ module Ccd
     constraint 'subject.related_subject', {:cardinality=>"1..1"}
 
     # This relatedSubject SHALL contain exactly one [1..1] @classCode="PRS" Person (CodeSystem: EntityClass 2.16.840.1.113883.5.41 STATIC) (CONF:15245).
-    constraint 'subject.related_subject.class_code', {:cardinality=>"1..1", :value=>{:code=>"PRS", :display_name=>"Person", :code_system=>"2.16.840.1.113883.5.41", :_type=>"Cda::CV"}}
+    constraint 'subject.related_subject.class_code', {:cardinality=>"1..1", :value=>"PRS"}
 
     # This relatedSubject SHALL contain exactly one [1..1] code (CONF:15246).
     constraint 'subject.related_subject.code', {:cardinality=>"1..1"}

@@ -2,7 +2,7 @@ module Ccd
   class PlanOfCareActivitySupply < ::Cda::Supply
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="SPLY" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8577).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"SPLY", :code_system=>"2.16.840.1.113883.5.6"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"SPLY"}
 
     # SHALL contain exactly one [1..1] @moodCode, which SHALL be selected from ValueSet Planned moodCode (SubstanceAdministration/Supply) 2.16.840.1.113883.11.20.9.24 STATIC 2011-09-30 (CONF:8578).
     constraint 'mood_code', {:cardinality=>"1..1"}

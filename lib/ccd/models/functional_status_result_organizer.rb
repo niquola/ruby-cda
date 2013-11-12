@@ -2,10 +2,10 @@ module Ccd
   class FunctionalStatusResultOrganizer < ::Cda::Organizer
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="CLUSTER", which SHALL be selected from CodeSystem HL7ActClass (2.16.840.1.113883.5.6) STATIC (CONF:14355).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"CLUSTER", :display_name=>"", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"CLUSTER"}
 
     # SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:14357).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
 
     # SHALL contain exactly one [1..1] templateId (CONF:14361) such that it
     constraint 'template_id', {:cardinality=>"1..1"}

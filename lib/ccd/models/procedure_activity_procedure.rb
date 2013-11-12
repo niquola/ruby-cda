@@ -2,7 +2,7 @@ module Ccd
   class ProcedureActivityProcedure < ::Cda::Procedure
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="PROC" Procedure (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7652).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"PROC", :display_name=>"Procedure", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"PROC"}
 
     # SHALL contain exactly one [1..1] @moodCode, which SHALL be selected from ValueSet MoodCodeEvnInt 2.16.840.1.113883.11.20.9.18 STATIC 2011-04-03 (CONF:7653).
     constraint 'mood_code', {:cardinality=>"1..1"}

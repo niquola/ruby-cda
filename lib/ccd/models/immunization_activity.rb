@@ -2,7 +2,7 @@ module Ccd
   class ImmunizationActivity < ::Cda::SubstanceAdministration
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="SBADM" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8826).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"SBADM", :code_system=>"2.16.840.1.113883.5.6"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"SBADM"}
 
     # SHALL contain exactly one [1..1] @moodCode, which SHALL be selected from ValueSet MoodCodeEvnInt 2.16.840.1.113883.11.20.9.18 STATIC (CONF:8827).
     constraint 'mood_code', {:cardinality=>"1..1"}

@@ -2,7 +2,7 @@ module Ccd
   class PlanOfCareActivityAct < ::Cda::Act
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="ACT" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8538).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"ACT", :code_system=>"2.16.840.1.113883.5.6"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
 
     # SHALL contain exactly one [1..1] @moodCode, which SHALL be selected from ValueSet Planned moodCode (Act/Encounter/Procedure) 2.16.840.1.113883.11.20.9.23 STATIC 2011-09-30 (CONF:8539).
     constraint 'mood_code', {:cardinality=>"1..1"}

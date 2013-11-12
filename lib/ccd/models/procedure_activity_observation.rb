@@ -2,7 +2,7 @@ module Ccd
   class ProcedureActivityObservation < ::Cda::Observation
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8282).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"OBS", :display_name=>"Observation", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
     # SHALL contain exactly one [1..1] @moodCode, which SHALL be selected from ValueSet MoodCodeEvnInt 2.16.840.1.113883.11.20.9.18 STATIC 2011-04-03 (CONF:8237).
     constraint 'mood_code', {:cardinality=>"1..1"}

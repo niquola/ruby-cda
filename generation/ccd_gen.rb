@@ -34,7 +34,7 @@ module CcdGen
   def mk_class(template, filename)
     ancestor = '::Cda::' + Gen::Namings.mk_class_name(template[:contextType])
     include_dsl = "extend ::Ccd::Dsl"
-    attributes = mk_attributes(class_name(template), template.xpath('./Constraint'))
+    attributes = mk_constraints(class_name(template), template.xpath('./Constraint'))
     extension = "Ccd.load_extension('#{filename}')"
     body = [include_dsl, attributes, extension].join("\n")
 
@@ -48,19 +48,19 @@ module CcdGen
     Gen::Namings.mk_ccd_class_name(template[:bookmark])
   end
 
-  def mk_attributes(class_name, constraints)
+  def mk_constraints(class_name, constraints)
     constraints
-      .map { |c| mk_attribute(class_name, c) }.flatten.join("\n")
+      .map { |c| mk_constraint(class_name, c) }.flatten.join("\n")
   end
 
-  def mk_attribute(class_name, constraint)
-    def_attribute(class_name, constraint).map do |definition|
+  def mk_constraint(class_name, constraint)
+    def_constraint(class_name, constraint).map do |definition|
       definition[:comments].map { |c| "# #{c}" } +
         ["constraint '#{definition[:name]}', #{definition[:params].inspect}\n"]
     end
   end
 
-  def def_attribute(class_name, constraint, name = nil)
+  def def_constraint(class_name, constraint, name = nil)
     name = [name, name(constraint)].compact.join('.')
     old_name = name
     comments = comments(constraint)
@@ -85,7 +85,7 @@ module CcdGen
         }]
 
       constraint.xpath('./Constraint').reduce(acc) do |acc, c|
-        child_constraints = def_attribute(class_name, c, old_name)
+        child_constraints = def_constraint(class_name, c, old_name)
 
         typed_constraints = child_constraints.select do |c|
           p = c[:params][:value]
@@ -111,7 +111,7 @@ module CcdGen
   end
 
   IGNORED_CONSTRAINTS = [
-    9431, 7589, 10494
+    9431, 7589, 10494 # duplicated constraints
   ]
 
   def constraint_useful?(constraint)
@@ -126,10 +126,6 @@ module CcdGen
 
     !IGNORED_CONSTRAINTS.include?(constraint[:number].to_i) &&
       (conf == "SHALL" && ['1..1', '1..*', '1..4'].include?(card))
-  end
-
-  def pretty_hash(hash)
-    hash.inspect
   end
 
   def comments(constraint)
@@ -161,14 +157,22 @@ module CcdGen
 
       value.delete_if{ |k, v| v.nil? }
 
-      if value.keys.to_set == [:code, :display_name, :code_system].to_set
-        value.merge! _type: 'Cda::CV'
-      end
+      normalize_value(constraint, value)
+    end
+  end
 
-      if value.keys == [:code] || root_template_id?(constraint)
-        value[:code]
+  def normalize_value(constraint, v)
+    plain_code_contexts = ["@classCode", '@moodCode']
+
+    if plain_code_contexts.include?(constraint[:context]) ||
+        v.keys == [:code] ||
+        root_template_id?(constraint)
+      v[:code]
+    else
+      if v.keys.to_set == [:code, :display_name, :code_system].to_set
+        v.merge _type: 'Cda::CV'
       else
-        value
+        v
       end
     end
   end

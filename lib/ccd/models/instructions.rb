@@ -2,10 +2,10 @@ module Ccd
   class Instructions < ::Cda::Act
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="ACT" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7391).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"ACT", :code_system=>"2.16.840.1.113883.5.6"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
 
     # SHALL contain exactly one [1..1] @moodCode="INT" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:7392).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"INT", :code_system=>"2.16.840.1.113883.5.1001"}}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>"INT"}
 
     # SHALL contain exactly one [1..1] templateId (CONF:7393) such that it
     constraint 'template_id', {:cardinality=>"1..1"}

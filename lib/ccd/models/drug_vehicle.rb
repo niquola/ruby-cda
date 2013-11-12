@@ -2,7 +2,7 @@ module Ccd
   class DrugVehicle < ::Cda::ParticipantRole
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="MANU" (CodeSystem: RoleClass 2.16.840.1.113883.5.110 STATIC) (CONF:7490).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"MANU", :code_system=>"2.16.840.1.113883.5.110"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"MANU"}
 
     # SHALL contain exactly one [1..1] templateId (CONF:7495) such that it
     constraint 'template_id', {:cardinality=>"1..1"}

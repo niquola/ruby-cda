@@ -2,10 +2,10 @@ module Ccd
   class MedicationSupplyOrder < ::Cda::Supply
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="SPLY" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7427).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"SPLY", :code_system=>"2.16.840.1.113883.5.6"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"SPLY"}
 
     # SHALL contain exactly one [1..1] @moodCode="INT" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:7428).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"INT", :code_system=>"2.16.840.1.113883.5.1001"}}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>"INT"}
 
     # SHALL contain exactly one [1..1] templateId (CONF:7429) such that it
     constraint 'template_id', {:cardinality=>"1..1"}

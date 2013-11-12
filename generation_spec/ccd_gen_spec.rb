@@ -51,6 +51,11 @@ describe CcdGen do
   end
 
   example do
+    Ccd::ResultObservation.should have_constraint("class_code").with_value('OBS')
+    Ccd::ResultObservation.should have_constraint("mood_code").with_value('EVN')
+  end
+
+  example do
     Ccd::PolicyActivity.should have_constraint('performer.type_code').with_value(code: 'PRF')
     Ccd::MedicationUseNoneKnownDeprecated.should have_constraint('value').with_value(code: '182904002')
     Ccd::USRealmHeader.should have_constraint('realm_code.code').with_value(code: 'US')

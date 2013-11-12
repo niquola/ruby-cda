@@ -2,10 +2,10 @@ module Ccd
   class ReferencedFramesObservation < ::Cda::Observation
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="ROIBND" Bounded Region of Interest (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9276).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"ROIBND", :display_name=>"Bounded Region of Interest", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"ROIBND"}
 
     # SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:9277).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
 
     # SHALL contain exactly one [1..1] code (CONF:19164).
     constraint 'code', {:cardinality=>"1..1"}

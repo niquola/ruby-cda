@@ -2,10 +2,10 @@ module Ccd
   class MedicationUseNoneKnownDeprecated < ::Cda::Observation
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="OBS" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7557).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"OBS", :code_system=>"2.16.840.1.113883.5.6"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
     # SHALL contain exactly one [1..1] @moodCode="EVN" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:7558).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :code_system=>"2.16.840.1.113883.5.1001"}}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
 
     # SHALL contain exactly one [1..1] templateId (CONF:7559) such that it
     constraint 'template_id', {:cardinality=>"1..1"}

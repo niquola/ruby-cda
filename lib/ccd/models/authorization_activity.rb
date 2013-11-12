@@ -2,10 +2,10 @@ module Ccd
   class AuthorizationActivity < ::Cda::Act
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="ACT" Act (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8944).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"ACT", :display_name=>"Act", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
 
     # SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8945).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
 
     # SHALL contain exactly one [1..1] templateId (CONF:8946) such that it
     constraint 'template_id', {:cardinality=>"1..1"}

@@ -2,10 +2,10 @@ module Ccd
   class EncounterActivities < ::Cda::Encounter
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @classCode="ENC" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8710).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"ENC", :code_system=>"2.16.840.1.113883.5.6"}}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>"ENC"}
 
     # SHALL contain exactly one [1..1] @moodCode="EVN" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:8711).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
 
     # SHALL contain exactly one [1..1] templateId (CONF:8712) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
