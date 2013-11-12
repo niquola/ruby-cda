@@ -79,17 +79,18 @@ module Ccd
       end
 
       def mk_class(attrs)
+        return attrs unless attrs.is_a?(Hash)
+
         res = attrs.reduce({}) do |acc, (k, v)|
-          acc[k] =
-          case v
-          when Hash
-            mk_class(v)
-          when Array
-            v.map { |vv| mk_class(vv) }
-          else
-            v
-          end
-        acc
+          acc[k] = case v
+                   when Hash
+                     mk_class(v)
+                   when Array
+                     v.map { |vv| mk_class(vv) }
+                   else
+                     v
+                   end
+          acc
         end
 
         if res.key?(:_type)
