@@ -1,4 +1,5 @@
 require 'cda/autoloads'
+
 module Cda
   class Base
     include Virtus.model
@@ -18,7 +19,13 @@ module Cda
     end
 
     def to_s
-      complex? ? super : _text
+      if complex?
+        super
+      elsif _text.present?
+        _text
+      else
+        super
+      end
     end
 
     private

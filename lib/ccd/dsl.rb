@@ -82,14 +82,14 @@ module Ccd
         return attrs unless attrs.is_a?(Hash)
 
         res = attrs.reduce({}) do |acc, (k, v)|
-          acc[k] = case v
-                   when Hash
-                     mk_class(v)
-                   when Array
-                     v.map { |vv| mk_class(vv) }
-                   else
-                     v
-                   end
+          acc[k.to_sym] = case v
+                          when Hash
+                            mk_class(v)
+                          when Array
+                            v.map { |vv| mk_class(vv) }
+                          else
+                            v
+                          end
           acc
         end
 
