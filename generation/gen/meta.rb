@@ -47,6 +47,10 @@ module Gen::Meta
     el_ref[:maxOccurs] == 'unbounded'
   end
 
+  def mixed?(node)
+    node[:mixed]
+  end
+
   def nested_type?(el_ref)
     ref(el_ref) =~ /\..+$/
   end

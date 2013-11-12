@@ -6,4 +6,5 @@ class Cda::ED < Cda::BIN
   attribute :compression, Cda::CompressionAlgorithm, annotations: {:kind=>:attribute, :class=>"Cda::CompressionAlgorithm"}
   attribute :integrity_check, Cda::Bin, annotations: {:kind=>:attribute, :class=>"Cda::Bin"}
   attribute :integrity_check_algorithm, Cda::IntegrityCheckAlgorithm, annotations: {:kind=>:attribute, :class=>"Cda::IntegrityCheckAlgorithm"}
+  attribute :_text, String, annotations: {:class=>"String"}
 end

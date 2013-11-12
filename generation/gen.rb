@@ -53,14 +53,12 @@ module Gen
   end
 
   def define_class(raw_name, xml, elemsdb, opts = {})
-    all_types = opts[:all_types]
     if xml.name == 'complexType'
       ancestor = xml.xpath('./complexContent/extension|./complexContent/restriction').first.try :[], :base
       {
         ancestor: ancestor,
         type: :complex,
-        attributes: attributes(xml, elemsdb,
-                               is_base_type: base_type?(raw_name, all_types))
+        attributes: attributes(xml, elemsdb)
       }
     elsif xml.name == 'simpleType'
       case
@@ -82,10 +80,6 @@ module Gen
     else
       raise xml.name
     end.merge(name: raw_name)
-  end
-
-  def base_type?(type_name, all_types)
-    all_types.keys.include?(type_name.downcase)
   end
 
   def cleanup
@@ -128,7 +122,6 @@ module Gen
   end
 
   def attributes(xml, elemsdb, opts = {})
-    is_base_type = opts[:is_base_type]
     elements = Meta.elements(xml).map { |el|
       if ref = Meta.ref(el)
         process_reference(ref, elemsdb)
@@ -137,9 +130,7 @@ module Gen
       end
     }
     attributes = Meta.attributes(xml).map { |attr| process_attribute(attr) }
-    if is_base_type
-      attributes << text_attribute
-    end
+    attributes << text_attribute if Meta.mixed?(xml)
 
     (elements + attributes).compact.map do |a|
       Codeg.generate_attribute(*a)
@@ -147,7 +138,7 @@ module Gen
   end
 
   def text_attribute
-    process_attribute(name: '_text', type: 'String')
+    ['_text', 'String', {}]
   end
 
   def process_element(el)

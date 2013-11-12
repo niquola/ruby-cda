@@ -12,4 +12,5 @@ class Cda::StrucDocTh < Cda::Base
   attribute :char, String, annotations: {:kind=>:attribute, :class=>"String"}
   attribute :charoff, String, annotations: {:kind=>:attribute, :class=>"String"}
   attribute :valign, String, annotations: {:class=>"String"}
+  attribute :_text, String, annotations: {:class=>"String"}
 end
