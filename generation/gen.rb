@@ -43,11 +43,11 @@ module Gen
           indent + attribute
         end.join("\n")
       end
-      path = Pth.base_path(definition[:type], class_file_name(class_name))
+      path = Pth.base_path(class_file_name(class_name))
       fappend(path, plain_text)
     end
     autoload_entries = definitions.reduce([]) do |accumulator, definition|
-      register_class(definition[:name], definition[:type], accumulator)
+      register_class(definition[:name], accumulator)
     end
     generate_autoloads(autoload_entries.sort)
   end
@@ -117,10 +117,10 @@ module Gen
     }
   end
 
-  def register_class(name, type, accumulator)
+  def register_class(name, accumulator)
     name = Namings.mk_class_name(name)
     file_name = class_file_name(name)
-    accumulator << "autoload :#{name}, 'cda/#{type}/#{file_name}'"
+    accumulator << "autoload :#{name}, 'cda/#{file_name}'"
   end
 
   def generate_autoloads(entries)
@@ -150,14 +150,7 @@ module Gen
     process_attribute(name: '_text', type: 'String')
   end
 
-  def logsimple(el, header)
-    if Meta.simple_type?(el)
-      fappend('lib/cda/simple.xml', [header, el.to_xml].join("\n"))
-    end
-  end
-
   def process_element(el)
-    logsimple(el, 'element')
     [Meta.name(el), Namings.mk_class_name(rmns Meta.type(el)), meta_options(el)]
   end
 
@@ -183,7 +176,6 @@ module Gen
   end
 
   def process_attribute(attr)
-    # logsimple(attr, 'attribute')
     if attr[:type].present?
       [
         attr[:name],

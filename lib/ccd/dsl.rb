@@ -120,16 +120,11 @@ module Ccd
     end
 
     def inference(path, value, context = self)
-      puts if self == context
-      puts "inference(#{path}, #{value}, #{context})"
-
       return value if path.empty?
 
       name = path.shift
 
       if path.empty? && value.is_a?(Hash) && value.key?(:_type)
-        # raise "BINGO"
-        puts "constantizing #{value[:_type]}"
         klass = value[:_type].constantize
         is_collection = false
       else

@@ -3,9 +3,7 @@ require 'spec_helper'
 describe Ccd do
   context ".build" do
     example do
-      puts Ccd::ProgressNote.defaults.to_yaml
       obs = Ccd::ProgressNote.build
-      puts obs.to_hash.to_yaml
       obs.should be
     end
   end

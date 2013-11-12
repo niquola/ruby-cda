@@ -39,14 +39,6 @@ module Gen::Meta
     base && base.gsub(/^xsd:/,'')
   end
 
-  def complex_type?(node)
-    node.name == 'complexType'
-  end
-
-  def simple_type?(node)
-    node.name == 'simpleType'
-  end
-
   def root_datatype?(name)
     not name =~ /CONTENT$/
   end
