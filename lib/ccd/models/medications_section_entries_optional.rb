@@ -8,10 +8,7 @@ module Ccd
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.22.2.1"}
 
     # SHALL contain exactly one [1..1] code (CONF:15385).
-    constraint 'code', {:cardinality=>"1..1"}
-
-    # This code SHALL contain exactly one [1..1] @code="10160-0" History of medication use (CodeSystem: LOINC 2.16.840.1.113883.6.1 STATIC) (CONF:15386).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"10160-0", :display_name=>"History of medication use", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"10160-0", :display_name=>"History of medication use", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
 
     # SHALL contain exactly one [1..1] title (CONF:7793).
     constraint 'title', {:cardinality=>"1..1"}

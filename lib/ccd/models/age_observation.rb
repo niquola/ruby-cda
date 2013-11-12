@@ -23,10 +23,7 @@ module Ccd
     constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"2.16.840.1.113883.6.96", :display_name=>"", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:15965).
-    constraint 'status_code', {:cardinality=>"1..1"}
-
-    # This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:15966).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
+    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     # SHALL contain exactly one [1..1] value with @xsi:type="PQ" (CONF:7617).
     constraint 'value', {:cardinality=>"1..1"}

@@ -17,16 +17,10 @@ module Ccd
     constraint 'id', {:cardinality=>"1..*"}
 
     # SHALL contain exactly one [1..1] code (CONF:8876).
-    constraint 'code', {:cardinality=>"1..1"}
-
-    # This code SHALL contain exactly one [1..1] @code="48768-6" Payment sources (CodeSystem: LOINC 2.16.840.1.113883.6.1 STATIC) (CONF:19160).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"48768-6", :display_name=>"Payment sources", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"48768-6", :display_name=>"Payment sources", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:8875).
-    constraint 'status_code', {:cardinality=>"1..1"}
-
-    # This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19094).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
+    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     # SHALL contain at least one [1..*] entryRelationship (CONF:8878) such that it
     constraint 'entry_relationship', {:cardinality=>"1..*"}

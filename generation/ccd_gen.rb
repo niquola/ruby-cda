@@ -49,10 +49,18 @@ module CcdGen
   end
 
   def mk_attributes(class_name, constraints)
-    constraints.map { |c| mk_attribute(class_name, c) }.flatten.join("\n")
+    constraints
+      .map { |c| mk_attribute(class_name, c) }.flatten.join("\n")
   end
 
-  def mk_attribute(class_name, constraint, name = nil)
+  def mk_attribute(class_name, constraint)
+    def_attribute(class_name, constraint).map do |definition|
+      definition[:comments].map { |c| "# #{c}" } +
+        ["constraint '#{definition[:name]}', #{definition[:params].inspect}\n"]
+    end
+  end
+
+  def def_attribute(class_name, constraint, name = nil)
     name = [name, name(constraint)].compact.join('.')
     old_name = name
     comments = comments(constraint)
@@ -70,12 +78,32 @@ module CcdGen
     unless constraint_useful?(constraint)
       []
     else
-      definition = ["'#{name}'", pretty_hash(params)].join(', ')
-      acc = comments.map { |c| "# #{c}" }
-      acc << "constraint #{definition}\n"
+      acc = [{
+          name: name,
+          params: params,
+          comments: comments,
+        }]
 
       constraint.xpath('./Constraint').reduce(acc) do |acc, c|
-        acc << mk_attribute(class_name, c, old_name)
+        child_constraints = def_attribute(class_name, c, old_name)
+
+        typed_constraints = child_constraints.select do |c|
+          p = c[:params][:value]
+          p.is_a?(Hash) && p.key?(:_type) && c[:name].ends_with?(".code")
+        end
+
+        if typed_constraints.size > 1
+          raise "I'm expecting one typed constraint, but got #{typed_constraints.size}:\n#{typed_constraints.inspect}"
+        end
+
+        if typed_constraints.first
+          tc = typed_constraints.first
+          child_constraints.delete(tc)
+
+          acc.first[:params][:value] = tc[:params][:value]
+        end
+
+        acc.concat child_constraints
       end
 
       acc.compact

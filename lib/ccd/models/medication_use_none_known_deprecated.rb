@@ -17,16 +17,10 @@ module Ccd
     constraint 'id', {:cardinality=>"1..*"}
 
     # SHALL contain exactly one [1..1] code (CONF:19149).
-    constraint 'code', {:cardinality=>"1..1"}
-
-    # This code SHALL contain exactly one [1..1] @code="ASSERTION" Assertion (CodeSystem: ActCode 2.16.840.1.113883.5.4 STATIC) (CONF:19150).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"ASSERTION", :display_name=>"Assertion", :code_system=>"2.16.840.1.113883.5.4", :_type=>"Cda::CV"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"ASSERTION", :display_name=>"Assertion", :code_system=>"2.16.840.1.113883.5.4", :_type=>"Cda::CV"}}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:7562).
-    constraint 'status_code', {:cardinality=>"1..1"}
-
-    # This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19107).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
+    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     # SHALL contain exactly one [1..1] value="182904002" Drug treatment unknown (CodeSystem: SNOMED CT 2.16.840.1.113883.6.96 STATIC) (CONF:7564).
     constraint 'value', {:cardinality=>"1..1", :value=>{:code=>"182904002", :display_name=>"Drug treatment unknown", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}

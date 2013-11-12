@@ -8,10 +8,7 @@ module Ccd
     constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     # SHALL contain exactly one [1..1] code (CONF:9284).
-    constraint 'code', {:cardinality=>"1..1"}
-
-    # This code SHALL contain exactly one [1..1] @code="113036" Frames for Display (CodeSystem: DCM 1.2.840.10008.2.16.4 STATIC) (CONF:19157).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"113036", :display_name=>"Frames for Display", :code_system=>"1.2.840.10008.2.16.4", :_type=>"Cda::CV"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"113036", :display_name=>"Frames for Display", :code_system=>"1.2.840.10008.2.16.4", :_type=>"Cda::CV"}}
 
     # Each number represents a frame for display.
     # SHALL contain at least one [1..*] value with @xsi:type="INT" (CONF:9285).

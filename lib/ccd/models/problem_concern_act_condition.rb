@@ -17,10 +17,7 @@ module Ccd
     constraint 'id', {:cardinality=>"1..*"}
 
     # SHALL contain exactly one [1..1] code (CONF:9027).
-    constraint 'code', {:cardinality=>"1..1"}
-
-    # This code SHALL contain exactly one [1..1] @code="CONC" Concern (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:19184).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"CONC", :display_name=>"Concern", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"CONC", :display_name=>"Concern", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     # SHALL contain exactly one [1..1] statusCode, which SHALL be selected from ValueSet ProblemAct statusCode 2.16.840.1.113883.11.20.9.19 STATIC 2011-09-09 (CONF:9029).
     constraint 'status_code', {:cardinality=>"1..1"}

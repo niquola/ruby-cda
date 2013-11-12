@@ -47,7 +47,6 @@ describe CcdGen do
 
   example do
     res = Ccd::PolicyActivity.build performer: [{ mode_code: { _type: 'Cda::CE', display_name: 'Trololo' } }]
-    #res.performer.first.template_id.first.root.should == '2.16.840.1.113883.10.20.22.4.87'
     res.performer.first.mode_code.should == Cda::CE.new(display_name: 'Trololo')
   end
 
@@ -55,7 +54,10 @@ describe CcdGen do
     Ccd::PolicyActivity.should have_constraint('performer.type_code').with_value(code: 'PRF')
     Ccd::MedicationUseNoneKnownDeprecated.should have_constraint('value').with_value(code: '182904002')
     Ccd::USRealmHeader.should have_constraint('realm_code.code').with_value(code: 'US')
-    # Ccd::ProcedureNote.should have_constraint('participant.function_code').with_value(code: 'PCP')
+  end
+
+  example do
+    Ccd::ResultsSectionEntriesOptional.should have_constraint('code').with_value(:code=>"30954-2", :display_name=>"Relevant diagnostic tests and/or laboratory data", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV")
   end
 
   example do

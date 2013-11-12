@@ -23,10 +23,7 @@ module Ccd
     constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"2264892003", :display_name=>"number of pressure ulcers"}}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:14714).
-    constraint 'status_code', {:cardinality=>"1..1"}
-
-    # This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19108).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
+    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     # SHALL contain exactly one [1..1] effectiveTime (CONF:14715).
     constraint 'effective_time', {:cardinality=>"1..1"}

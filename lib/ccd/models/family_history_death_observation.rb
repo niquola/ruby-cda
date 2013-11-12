@@ -23,16 +23,10 @@ module Ccd
     constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"2.16.840.1.113883.5.4", :display_name=>"", :code_system=>"2.16.840.1.113883.5.4", :_type=>"Cda::CV"}}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:8625).
-    constraint 'status_code', {:cardinality=>"1..1"}
-
-    # This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19097).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
+    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     # SHALL contain exactly one [1..1] value with @xsi:type="CD" (CONF:8626).
-    constraint 'value', {:cardinality=>"1..1"}
-
-    # This value SHALL contain exactly one [1..1] @code="419099009" Dead (CodeSystem: SNOMED CT 2.16.840.1.113883.6.96 STATIC) (CONF:26470).
-    constraint 'value.code', {:cardinality=>"1..1", :value=>{:code=>"419099009", :display_name=>"Dead", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
+    constraint 'value', {:cardinality=>"1..1", :value=>{:code=>"419099009", :display_name=>"Dead", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
 
     Ccd.load_extension('family_history_death_observation.rb')
   end

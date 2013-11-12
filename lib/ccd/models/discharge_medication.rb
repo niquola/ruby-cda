@@ -14,10 +14,7 @@ module Ccd
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.22.4.35"}
 
     # SHALL contain exactly one [1..1] code (CONF:7691).
-    constraint 'code', {:cardinality=>"1..1"}
-
-    # This code SHALL contain exactly one [1..1] @code="10183-2" Discharge medication (CodeSystem: LOINC 2.16.840.1.113883.6.1 STATIC) (CONF:19161).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"10183-2", :display_name=>"Discharge medication", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"10183-2", :display_name=>"Discharge medication", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
 
     # SHALL contain at least one [1..*] entryRelationship (CONF:7692) such that it
     constraint 'entry_relationship', {:cardinality=>"1..*"}

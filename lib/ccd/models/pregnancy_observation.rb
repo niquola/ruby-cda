@@ -23,16 +23,10 @@ module Ccd
     constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"2.16.840.1.113883.5.4", :display_name=>"", :code_system=>"2.16.840.1.113883.5.4", :_type=>"Cda::CV"}}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:455).
-    constraint 'status_code', {:cardinality=>"1..1"}
-
-    # This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19110).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
+    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     # SHALL contain exactly one [1..1] value with @xsi:type="CD" (CONF:457).
-    constraint 'value', {:cardinality=>"1..1"}
-
-    # This value SHALL contain exactly one [1..1] @code="77386006" Pregnant (CodeSystem: SNOMED CT 2.16.840.1.113883.6.96) (CONF:26460).
-    constraint 'value.code', {:cardinality=>"1..1", :value=>{:code=>"77386006", :display_name=>"Pregnant", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
+    constraint 'value', {:cardinality=>"1..1", :value=>{:code=>"77386006", :display_name=>"Pregnant", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
 
     Ccd.load_extension('pregnancy_observation.rb')
   end
