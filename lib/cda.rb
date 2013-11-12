@@ -13,6 +13,14 @@ module Cda
       end.merge(_type: self.class.name)
     end
 
+    def complex?
+      !respond_to?(:_text)
+    end
+
+    def to_s
+      complex? ? super : _text
+    end
+
     private
 
     def serialize_value(value)
