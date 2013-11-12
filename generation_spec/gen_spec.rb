@@ -17,6 +17,7 @@ describe Gen do
         next if file =~ /autoloads/
         require file
       end
+
       Cda::Act
       Cda::Section
     end.not_to raise_error

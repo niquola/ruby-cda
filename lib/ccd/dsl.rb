@@ -18,8 +18,12 @@ module Ccd
     def constraint(*args)
       opts = args.extract_options!
       name = args.shift
+
       @constraints ||= {}
+
+      raise RuntimeError, "Duplicate constraint: #{self.name}##{name} #{opts.inspect}" if @constraints[name].present?
       @constraints[name] = opts
+
       save_default_value(name, opts[:value]) if opts[:value].present? && opts[:cardinality] == '1..1'
       #save_cardinality(name, opts[:cardinality]) if opts[:cardinality]
     end
@@ -120,6 +124,8 @@ module Ccd
     end
 
     def inference(path, value, context = self)
+      # puts if self == context
+      # puts "inference(#{path}, #{value}, #{context})"
       return value if path.empty?
 
       name = path.shift

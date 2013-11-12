@@ -1,77 +1,24 @@
 module Ccd
   class SOPInstanceObservation < ::Cda::Observation
     extend ::Ccd::Dsl
-    #SHALL contain exactly one [1..1] @classCode="DGIMG" Diagnostic Image (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9240).
+    # SHALL contain exactly one [1..1] @classCode="DGIMG" Diagnostic Image (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9240).
     constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"DGIMG", :display_name=>"Diagnostic Image", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
-    #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:9241).
+    # SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:9241).
     constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
-    #SHALL contain at least one [1..*] id (CONF:9242).
+    # The @root contains an OID representing the DICOM SOP Instance UID
+    # SHALL contain at least one [1..*] id (CONF:9242).
     constraint 'id', {:cardinality=>"1..*"}
 
-    #SHALL contain exactly one [1..1] code (CONF:9244).
+    # SHALL contain exactly one [1..1] code (CONF:9244).
     constraint 'code', {:cardinality=>"1..1"}
 
-    #This code SHALL contain exactly one [1..1] @code (CONF:19225).
+    # This code SHALL contain exactly one [1..1] @code (CONF:19225).
     constraint 'code.code', {:cardinality=>"1..1"}
 
-    #@code is an OID for a valid SOP class name UID
-    constraint 'code.code', {}
-
-    #This code SHALL contain exactly one [1..1] @codeSystem="1.2.840.10008.2.6.1" DCMUID (CONF:19227).
+    # This code SHALL contain exactly one [1..1] @codeSystem="1.2.840.10008.2.6.1" DCMUID (CONF:19227).
     constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"1.2.840.10008.2.6.1", :display_name=>"DCMUID"}}
-
-    #SHOULD contain zero or one [0..1] text (CONF:9246).
-    constraint 'text', {:cardinality=>"0..1"}
-
-    #The text, if present, SHALL contain exactly one [1..1] @mediaType="application/dicom" (CONF:9247).
-    constraint 'text.media_type', {:cardinality=>"1..1", :value=>"application/dicom"}
-
-    #The text, if present, SHALL contain exactly one [1..1] reference (CONF:9248).
-    constraint 'text.reference', {:cardinality=>"1..1"}
-
-    #SHALL contain a @value that contains a WADO reference as a URI
-    constraint 'text.reference', {}
-
-    #SHOULD contain zero or one [0..1] effectiveTime (CONF:9250).
-    constraint 'effective_time', {:cardinality=>"0..1"}
-
-    #The effectiveTime, if present, SHALL contain exactly one [1..1] @value (CONF:9251).
-    constraint 'effective_time.value', {:cardinality=>"1..1"}
-
-    #The effectiveTime, if present, SHALL NOT contain [0..0] low (CONF:9252).
-    constraint 'effective_time.low', {:cardinality=>"0..0"}
-
-    #The effectiveTime, if present, SHALL NOT contain [0..0] high (CONF:9253).
-    constraint 'effective_time.high', {:cardinality=>"0..0"}
-
-    #MAY contain zero or more [0..*] entryRelationship (CONF:9254) such that it
-    constraint 'entry_relationship', {:cardinality=>"0..*"}
-
-    #SHALL contain exactly one [1..1] @typeCode="SUBJ" Has Subject (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:9255).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"SUBJ", :display_name=>"Has Subject", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
-
-    #MAY contain zero or more [0..*] entryRelationship (CONF:9257) such that it
-    constraint 'entry_relationship', {:cardinality=>"0..*"}
-
-    #SHALL contain exactly one [1..1] @typeCode="RSON" Has Reason (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:9258).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"RSON", :display_name=>"Has Reason", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
-
-    #SHALL contain exactly one [1..1] Purpose of Reference Observation (templateId:2.16.840.1.113883.10.20.6.2.9) (CONF:15935).
-    constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
-
-    #MAY contain zero or more [0..*] entryRelationship (CONF:9260) such that it
-    constraint 'entry_relationship', {:cardinality=>"0..*"}
-
-    #SHALL contain exactly one [1..1] @typeCode="COMP" Has Component (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:9261).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"COMP", :display_name=>"Has Component", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
-
-    #SHALL contain exactly one [1..1] Referenced Frames Observation (templateId:2.16.840.1.113883.10.20.6.2.10) (CONF:15936).
-    constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
-
-    #This entryRelationship SHALL be present if the referenced DICOM object is a multiframe object and the reference does not apply to all frames
-    constraint 'entry_relationship', {}
 
     Ccd.load_extension('sop_instance_observation.rb')
   end

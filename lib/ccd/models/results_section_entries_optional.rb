@@ -1,29 +1,23 @@
 module Ccd
   class ResultsSectionEntriesOptional < ::Cda::Section
     extend ::Ccd::Dsl
-    #SHALL contain exactly one [1..1] templateId (CONF:7116) such that it
+    # SHALL contain exactly one [1..1] templateId (CONF:7116) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
-    #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.2.3" (CONF:9136).
+    # SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.2.3" (CONF:9136).
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.22.2.3"}
 
-    #SHALL contain exactly one [1..1] code (CONF:15431).
+    # SHALL contain exactly one [1..1] code (CONF:15431).
     constraint 'code', {:cardinality=>"1..1"}
 
-    #This code SHALL contain exactly one [1..1] @code="30954-2" Relevant diagnostic tests and/or laboratory data (CodeSystem: LOINC 2.16.840.1.113883.6.1 STATIC) (CONF:15432).
+    # This code SHALL contain exactly one [1..1] @code="30954-2" Relevant diagnostic tests and/or laboratory data (CodeSystem: LOINC 2.16.840.1.113883.6.1 STATIC) (CONF:15432).
     constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"30954-2", :display_name=>"Relevant diagnostic tests and/or laboratory data", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
 
-    #SHALL contain exactly one [1..1] title (CONF:8891).
+    # SHALL contain exactly one [1..1] title (CONF:8891).
     constraint 'title', {:cardinality=>"1..1"}
 
-    #SHALL contain exactly one [1..1] text (CONF:7118).
+    # SHALL contain exactly one [1..1] text (CONF:7118).
     constraint 'text', {:cardinality=>"1..1"}
-
-    #SHOULD contain zero or more [0..*] entry (CONF:7119) such that it
-    constraint 'entry', {:cardinality=>"0..*"}
-
-    #SHALL contain exactly one [1..1] Result Organizer (templateId:2.16.840.1.113883.10.20.22.4.1) (CONF:15515).
-    constraint 'entry.organizer', {:cardinality=>"1..1"}
 
     Ccd.load_extension('results_section_entries_optional.rb')
   end

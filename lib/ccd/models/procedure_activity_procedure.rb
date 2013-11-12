@@ -1,176 +1,26 @@
 module Ccd
   class ProcedureActivityProcedure < ::Cda::Procedure
     extend ::Ccd::Dsl
-    #SHALL contain exactly one [1..1] @classCode="PROC" Procedure (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7652).
+    # SHALL contain exactly one [1..1] @classCode="PROC" Procedure (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7652).
     constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"PROC", :display_name=>"Procedure", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
-    #SHALL contain exactly one [1..1] @moodCode, which SHALL be selected from ValueSet MoodCodeEvnInt 2.16.840.1.113883.11.20.9.18 STATIC 2011-04-03 (CONF:7653).
+    # SHALL contain exactly one [1..1] @moodCode, which SHALL be selected from ValueSet MoodCodeEvnInt 2.16.840.1.113883.11.20.9.18 STATIC 2011-04-03 (CONF:7653).
     constraint 'mood_code', {:cardinality=>"1..1"}
 
-    #SHALL contain exactly one [1..1] templateId (CONF:7654) such that it
+    # SHALL contain exactly one [1..1] templateId (CONF:7654) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
-    #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.4.14" (CONF:10521).
+    # SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.22.4.14" (CONF:10521).
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.22.4.14"}
 
-    #SHALL contain at least one [1..*] id (CONF:7655).
+    # SHALL contain at least one [1..*] id (CONF:7655).
     constraint 'id', {:cardinality=>"1..*"}
 
-    #SHALL contain exactly one [1..1] code (CONF:7656).
+    # SHALL contain exactly one [1..1] code (CONF:7656).
     constraint 'code', {:cardinality=>"1..1"}
 
-    #This code SHOULD contain zero or one [0..1] originalText (CONF:19203).
-    constraint 'code.original_text', {:cardinality=>"0..1"}
-
-    #The originalText, if present, SHOULD contain zero or one [0..1] reference (CONF:19204).
-    constraint 'code.original_text.reference', {:cardinality=>"0..1"}
-
-    #The reference, if present, SHOULD contain zero or one [0..1] @value (CONF:19205).
-    constraint 'code.original_text.reference.value', {:cardinality=>"0..1"}
-
-    #This reference/@value SHALL begin with a '#' and SHALL point to its corresponding narrative (using the approach defined in CDA Release 2, section 4.3.5.1).
-    constraint 'code.original_text.reference.value', {}
-
-    #This code in a procedure activity SHOULD be selected from LOINC (codeSystem 2.16.840.1.113883.6.1) or SNOMED CT (CodeSystem: 2.16.840.1.113883.6.96), and MAY be selected from CPT-4 (CodeSystem: 2.16.840.1.113883.6.12) or ICD10 PCS (CodeSystem: 2.16.840.1.113883.6.4).
-    constraint 'code', {}
-
-    #SHALL contain exactly one [1..1] statusCode, which SHALL be selected from ValueSet ProcedureAct statusCode 2.16.840.1.113883.11.20.9.22 DYNAMIC (CONF:7661).
+    # SHALL contain exactly one [1..1] statusCode, which SHALL be selected from ValueSet ProcedureAct statusCode 2.16.840.1.113883.11.20.9.22 DYNAMIC (CONF:7661).
     constraint 'status_code', {:cardinality=>"1..1"}
-
-    #SHOULD contain zero or one [0..1] effectiveTime (CONF:7662).
-    constraint 'effective_time', {:cardinality=>"0..1"}
-
-    #MAY contain zero or one [0..1] priorityCode, which SHALL be selected from ValueSet Act Priority 2.16.840.1.113883.1.11.16866 DYNAMIC (CONF:7668).
-    constraint 'priority_code', {:cardinality=>"0..1"}
-
-    #MAY contain zero or one [0..1] methodCode (CONF:7670).
-    constraint 'method_code', {:cardinality=>"0..1"}
-
-    #methodCode SHALL NOT conflict with the method inherent in Procedure / code.
-    constraint 'method_code', {}
-
-    #SHOULD contain zero or more [0..*] targetSiteCode (CONF:7683).
-    constraint 'target_site_code', {:cardinality=>"0..*"}
-
-    #The targetSiteCode, if present, SHALL contain exactly one [1..1] @code, which SHALL be selected from ValueSet Body Site 2.16.840.1.113883.3.88.12.3221.8.9 DYNAMIC (CONF:16082).
-    constraint 'target_site_code.code', {:cardinality=>"1..1"}
-
-    #MAY contain zero or more [0..*] specimen (CONF:7697).
-    constraint 'specimen', {:cardinality=>"0..*"}
-
-    #The specimen, if present, SHALL contain exactly one [1..1] specimenRole (CONF:7704).
-    constraint 'specimen.specimen_role', {:cardinality=>"1..1"}
-
-    #This specimenRole SHOULD contain zero or more [0..*] id (CONF:7716).
-    constraint 'specimen.specimen_role.id', {:cardinality=>"0..*"}
-
-    #	If you want to indicate that the Procedure and the Results are referring to the same specimen, the Procedure/specimen/specimenRole/id SHOULD be set to equal an Organizer/specimen/ specimenRole/id
-    constraint 'specimen.specimen_role.id', {}
-
-    #This specimen is for representing specimens obtained from a procedure.
-    constraint 'specimen', {}
-
-    #SHOULD contain zero or more [0..*] performer (CONF:7718) such that it
-    constraint 'performer', {:cardinality=>"0..*"}
-
-    #SHALL contain exactly one [1..1] assignedEntity (CONF:7720).
-    constraint 'performer.assigned_entity', {:cardinality=>"1..1"}
-
-    #This assignedEntity SHALL contain at least one [1..*] id (CONF:7722).
-    constraint 'performer.assigned_entity.id', {:cardinality=>"1..*"}
-
-    #This assignedEntity SHALL contain exactly one [1..1] addr (CONF:7731).
-    constraint 'performer.assigned_entity.addr', {:cardinality=>"1..1"}
-
-    #This assignedEntity SHALL contain exactly one [1..1] telecom (CONF:7732).
-    constraint 'performer.assigned_entity.telecom', {:cardinality=>"1..1"}
-
-    #This assignedEntity SHOULD contain zero or one [0..1] representedOrganization (CONF:7733).
-    constraint 'performer.assigned_entity.represented_organization', {:cardinality=>"0..1"}
-
-    #The representedOrganization, if present, SHOULD contain zero or more [0..*] id (CONF:7734).
-    constraint 'performer.assigned_entity.represented_organization.id', {:cardinality=>"0..*"}
-
-    #The representedOrganization, if present, MAY contain zero or more [0..*] name (CONF:7735).
-    constraint 'performer.assigned_entity.represented_organization.name', {:cardinality=>"0..*"}
-
-    #The representedOrganization, if present, SHALL contain exactly one [1..1] telecom (CONF:7737).
-    constraint 'performer.assigned_entity.represented_organization.telecom', {:cardinality=>"1..1"}
-
-    #The representedOrganization, if present, SHALL contain exactly one [1..1] addr (CONF:7736).
-    constraint 'performer.assigned_entity.represented_organization.addr', {:cardinality=>"1..1"}
-
-    #MAY contain zero or more [0..*] participant (CONF:7751) such that it
-    constraint 'participant', {:cardinality=>"0..*"}
-
-    #SHALL contain exactly one [1..1] @typeCode="DEV" Device (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7752).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"DEV", :display_name=>"Device", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
-
-    #SHALL contain exactly one [1..1] Product Instance (templateId:2.16.840.1.113883.10.20.22.4.37) (CONF:15911).
-    constraint 'participant.participant_role', {:cardinality=>"1..1"}
-
-    #MAY contain zero or more [0..*] participant (CONF:7765) such that it
-    constraint 'participant', {:cardinality=>"0..*"}
-
-    #SHALL contain exactly one [1..1] @typeCode="LOC" Location (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:7766).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"LOC", :display_name=>"Location", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
-
-    #SHALL contain exactly one [1..1] Service Delivery Location (templateId:2.16.840.1.113883.10.20.22.4.32) (CONF:15912).
-    constraint 'participant.participant_role', {:cardinality=>"1..1"}
-
-    #MAY contain zero or more [0..*] entryRelationship (CONF:7768) such that it
-    constraint 'entry_relationship', {:cardinality=>"0..*"}
-
-    #SHALL contain exactly one [1..1] @typeCode="COMP" Has Component (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7769).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"COMP", :display_name=>"Has Component", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
-
-    #SHALL contain exactly one [1..1] @inversionInd="true" true (CONF:8009).
-    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>{:code=>"true", :display_name=>"true"}}
-
-    #SHALL contain exactly one [1..1] encounter (CONF:7770).
-    constraint 'entry_relationship.encounter', {:cardinality=>"1..1"}
-
-    #This encounter SHALL contain exactly one [1..1] @classCode="ENC" Encounter (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7771).
-    constraint 'entry_relationship.encounter.class_code', {:cardinality=>"1..1", :value=>{:code=>"ENC", :display_name=>"Encounter", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
-
-    #This encounter SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:7772).
-    constraint 'entry_relationship.encounter.mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
-
-    #This encounter SHALL contain exactly one [1..1] id (CONF:7773).
-    constraint 'entry_relationship.encounter.id', {:cardinality=>"1..1"}
-
-    #Set the encounter ID to the ID of an encounter in another section to signify they are the same encounter.
-    constraint 'entry_relationship.encounter.id', {}
-
-    #MAY contain zero or one [0..1] entryRelationship (CONF:7775) such that it
-    constraint 'entry_relationship', {:cardinality=>"0..1"}
-
-    #SHALL contain exactly one [1..1] @typeCode="SUBJ" Has Subject (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7776).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"SUBJ", :display_name=>"Has Subject", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
-
-    #SHALL contain exactly one [1..1] @inversionInd="true" true (CONF:7777).
-    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>{:code=>"true", :display_name=>"true"}}
-
-    #SHALL contain exactly one [1..1] Instructions (templateId:2.16.840.1.113883.10.20.22.4.20) (CONF:15913).
-    constraint 'entry_relationship.act', {:cardinality=>"1..1"}
-
-    #MAY contain zero or more [0..*] entryRelationship (CONF:7779) such that it
-    constraint 'entry_relationship', {:cardinality=>"0..*"}
-
-    #SHALL contain exactly one [1..1] @typeCode="RSON" Has Reason (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7780).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"RSON", :display_name=>"Has Reason", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
-
-    #SHALL contain exactly one [1..1] Indication (templateId:2.16.840.1.113883.10.20.22.4.19) (CONF:15914).
-    constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
-
-    #MAY contain zero or more [0..*] entryRelationship (CONF:7886) such that it
-    constraint 'entry_relationship', {:cardinality=>"0..*"}
-
-    #SHALL contain exactly one [1..1] @typeCode="COMP" Has Component (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7887).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"COMP", :display_name=>"Has Component", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
-
-    #SHALL contain exactly one [1..1] Medication Activity (templateId:2.16.840.1.113883.10.20.22.4.16) (CONF:15915).
-    constraint 'entry_relationship.substance_administration', {:cardinality=>"1..1"}
 
     Ccd.load_extension('procedure_activity_procedure.rb')
   end

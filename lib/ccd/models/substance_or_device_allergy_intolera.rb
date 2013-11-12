@@ -1,122 +1,41 @@
 module Ccd
   class SubstanceOrDeviceAllergyIntolera < ::Cda::Observation
     extend ::Ccd::Dsl
-    #SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:16303).
+    # SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:16303).
     constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"OBS", :display_name=>"Observation", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
-    #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:16304).
+    # SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:16304).
     constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
-    #SHALL contain exactly one [1..1] templateId (CONF:16305) such that it
+    # SHALL contain exactly one [1..1] templateId (CONF:16305) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
-    #SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.24.3.90" (CONF:16306).
+    # SHALL contain exactly one [1..1] @root="2.16.840.1.113883.10.20.24.3.90" (CONF:16306).
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.24.3.90"}
 
-    #SHALL contain at least one [1..*] id (CONF:16307).
+    # SHALL contain at least one [1..*] id (CONF:16307).
     constraint 'id', {:cardinality=>"1..*"}
 
-    #SHALL contain exactly one [1..1] code (CONF:16345).
+    # SHALL contain exactly one [1..1] code (CONF:16345).
     constraint 'code', {:cardinality=>"1..1"}
 
-    #This code SHALL contain exactly one [1..1] @code="ASSERTION" Assertion (CodeSystem: ActCode 2.16.840.1.113883.5.4 STATIC) (CONF:16346).
+    # This code SHALL contain exactly one [1..1] @code="ASSERTION" Assertion (CodeSystem: ActCode 2.16.840.1.113883.5.4 STATIC) (CONF:16346).
     constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"ASSERTION", :display_name=>"Assertion", :code_system=>"2.16.840.1.113883.5.4", :_type=>"Cda::CV"}}
 
-    #SHALL contain exactly one [1..1] statusCode (CONF:16308).
+    # SHALL contain exactly one [1..1] statusCode (CONF:16308).
     constraint 'status_code', {:cardinality=>"1..1"}
 
-    #This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14) (CONF:26354).
+    # This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14) (CONF:26354).
     constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
-    #SHALL contain exactly one [1..1] effectiveTime (CONF:16309).
+    # SHALL contain exactly one [1..1] effectiveTime (CONF:16309).
     constraint 'effective_time', {:cardinality=>"1..1"}
 
-    #SHALL contain exactly one [1..1] value with @xsi:type="CD" (CONF:16312).
+    # SHALL contain exactly one [1..1] value with @xsi:type="CD" (CONF:16312).
     constraint 'value', {:cardinality=>"1..1"}
 
-    #This value SHALL contain exactly one [1..1] @code, which SHALL be selected from ValueSet Allergy/Adverse Event Type 2.16.840.1.113883.3.88.12.3221.6.2 DYNAMIC (CONF:16317).
+    # This value SHALL contain exactly one [1..1] @code, which SHALL be selected from ValueSet Allergy/Adverse Event Type 2.16.840.1.113883.3.88.12.3221.6.2 DYNAMIC (CONF:16317).
     constraint 'value.code', {:cardinality=>"1..1"}
-
-    #SHOULD contain zero or more [0..*] participant (CONF:16318).
-    constraint 'participant', {:cardinality=>"0..*"}
-
-    #The participant, if present, SHALL contain exactly one [1..1] @typeCode="CSM" Consumable (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:16319).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"CSM", :display_name=>"Consumable", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
-
-    #The participant, if present, SHALL contain exactly one [1..1] participantRole (CONF:16320).
-    constraint 'participant.participant_role', {:cardinality=>"1..1"}
-
-    #This participantRole SHALL contain exactly one [1..1] @classCode="MANU" Manufactured Product (CodeSystem: RoleClass 2.16.840.1.113883.5.110 STATIC) (CONF:16321).
-    constraint 'participant.participant_role.class_code', {:cardinality=>"1..1", :value=>{:code=>"MANU", :display_name=>"Manufactured Product", :code_system=>"2.16.840.1.113883.5.110", :_type=>"Cda::CV"}}
-
-    #This participantRole SHALL contain exactly one [1..1] playingEntity (CONF:16322).
-    constraint 'participant.participant_role.playing_entity', {:cardinality=>"1..1"}
-
-    #This playingEntity SHALL contain exactly one [1..1] @classCode="MMAT" Manufactured Material (CodeSystem: EntityClass 2.16.840.1.113883.5.41 STATIC) (CONF:16323).
-    constraint 'participant.participant_role.playing_entity.class_code', {:cardinality=>"1..1", :value=>{:code=>"MMAT", :display_name=>"Manufactured Material", :code_system=>"2.16.840.1.113883.5.41", :_type=>"Cda::CV"}}
-
-    #This playingEntity SHALL contain exactly one [1..1] code (CONF:16324).
-    constraint 'participant.participant_role.playing_entity.code', {:cardinality=>"1..1"}
-
-    #This code SHOULD contain zero or one [0..1] originalText (CONF:16326).
-    constraint 'participant.participant_role.playing_entity.code.original_text', {:cardinality=>"0..1"}
-
-    #The originalText, if present, SHOULD contain zero or one [0..1] reference (CONF:16327).
-    constraint 'participant.participant_role.playing_entity.code.original_text.reference', {:cardinality=>"0..1"}
-
-    #The reference, if present, SHOULD contain zero or one [0..1] @value (CONF:16328).
-    constraint 'participant.participant_role.playing_entity.code.original_text.reference.value', {:cardinality=>"0..1"}
-
-    #This reference/@value SHALL begin with a '#' and SHALL point to its corresponding narrative (using the approach defined in CDA Release 2, section 4.3.5.1)
-    constraint 'participant.participant_role.playing_entity.code.original_text.reference.value', {}
-
-    #This code MAY contain zero or more [0..*] translation (CONF:16330).
-    constraint 'participant.participant_role.playing_entity.code.translation', {:cardinality=>"0..*"}
-
-    #	In an allergy to a specific medication the code SHALL be selected from the ValueSet 2.16.840.1.113883.3.88.12.80.16 Medication Brand Name DYNAMIC or the ValueSet 2.16.840.1.113883.3.88.12.80.17 Medication Clinical Drug DYNAMIC
-    constraint 'participant.participant_role.playing_entity.code', {}
-
-    #	In an allergy to a class of medications the code SHALL be selected from the ValueSet 2.16.840.1.113883.3.88.12.80.18 Medication Drug Class DYNAMIC
-    constraint 'participant.participant_role.playing_entity.code', {}
-
-    #	In an allergy to a food or other substance the code SHALL be selected from the ValueSet 2.16.840.1.113883.3.88.12.80.20 Ingredient Name DYNAMIC
-    constraint 'participant.participant_role.playing_entity.code', {}
-
-    #MAY contain zero or one [0..1] entryRelationship (CONF:16333) such that it
-    constraint 'entry_relationship', {:cardinality=>"0..1"}
-
-    #SHALL contain exactly one [1..1] @typeCode="SUBJ" Has subject (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:16335).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"SUBJ", :display_name=>"Has subject", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
-
-    #SHALL contain exactly one [1..1] @inversionInd="true" True (CONF:16334).
-    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>{:code=>"true", :display_name=>"True"}}
-
-    #SHALL contain exactly one [1..1] Allergy Status Observation (templateId:2.16.840.1.113883.10.20.22.4.28) (CONF:16336).
-    constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
-
-    #SHOULD contain zero or more [0..*] entryRelationship (CONF:16337) such that it
-    constraint 'entry_relationship', {:cardinality=>"0..*"}
-
-    #SHALL contain exactly one [1..1] @typeCode="MFST" Is Manifestation of (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:16339).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"MFST", :display_name=>"Is Manifestation of", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
-
-    #SHALL contain exactly one [1..1] @inversionInd="true" True (CONF:16338).
-    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>{:code=>"true", :display_name=>"True"}}
-
-    #SHALL contain exactly one [1..1] Reaction Observation (templateId:2.16.840.1.113883.10.20.22.4.9) (CONF:16340).
-    constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
-
-    #MAY contain zero or one [0..1] entryRelationship (CONF:16341) such that it
-    constraint 'entry_relationship', {:cardinality=>"0..1"}
-
-    #SHALL contain exactly one [1..1] @typeCode="SUBJ" Has Subject (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:16342).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"SUBJ", :display_name=>"Has Subject", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
-
-    #SHALL contain exactly one [1..1] @inversionInd="true" True (CONF:16343).
-    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>{:code=>"true", :display_name=>"True"}}
-
-    #SHALL contain exactly one [1..1] Severity Observation (templateId:2.16.840.1.113883.10.20.22.4.8) (CONF:16344).
-    constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
 
     Ccd.load_extension('substance_or_device_allergy_intolera.rb')
   end

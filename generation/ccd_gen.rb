@@ -18,6 +18,7 @@ module CcdGen
     prefix = 'lib/ccd/models'
     `rm -fr #{prefix}`
     `mkdir -p #{prefix}`
+
     autoload_entries = []
     templates.each do |template|
       class_name = class_name(template)
@@ -26,6 +27,7 @@ module CcdGen
       fwrite(class_file_name, class_body)
       autoload_entries << "autoload :#{class_name}, '#{class_file_name.sub(/^lib\//, '')}'"
     end
+
     fwrite('lib/ccd/autoloads.rb', Gen::Codeg.gmodule('Ccd', autoload_entries.sort.join("\n")))
   end
 
@@ -47,33 +49,17 @@ module CcdGen
   end
 
   def mk_attributes(class_name, constraints)
-    groups = constraints.group_by { |c| name(c) }.delete_if { |n, v| v.size == 1 }
-
     constraints.map { |c| mk_attribute(class_name, c) }.flatten.join("\n")
-  end
-
-  def dump
-    templates.map do |template|
-      {
-        name: (template[:bookmark]),
-        ancestor: template[:contextType],
-        constraints: constraints(template.xpath('./Constraint'))
-      }
-    end
   end
 
   def mk_attribute(class_name, constraint, name = nil)
     name = [name, name(constraint)].compact.join('.')
     old_name = name
-    comments = [comment(constraint)]
+    comments = comments(constraint)
     params = {}
 
     if card = constraint[:cardinality]
       params.merge! cardinality: card
-    end
-
-    if sch = schematron_test(constraint)
-      #comments << "schematron_test: %Q{#{sch}}"
     end
 
     if value = value(constraint)
@@ -81,43 +67,53 @@ module CcdGen
       name = patch_name(class_name, name)
     end
 
-    params = ["'#{name}'", pretty_hash(params)]
-    acc = comments.map { |c| "##{c}" }
-    acc << "constraint #{params.join(', ')}\n"
+    unless constraint_useful?(constraint)
+      []
+    else
+      definition = ["'#{name}'", pretty_hash(params)].join(', ')
+      acc = comments.map { |c| "# #{c}" }
+      acc << "constraint #{definition}\n"
 
-    constraint.xpath('./Constraint').reduce(acc) do |acc, c|
-      acc << mk_attribute(class_name, c, old_name)
+      constraint.xpath('./Constraint').reduce(acc) do |acc, c|
+        acc << mk_attribute(class_name, c, old_name)
+      end
+
+      acc.compact
     end
+  end
 
-    acc.compact
+  IGNORED_CONSTRAINTS = [
+    9431, 7589, 10494
+  ]
+
+  def constraint_useful?(constraint)
+    # Possible combinations of conformance and cardinality:
+    # "SHALL"  => {"1..1", nil, "1..*", "1..4", "0..1"}
+    # "SHOULD" => {"0..1", nil, "0..*"}
+    # "MAY"    => {"0..1", "0..*", nil, "1..*"}
+    # nil      => {nil, "0..0", "1..1"}
+
+    card = constraint[:cardinality]
+    conf = constraint[:conformance]
+
+    !IGNORED_CONSTRAINTS.include?(constraint[:number].to_i) &&
+      (conf == "SHALL" && ['1..1', '1..*', '1..4'].include?(card))
   end
 
   def pretty_hash(hash)
     hash.inspect
   end
 
-  def comment(constraint)
-    constraint.xpath('./NarrativeText').first.try(:text)
+  def comments(constraint)
+    ['./Description', './NarrativeText'].map do |xp|
+      constraint.xpath(xp).first.try(:text)
+    end.compact
   end
 
   def name(el)
     return nil if el[:context].nil?
-    Gen::Namings.normalize_name(el[:context].sub('@',''))
-  end
 
-  def constraints(elems, level = 0)
-    elems.map do |el|
-      {
-        element: el[:context],
-        number: el[:number],
-        level: level,
-        cardinality: el[:cardinality],
-        comment: comment(el),
-        schematron_test: schematron_test(el),
-        values: values(el),
-        constraints: constraints(el.xpath('./Constraint'), level + 1)
-      }.delete_if { |k, v| v.blank? }
-    end
+    Gen::Namings.normalize_name(el[:context].sub('@',''))
   end
 
   def schematron_test(el)
@@ -153,27 +149,10 @@ module CcdGen
     constraint['context'] == '@root'
   end
 
-  def value_set(constraint)
-    if vs = constraint.xpath('./ValueSet').first
-      vs['oid']
-    end
-  end
-
   def notice_once(value, key)
     @keys ||= {}
     puts value unless @keys.key?(key)
     @keys[key] = value
-  end
-
-  def values(el)
-    el.xpath('./*[not(self::Constraint)]').reduce(Hash.new { |h, k| h[k] = {}}) do |acc, node|
-      acc[node.name][:text] = node.text if node.text.present?
-      attrs = node.attributes.reduce({}) { |acc, (k, attr)| acc[attr.name] = attr.value; acc }
-      if attrs.present?
-        acc[node.name][:attributes] = attrs
-      end
-      acc
-    end
   end
 
   def comment(el)
@@ -183,7 +162,6 @@ module CcdGen
   end
 
   def patch_name(class_name, name)
-    #return name
     case [class_name, name]
     when ['PolicyActivity', 'performer']
       'performer.type_code'
