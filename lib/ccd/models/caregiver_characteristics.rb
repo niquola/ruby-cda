@@ -29,7 +29,7 @@ module Ccd
     constraint 'participant', {:cardinality=>"1..*"}
 
     # Such participants SHALL contain exactly one [1..1] @typeCode="IND" (CONF:26451).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"IND", :display_name=>""}}
+    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>"IND"}
 
     # Such participants SHALL contain exactly one [1..1] participantRole (CONF:14228).
     constraint 'participant.participant_role', {:cardinality=>"1..1"}

@@ -45,7 +45,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"1..*"}
 
     # SHALL contain exactly one [1..1] @typeCode="COMP" Component (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:9238).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"COMP", :display_name=>"Component", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"COMP"}
 
     # SHALL contain exactly one [1..1] SOP Instance Observation (templateId:2.16.840.1.113883.10.20.6.2.8) (CONF:15927).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}

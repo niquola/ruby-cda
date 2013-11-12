@@ -26,7 +26,7 @@ module Ccd
     constraint 'documentation_of.service_event.performer', {:cardinality=>"1..1"}
 
     # SHALL contain exactly one [1..1] @typeCode="PPRF" Primary performer (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8495).
-    constraint 'documentation_of.service_event.performer.type_code', {:cardinality=>"1..1", :value=>{:code=>"PPRF", :display_name=>"Primary performer", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
+    constraint 'documentation_of.service_event.performer.type_code', {:cardinality=>"1..1", :value=>"PPRF"}
 
     # SHALL contain exactly one [1..1] assignedEntity (CONF:10917).
     constraint 'documentation_of.service_event.performer.assigned_entity', {:cardinality=>"1..1"}

@@ -28,7 +28,7 @@ module Ccd
     constraint 'performer', {:cardinality=>"1..1"}
 
     # SHALL contain exactly one [1..1] @typeCode="PRF" Performer (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8907).
-    constraint 'performer.type_code', {:cardinality=>"1..1", :value=>{:code=>"PRF", :display_name=>"Performer", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
+    constraint 'performer.type_code', {:cardinality=>"1..1", :value=>"PRF"}
 
     # SHALL contain exactly one [1..1] templateId (CONF:16808).
     constraint 'performer.template_id', {:cardinality=>"1..1"}
@@ -46,7 +46,7 @@ module Ccd
     constraint 'participant', {:cardinality=>"1..1"}
 
     # SHALL contain exactly one [1..1] @typeCode="COV" Coverage target (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8917).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"COV", :display_name=>"Coverage target", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
+    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>"COV"}
 
     # SHALL contain exactly one [1..1] templateId (CONF:16812).
     constraint 'participant.template_id', {:cardinality=>"1..1"}
@@ -67,7 +67,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"1..*"}
 
     # SHALL contain exactly one [1..1] @typeCode="REFR" Refers to (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8940).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"REFR", :display_name=>"Refers to", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"REFR"}
 
     Ccd.load_extension('policy_activity.rb')
   end

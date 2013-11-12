@@ -2,7 +2,7 @@ module Ccd
   class PhysicianOfRecordParticipant < ::Cda::EncounterParticipant
     extend ::Ccd::Dsl
     # SHALL contain exactly one [1..1] @typeCode="ATND" Attender (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8881).
-    constraint 'type_code', {:cardinality=>"1..1", :value=>{:code=>"ATND", :display_name=>"Attender", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
+    constraint 'type_code', {:cardinality=>"1..1", :value=>"ATND"}
 
     # SHALL contain exactly one [1..1] assignedEntity (CONF:8886).
     constraint 'assigned_entity', {:cardinality=>"1..1"}

@@ -26,7 +26,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"1..*"}
 
     # SHALL contain exactly one [1..1] @typeCode="COMP" has component (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8879).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"COMP", :display_name=>"has component", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"COMP"}
 
     # SHALL contain exactly one [1..1] Policy Activity (templateId:2.16.840.1.113883.10.20.22.4.61) (CONF:15528).
     constraint 'entry_relationship.act', {:cardinality=>"1..1"}

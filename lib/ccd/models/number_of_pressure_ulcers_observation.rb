@@ -35,7 +35,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"1..1"}
 
     # This entryRelationship SHALL contain exactly one [1..1] @typeCode="SUBJ" Has subject (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:14719).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"SUBJ", :display_name=>"Has subject", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"SUBJ"}
 
     # This entryRelationship SHALL contain exactly one [1..1] observation (CONF:14720).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}

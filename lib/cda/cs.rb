@@ -1,6 +1,7 @@
 class Cda::Cs < String
 
 end
+
 class Cda::CS < Cda::CV
   attribute :code, Cda::Cs, annotations: {:kind=>:attribute, :class=>"Cda::Cs"}
   attribute :code_system, Cda::Uid, annotations: {:kind=>:attribute, :class=>"Cda::Uid"}

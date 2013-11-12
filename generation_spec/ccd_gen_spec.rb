@@ -14,7 +14,7 @@ describe CcdGen do
   end
 
   example do
-    glob = "#{File.dirname(__FILE__)}/../lib/ccd/*rb"
+    glob = "#{File.dirname(__FILE__)}/../lib/ccd/models/*.rb"
     Dir[glob].each { |f| require f }
   end
 
@@ -56,7 +56,7 @@ describe CcdGen do
   end
 
   example do
-    Ccd::PolicyActivity.should have_constraint('performer.type_code').with_value(code: 'PRF')
+    Ccd::PolicyActivity.should have_constraint('performer.type_code').with_value('PRF')
     Ccd::MedicationUseNoneKnownDeprecated.should have_constraint('value').with_value(code: '182904002')
     Ccd::USRealmHeader.should have_constraint('realm_code.code').with_value(code: 'US')
   end
