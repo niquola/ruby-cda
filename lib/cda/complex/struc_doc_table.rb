@@ -1,5 +1,7 @@
 class Cda::StrucDocTable < Cda::Base
   attribute :caption, Cda::StrucDocCaption, annotations: {:class=>"Cda::StrucDocCaption"}
+  attribute :col, Array[Cda::StrucDocCol], annotations: {:multiple=>true, :class=>"Cda::StrucDocCol"}
+  attribute :colgroup, Array[Cda::StrucDocColgroup], annotations: {:multiple=>true, :class=>"Cda::StrucDocColgroup"}
   attribute :thead, Cda::StrucDocThead, annotations: {:class=>"Cda::StrucDocThead"}
   attribute :tfoot, Cda::StrucDocTfoot, annotations: {:class=>"Cda::StrucDocTfoot"}
   attribute :tbody, Array[Cda::StrucDocTbody], annotations: {:multiple=>true, :class=>"Cda::StrucDocTbody"}

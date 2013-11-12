@@ -2,7 +2,7 @@ module Ccd
   class PhysicianReadingStudyPerformer < ::Cda::Performer1
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @typeCode="PRF" Performer (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8424).
-    constraint 'type_code', {:cardinality=>"1..1", :value=>"PRF"}
+    constraint 'type_code', {:cardinality=>"1..1", :value=>{:code=>"PRF", :display_name=>"Performer", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #MAY contain zero or one [0..1] time (CONF:8425).
     constraint 'time', {:cardinality=>"0..1"}

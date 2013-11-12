@@ -2,7 +2,7 @@ module Ccd
   class ImmunizationActivity < ::Cda::SubstanceAdministration
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="SBADM" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8826).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"SBADM"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"SBADM", :code_system=>"2.16.840.1.113883.5.6"}}
 
     #SHALL contain exactly one [1..1] @moodCode, which SHALL be selected from ValueSet MoodCodeEvnInt 2.16.840.1.113883.11.20.9.18 STATIC (CONF:8827).
     constraint 'mood_code', {:cardinality=>"1..1"}
@@ -71,7 +71,7 @@ module Ccd
     constraint 'participant', {:cardinality=>"0..*"}
 
     #The participant, if present, SHALL contain exactly one [1..1] @typeCode="CSM" (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8851).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>"CSM"}
+    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"CSM", :code_system=>"2.16.840.1.113883.5.90"}}
 
     #The participant, if present, SHALL contain exactly one [1..1] Drug Vehicle (templateId:2.16.840.1.113883.10.20.22.4.24) (CONF:15547).
     constraint 'participant.participant_role', {:cardinality=>"1..1"}
@@ -80,7 +80,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="RSON" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8854).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"RSON"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"RSON", :code_system=>"2.16.840.1.113883.5.1002"}}
 
     #SHALL contain exactly one [1..1] Indication (templateId:2.16.840.1.113883.10.20.22.4.19) (CONF:15537).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
@@ -89,10 +89,10 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="SUBJ" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8857).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"SUBJ"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"SUBJ", :code_system=>"2.16.840.1.113883.5.1002"}}
 
     #SHALL contain exactly one [1..1] @inversionInd="true" True (CONF:8858).
-    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>"true"}
+    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>{:code=>"true", :display_name=>"True"}}
 
     #SHALL contain exactly one [1..1] Instructions (templateId:2.16.840.1.113883.10.20.22.4.20) (CONF:15538).
     constraint 'entry_relationship.act', {:cardinality=>"1..1"}
@@ -101,7 +101,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="REFR" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8861).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"REFR"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"REFR", :code_system=>"2.16.840.1.113883.5.1002"}}
 
     #SHALL contain exactly one [1..1] Medication Supply Order (templateId:2.16.840.1.113883.10.20.22.4.17) (CONF:15539).
     constraint 'entry_relationship.supply', {:cardinality=>"1..1"}
@@ -110,7 +110,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="REFR" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8864).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"REFR"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"REFR", :code_system=>"2.16.840.1.113883.5.1002"}}
 
     #SHALL contain exactly one [1..1] Medication Dispense (templateId:2.16.840.1.113883.10.20.22.4.18) (CONF:15540).
     constraint 'entry_relationship.supply', {:cardinality=>"1..1"}
@@ -119,7 +119,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="CAUS" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8867).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"CAUS"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"CAUS", :code_system=>"2.16.840.1.113883.5.1002"}}
 
     #SHALL contain exactly one [1..1] Reaction Observation (templateId:2.16.840.1.113883.10.20.22.4.9) (CONF:15541).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
@@ -128,7 +128,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="RSON" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8989).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"RSON"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"RSON", :code_system=>"2.16.840.1.113883.5.1002"}}
 
     #SHALL contain exactly one [1..1] Immunization Refusal Reason (templateId:2.16.840.1.113883.10.20.22.4.53) (CONF:15542).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
@@ -137,7 +137,7 @@ module Ccd
     constraint 'precondition', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="PRCN" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8870).
-    constraint 'precondition.type_code', {:cardinality=>"1..1", :value=>"PRCN"}
+    constraint 'precondition.type_code', {:cardinality=>"1..1", :value=>{:code=>"PRCN", :code_system=>"2.16.840.1.113883.5.1002"}}
 
     #SHALL contain exactly one [1..1] Precondition for Substance Administration (templateId:2.16.840.1.113883.10.20.22.4.25) (CONF:15548).
     constraint 'precondition.criterion', {:cardinality=>"1..1"}

@@ -11,7 +11,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="34133-9" Summarization of Episode Note (CodeSystem: LOINC 2.16.840.1.113883.6.1 STATIC) (CONF:17181).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>"34133-9"}
+    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"34133-9", :display_name=>"Summarization of Episode Note", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
 
     #SHALL contain at least one [1..*] author (CONF:9442).
     constraint 'author', {:cardinality=>"1..*"}
@@ -32,7 +32,7 @@ module Ccd
     constraint 'documentation_of.service_event', {:cardinality=>"1..1"}
 
     #This serviceEvent SHALL contain exactly one [1..1] @classCode="PCPR" Care Provision (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8453).
-    constraint 'documentation_of.service_event.class_code', {:cardinality=>"1..1", :value=>"PCPR"}
+    constraint 'documentation_of.service_event.class_code', {:cardinality=>"1..1", :value=>{:code=>"PCPR", :display_name=>"Care Provision", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #This serviceEvent SHALL contain exactly one [1..1] effectiveTime (CONF:8481).
     constraint 'documentation_of.service_event.effective_time', {:cardinality=>"1..1"}
@@ -47,7 +47,7 @@ module Ccd
     constraint 'documentation_of.service_event.performer', {:cardinality=>"0..*"}
 
     #The performer, if present, SHALL contain exactly one [1..1] @typeCode="PRF" Participation physical performer (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8458).
-    constraint 'documentation_of.service_event.performer.type_code', {:cardinality=>"1..1", :value=>"PRF"}
+    constraint 'documentation_of.service_event.performer.type_code', {:cardinality=>"1..1", :value=>{:code=>"PRF", :display_name=>"Participation physical performer", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
 
     #The performer, if present, MAY contain zero or one [0..1] assignedEntity (CONF:8459).
     constraint 'documentation_of.service_event.performer.assigned_entity', {:cardinality=>"0..1"}

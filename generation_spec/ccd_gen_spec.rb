@@ -15,10 +15,7 @@ describe CcdGen do
 
   example do
     glob = "#{File.dirname(__FILE__)}/../lib/ccd/*rb"
-    Dir[glob].each { |f|
-      next if f =~ /policy_activity/
-      require f#File.expand_path(f)
-    }
+    Dir[glob].each { |f| require f }
   end
 
   example do

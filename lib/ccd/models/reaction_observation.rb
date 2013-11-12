@@ -2,10 +2,10 @@ module Ccd
   class ReactionObservation < ::Cda::Observation
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7325).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"OBS", :display_name=>"Observation", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:7326).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:7323) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -38,7 +38,7 @@ module Ccd
     constraint 'status_code', {:cardinality=>"1..1"}
 
     #This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19114).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>"completed"}
+    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     #SHOULD contain zero or one [0..1] effectiveTime (CONF:7332).
     constraint 'effective_time', {:cardinality=>"0..1"}
@@ -56,10 +56,10 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="RSON" Has reason (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7338).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"RSON"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"RSON", :display_name=>"Has reason", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @inversionInd="true" True (CONF:7343).
-    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>"true"}
+    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>{:code=>"true", :display_name=>"True"}}
 
     #SHALL contain exactly one [1..1] Procedure Activity Procedure (templateId:2.16.840.1.113883.10.20.22.4.14) (CONF:15920).
     constraint 'entry_relationship.procedure', {:cardinality=>"1..1"}
@@ -71,10 +71,10 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="RSON" Has reason (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7341).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"RSON"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"RSON", :display_name=>"Has reason", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @inversionInd="true" True (CONF:7344).
-    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>"true"}
+    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>{:code=>"true", :display_name=>"True"}}
 
     #SHALL contain exactly one [1..1] Medication Activity (templateId:2.16.840.1.113883.10.20.22.4.16) (CONF:15921).
     constraint 'entry_relationship.substance_administration', {:cardinality=>"1..1"}
@@ -86,10 +86,10 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="SUBJ" Has subject (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7581).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"SUBJ"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"SUBJ", :display_name=>"Has subject", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @inversionInd="true" TRUE (CONF:10375).
-    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>"true"}
+    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>{:code=>"true", :display_name=>"TRUE"}}
 
     #SHALL contain exactly one [1..1] Severity Observation (templateId:2.16.840.1.113883.10.20.22.4.8) (CONF:15922).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}

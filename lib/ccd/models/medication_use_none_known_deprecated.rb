@@ -2,10 +2,10 @@ module Ccd
   class MedicationUseNoneKnownDeprecated < ::Cda::Observation
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="OBS" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7557).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"OBS", :code_system=>"2.16.840.1.113883.5.6"}}
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:7558).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :code_system=>"2.16.840.1.113883.5.1001"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:7559) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -20,7 +20,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="ASSERTION" Assertion (CodeSystem: ActCode 2.16.840.1.113883.5.4 STATIC) (CONF:19150).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>"ASSERTION"}
+    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"ASSERTION", :display_name=>"Assertion", :code_system=>"2.16.840.1.113883.5.4", :_type=>"Cda::CV"}}
 
     #MAY contain zero or one [0..1] text (CONF:7565).
     constraint 'text', {:cardinality=>"0..1"}
@@ -38,7 +38,7 @@ module Ccd
     constraint 'status_code', {:cardinality=>"1..1"}
 
     #This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19107).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>"completed"}
+    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     #SHOULD contain zero or one [0..1] effectiveTime (CONF:7563).
     constraint 'effective_time', {:cardinality=>"0..1"}

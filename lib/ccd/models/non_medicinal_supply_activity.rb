@@ -2,7 +2,7 @@ module Ccd
   class NonMedicinalSupplyActivity < ::Cda::Supply
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="SPLY" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8745).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"SPLY"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"SPLY", :code_system=>"2.16.840.1.113883.5.6"}}
 
     #SHALL contain exactly one [1..1] @moodCode, which SHALL be selected from ValueSet MoodCodeEvnInt 2.16.840.1.113883.11.20.9.18 STATIC 2011-04-03 (CONF:8746).
     constraint 'mood_code', {:cardinality=>"1..1"}
@@ -32,7 +32,7 @@ module Ccd
     constraint 'participant', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="PRD" Product (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8754).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>"PRD"}
+    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"PRD", :display_name=>"Product", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] Product Instance (templateId:2.16.840.1.113883.10.20.22.4.37) (CONF:15900).
     constraint 'participant.participant_role', {:cardinality=>"1..1"}

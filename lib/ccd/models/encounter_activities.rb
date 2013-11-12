@@ -2,10 +2,10 @@ module Ccd
   class EncounterActivities < ::Cda::Encounter
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="ENC" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8710).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"ENC"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"ENC", :code_system=>"2.16.840.1.113883.5.6"}}
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:8711).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:8712) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -53,7 +53,7 @@ module Ccd
     constraint 'participant', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="LOC" Location (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8740).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>"LOC"}
+    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"LOC", :display_name=>"Location", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] Service Delivery Location (templateId:2.16.840.1.113883.10.20.22.4.32) (CONF:14903).
     constraint 'participant.participant_role', {:cardinality=>"1..1"}
@@ -62,7 +62,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="RSON" Has Reason (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8723).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"RSON"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"RSON", :display_name=>"Has Reason", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] Indication (templateId:2.16.840.1.113883.10.20.22.4.19) (CONF:14899).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}

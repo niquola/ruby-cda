@@ -2,10 +2,10 @@ module Ccd
   class FunctionalStatusResultObservation < ::Cda::Observation
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="OBS" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:13905).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"OBS", :display_name=>"", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:13906).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:13889) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -35,7 +35,7 @@ module Ccd
     constraint 'status_code', {:cardinality=>"1..1"}
 
     #This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19101).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>"completed"}
+    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] effectiveTime (CONF:13930).
     constraint 'effective_time', {:cardinality=>"1..1"}
@@ -62,7 +62,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="REFR" refers to (CONF:14596).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"REFR"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"REFR", :display_name=>"refers to"}}
 
     #SHALL contain exactly one [1..1] Non-Medicinal Supply Activity (templateId:2.16.840.1.113883.10.20.22.4.50) (CONF:14218).
     constraint 'entry_relationship.supply', {:cardinality=>"1..1"}
@@ -71,7 +71,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="REFR" refers to (CONF:14597).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"REFR"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"REFR", :display_name=>"refers to"}}
 
     #SHALL contain exactly one [1..1] Caregiver Characteristics (templateId:2.16.840.1.113883.10.20.22.4.72) (CONF:13897).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
@@ -80,7 +80,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="COMP" has component (CONF:14598).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"COMP"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"COMP", :display_name=>"has component"}}
 
     #SHALL contain exactly one [1..1] Assessment Scale Observation (templateId:2.16.840.1.113883.10.20.22.4.69) (CONF:14466).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}

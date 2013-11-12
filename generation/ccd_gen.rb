@@ -129,24 +129,28 @@ module CcdGen
 
   def value(constraint)
     if vc = constraint.xpath('./SingleValueCode').first
-      attrs = { code: vc['code'], display_name: vc['displayName'] }
+      value = { code: vc['code'], display_name: vc['displayName'] }
+
       if cs = constraint.xpath('./CodeSystem').first
-        attrs.merge! code_system: cs['oid']
+        value.merge! code_system: cs['oid']
       end
-      attrs.delete_if{ |k, v| v.nil? }
-      if attrs.keys.to_set == [:code, :display_name, :code_system].to_set
-        attrs.merge! _type: 'Cda::CV'
+
+      value.delete_if{ |k, v| v.nil? }
+
+      if value.keys.to_set == [:code, :display_name, :code_system].to_set
+        value.merge! _type: 'Cda::CV'
       end
-      if attrs.keys == [:code] || attribute?(constraint)
-        attrs[:code]
+
+      if value.keys == [:code] || root_template_id?(constraint)
+        value[:code]
       else
-        attrs
+        value
       end
     end
   end
 
-  def attribute?(constraint)
-    constraint['context'].starts_with?('@')
+  def root_template_id?(constraint)
+    constraint['context'] == '@root'
   end
 
   def value_set(constraint)

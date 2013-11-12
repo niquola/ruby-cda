@@ -2,10 +2,10 @@ module Ccd
   class PolicyActivity < ::Cda::Act
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="ACT" Act (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8898).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"ACT", :display_name=>"Act", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:8899).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:8900) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -26,13 +26,13 @@ module Ccd
     constraint 'status_code', {:cardinality=>"1..1"}
 
     #This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19109).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>"completed"}
+    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] performer (CONF:8906) such that it
     constraint 'performer', {:cardinality=>"1..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="PRF" Performer (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8907).
-    constraint 'performer.type_code', {:cardinality=>"1..1", :value=>"PRF"}
+    constraint 'performer.type_code', {:cardinality=>"1..1", :value=>{:code=>"PRF", :display_name=>"Performer", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:16808).
     constraint 'performer.template_id', {:cardinality=>"1..1"}
@@ -86,7 +86,7 @@ module Ccd
     constraint 'performer.assigned_entity.code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="GUAR" Guarantor (CodeSystem: RoleClass 2.16.840.1.113883.5.110 STATIC) (CONF:16096).
-    constraint 'performer.assigned_entity.code.code', {:cardinality=>"1..1", :value=>"GUAR"}
+    constraint 'performer.assigned_entity.code.code', {:cardinality=>"1..1", :value=>{:code=>"GUAR", :display_name=>"Guarantor", :code_system=>"2.16.840.1.113883.5.110", :_type=>"Cda::CV"}}
 
     #This assignedEntity SHOULD contain zero or one [0..1] addr (CONF:8964).
     constraint 'performer.assigned_entity.addr', {:cardinality=>"0..1"}
@@ -104,7 +104,7 @@ module Ccd
     constraint 'participant', {:cardinality=>"1..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="COV" Coverage target (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8917).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>"COV"}
+    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"COV", :display_name=>"Coverage target", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:16812).
     constraint 'participant.template_id', {:cardinality=>"1..1"}
@@ -155,7 +155,7 @@ module Ccd
     constraint 'participant', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="HLD" Holder (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8935).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>"HLD"}
+    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"HLD", :display_name=>"Holder", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:16813).
     constraint 'participant.template_id', {:cardinality=>"1..1"}
@@ -188,7 +188,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"1..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="REFR" Refers to (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8940).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"REFR"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"REFR", :display_name=>"Refers to", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #The target of a policy activity with act/entryRelationship/@typeCode="REFR" SHALL be an authorization activity (templateId 2.16.840.1.113883.10.20.1.19) OR an act, with act[@classCode="ACT"] and act[@moodCode="DEF"], representing a description of the coverage plan
     constraint 'entry_relationship', {}

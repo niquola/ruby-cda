@@ -11,7 +11,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="46240-8" Encounters (CodeSystem: LOINC 2.16.840.1.113883.6.1 STATIC) (CONF:15462).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>"46240-8"}
+    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"46240-8", :display_name=>"Encounters", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] title (CONF:7942).
     constraint 'title', {:cardinality=>"1..1"}

@@ -2,10 +2,10 @@ module Ccd
   class ProcedureContext < ::Cda::Act
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="ACT" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6) (CONF:26452).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"ACT", :display_name=>"", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" (CodeSystem: ActMood 2.16.840.1.113883.5.1001) (CONF:26453).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:9200) such that it
     constraint 'template_id', {:cardinality=>"1..1"}

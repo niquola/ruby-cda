@@ -11,7 +11,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="47420-5" Functional Status (CodeSystem: LOINC 2.16.840.1.113883.6.1 STATIC) (CONF:14579).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>"47420-5"}
+    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"47420-5", :display_name=>"Functional Status", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] title (CONF:7922).
     constraint 'title', {:cardinality=>"1..1"}

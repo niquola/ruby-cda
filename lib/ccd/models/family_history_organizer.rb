@@ -2,10 +2,10 @@ module Ccd
   class FamilyHistoryOrganizer < ::Cda::Organizer
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="CLUSTER" Cluster (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8600).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"CLUSTER"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"CLUSTER", :display_name=>"Cluster", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:8601).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:8604) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -17,7 +17,7 @@ module Ccd
     constraint 'status_code', {:cardinality=>"1..1"}
 
     #This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19099).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>"completed"}
+    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] subject (CONF:8609).
     constraint 'subject', {:cardinality=>"1..1"}
@@ -26,7 +26,7 @@ module Ccd
     constraint 'subject.related_subject', {:cardinality=>"1..1"}
 
     #This relatedSubject SHALL contain exactly one [1..1] @classCode="PRS" Person (CodeSystem: EntityClass 2.16.840.1.113883.5.41 STATIC) (CONF:15245).
-    constraint 'subject.related_subject.class_code', {:cardinality=>"1..1", :value=>"PRS"}
+    constraint 'subject.related_subject.class_code', {:cardinality=>"1..1", :value=>{:code=>"PRS", :display_name=>"Person", :code_system=>"2.16.840.1.113883.5.41", :_type=>"Cda::CV"}}
 
     #This relatedSubject SHALL contain exactly one [1..1] code (CONF:15246).
     constraint 'subject.related_subject.code', {:cardinality=>"1..1"}

@@ -2,10 +2,10 @@ module Ccd
   class MedicationSupplyOrder < ::Cda::Supply
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="SPLY" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7427).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"SPLY"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"SPLY", :code_system=>"2.16.840.1.113883.5.6"}}
 
     #SHALL contain exactly one [1..1] @moodCode="INT" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:7428).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"INT"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"INT", :code_system=>"2.16.840.1.113883.5.1001"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:7429) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -56,10 +56,10 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #The entryRelationship, if present, SHALL contain exactly one [1..1] @typeCode="SUBJ" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7444).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"SUBJ"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"SUBJ", :code_system=>"2.16.840.1.113883.5.1002"}}
 
     #The entryRelationship, if present, SHALL contain exactly one [1..1] @inversionInd="true" True (CONF:7445).
-    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>"true"}
+    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>{:code=>"true", :display_name=>"True"}}
 
     #The entryRelationship, if present, SHALL contain exactly one [1..1] Instructions (templateId:2.16.840.1.113883.10.20.22.4.20) (CONF:16095).
     constraint 'entry_relationship.act', {:cardinality=>"1..1"}

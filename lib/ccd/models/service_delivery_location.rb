@@ -2,7 +2,7 @@ module Ccd
   class ServiceDeliveryLocation < ::Cda::ParticipantRole
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="SDLOC" (CodeSystem: RoleCode 2.16.840.1.113883.5.111 STATIC) (CONF:7758).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"SDLOC"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"SDLOC", :code_system=>"2.16.840.1.113883.5.111"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:7635) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -23,7 +23,7 @@ module Ccd
     constraint 'playing_entity', {:cardinality=>"0..1"}
 
     #The playingEntity, if present, SHALL contain exactly one [1..1] @classCode="PLC" (CodeSystem: EntityClass 2.16.840.1.113883.5.41 STATIC) (CONF:7763).
-    constraint 'playing_entity.class_code', {:cardinality=>"1..1", :value=>"PLC"}
+    constraint 'playing_entity.class_code', {:cardinality=>"1..1", :value=>{:code=>"PLC", :code_system=>"2.16.840.1.113883.5.41"}}
 
     #The playingEntity, if present, MAY contain zero or one [0..1] name (CONF:16037).
     constraint 'playing_entity.name', {:cardinality=>"0..1"}

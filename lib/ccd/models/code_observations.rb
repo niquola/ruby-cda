@@ -2,10 +2,10 @@ module Ccd
   class CodeObservations < ::Cda::Observation
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9304).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"OBS", :display_name=>"Observation", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:9305).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:15523).
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -26,7 +26,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="SPRT" Has Support (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:9312).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"SPRT"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"SPRT", :display_name=>"Has Support", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] SOP Instance Observation (templateId:2.16.840.1.113883.10.20.6.2.8) (CONF:16083).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
@@ -35,7 +35,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="SPRT" Has Support (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:9315).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"SPRT"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"SPRT", :display_name=>"Has Support", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] Quantity Measurement Observation (templateId:2.16.840.1.113883.10.20.6.2.14) (CONF:16084).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}

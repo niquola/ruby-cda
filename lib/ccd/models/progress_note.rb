@@ -20,7 +20,7 @@ module Ccd
     constraint 'documentation_of.service_event', {:cardinality=>"1..1"}
 
     #This serviceEvent SHALL contain exactly one [1..1] @classCode="PCPR" Care Provision (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:26420).
-    constraint 'documentation_of.service_event.class_code', {:cardinality=>"1..1", :value=>"PCPR"}
+    constraint 'documentation_of.service_event.class_code', {:cardinality=>"1..1", :value=>{:code=>"PCPR", :display_name=>"Care Provision", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #This serviceEvent SHALL contain exactly one [1..1] templateId (CONF:9480) such that it
     constraint 'documentation_of.service_event.template_id', {:cardinality=>"1..1"}

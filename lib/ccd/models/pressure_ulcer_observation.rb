@@ -2,10 +2,10 @@ module Ccd
   class PressureUlcerObservation < ::Cda::Observation
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="OBS" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:14383).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"OBS", :display_name=>"", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:14384).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #MAY contain zero or one [0..1] @negationInd (CONF:14385).
     constraint 'negation_ind', {:cardinality=>"0..1"}
@@ -23,7 +23,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="ASSERTION" Assertion (CodeSystem: ActCode 2.16.840.1.113883.5.4 STATIC) (CONF:14760).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>"ASSERTION"}
+    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"ASSERTION", :display_name=>"Assertion", :code_system=>"2.16.840.1.113883.5.4", :_type=>"Cda::CV"}}
 
     #SHOULD contain zero or one [0..1] text (CONF:14391).
     constraint 'text', {:cardinality=>"0..1"}
@@ -41,7 +41,7 @@ module Ccd
     constraint 'status_code', {:cardinality=>"1..1"}
 
     #This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19111).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>"completed"}
+    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] effectiveTime (CONF:14395).
     constraint 'effective_time', {:cardinality=>"1..1"}
@@ -68,7 +68,7 @@ module Ccd
     constraint 'target_site_code.qualifier.name', {:cardinality=>"1..1"}
 
     #This name SHOULD contain zero or one [0..1] @code="272741003" laterality (CodeSystem: SNOMED CT 2.16.840.1.113883.6.96 STATIC) (CONF:14801).
-    constraint 'target_site_code.qualifier.name.code', {:cardinality=>"0..1", :value=>"272741003"}
+    constraint 'target_site_code.qualifier.name.code', {:cardinality=>"0..1", :value=>{:code=>"272741003", :display_name=>"laterality", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
 
     #The qualifier, if present, SHALL contain exactly one [1..1] value (CONF:14802).
     constraint 'target_site_code.qualifier.value', {:cardinality=>"1..1"}
@@ -80,22 +80,22 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="COMP" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:14411).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"COMP"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"COMP", :display_name=>"", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] observation (CONF:14619).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
 
     #This observation SHALL contain exactly one [1..1] @classCode="OBS" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:14685).
-    constraint 'entry_relationship.observation.class_code', {:cardinality=>"1..1", :value=>"OBS"}
+    constraint 'entry_relationship.observation.class_code', {:cardinality=>"1..1", :value=>{:code=>"OBS", :display_name=>"", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #This observation SHALL contain exactly one [1..1] @moodCode="EVN" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:14686).
-    constraint 'entry_relationship.observation.mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'entry_relationship.observation.mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #This observation SHALL contain exactly one [1..1] code (CONF:14620).
     constraint 'entry_relationship.observation.code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="401238003" Length of Wound (CodeSystem: SNOMED CT 2.16.840.1.113883.6.96 STATIC) (CONF:14621).
-    constraint 'entry_relationship.observation.code.code', {:cardinality=>"1..1", :value=>"401238003"}
+    constraint 'entry_relationship.observation.code.code', {:cardinality=>"1..1", :value=>{:code=>"401238003", :display_name=>"Length of Wound", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
 
     #This observation SHALL contain exactly one [1..1] value with @xsi:type="PQ" (CONF:14622).
     constraint 'entry_relationship.observation.value', {:cardinality=>"1..1"}
@@ -104,22 +104,22 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="COMP" (CONF:14602).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"COMP"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"COMP", :display_name=>""}}
 
     #SHALL contain exactly one [1..1] observation (CONF:14623).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
 
     #This observation SHALL contain exactly one [1..1] @classCode="OBS" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:14687).
-    constraint 'entry_relationship.observation.class_code', {:cardinality=>"1..1", :value=>"OBS"}
+    constraint 'entry_relationship.observation.class_code', {:cardinality=>"1..1", :value=>{:code=>"OBS", :display_name=>"", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #This observation SHALL contain exactly one [1..1] @moodCode="EVN" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:14688).
-    constraint 'entry_relationship.observation.mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'entry_relationship.observation.mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #This observation SHALL contain exactly one [1..1] code (CONF:14624).
     constraint 'entry_relationship.observation.code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="401239006" Width of Wound (CodeSystem: SNOMED CT 2.16.840.1.113883.6.96 STATIC) (CONF:14625).
-    constraint 'entry_relationship.observation.code.code', {:cardinality=>"1..1", :value=>"401239006"}
+    constraint 'entry_relationship.observation.code.code', {:cardinality=>"1..1", :value=>{:code=>"401239006", :display_name=>"Width of Wound", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
 
     #This observation SHALL contain exactly one [1..1] value with @xsi:type="PQ" (CONF:14626).
     constraint 'entry_relationship.observation.value', {:cardinality=>"1..1"}
@@ -128,22 +128,22 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="COMP" (CONF:14606).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"COMP"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"COMP", :display_name=>""}}
 
     #SHALL contain exactly one [1..1] observation (CONF:14627).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
 
     #This observation SHALL contain exactly one [1..1] @classCode="OBS" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:14689).
-    constraint 'entry_relationship.observation.class_code', {:cardinality=>"1..1", :value=>"OBS"}
+    constraint 'entry_relationship.observation.class_code', {:cardinality=>"1..1", :value=>{:code=>"OBS", :display_name=>"", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #This observation SHALL contain exactly one [1..1] @moodCode="EVN" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:14690).
-    constraint 'entry_relationship.observation.mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'entry_relationship.observation.mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #This observation SHALL contain exactly one [1..1] code (CONF:14628).
     constraint 'entry_relationship.observation.code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="425094009" Depth of Wound (CodeSystem: SNOMED CT 2.16.840.1.113883.6.96 STATIC) (CONF:14629).
-    constraint 'entry_relationship.observation.code.code', {:cardinality=>"1..1", :value=>"425094009"}
+    constraint 'entry_relationship.observation.code.code', {:cardinality=>"1..1", :value=>{:code=>"425094009", :display_name=>"Depth of Wound", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
 
     #This observation SHALL contain exactly one [1..1] value with @xsi:type="PQ" (CONF:14630).
     constraint 'entry_relationship.observation.value', {:cardinality=>"1..1"}

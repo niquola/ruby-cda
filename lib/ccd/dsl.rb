@@ -1,4 +1,5 @@
 require 'active_support/core_ext'
+
 module Ccd
   module Dsl
     attr_reader :constraints
@@ -39,6 +40,7 @@ module Ccd
     #private
     module Utility
       extend self
+
       def merge_json(x, y)
         hash_to_object object_to_hash(x).deep_merge(object_to_hash(y))
       end
@@ -74,7 +76,7 @@ module Ccd
 
       def mk_class(attrs)
         res = attrs.reduce({}) do |acc, (k, v)|
-          acc[k] = 
+          acc[k] =
           case v
           when Hash
             mk_class(v)
@@ -92,8 +94,6 @@ module Ccd
           res
         end
       end
-
-
     end
 
     def defaults
@@ -120,12 +120,26 @@ module Ccd
     end
 
     def inference(path, value, context = self)
-      #puts if self == context
-      #puts "inference(#{path}, #{value}, #{context})"
-      return value if path.blank?
+      puts if self == context
+      puts "inference(#{path}, #{value}, #{context})"
+
+      return value if path.empty?
+
       name = path.shift
-      value = inference(path, value, attribute_class(context, name))
-      if collection?(context, name)
+
+      if path.empty? && value.is_a?(Hash) && value.key?(:_type)
+        # raise "BINGO"
+        puts "constantizing #{value[:_type]}"
+        klass = value[:_type].constantize
+        is_collection = false
+      else
+        klass = attribute_class(context, name)
+        is_collection = collection?(context, name)
+      end
+
+      value = inference(path, value, klass)
+
+      if is_collection
         { name => [value] }
       else
         { name => value }

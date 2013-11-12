@@ -2,10 +2,10 @@ module Ccd
   class AuthorizationActivity < ::Cda::Act
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="ACT" Act (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8944).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"ACT", :display_name=>"Act", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8945).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:8946) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -20,7 +20,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"1..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="SUBJ" Has Subject (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8949).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"SUBJ"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"SUBJ", :display_name=>"Has Subject", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     # 	The target of an authorization activity with act/entryRelationship/@typeCode="SUBJ" SHALL be a clinical statement with moodCode="PRMS" Promise
     constraint 'entry_relationship', {}

@@ -11,7 +11,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="10183-2" Hospital Discharge Medications (CodeSystem: LOINC 2.16.840.1.113883.6.1 STATIC) (CONF:15360).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>"10183-2"}
+    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"10183-2", :display_name=>"Hospital Discharge Medications", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] title (CONF:7818).
     constraint 'title', {:cardinality=>"1..1"}

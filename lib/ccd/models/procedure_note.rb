@@ -17,7 +17,7 @@ module Ccd
     constraint 'participant', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="IND" Individual (CodeSystem: participationFunction 2.16.840.1.113883.5.88 STATIC) (CONF:8505).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>"IND"}
+    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"IND", :display_name=>"Individual", :code_system=>"2.16.840.1.113883.5.88", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] functionCode="PCP" Primary Care Physician (CodeSystem: participationFunction 2.16.840.1.113883.5.88 STATIC) (CONF:8506).
     constraint 'participant.function_code', {:cardinality=>"1..1", :value=>{:code=>"PCP", :display_name=>"Primary Care Physician", :code_system=>"2.16.840.1.113883.5.88", :_type=>"Cda::CV"}}
@@ -56,7 +56,7 @@ module Ccd
     constraint 'documentation_of.service_event.performer', {:cardinality=>"1..1"}
 
     #This performer SHALL contain exactly one [1..1] @typeCode="PPRF" Primary Performer (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8521).
-    constraint 'documentation_of.service_event.performer.type_code', {:cardinality=>"1..1", :value=>"PPRF"}
+    constraint 'documentation_of.service_event.performer.type_code', {:cardinality=>"1..1", :value=>{:code=>"PPRF", :display_name=>"Primary Performer", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
 
     #This performer SHALL contain exactly one [1..1] assignedEntity (CONF:14911).
     constraint 'documentation_of.service_event.performer.assigned_entity', {:cardinality=>"1..1"}
@@ -194,7 +194,7 @@ module Ccd
     constraint 'component_of.encompassing_encounter.encounter_participant', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="REF" Referrer (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8503).
-    constraint 'component_of.encompassing_encounter.encounter_participant.type_code', {:cardinality=>"1..1", :value=>"REF"}
+    constraint 'component_of.encompassing_encounter.encounter_participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"REF", :display_name=>"Referrer", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
 
     #A consent, if present, SHALL be represented as ClinicalDocument/authorization/consent.
     constraint '', {}

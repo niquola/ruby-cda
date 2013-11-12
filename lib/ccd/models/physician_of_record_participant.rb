@@ -2,7 +2,7 @@ module Ccd
   class PhysicianOfRecordParticipant < ::Cda::EncounterParticipant
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @typeCode="ATND" Attender (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8881).
-    constraint 'type_code', {:cardinality=>"1..1", :value=>"ATND"}
+    constraint 'type_code', {:cardinality=>"1..1", :value=>{:code=>"ATND", :display_name=>"Attender", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
 
     #MAY contain zero or more [0..*] templateId (CONF:16072).
     constraint 'template_id', {:cardinality=>"0..*"}

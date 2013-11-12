@@ -2,7 +2,7 @@ module Ccd
   class ProductInstance < ::Cda::ParticipantRole
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="MANU" Manufactured Product (CodeSystem: RoleClass 2.16.840.1.113883.5.110 STATIC) (CONF:7900).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"MANU"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"MANU", :display_name=>"Manufactured Product", :code_system=>"2.16.840.1.113883.5.110", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:7901) such that it
     constraint 'template_id', {:cardinality=>"1..1"}

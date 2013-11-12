@@ -12,7 +12,7 @@ module Gen::Meta
   end
 
   def elements(node)
-    node.xpath('.//sequence/element')
+    node.xpath('.//sequence//element')
   end
 
   def attributes(node)

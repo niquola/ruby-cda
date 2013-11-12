@@ -395,7 +395,7 @@ module Ccd
     constraint 'legal_authenticator.signature_code', {:cardinality=>"1..1"}
 
     #This signatureCode SHALL contain exactly one [1..1] @code="S" (CodeSystem: Participationsignature 2.16.840.1.113883.5.89 STATIC) (CONF:5584).
-    constraint 'legal_authenticator.signature_code.code', {:cardinality=>"1..1", :value=>"S"}
+    constraint 'legal_authenticator.signature_code.code', {:cardinality=>"1..1", :value=>{:code=>"S", :code_system=>"2.16.840.1.113883.5.89"}}
 
     #The legalAuthenticator, if present, SHALL contain exactly one [1..1] assignedEntity (CONF:5585).
     constraint 'legal_authenticator.assigned_entity', {:cardinality=>"1..1"}
@@ -443,7 +443,7 @@ module Ccd
     constraint 'authenticator.signature_code', {:cardinality=>"1..1"}
 
     #This signatureCode SHALL contain exactly one [1..1] @code="S" (CodeSystem: Participationsignature 2.16.840.1.113883.5.89 STATIC) (CONF:5611).
-    constraint 'authenticator.signature_code.code', {:cardinality=>"1..1", :value=>"S"}
+    constraint 'authenticator.signature_code.code', {:cardinality=>"1..1", :value=>{:code=>"S", :code_system=>"2.16.840.1.113883.5.89"}}
 
     #The authenticator, if present, SHALL contain exactly one [1..1] assignedEntity (CONF:5612).
     constraint 'authenticator.assigned_entity', {:cardinality=>"1..1"}
@@ -563,7 +563,7 @@ module Ccd
     constraint 'authorization.consent.status_code', {:cardinality=>"1..1"}
 
     #This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:16798).
-    constraint 'authorization.consent.status_code.code', {:cardinality=>"1..1", :value=>"completed"}
+    constraint 'authorization.consent.status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #MAY contain zero or one [0..1] componentOf (CONF:9955).
     constraint 'component_of', {:cardinality=>"0..1"}

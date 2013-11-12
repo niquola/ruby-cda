@@ -2,7 +2,7 @@ module Ccd
   class ProcedureActivityObservation < ::Cda::Observation
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8282).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"OBS", :display_name=>"Observation", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @moodCode, which SHALL be selected from ValueSet MoodCodeEvnInt 2.16.840.1.113883.11.20.9.18 STATIC 2011-04-03 (CONF:8237).
     constraint 'mood_code', {:cardinality=>"1..1"}
@@ -92,7 +92,7 @@ module Ccd
     constraint 'participant', {:cardinality=>"0..*"}
 
     #The participant, if present, SHALL contain exactly one [1..1] @typeCode="LOC" Location (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8262).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>"LOC"}
+    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"LOC", :display_name=>"Location", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #The participant, if present, SHALL contain exactly one [1..1] Service Delivery Location (templateId:2.16.840.1.113883.10.20.22.4.32) (CONF:15904).
     constraint 'participant.participant_role', {:cardinality=>"1..1"}
@@ -101,19 +101,19 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..*"}
 
     #The entryRelationship, if present, SHALL contain exactly one [1..1] @typeCode="COMP" Component (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8265).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"COMP"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"COMP", :display_name=>"Component", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #The entryRelationship, if present, SHALL contain exactly one [1..1] @inversionInd="true" true (CONF:8266).
-    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>"true"}
+    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>{:code=>"true", :display_name=>"true"}}
 
     #The entryRelationship, if present, SHALL contain exactly one [1..1] encounter (CONF:8267).
     constraint 'entry_relationship.encounter', {:cardinality=>"1..1"}
 
     #This encounter SHALL contain exactly one [1..1] @classCode="ENC" Encounter (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8268).
-    constraint 'entry_relationship.encounter.class_code', {:cardinality=>"1..1", :value=>"ENC"}
+    constraint 'entry_relationship.encounter.class_code', {:cardinality=>"1..1", :value=>{:code=>"ENC", :display_name=>"Encounter", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #This encounter SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:8269).
-    constraint 'entry_relationship.encounter.mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'entry_relationship.encounter.mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #This encounter SHALL contain exactly one [1..1] id (CONF:8270).
     constraint 'entry_relationship.encounter.id', {:cardinality=>"1..1"}
@@ -125,10 +125,10 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="SUBJ" Has Subject (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8273).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"SUBJ"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"SUBJ", :display_name=>"Has Subject", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @inversionInd="true" true (CONF:8274).
-    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>"true"}
+    constraint 'entry_relationship.inversion_ind', {:cardinality=>"1..1", :value=>{:code=>"true", :display_name=>"true"}}
 
     #SHALL contain exactly one [1..1] Instructions (templateId:2.16.840.1.113883.10.20.22.4.20) (CONF:15905).
     constraint 'entry_relationship.act', {:cardinality=>"1..1"}
@@ -137,7 +137,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="RSON" Has Reason (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8277).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"RSON"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"RSON", :display_name=>"Has Reason", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] Indication (templateId:2.16.840.1.113883.10.20.22.4.19) (CONF:15906).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
@@ -146,7 +146,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="COMP" Has Component (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8280).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"COMP"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"COMP", :display_name=>"Has Component", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] Medication Activity (templateId:2.16.840.1.113883.10.20.22.4.16) (CONF:15907).
     constraint 'entry_relationship.substance_administration', {:cardinality=>"1..1"}

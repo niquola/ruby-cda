@@ -44,7 +44,7 @@ module Ccd
     constraint 'documentation_of.service_event', {:cardinality=>"1..1"}
 
     #This serviceEvent SHALL contain exactly one [1..1] @classCode="ACT" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8430).
-    constraint 'documentation_of.service_event.class_code', {:cardinality=>"1..1", :value=>"ACT"}
+    constraint 'documentation_of.service_event.class_code', {:cardinality=>"1..1", :value=>{:code=>"ACT", :code_system=>"2.16.840.1.113883.5.6"}}
 
     #This serviceEvent SHOULD contain zero or more [0..*] id (CONF:8418).
     constraint 'documentation_of.service_event.id', {:cardinality=>"0..*"}

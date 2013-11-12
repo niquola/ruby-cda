@@ -2,10 +2,10 @@ module Ccd
   class AdvanceDirectiveObservation < ::Cda::Observation
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8648).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"OBS", :display_name=>"Observation", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:8649).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:8655) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -23,7 +23,7 @@ module Ccd
     constraint 'status_code', {:cardinality=>"1..1"}
 
     #This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19082).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>"completed"}
+    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] effectiveTime (CONF:8656).
     constraint 'effective_time', {:cardinality=>"1..1"}
@@ -35,7 +35,7 @@ module Ccd
     constraint 'participant', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="VRF" Verifier (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8663).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>"VRF"}
+    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"VRF", :display_name=>"Verifier", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:8664).
     constraint 'participant.template_id', {:cardinality=>"1..1"}
@@ -56,13 +56,13 @@ module Ccd
     constraint 'participant', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="CST" Custodian (CodeSystem: HL7ParticipationType 2.16.840.1.113883.5.90 STATIC) (CONF:8668).
-    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>"CST"}
+    constraint 'participant.type_code', {:cardinality=>"1..1", :value=>{:code=>"CST", :display_name=>"Custodian", :code_system=>"2.16.840.1.113883.5.90", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] participantRole (CONF:8669).
     constraint 'participant.participant_role', {:cardinality=>"1..1"}
 
     #This participantRole SHALL contain exactly one [1..1] @classCode="AGNT" Agent (CodeSystem: RoleClass 2.16.840.1.113883.5.110 STATIC) (CONF:8670).
-    constraint 'participant.participant_role.class_code', {:cardinality=>"1..1", :value=>"AGNT"}
+    constraint 'participant.participant_role.class_code', {:cardinality=>"1..1", :value=>{:code=>"AGNT", :display_name=>"Agent", :code_system=>"2.16.840.1.113883.5.110", :_type=>"Cda::CV"}}
 
     #This participantRole SHOULD contain zero or one [0..1] addr (CONF:8671).
     constraint 'participant.participant_role.addr', {:cardinality=>"0..1"}
@@ -83,7 +83,7 @@ module Ccd
     constraint 'reference', {:cardinality=>"0..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="REFR" Refers to (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8694).
-    constraint 'reference.type_code', {:cardinality=>"1..1", :value=>"REFR"}
+    constraint 'reference.type_code', {:cardinality=>"1..1", :value=>{:code=>"REFR", :display_name=>"Refers to", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] externalDocument (CONF:8693).
     constraint 'reference.external_document', {:cardinality=>"1..1"}

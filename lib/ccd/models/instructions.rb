@@ -2,10 +2,10 @@ module Ccd
   class Instructions < ::Cda::Act
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="ACT" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7391).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"ACT", :code_system=>"2.16.840.1.113883.5.6"}}
 
     #SHALL contain exactly one [1..1] @moodCode="INT" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:7392).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"INT"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"INT", :code_system=>"2.16.840.1.113883.5.1001"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:7393) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -32,7 +32,7 @@ module Ccd
     constraint 'status_code', {:cardinality=>"1..1"}
 
     #This statusCode SHALL contain exactly one [1..1] @code="completed" Completed (CodeSystem: ActStatus 2.16.840.1.113883.5.14 STATIC) (CONF:19106).
-    constraint 'status_code.code', {:cardinality=>"1..1", :value=>"completed"}
+    constraint 'status_code.code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
 
     Ccd.load_extension('instructions.rb')
   end

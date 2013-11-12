@@ -2,10 +2,10 @@ module Ccd
   class MedicationDispense < ::Cda::Supply
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="SPLY" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7451).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"SPLY"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"SPLY", :code_system=>"2.16.840.1.113883.5.6"}}
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:7452).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :code_system=>"2.16.840.1.113883.5.1001"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:7453) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -59,7 +59,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"0..1"}
 
     #SHALL contain exactly one [1..1] @typeCode="REFR" (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:7474).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"REFR"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"REFR", :code_system=>"2.16.840.1.113883.5.1002"}}
 
     #SHALL contain exactly one [1..1] Medication Supply Order (templateId:2.16.840.1.113883.10.20.22.4.17) (CONF:15606).
     constraint 'entry_relationship.supply', {:cardinality=>"1..1"}

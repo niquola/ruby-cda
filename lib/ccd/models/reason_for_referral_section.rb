@@ -11,7 +11,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="42349-1" Reason for Referral (CodeSystem: LOINC 2.16.840.1.113883.6.1 STATIC) (CONF:15428).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>"42349-1"}
+    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"42349-1", :display_name=>"Reason for Referral", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] title (CONF:7846).
     constraint 'title', {:cardinality=>"1..1"}

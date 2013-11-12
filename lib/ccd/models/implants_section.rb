@@ -11,10 +11,10 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="55122-6" Implants (CodeSystem: LOINC 2.16.840.1.113883.6.1 STATIC) (CONF:15372).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>"55122-6"}
+    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"55122-6", :display_name=>"Implants", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
 
     #This code SHALL contain zero or one [0..1] @codeSystem="2.16.840.1.113883.6.1" (CodeSystem: LOINC 2.16.840.1.113883.6.1) (CONF:26471).
-    constraint 'code.code_system', {:cardinality=>"0..1", :value=>"2.16.840.1.113883.6.1"}
+    constraint 'code.code_system', {:cardinality=>"0..1", :value=>{:code=>"2.16.840.1.113883.6.1", :display_name=>"", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] title (CONF:8044).
     constraint 'title', {:cardinality=>"1..1"}

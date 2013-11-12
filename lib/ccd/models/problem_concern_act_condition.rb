@@ -2,10 +2,10 @@ module Ccd
   class ProblemConcernActCondition < ::Cda::Act
     extend ::Ccd::Dsl
     #SHALL contain exactly one [1..1] @classCode="ACT" Act (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9024).
-    constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
+    constraint 'class_code', {:cardinality=>"1..1", :value=>{:code=>"ACT", :display_name=>"Act", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] @moodCode="EVN" Event (CodeSystem: ActMood 2.16.840.1.113883.5.1001 STATIC) (CONF:9025).
-    constraint 'mood_code', {:cardinality=>"1..1", :value=>"EVN"}
+    constraint 'mood_code', {:cardinality=>"1..1", :value=>{:code=>"EVN", :display_name=>"Event", :code_system=>"2.16.840.1.113883.5.1001", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] templateId (CONF:16772) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
@@ -20,7 +20,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="CONC" Concern (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:19184).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>"CONC"}
+    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"CONC", :display_name=>"Concern", :code_system=>"2.16.840.1.113883.5.6", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] statusCode, which SHALL be selected from ValueSet ProblemAct statusCode 2.16.840.1.113883.11.20.9.19 STATIC 2011-09-09 (CONF:9029).
     constraint 'status_code', {:cardinality=>"1..1"}
@@ -38,7 +38,7 @@ module Ccd
     constraint 'entry_relationship', {:cardinality=>"1..*"}
 
     #SHALL contain exactly one [1..1] @typeCode="SUBJ" Has subject (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:9035).
-    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"SUBJ"}
+    constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>{:code=>"SUBJ", :display_name=>"Has subject", :code_system=>"2.16.840.1.113883.5.1002", :_type=>"Cda::CV"}}
 
     #SHALL contain exactly one [1..1] Problem Observation (templateId:2.16.840.1.113883.10.20.22.4.4) (CONF:15980).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}

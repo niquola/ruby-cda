@@ -186,16 +186,16 @@ module Gen
     # logsimple(attr, 'attribute')
     if attr[:type].present?
       [
-       attr[:name],
-       Namings.mk_class_name(attr[:type]),
-       meta_options(attr).deep_merge(annotations: { kind: :attribute })
+        attr[:name],
+        Namings.mk_class_name(attr[:type]),
+        meta_options(attr).deep_merge(annotations: { kind: :attribute })
       ]
     elsif st = Meta.simple_type(attr)
       # fappend 'attributes.xml', st.to_xml
       [
-       attr[:name],
-       Namings.mk_class_name(st[:base]),
-       {}
+        attr[:name],
+        Namings.mk_class_name(st[:base]),
+        {}
       ]
     end
   end

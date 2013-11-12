@@ -11,7 +11,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1"}
 
     #This code SHALL contain exactly one [1..1] @code="29299-5" Reason for Visit (CONF:15430).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>"29299-5"}
+    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"29299-5", :display_name=>"Reason for Visit"}}
 
     #This code SHALL contain exactly one [1..1] @codeSystem (CONF:26494).
     constraint 'code.code_system', {:cardinality=>"1..1"}
