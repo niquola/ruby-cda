@@ -14,12 +14,12 @@ module Cda
       end.merge(_type: self.class.name)
     end
 
-    def complex?
-      !respond_to?(:_text)
+    def mixed?
+      respond_to?(:_text)
     end
 
     def to_s
-      if complex?
+      if !mixed?
         super
       elsif _text.present?
         _text
