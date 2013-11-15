@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'cgi'
 require 'yaml'
 require 'set'
-require_relative 'gen'
+require_relative 'cda_gen'
 
 module CcdGen
   extend self

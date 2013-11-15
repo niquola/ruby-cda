@@ -11,7 +11,7 @@ class Cda::Observation < Cda::Base
   attribute :priority_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :repeat_number, Cda::IVL_INT, annotations: {:class=>"Cda::IVL_INT"}
   attribute :language_code, Cda::CS, annotations: {:class=>"Cda::CS"}
-  attribute :value, Array[Object], annotations: {:multiple=>true, :class=>"Object"}
+  attribute :value, Array[Cda::ANY], annotations: {:multiple=>true, :class=>"Cda::ANY"}
   attribute :interpretation_code, Array[Cda::CE], annotations: {:multiple=>true, :class=>"Cda::CE"}
   attribute :method_code, Array[Cda::CE], annotations: {:multiple=>true, :class=>"Cda::CE"}
   attribute :target_site_code, Array[Cda::CD], annotations: {:multiple=>true, :class=>"Cda::CD"}

@@ -7,6 +7,7 @@ module Gen
   autoload :Namings, 'gen/namings.rb'
   autoload :Pth, 'gen/pth.rb'
   autoload :Codeg, 'gen/codeg.rb'
+  autoload :Types, 'gen/types.rb'
 
   def generate
     cleanup
@@ -22,6 +23,7 @@ module Gen
     end
     # fwrite 'types.txt', db[:types].keys.sort_by(&:upcase).join("\n")
     definitions.each do |definition|
+      next if Types.type_mapped?(definition[:name])
       class_name = Namings.mk_class_name(definition[:name])
       full_class_name = 'Cda::' + class_name
       ancestor = if definition[:ancestor].present?
@@ -133,6 +135,7 @@ module Gen
         process_element(el)
       end
     }
+
     attributes = Meta.attributes(xml).map { |attr| process_attribute(attr) }
     attributes << text_attribute if Meta.mixed?(xml)
 
@@ -176,10 +179,9 @@ module Gen
       [
         attr[:name],
         Namings.mk_class_name(attr[:type]),
-        meta_options(attr).deep_merge(annotations: { kind: :attribute })
+        meta_options(attr).deep_merge(annotations: { kind: :attribute }),
       ]
     elsif (st = Meta.simple_type(attr))
-      # fappend 'attributes.xml', st.to_xml
       [
         attr[:name],
         Namings.mk_class_name(st[:base]),

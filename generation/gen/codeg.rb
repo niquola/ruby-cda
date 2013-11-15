@@ -36,15 +36,14 @@ module Gen
     end
 
     def to_prefix_type(type_name)
-      return type_name if stdlib_type?(type_name)
-      'Cda::' + type_name
+      if stdlib_type?(type_name)
+        type_name
+      else
+        'Cda::' + type_name
+      end
     end
 
     def generate_attribute(aname, type, opts)
-      if type == 'ANY'
-        type = 'Object'
-      end
-
       unless type.start_with?('Array')
         type = to_prefix_type(type)
       end

@@ -1,2 +1,2 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'generation')
-require "gen"
+require "cda_gen"

@@ -4,7 +4,7 @@ class Cda::Criterion < Cda::Base
   attribute :template_id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}
   attribute :code, Cda::CD, annotations: {:class=>"Cda::CD"}
   attribute :text, Cda::ED, annotations: {:class=>"Cda::ED"}
-  attribute :value, Object, annotations: {:class=>"Object"}
+  attribute :value, Cda::ANY, annotations: {:class=>"Cda::ANY"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :class_code, Cda::ActClassObservation, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ActClassObservation"}
   attribute :mood_code, Cda::ActMood, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ActMood"}

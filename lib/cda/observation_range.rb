@@ -4,7 +4,7 @@ class Cda::ObservationRange < Cda::Base
   attribute :template_id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}
   attribute :code, Cda::CD, annotations: {:class=>"Cda::CD"}
   attribute :text, Cda::ED, annotations: {:class=>"Cda::ED"}
-  attribute :value, Object, annotations: {:class=>"Object"}
+  attribute :value, Cda::ANY, annotations: {:class=>"Cda::ANY"}
   attribute :interpretation_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
   attribute :class_code, Cda::ActClassObservation, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ActClassObservation"}
