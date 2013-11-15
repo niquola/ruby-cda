@@ -5,6 +5,6 @@ class Cda::Performer2 < Cda::Base
   attribute :time, Cda::IVL_TS, annotations: {:class=>"Cda::IVL_TS"}
   attribute :mode_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :assigned_entity, Cda::AssignedEntity, annotations: {:class=>"Cda::AssignedEntity"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :type_code, Cda::ParticipationPhysicalPerformer, annotations: {:kind=>:attribute, :class=>"Cda::ParticipationPhysicalPerformer"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :type_code, Cda::ParticipationPhysicalPerformer, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ParticipationPhysicalPerformer"}
 end

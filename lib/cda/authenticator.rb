@@ -5,6 +5,6 @@ class Cda::Authenticator < Cda::Base
   attribute :time, Cda::TS, annotations: {:class=>"Cda::TS"}
   attribute :signature_code, Cda::CS, annotations: {:class=>"Cda::CS"}
   attribute :assigned_entity, Cda::AssignedEntity, annotations: {:class=>"Cda::AssignedEntity"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :type_code, Cda::ParticipationType, annotations: {:kind=>:attribute, :class=>"Cda::ParticipationType"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :type_code, Cda::ParticipationType, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ParticipationType"}
 end

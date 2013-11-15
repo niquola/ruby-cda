@@ -6,7 +6,7 @@ class Cda::CustodianOrganization < Cda::Base
   attribute :name, Cda::ON, annotations: {:class=>"Cda::ON"}
   attribute :telecom, Cda::TEL, annotations: {:class=>"Cda::TEL"}
   attribute :addr, Cda::AD, annotations: {:class=>"Cda::AD"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::EntityClassOrganization, annotations: {:kind=>:attribute, :class=>"Cda::EntityClassOrganization"}
-  attribute :determiner_code, Cda::EntityDeterminer, annotations: {:kind=>:attribute, :class=>"Cda::EntityDeterminer"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::EntityClassOrganization, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::EntityClassOrganization"}
+  attribute :determiner_code, Cda::EntityDeterminer, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::EntityDeterminer"}
 end

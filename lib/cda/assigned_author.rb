@@ -9,6 +9,6 @@ class Cda::AssignedAuthor < Cda::Base
   attribute :assigned_person, Cda::Person, annotations: {:class=>"Cda::Person"}
   attribute :assigned_authoring_device, Cda::AuthoringDevice, annotations: {:class=>"Cda::AuthoringDevice"}
   attribute :represented_organization, Cda::Organization, annotations: {:class=>"Cda::Organization"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::RoleClassAssignedEntity, annotations: {:kind=>:attribute, :class=>"Cda::RoleClassAssignedEntity"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::RoleClassAssignedEntity, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::RoleClassAssignedEntity"}
 end

@@ -15,7 +15,7 @@ class Cda::ObservationMedia < Cda::Base
   attribute :reference, Array[Cda::Reference], annotations: {:multiple=>true, :class=>"Cda::Reference"}
   attribute :precondition, Array[Cda::Precondition], annotations: {:multiple=>true, :class=>"Cda::Precondition"}
   attribute :id, String, annotations: {:kind=>:attribute, :class=>"String"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::ActClassObservation, annotations: {:kind=>:attribute, :class=>"Cda::ActClassObservation"}
-  attribute :mood_code, Cda::ActMood, annotations: {:kind=>:attribute, :class=>"Cda::ActMood"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::ActClassObservation, annotations: {:use=>:required, :kind=>:attribute, :class=>"Cda::ActClassObservation"}
+  attribute :mood_code, Cda::ActMood, annotations: {:use=>:required, :kind=>:attribute, :class=>"Cda::ActMood"}
 end

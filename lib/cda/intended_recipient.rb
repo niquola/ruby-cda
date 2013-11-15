@@ -7,6 +7,6 @@ class Cda::IntendedRecipient < Cda::Base
   attribute :telecom, Array[Cda::TEL], annotations: {:multiple=>true, :class=>"Cda::TEL"}
   attribute :information_recipient, Cda::Person, annotations: {:class=>"Cda::Person"}
   attribute :received_organization, Cda::Organization, annotations: {:class=>"Cda::Organization"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::XInformationRecipientRole, annotations: {:kind=>:attribute, :class=>"Cda::XInformationRecipientRole"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::XInformationRecipientRole, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::XInformationRecipientRole"}
 end

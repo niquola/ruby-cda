@@ -6,5 +6,5 @@ class Cda::LanguageCommunication < Cda::Base
   attribute :mode_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :proficiency_level_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :preference_ind, Cda::BL, annotations: {:class=>"Cda::BL"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
 end

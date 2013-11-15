@@ -18,7 +18,7 @@ class Cda::Encounter < Cda::Base
   attribute :entry_relationship, Array[Cda::EntryRelationship], annotations: {:multiple=>true, :class=>"Cda::EntryRelationship"}
   attribute :reference, Array[Cda::Reference], annotations: {:multiple=>true, :class=>"Cda::Reference"}
   attribute :precondition, Array[Cda::Precondition], annotations: {:multiple=>true, :class=>"Cda::Precondition"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::ActClass, annotations: {:kind=>:attribute, :class=>"Cda::ActClass"}
-  attribute :mood_code, Cda::XDocumentEncounterMood, annotations: {:kind=>:attribute, :class=>"Cda::XDocumentEncounterMood"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::ActClass, annotations: {:use=>:required, :kind=>:attribute, :class=>"Cda::ActClass"}
+  attribute :mood_code, Cda::XDocumentEncounterMood, annotations: {:use=>:required, :kind=>:attribute, :class=>"Cda::XDocumentEncounterMood"}
 end

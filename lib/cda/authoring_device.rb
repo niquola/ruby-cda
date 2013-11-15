@@ -6,7 +6,7 @@ class Cda::AuthoringDevice < Cda::Base
   attribute :manufacturer_model_name, Cda::SC, annotations: {:class=>"Cda::SC"}
   attribute :software_name, Cda::SC, annotations: {:class=>"Cda::SC"}
   attribute :as_maintained_entity, Array[Cda::MaintainedEntity], annotations: {:multiple=>true, :class=>"Cda::MaintainedEntity"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::EntityClassDevice, annotations: {:kind=>:attribute, :class=>"Cda::EntityClassDevice"}
-  attribute :determiner_code, Cda::EntityDeterminer, annotations: {:kind=>:attribute, :class=>"Cda::EntityDeterminer"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::EntityClassDevice, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::EntityClassDevice"}
+  attribute :determiner_code, Cda::EntityDeterminer, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::EntityDeterminer"}
 end

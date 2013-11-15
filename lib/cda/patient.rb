@@ -14,7 +14,7 @@ class Cda::Patient < Cda::Base
   attribute :guardian, Array[Cda::Guardian], annotations: {:multiple=>true, :class=>"Cda::Guardian"}
   attribute :birthplace, Cda::Birthplace, annotations: {:class=>"Cda::Birthplace"}
   attribute :language_communication, Array[Cda::LanguageCommunication], annotations: {:multiple=>true, :class=>"Cda::LanguageCommunication"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::EntityClass, annotations: {:kind=>:attribute, :class=>"Cda::EntityClass"}
-  attribute :determiner_code, Cda::EntityDeterminer, annotations: {:kind=>:attribute, :class=>"Cda::EntityDeterminer"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::EntityClass, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::EntityClass"}
+  attribute :determiner_code, Cda::EntityDeterminer, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::EntityDeterminer"}
 end

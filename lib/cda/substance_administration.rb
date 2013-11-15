@@ -25,8 +25,8 @@ class Cda::SubstanceAdministration < Cda::Base
   attribute :entry_relationship, Array[Cda::EntryRelationship], annotations: {:multiple=>true, :class=>"Cda::EntryRelationship"}
   attribute :reference, Array[Cda::Reference], annotations: {:multiple=>true, :class=>"Cda::Reference"}
   attribute :precondition, Array[Cda::Precondition], annotations: {:multiple=>true, :class=>"Cda::Precondition"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::ActClass, annotations: {:kind=>:attribute, :class=>"Cda::ActClass"}
-  attribute :mood_code, Cda::XDocumentSubstanceMood, annotations: {:kind=>:attribute, :class=>"Cda::XDocumentSubstanceMood"}
-  attribute :negation_ind, Cda::Bl, annotations: {:kind=>:attribute, :class=>"Cda::Bl"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::ActClass, annotations: {:use=>:required, :kind=>:attribute, :class=>"Cda::ActClass"}
+  attribute :mood_code, Cda::XDocumentSubstanceMood, annotations: {:use=>:required, :kind=>:attribute, :class=>"Cda::XDocumentSubstanceMood"}
+  attribute :negation_ind, Cda::Bl, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::Bl"}
 end

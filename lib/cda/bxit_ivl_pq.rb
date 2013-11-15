@@ -1,3 +1,3 @@
 class Cda::BXIT_IVL_PQ < Cda::IVL_PQ
-  attribute :qty, Cda::Int, annotations: {:kind=>:attribute, :class=>"Cda::Int"}
+  attribute :qty, Cda::Int, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::Int"}
 end

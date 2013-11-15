@@ -25,8 +25,8 @@ class Cda::Observation < Cda::Base
   attribute :reference, Array[Cda::Reference], annotations: {:multiple=>true, :class=>"Cda::Reference"}
   attribute :precondition, Array[Cda::Precondition], annotations: {:multiple=>true, :class=>"Cda::Precondition"}
   attribute :reference_range, Array[Cda::ReferenceRange], annotations: {:multiple=>true, :class=>"Cda::ReferenceRange"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::ActClassObservation, annotations: {:kind=>:attribute, :class=>"Cda::ActClassObservation"}
-  attribute :mood_code, Cda::XActMoodDocumentObservation, annotations: {:kind=>:attribute, :class=>"Cda::XActMoodDocumentObservation"}
-  attribute :negation_ind, Cda::Bl, annotations: {:kind=>:attribute, :class=>"Cda::Bl"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::ActClassObservation, annotations: {:use=>:required, :kind=>:attribute, :class=>"Cda::ActClassObservation"}
+  attribute :mood_code, Cda::XActMoodDocumentObservation, annotations: {:use=>:required, :kind=>:attribute, :class=>"Cda::XActMoodDocumentObservation"}
+  attribute :negation_ind, Cda::Bl, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::Bl"}
 end

@@ -27,7 +27,7 @@ class Cda::AD < Cda::ANY
   attribute :post_box, Cda::AdxpPostBox, annotations: {:class=>"Cda::AdxpPostBox"}
   attribute :precinct, Cda::AdxpPrecinct, annotations: {:class=>"Cda::AdxpPrecinct"}
   attribute :useable_period, Array[Cda::SXCM_TS], annotations: {:multiple=>true, :class=>"Cda::SXCM_TS"}
-  attribute :use, Cda::Set_PostalAddressUse, annotations: {:kind=>:attribute, :class=>"Cda::Set_PostalAddressUse"}
-  attribute :is_not_ordered, Cda::Bl, annotations: {:kind=>:attribute, :class=>"Cda::Bl"}
+  attribute :use, Cda::Set_PostalAddressUse, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::Set_PostalAddressUse"}
+  attribute :is_not_ordered, Cda::Bl, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::Bl"}
   attribute :_text, String, annotations: {:class=>"String"}
 end

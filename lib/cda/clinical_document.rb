@@ -26,7 +26,7 @@ class Cda::ClinicalDocument < Cda::Base
   attribute :authorization, Array[Cda::Authorization], annotations: {:multiple=>true, :class=>"Cda::Authorization"}
   attribute :component_of, Cda::Component1, annotations: {:class=>"Cda::Component1"}
   attribute :component, Cda::Component2, annotations: {:class=>"Cda::Component2"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::ActClinicalDocument, annotations: {:kind=>:attribute, :class=>"Cda::ActClinicalDocument"}
-  attribute :mood_code, Cda::ActMood, annotations: {:kind=>:attribute, :class=>"Cda::ActMood"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::ActClinicalDocument, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ActClinicalDocument"}
+  attribute :mood_code, Cda::ActMood, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ActMood"}
 end

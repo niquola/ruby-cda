@@ -8,6 +8,6 @@ class Cda::Guardian < Cda::Base
   attribute :telecom, Array[Cda::TEL], annotations: {:multiple=>true, :class=>"Cda::TEL"}
   attribute :guardian_person, Cda::Person, annotations: {:class=>"Cda::Person"}
   attribute :guardian_organization, Cda::Organization, annotations: {:class=>"Cda::Organization"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::RoleClass, annotations: {:kind=>:attribute, :class=>"Cda::RoleClass"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::RoleClass, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::RoleClass"}
 end

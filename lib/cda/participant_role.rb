@@ -9,6 +9,6 @@ class Cda::ParticipantRole < Cda::Base
   attribute :playing_device, Cda::Device, annotations: {:class=>"Cda::Device"}
   attribute :playing_entity, Cda::PlayingEntity, annotations: {:class=>"Cda::PlayingEntity"}
   attribute :scoping_entity, Cda::Entity, annotations: {:class=>"Cda::Entity"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::RoleClassRoot, annotations: {:kind=>:attribute, :class=>"Cda::RoleClassRoot"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::RoleClassRoot, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::RoleClassRoot"}
 end

@@ -22,7 +22,7 @@ class Cda::Supply < Cda::Base
   attribute :entry_relationship, Array[Cda::EntryRelationship], annotations: {:multiple=>true, :class=>"Cda::EntryRelationship"}
   attribute :reference, Array[Cda::Reference], annotations: {:multiple=>true, :class=>"Cda::Reference"}
   attribute :precondition, Array[Cda::Precondition], annotations: {:multiple=>true, :class=>"Cda::Precondition"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::ActClassSupply, annotations: {:kind=>:attribute, :class=>"Cda::ActClassSupply"}
-  attribute :mood_code, Cda::XDocumentSubstanceMood, annotations: {:kind=>:attribute, :class=>"Cda::XDocumentSubstanceMood"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::ActClassSupply, annotations: {:use=>:required, :kind=>:attribute, :class=>"Cda::ActClassSupply"}
+  attribute :mood_code, Cda::XDocumentSubstanceMood, annotations: {:use=>:required, :kind=>:attribute, :class=>"Cda::XDocumentSubstanceMood"}
 end

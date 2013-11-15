@@ -82,9 +82,13 @@ module Gen
     end.merge(name: raw_name)
   end
 
+  def output_path
+    File.expand_path('../../lib/cda', __FILE__)
+  end
+
   def cleanup
-    `rm -r lib/cda`
-    `mkdir lib/cda`
+    FileUtils.rm_rf(output_path)
+    FileUtils.mkdir_p(output_path)
   end
 
   def inference(types)
@@ -118,7 +122,7 @@ module Gen
   end
 
   def generate_autoloads(entries)
-    fwrite('lib/cda/autoloads.rb', Codeg.gmodule('Cda', entries.join("\n")))
+    fwrite(File.join(output_path, 'autoloads.rb'), Codeg.gmodule('Cda', entries.join("\n")))
   end
 
   def attributes(xml, elemsdb, opts = {})
@@ -159,6 +163,7 @@ module Gen
         opts[:multiple] = true
         opts[:annotations] = { multiple: true }
       end
+      opts.deep_merge!(annotations: {use: el[:use].to_sym}) if el[:use]
     end
   end
 
@@ -173,7 +178,7 @@ module Gen
         Namings.mk_class_name(attr[:type]),
         meta_options(attr).deep_merge(annotations: { kind: :attribute })
       ]
-    elsif st = Meta.simple_type(attr)
+    elsif (st = Meta.simple_type(attr))
       # fappend 'attributes.xml', st.to_xml
       [
         attr[:name],

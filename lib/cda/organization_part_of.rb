@@ -7,6 +7,6 @@ class Cda::OrganizationPartOf < Cda::Base
   attribute :status_code, Cda::CS, annotations: {:class=>"Cda::CS"}
   attribute :effective_time, Cda::IVL_TS, annotations: {:class=>"Cda::IVL_TS"}
   attribute :whole_organization, Cda::Organization, annotations: {:class=>"Cda::Organization"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::RoleClass, annotations: {:kind=>:attribute, :class=>"Cda::RoleClass"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::RoleClass, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::RoleClass"}
 end

@@ -4,7 +4,7 @@ class Cda::DataEnterer < Cda::Base
   attribute :template_id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}
   attribute :time, Cda::TS, annotations: {:class=>"Cda::TS"}
   attribute :assigned_entity, Cda::AssignedEntity, annotations: {:class=>"Cda::AssignedEntity"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :type_code, Cda::ParticipationType, annotations: {:kind=>:attribute, :class=>"Cda::ParticipationType"}
-  attribute :context_control_code, Cda::ContextControl, annotations: {:kind=>:attribute, :class=>"Cda::ContextControl"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :type_code, Cda::ParticipationType, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ParticipationType"}
+  attribute :context_control_code, Cda::ContextControl, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ContextControl"}
 end

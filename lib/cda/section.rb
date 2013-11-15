@@ -14,7 +14,7 @@ class Cda::Section < Cda::Base
   attribute :entry, Array[Cda::Entry], annotations: {:multiple=>true, :class=>"Cda::Entry"}
   attribute :component, Array[Cda::Component5], annotations: {:multiple=>true, :class=>"Cda::Component5"}
   attribute :id, String, annotations: {:kind=>:attribute, :class=>"String"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::ActClass, annotations: {:kind=>:attribute, :class=>"Cda::ActClass"}
-  attribute :mood_code, Cda::ActMood, annotations: {:kind=>:attribute, :class=>"Cda::ActMood"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::ActClass, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ActClass"}
+  attribute :mood_code, Cda::ActMood, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ActMood"}
 end

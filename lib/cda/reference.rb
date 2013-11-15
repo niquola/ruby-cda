@@ -7,6 +7,6 @@ class Cda::Reference < Cda::Base
   attribute :external_observation, Cda::ExternalObservation, annotations: {:class=>"Cda::ExternalObservation"}
   attribute :external_procedure, Cda::ExternalProcedure, annotations: {:class=>"Cda::ExternalProcedure"}
   attribute :external_document, Cda::ExternalDocument, annotations: {:class=>"Cda::ExternalDocument"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :type_code, Cda::XActRelationshipExternalReference, annotations: {:kind=>:attribute, :class=>"Cda::XActRelationshipExternalReference"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :type_code, Cda::XActRelationshipExternalReference, annotations: {:use=>:required, :kind=>:attribute, :class=>"Cda::XActRelationshipExternalReference"}
 end

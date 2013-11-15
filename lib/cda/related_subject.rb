@@ -6,6 +6,6 @@ class Cda::RelatedSubject < Cda::Base
   attribute :addr, Array[Cda::AD], annotations: {:multiple=>true, :class=>"Cda::AD"}
   attribute :telecom, Array[Cda::TEL], annotations: {:multiple=>true, :class=>"Cda::TEL"}
   attribute :subject, Cda::SubjectPerson, annotations: {:class=>"Cda::SubjectPerson"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::XDocumentSubject, annotations: {:kind=>:attribute, :class=>"Cda::XDocumentSubject"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::XDocumentSubject, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::XDocumentSubject"}
 end

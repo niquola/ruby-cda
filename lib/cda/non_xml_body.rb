@@ -5,7 +5,7 @@ class Cda::NonXMLBody < Cda::Base
   attribute :text, Cda::ED, annotations: {:class=>"Cda::ED"}
   attribute :confidentiality_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :language_code, Cda::CS, annotations: {:class=>"Cda::CS"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::ActClass, annotations: {:kind=>:attribute, :class=>"Cda::ActClass"}
-  attribute :mood_code, Cda::ActMood, annotations: {:kind=>:attribute, :class=>"Cda::ActMood"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::ActClass, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ActClass"}
+  attribute :mood_code, Cda::ActMood, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ActMood"}
 end

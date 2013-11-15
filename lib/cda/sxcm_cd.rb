@@ -1,3 +1,3 @@
 class Cda::SXCM_CD < Cda::CD
-  attribute :operator, Cda::SetOperator, annotations: {:kind=>:attribute, :class=>"Cda::SetOperator"}
+  attribute :operator, Cda::SetOperator, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::SetOperator"}
 end

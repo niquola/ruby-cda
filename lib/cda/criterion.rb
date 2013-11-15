@@ -5,7 +5,7 @@ class Cda::Criterion < Cda::Base
   attribute :code, Cda::CD, annotations: {:class=>"Cda::CD"}
   attribute :text, Cda::ED, annotations: {:class=>"Cda::ED"}
   attribute :value, Object, annotations: {:class=>"Object"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::ActClassObservation, annotations: {:kind=>:attribute, :class=>"Cda::ActClassObservation"}
-  attribute :mood_code, Cda::ActMood, annotations: {:kind=>:attribute, :class=>"Cda::ActMood"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::ActClassObservation, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ActClassObservation"}
+  attribute :mood_code, Cda::ActMood, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ActMood"}
 end

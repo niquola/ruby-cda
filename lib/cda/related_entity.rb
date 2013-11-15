@@ -7,6 +7,6 @@ class Cda::RelatedEntity < Cda::Base
   attribute :telecom, Array[Cda::TEL], annotations: {:multiple=>true, :class=>"Cda::TEL"}
   attribute :effective_time, Cda::IVL_TS, annotations: {:class=>"Cda::IVL_TS"}
   attribute :related_person, Cda::Person, annotations: {:class=>"Cda::Person"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::RoleClassMutualRelationship, annotations: {:kind=>:attribute, :class=>"Cda::RoleClassMutualRelationship"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::RoleClassMutualRelationship, annotations: {:use=>:required, :kind=>:attribute, :class=>"Cda::RoleClassMutualRelationship"}
 end

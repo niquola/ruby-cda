@@ -11,7 +11,7 @@ class Cda::Entry < Cda::Base
   attribute :region_of_interest, Cda::RegionOfInterest, annotations: {:class=>"Cda::RegionOfInterest"}
   attribute :substance_administration, Cda::SubstanceAdministration, annotations: {:class=>"Cda::SubstanceAdministration"}
   attribute :supply, Cda::Supply, annotations: {:class=>"Cda::Supply"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :type_code, Cda::XActRelationshipEntry, annotations: {:kind=>:attribute, :class=>"Cda::XActRelationshipEntry"}
-  attribute :context_conduction_ind, Cda::Bl, annotations: {:kind=>:attribute, :class=>"Cda::Bl"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :type_code, Cda::XActRelationshipEntry, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::XActRelationshipEntry"}
+  attribute :context_conduction_ind, Cda::Bl, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::Bl"}
 end

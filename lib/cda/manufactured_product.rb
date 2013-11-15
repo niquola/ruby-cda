@@ -6,6 +6,6 @@ class Cda::ManufacturedProduct < Cda::Base
   attribute :manufactured_labeled_drug, Cda::LabeledDrug, annotations: {:class=>"Cda::LabeledDrug"}
   attribute :manufactured_material, Cda::Material, annotations: {:class=>"Cda::Material"}
   attribute :manufacturer_organization, Cda::Organization, annotations: {:class=>"Cda::Organization"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::RoleClassManufacturedProduct, annotations: {:kind=>:attribute, :class=>"Cda::RoleClassManufacturedProduct"}
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
+  attribute :class_code, Cda::RoleClassManufacturedProduct, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::RoleClassManufacturedProduct"}
 end
