@@ -46,7 +46,7 @@ module Gen
           indent + attribute
         end.join("\n")
       end
-      path = Pth.base_path('models', class_file_name(class_name))
+      path = Pth.models_path.join(class_file_name(class_name))
       fappend(path, plain_text)
     end
     autoload_entries = definitions.reduce([]) do |accumulator, definition|
@@ -85,13 +85,10 @@ module Gen
     end.merge(name: raw_name)
   end
 
-  def output_path
-    File.expand_path('../../lib/cda', __FILE__)
-  end
-
   def cleanup
-    FileUtils.rm_rf(output_path)
-    FileUtils.mkdir_p(output_path)
+    FileUtils.rm_f(Pth.autoloads_file_path)
+    FileUtils.rm_rf(Pth.models_path)
+    FileUtils.mkdir_p(Pth.models_path)
   end
 
   def inference(types)
@@ -121,11 +118,11 @@ module Gen
   def register_class(name, accumulator)
     name = Namings.mk_class_name(name)
     file_name = class_file_name(name)
-    accumulator << "autoload :#{name}, 'cda/models/#{file_name}'"
+    accumulator << "autoload :#{name}, '#{Pth.to_relative(Pth.models_path.join(file_name))}'"
   end
 
   def generate_autoloads(entries)
-    fwrite(File.join(output_path, 'autoloads.rb'), Codeg.gmodule('Cda', entries.join("\n")))
+    fwrite(Pth.autoloads_file_path, Codeg.gmodule('Cda', entries.join("\n")))
   end
 
   def attributes(xml, elemsdb, opts = {})
