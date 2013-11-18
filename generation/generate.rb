@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require 'fileutils'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 

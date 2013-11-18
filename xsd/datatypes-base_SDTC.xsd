@@ -33,7 +33,7 @@
   -->
 <xs:schema xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:sdtc="urn:hl7-org:sdtc" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 <!--  <xs:include schemaLocation="../../infrastructure/cda/SDTC.xsd" />-->
-  <xs:import namespace="urn:hl7-org:sdtc" schemaLocation="../../infrastructure/cda/SDTC.xsd" />
+  <xs:import namespace="urn:hl7-org:sdtc" schemaLocation="SDTC.xsd" />
   <xs:annotation>
     
    <xs:documentation>Manually edited to add SDTC Schema Extensions, July 2012</xs:documentation>

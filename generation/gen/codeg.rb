@@ -2,8 +2,8 @@ module Gen
   module Codeg
     def gklass(name, opts = {})
       module_name = opts[:module]
-      ancestor    = opts[:ancestor]
-      body        = opts[:body]
+      ancestor = opts[:ancestor]
+      body = opts[:body]
 
       content = []
       content << "class #{name}"
@@ -17,7 +17,7 @@ module Gen
       content << 'end'
       if module_name.present?
         content = content.map { |row| indent(row, 2) }
-        content.unshift( "module #{module_name}")
+        content.unshift("module #{module_name}")
         content.push('end')
       end
       content.join("\n").split("\n").map { |s| s.rstrip }.join("\n")
@@ -29,9 +29,9 @@ module Gen
 
     def gmodule(name, body)
       content = []
-      content  << "module #{name}"
-      content  << indent(body, 2)
-      content  << 'end'
+      content << "module #{name}"
+      content << indent(body, 2)
+      content << 'end'
       content.join("\n")
     end
 
@@ -44,11 +44,14 @@ module Gen
     end
 
     def generate_attribute(aname, type, opts)
+      if type == 'ANY'
+        type = 'Object'
+      end
       unless type.start_with?('Array')
         type = to_prefix_type(type)
       end
 
-      opts.deep_merge! annotations: { class: type }
+      opts.deep_merge! annotations: {class: type}
 
       if opts.delete :multiple
         type = "Array[#{type}]"
@@ -56,13 +59,13 @@ module Gen
 
       res = []
       comment = opts.delete(:comment)
-      res << "# #{comment.gsub(/\s+$/,'')}" if comment.present?
+      res << "# #{comment.gsub(/\s+$/, '')}" if comment.present?
 
       attr = [
-              "attribute :#{Namings.normalize_name(aname)}",
-              type,
-              hash_to_str(opts).presence
-             ]
+        "attribute :#{Namings.normalize_name(aname)}",
+        type,
+        hash_to_str(opts).presence
+      ]
       res << attr.compact.join(', ')
       res.join("\n")
     end
@@ -71,13 +74,14 @@ module Gen
 
     def indent(str, size)
       str.split("\n")
-      .map { |s| (' ' * size) + s}
+      .map { |s| (' ' * size) + s }
       .join("\n")
     end
 
     def hash_to_str(hash)
-      hash.map { |k,v| "#{k}: #{v.inspect}" }.join(', ')
+      hash.map { |k, v| "#{k}: #{v.inspect}" }.join(', ')
     end
+
     extend self
   end
 end
