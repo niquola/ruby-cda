@@ -15,7 +15,7 @@ describe Gen do
     File.should_not exist("#{output_path}/integer.rb")
   end
 
-  it 'should generat at least Act and Section' do
+  it 'should generate at least Act and Section' do
     expect do
       Dir["#{output_path}/**/*rb"].each do |file|
         next if file =~ /autoloads/

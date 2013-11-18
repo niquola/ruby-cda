@@ -14,6 +14,8 @@ module Gen
     db = Db.full_db
     definitions = db[:types].map do |raw_name, xml|
       define_class(raw_name, xml, db[:elements], all_types: db[:types])
+    end.reject do |definition|
+      Types.type_mapped?(definition[:name])
     end.sort_by do |node|
       case node[:type]
       when :simple  then 0
@@ -23,7 +25,6 @@ module Gen
     end
     # fwrite 'types.txt', db[:types].keys.sort_by(&:upcase).join("\n")
     definitions.each do |definition|
-      next if Types.type_mapped?(definition[:name])
       class_name = Namings.mk_class_name(definition[:name])
       full_class_name = 'Cda::' + class_name
       ancestor = if definition[:ancestor].present?
@@ -45,7 +46,7 @@ module Gen
           indent + attribute
         end.join("\n")
       end
-      path = Pth.base_path(class_file_name(class_name))
+      path = Pth.base_path('models', class_file_name(class_name))
       fappend(path, plain_text)
     end
     autoload_entries = definitions.reduce([]) do |accumulator, definition|
@@ -120,7 +121,7 @@ module Gen
   def register_class(name, accumulator)
     name = Namings.mk_class_name(name)
     file_name = class_file_name(name)
-    accumulator << "autoload :#{name}, 'cda/#{file_name}'"
+    accumulator << "autoload :#{name}, 'cda/models/#{file_name}'"
   end
 
   def generate_autoloads(entries)
