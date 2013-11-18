@@ -61,7 +61,7 @@ module Gen
       {
         ancestor: ancestor,
         type: :complex,
-        attributes: attributes(xml, elemsdb)
+        attributes: attributes(raw_name, xml, elemsdb)
       }
     elsif xml.name == 'simpleType'
       case
@@ -125,7 +125,7 @@ module Gen
     fwrite(Pth.autoloads_file_path, Codeg.gmodule('Cda', entries.join("\n")))
   end
 
-  def attributes(xml, elemsdb, opts = {})
+  def attributes(raw_name, xml, elemsdb, opts = {})
     elements = Meta.elements(xml).map { |el|
       if ref = Meta.ref(el)
         process_reference(ref, elemsdb)
@@ -135,11 +135,16 @@ module Gen
     }
 
     attributes = Meta.attributes(xml).map { |attr| process_attribute(attr) }
+    elements = merge_elements(elements)
     attributes << text_attribute if Meta.mixed?(xml)
 
     (elements + attributes).compact.map do |a|
       Codeg.generate_attribute(*a)
     end
+  end
+
+  def merge_elements(els)
+    els.reverse.uniq { |el| el.first }.reverse
   end
 
   def text_attribute

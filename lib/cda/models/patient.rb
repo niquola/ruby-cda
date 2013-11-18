@@ -9,7 +9,6 @@ class Cda::Patient < Cda::Base
   attribute :marital_status_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :religious_affiliation_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :race_code, Cda::CE, annotations: {:class=>"Cda::CE"}
-  attribute :race_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :ethnic_group_code, Cda::CE, annotations: {:class=>"Cda::CE"}
   attribute :guardian, Array[Cda::Guardian], annotations: {:multiple=>true, :class=>"Cda::Guardian"}
   attribute :birthplace, Cda::Birthplace, annotations: {:class=>"Cda::Birthplace"}
