@@ -1,4 +1,4 @@
 class Cda::AdxpPostalCode < Cda::ADXP
-  attribute :part_type, Cda::AddressPartType, annotations: {:kind=>:attribute, :class=>"Cda::AddressPartType"}
-  attribute :_text, String, annotations: {:class=>"String"}
+  attribute :part_type, Cda::AddressPartType, annotations: {:kind=>:attribute}
+  attribute :_text, String
 end

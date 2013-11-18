@@ -24,7 +24,7 @@ module Gen
     end
 
     def stdlib_type?(type)
-      Object.constants.include?(type.try :to_sym)
+      Object.constants.include?(type.try :to_sym) || type == 'Boolean'
     end
 
     def gmodule(name, body)
@@ -50,8 +50,6 @@ module Gen
       unless type.start_with?('Array')
         type = to_prefix_type(type)
       end
-
-      opts.deep_merge! annotations: {class: type}
 
       if opts.delete :multiple
         type = "Array[#{type}]"

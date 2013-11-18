@@ -1,11 +1,11 @@
 class Cda::Author < Cda::Base
-  attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}
-  attribute :type_id, Cda::InfrastructureRootTypeId, annotations: {:class=>"Cda::InfrastructureRootTypeId"}
-  attribute :template_id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}
-  attribute :function_code, Cda::CE, annotations: {:class=>"Cda::CE"}
-  attribute :time, Cda::TS, annotations: {:class=>"Cda::TS"}
-  attribute :assigned_author, Cda::AssignedAuthor, annotations: {:class=>"Cda::AssignedAuthor"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :type_code, Cda::ParticipationType, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ParticipationType"}
-  attribute :context_control_code, Cda::ContextControl, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::ContextControl"}
+  attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true}
+  attribute :type_id, Cda::InfrastructureRootTypeId
+  attribute :template_id, Array[Cda::II], annotations: {:multiple=>true}
+  attribute :function_code, Cda::CE
+  attribute :time, Cda::TS
+  attribute :assigned_author, Cda::AssignedAuthor
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute}
+  attribute :type_code, Cda::ParticipationType, annotations: {:use=>:optional, :kind=>:attribute}
+  attribute :context_control_code, Cda::ContextControl, annotations: {:use=>:optional, :kind=>:attribute}
 end

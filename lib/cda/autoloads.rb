@@ -89,8 +89,6 @@ module Cda
   autoload :Bin, 'cda/models/bin.rb'
   autoload :BinaryDataEncoding, 'cda/models/binary_data_encoding.rb'
   autoload :Birthplace, 'cda/models/birthplace.rb'
-  autoload :Bl, 'cda/models/bl.rb'
-  autoload :Bn, 'cda/models/bn.rb'
   autoload :BuildingNumber, 'cda/models/building_number.rb'
   autoload :CD, 'cda/models/cd.rb'
   autoload :CE, 'cda/models/ce.rb'

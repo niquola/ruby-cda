@@ -1,11 +1,11 @@
 class Cda::HealthCareFacility < Cda::Base
-  attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true, :class=>"Cda::CS"}
-  attribute :type_id, Cda::InfrastructureRootTypeId, annotations: {:class=>"Cda::InfrastructureRootTypeId"}
-  attribute :template_id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}
-  attribute :id, Array[Cda::II], annotations: {:multiple=>true, :class=>"Cda::II"}
-  attribute :code, Cda::CE, annotations: {:class=>"Cda::CE"}
-  attribute :location, Cda::Place, annotations: {:class=>"Cda::Place"}
-  attribute :service_provider_organization, Cda::Organization, annotations: {:class=>"Cda::Organization"}
-  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::NullFlavor"}
-  attribute :class_code, Cda::RoleClassServiceDeliveryLocation, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::RoleClassServiceDeliveryLocation"}
+  attribute :realm_code, Array[Cda::CS], annotations: {:multiple=>true}
+  attribute :type_id, Cda::InfrastructureRootTypeId
+  attribute :template_id, Array[Cda::II], annotations: {:multiple=>true}
+  attribute :id, Array[Cda::II], annotations: {:multiple=>true}
+  attribute :code, Cda::CE
+  attribute :location, Cda::Place
+  attribute :service_provider_organization, Cda::Organization
+  attribute :null_flavor, Cda::NullFlavor, annotations: {:use=>:optional, :kind=>:attribute}
+  attribute :class_code, Cda::RoleClassServiceDeliveryLocation, annotations: {:use=>:optional, :kind=>:attribute}
 end

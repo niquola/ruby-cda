@@ -149,7 +149,10 @@ module Ccd
     end
 
     def attribute_class(context, attribute)
-      annotations(context, attribute)[:class].constantize
+      attribute_decl = context.attribute_set[attribute.to_sym]
+
+      type = attribute_decl.respond_to?(:member_type) ? attribute_decl.member_type : attribute_decl.type
+      type.primitive
     end
 
     def collection?(context, attribute)

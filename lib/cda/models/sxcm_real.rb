@@ -1,3 +1,3 @@
 class Cda::SXCM_REAL < Cda::REAL
-  attribute :operator, Cda::SetOperator, annotations: {:use=>:optional, :kind=>:attribute, :class=>"Cda::SetOperator"}
+  attribute :operator, Cda::SetOperator, annotations: {:use=>:optional, :kind=>:attribute}
 end
