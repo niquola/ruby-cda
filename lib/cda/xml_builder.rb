@@ -144,7 +144,7 @@ class Cda::XmlBuilder
         'IVL_PQ'
       when Cda::RTO
         'RTO'
-      when Cda::Timestamp
+      when Cda::TS
         'TS'
       else
         if instance.respond_to?(:type)
