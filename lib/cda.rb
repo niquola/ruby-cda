@@ -3,14 +3,26 @@ require 'active_support/core_ext/string'
 require 'active_support/core_ext/object'
 
 module Cda
+  extend self
+
   autoload :XmlBuilder, "cda/xml_builder"
   autoload :XmlParser, "cda/xml_parser"
   autoload :TemplatesRegistry, "cda/templates_registry"
   autoload :RSpec, "cda/rspec"
   autoload :MetaInfo, "cda/meta_info"
+  autoload :StrictAttributes, 'cda/strict_attributes'
+  autoload :Utility, 'cda/utility'
 
   class Base
     include Virtus.model
+    include StrictAttributes
+
+    def self.build(attrs = {}, &_)
+      new(Utility.mk_class(attrs.with_indifferent_access)).tap do |object|
+        yield(object) if block_given?
+        #validate!(object)
+      end
+    end
 
     def ==(other)
       self.class == other.class && self.serialize == other.serialize

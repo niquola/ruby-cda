@@ -22,7 +22,7 @@ describe Ccd do
   end
 
   context 'merge' do
-    let(:converter) { Ccd::Dsl::Utility }
+    let(:converter) { Cda::Utility }
     context '.object_to_hash' do
       example do
         converter.object_to_hash([a: { b: 1 }]).should == { 0 => { a: { b: 1 } } }
