@@ -7,15 +7,13 @@ describe Cda::XmlBuilder do
   include Cda::RSpec::ValidationRules
 
   let(:builder) {
-    builder = Cda::XmlBuilder.new(test_model)
+    builder = Cda::XmlBuilder.new(test_model, 'test-model')
     builder.xml = Nokogiri::XML::Builder.new
     builder
   }
 
   let(:document) {
-    builder.build_document.tap do |doc|
-      doc.remove_namespaces!
-    end
+    builder.build_document.tap(&:remove_namespaces!)
   }
 
   it 'should build xml' do

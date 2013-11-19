@@ -1,5 +1,5 @@
 class Cda::XmlBuilder
-  attr_reader :model
+  attr_reader :model, :template_type
   attr_accessor :xml
 
   module Helpers
@@ -25,12 +25,12 @@ class Cda::XmlBuilder
 
     def determine_format(value)
       case value
-      when Time, DateTime
-        :datetime
-      when Date
-        :date
-      else
-        nil
+        when Time, DateTime
+          :datetime
+        when Date
+          :date
+        else
+          nil
       end
     end
 
@@ -45,23 +45,23 @@ class Cda::XmlBuilder
 
   include Helpers
 
-  def initialize(model)
+  def initialize(model, template_type)
     @model = model
+    @template_type = template_type
   end
 
   def build
-    fail "#{model.class.name} doesn't have any template_type!" if model.template_type.nil?
-    build_instance_element(model.template_type, model)
+    build_instance_element(template_type, model)
   end
 
   def build_document
     self.xml = Nokogiri::XML::Builder.new
     xml.ClinicalDocument(
-                         'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
-                         'xsi:schemaLocation' => "urn:hl7-org:v3 http://xreg2.nist.gov:8080/hitspValidation/schema/cdar2c32/infrastructure/cda/C32_CDA.xsd",
-                         'xmlns' => "urn:hl7-org:v3",
-                         'xmlns:mif' => "urn:hl7-org:v3/mif"
-                         ) do |_|
+      'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
+      'xsi:schemaLocation' => "urn:hl7-org:v3 http://xreg2.nist.gov:8080/hitspValidation/schema/cdar2c32/infrastructure/cda/C32_CDA.xsd",
+      'xmlns' => "urn:hl7-org:v3",
+      'xmlns:mif' => "urn:hl7-org:v3/mif"
+    ) do |_|
       build
     end
     xml.doc
