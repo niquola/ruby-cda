@@ -130,8 +130,14 @@ class Cda::XmlBuilder
 
   def get_additional_options(model, element)
     options = {}
-    options['xsi:type'] = detect_xsi_type(model) if model.class < element.model_class
+    if !templated?(model) && model.class < element.model_class
+      options['xsi:type'] = detect_xsi_type(model)
+    end
     options
+  end
+
+  def templated?(model)
+    model.respond_to?(:template_id)
   end
 
   def detect_xsi_type(instance)
