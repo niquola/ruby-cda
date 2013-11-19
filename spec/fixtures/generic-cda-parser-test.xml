@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<test-model attr="Attr value">
+  <templateId root="test-template-id"/>
+  <content>Some content</content>
+  <contentWrapper attr="wrapper attr">
+    <wrappedContent>Some wrapped content</wrappedContent>
+  </contentWrapper>
+  <entry>
+    <templateId root="test-entry-template-id"/>
+    <foo>Foo 1</foo>
+  </entry>
+  <entry>
+    <templateId root="test-entry-template-id"/>
+    <foo>Foo 2</foo>
+  </entry>
+  <entryWrapper>
+    <entry>
+      <templateId root="test-entry-template-id"/>
+      <foo>Bar 1</foo>
+    </entry>
+  </entryWrapper>
+  <entryWrapper>
+    <entry>
+      <templateId root="test-entry-template-id"/>
+      <foo>Bar 2</foo>
+    </entry>
+  </entryWrapper>
+</test-model>

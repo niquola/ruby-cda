@@ -4,9 +4,18 @@ require 'support/test_entities'
 describe Cda::XmlParser do
   include Cda::TestEntities
 
-  let(:test_document) { 'generic-cda-parser-test.xml' }
-  cda_xpath('test-model')
-  subject { described_class.new(node, registry) }
+  let(:xml_content) {
+    filename = File.join(File.dirname(__FILE__), '..', 'fixtures', "generic-cda-parser-test.xml")
+    File.read(filename)
+  }
+
+  let(:root_node) do
+    document = Nokogiri::XML.parse(xml_content)
+    document.remove_namespaces!
+    document.xpath('test-model')
+  end
+
+  subject { described_class.new(root_node, registry) }
 
   it 'should parse document' do
     instance = subject.parse
