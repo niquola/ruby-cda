@@ -1,6 +1,14 @@
 require 'cda/autoloads'
+require 'active_support/core_ext/string'
+require 'active_support/core_ext/object'
 
 module Cda
+  autoload :XmlBuilder, "cda/xml_builder"
+  autoload :XmlParser, "cda/xml_parser"
+  autoload :TemplatesRegistry, "cda/templates_registry"
+  autoload :RSpec, "cda/rspec"
+  autoload :MetaInfo, "cda/meta_info"
+
   class Base
     include Virtus.model
 

@@ -2,7 +2,8 @@ PATH
   remote: .
   specs:
     ruby-cda (0.0.1)
-      activesupport
+      activesupport (>= 3.2)
+      i18n (>= 0.6)
       nokogiri
       virtus
 
