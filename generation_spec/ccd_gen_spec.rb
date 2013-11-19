@@ -13,9 +13,12 @@ describe CcdGen do
     require 'ccd'
   end
 
-  example do
-    glob = "#{File.dirname(__FILE__)}/../lib/ccd/models/*.rb"
-    Dir[glob].each { |f| require f }
+  it 'should generate valid ruby files' do
+    ccd_dir = Pathname.new(__FILE__).dirname.join('..', 'lib', 'ccd')
+    Dir[
+      ccd_dir.join('models', '*.rb'),
+      ccd_dir.join('{autoload,registry}.rb')
+    ].each { |f| require f }
   end
 
   example do

@@ -23,7 +23,7 @@ class Cda::XmlParser
     node = xpath_or_node.is_a?(String) ? xml.xpath(xpath_or_node) : xpath_or_node
     node = node.xpath(xpath) if xpath
     saved_node, @xml = @xml, node
-    yield
+    yield if @xml.present?
   ensure
     @xml = saved_node
   end
@@ -41,20 +41,20 @@ class Cda::XmlParser
     end
 
     case opts[:as]
-    when :numeric
-      parse_numeric(node)
-    when :boolean
-      parse_boolean(node)
-    when :datetime, :date
-      parse_time(node)
-    when :coded_value
-      parse_coded_value(node)
-    when :time_interval
-      parse_time_interval(node)
-    when :value_with_unit
-      parse_value_with_unit(node)
-    else
-      node.text if node.present?
+      when :numeric
+        parse_numeric(node)
+      when :boolean
+        parse_boolean(node)
+      when :datetime, :date
+        parse_time(node)
+      when :coded_value
+        parse_coded_value(node)
+      when :time_interval
+        parse_time_interval(node)
+      when :value_with_unit
+        parse_value_with_unit(node)
+      else
+        node.text if node.present?
     end
   end
 
@@ -95,6 +95,8 @@ class Cda::XmlParser
   def parse_value(element)
     if element.complex?
       instantiate_from_element(resolve_class || element.model_class)
+    elsif (type = value_of('@type'))
+      instantiate_from_element("Cda::#{type}".constantize)
     else
       value_of('text()')
     end

@@ -20,15 +20,18 @@ module CcdGen
     `mkdir -p #{prefix}`
 
     autoload_entries = []
+    registry_entries = []
     templates.each do |template|
       class_name = class_name(template)
       class_file_name = File.join("#{prefix}/", Gen::Namings.mk_class_fname(class_name))
       class_body = mk_class(template, File.basename(class_file_name))
       fwrite(class_file_name, class_body)
       autoload_entries << "autoload :#{class_name}, '#{class_file_name.sub(/^lib\//, '')}'"
+      registry_entries << "add('#{template['oid']}', Ccd::#{class_name})"
     end
 
     fwrite('lib/ccd/autoloads.rb', Gen::Codeg.gmodule('Ccd', autoload_entries.sort.join("\n")))
+    fwrite('lib/ccd/_registry.rb', registry_entries.join("\n"))
   end
 
   def mk_class(template, filename)
