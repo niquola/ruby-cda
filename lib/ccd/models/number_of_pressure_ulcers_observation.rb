@@ -17,13 +17,10 @@ module Ccd
     constraint 'id', {:cardinality=>"1..*"}
 
     # SHALL contain exactly one [1..1] code (CONF:14767).
-    constraint 'code', {:cardinality=>"1..1"}
-
-    # This code SHALL contain exactly one [1..1] @code="2264892003" number of pressure ulcers (CONF:14768).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"2264892003", :display_name=>"number of pressure ulcers"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"2264892003", :display_name=>"number of pressure ulcers"}}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:14714).
-    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
+    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14"}}
 
     # SHALL contain exactly one [1..1] effectiveTime (CONF:14715).
     constraint 'effective_time', {:cardinality=>"1..1"}

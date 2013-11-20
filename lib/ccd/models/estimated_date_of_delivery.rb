@@ -14,16 +14,13 @@ module Ccd
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.15.3.1"}
 
     # SHALL contain exactly one [1..1] code (CONF:19139).
-    constraint 'code', {:cardinality=>"1..1"}
-
-    # This code SHALL contain exactly one [1..1] @code="11778-8" Estimated date of delivery (CONF:19140).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"11778-8", :display_name=>"Estimated date of delivery"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"11778-8", :display_name=>"Estimated date of delivery"}}
 
     # This code SHALL contain exactly one [1..1] @codeSystem="2.16.840.1.113883.6.1" (CodeSystem: LOINC 2.16.840.1.113883.6.1) (CONF:26503).
-    constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"2.16.840.1.113883.6.1", :display_name=>"", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
+    constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"2.16.840.1.113883.6.1", :display_name=>"", :code_system=>"2.16.840.1.113883.6.1"}}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:448).
-    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
+    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14"}}
 
     # SHALL contain exactly one [1..1] value with @xsi:type="TS" (CONF:450).
     constraint 'value', {:cardinality=>"1..1"}

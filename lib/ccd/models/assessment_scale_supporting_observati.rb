@@ -23,7 +23,7 @@ module Ccd
     constraint 'code.code', {:cardinality=>"1..1"}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:16720).
-    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
+    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14"}}
 
     # SHALL contain at least one [1..*] value (CONF:16754).
     constraint 'value', {:cardinality=>"1..*"}

@@ -21,7 +21,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1"}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:8902).
-    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
+    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14"}}
 
     # This performer represents the Payer.
     # SHALL contain exactly one [1..1] performer (CONF:8906) such that it

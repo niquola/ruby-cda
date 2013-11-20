@@ -54,8 +54,8 @@ describe CcdGen do
   end
 
   example do
-    Ccd::ResultObservation.should have_constraint("class_code").with_value('OBS')
-    Ccd::ResultObservation.should have_constraint("mood_code").with_value('EVN')
+    Ccd::ResultObservation.should have_constraint('class_code').with_value('OBS')
+    Ccd::ResultObservation.should have_constraint('mood_code').with_value('EVN')
   end
 
   example do
@@ -65,12 +65,14 @@ describe CcdGen do
   end
 
   example do
-    Ccd::ResultsSectionEntriesOptional.should have_constraint('code').with_value(:code=>"30954-2", :display_name=>"Relevant diagnostic tests and/or laboratory data", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV")
+    Ccd::ResultsSectionEntriesOptional.should
+    have_constraint('code').with_value(code: '30954-2', display_name: 'Relevant diagnostic tests and/or laboratory data',
+                                       code_system: '2.16.840.1.113883.6.1')
   end
 
-  example do
+  example 'constraint for any value with default as coded value' do
     md = Ccd::MedicationUseNoneKnownDeprecated.new
-    md.value.should == [Cda::CV.new(:code=>"182904002", :display_name=>"Drug treatment unknown", :code_system=>"2.16.840.1.113883.6.96")]
+    md.value.should == [Cda::CD.new(:code=>"182904002", :display_name=>"Drug treatment unknown", :code_system=>"2.16.840.1.113883.6.96")]
   end
 
   example do

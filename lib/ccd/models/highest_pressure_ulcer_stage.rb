@@ -17,7 +17,7 @@ module Ccd
     constraint 'id', {:cardinality=>"1..*"}
 
     # SHALL contain exactly one [1..1] code (CONF:14731).
-    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"420905001", :display_name=>"Highest Pressure Ulcer Stage", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"420905001", :display_name=>"Highest Pressure Ulcer Stage", :code_system=>"2.16.840.1.113883.6.96"}}
 
     # SHALL contain exactly one [1..1] value (CONF:14733).
     constraint 'value', {:cardinality=>"1..1"}

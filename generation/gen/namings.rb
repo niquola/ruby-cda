@@ -4,8 +4,7 @@ module Gen::Namings
     name = name.sub(/^x_/, 'X')
 
     if Gen::Types.type_mapped?(name)
-      t = Gen::Types.map_type(name)
-      t
+      Gen::Types.map_type(name)
     else
       return name if name == name.upcase
 

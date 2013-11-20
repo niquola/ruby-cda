@@ -369,7 +369,6 @@ module Cda
   autoload :URL, 'cda/models/url.rb'
   autoload :URLScheme, 'cda/models/url_scheme.rb'
   autoload :UVP_TS, 'cda/models/uvp_ts.rb'
-  autoload :Uid, 'cda/models/uid.rb'
   autoload :Unknown, 'cda/models/unknown.rb'
   autoload :Url, 'cda/models/url.rb'
   autoload :Uuid, 'cda/models/uuid.rb'

@@ -8,7 +8,7 @@ module Ccd
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.22.2.10"}
 
     # SHALL contain exactly one [1..1] code (CONF:14749).
-    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"18776-5", :display_name=>"Plan of Care", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"18776-5", :display_name=>"Plan of Care", :code_system=>"2.16.840.1.113883.6.1"}}
 
     # SHALL contain exactly one [1..1] title (CONF:16986).
     constraint 'title', {:cardinality=>"1..1"}

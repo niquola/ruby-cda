@@ -8,10 +8,7 @@ module Ccd
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.2.5"}
 
     # SHALL contain exactly one [1..1] code (CONF:15472).
-    constraint 'code', {:cardinality=>"1..1"}
-
-    # This code SHALL contain exactly one [1..1] @code="10210-3" General Status (CONF:15473).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"10210-3", :display_name=>"General Status"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"10210-3", :display_name=>"General Status"}}
 
     # This code SHALL contain exactly one [1..1] @codeSystem (CONF:26477).
     constraint 'code.code_system', {:cardinality=>"1..1"}

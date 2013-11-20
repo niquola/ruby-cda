@@ -14,13 +14,10 @@ module Ccd
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.22.4.64"}
 
     # SHALL contain exactly one [1..1] code (CONF:9428).
-    constraint 'code', {:cardinality=>"1..1"}
-
-    # This code SHALL contain exactly one [1..1] @code="48767-8" Annotation Comment (CONF:19159).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"48767-8", :display_name=>"Annotation Comment"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"48767-8", :display_name=>"Annotation Comment"}}
 
     # This code SHALL contain exactly one [1..1] @codeSystem="2.16.840.1.113883.6.1" (CodeSystem: LOINC 2.16.840.1.113883.6.1) (CONF:26501).
-    constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"2.16.840.1.113883.6.1", :display_name=>"", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
+    constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"2.16.840.1.113883.6.1", :display_name=>"", :code_system=>"2.16.840.1.113883.6.1"}}
 
     # SHALL contain exactly one [1..1] text (CONF:9430).
     constraint 'text', {:cardinality=>"1..1"}

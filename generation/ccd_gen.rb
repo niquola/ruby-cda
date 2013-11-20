@@ -1,11 +1,17 @@
+$LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
+
 require 'nokogiri'
 require 'cgi'
 require 'yaml'
 require 'set'
 require_relative 'cda_gen'
+require 'cda'
 
 module CcdGen
   extend self
+
+  Context = Struct.new(:class_name, :owning_class, :parent_path)
+
   def templates
     doc.xpath("//Template")
   end
@@ -37,7 +43,8 @@ module CcdGen
   def mk_class(template, filename)
     ancestor = '::Cda::' + Gen::Namings.mk_class_name(template[:contextType])
     include_dsl = "extend ::Ccd::Dsl"
-    attributes = mk_constraints(class_name(template), template.xpath('./Constraint'))
+    context = Context.new(class_name(template), ancestor.constantize, [])
+    attributes = mk_constraints(context, template.xpath('./Constraint'))
     extension = "Ccd.load_extension('#{filename}')"
     body = [include_dsl, attributes, extension].join("\n")
 
@@ -51,70 +58,112 @@ module CcdGen
     Gen::Namings.mk_ccd_class_name(template[:bookmark])
   end
 
-  def mk_constraints(class_name, constraints)
-    constraints
-      .map { |c| mk_constraint(class_name, c) }.flatten.join("\n")
+  def mk_constraints(context, constraints)
+    constraints.map { |c| mk_constraint(context, c) }.flatten.join("\n")
   end
 
-  def mk_constraint(class_name, constraint)
-    def_constraint(class_name, constraint).map do |definition|
+  def mk_constraint(context, constraint)
+    def_constraint(context, constraint).map do |definition|
       definition[:comments].map { |c| "# #{c}" } +
         ["constraint '#{definition[:name]}', #{definition[:params].inspect}\n"]
     end
   end
 
-  def def_constraint(class_name, constraint, name = nil)
-    name = [name, name(constraint)].compact.join('.')
-    old_name = name
+  def def_constraint(context, constraint)
+    return [] unless constraint_useful?(constraint)
+
+    attribute_name = name(constraint)
+    #puts "[#{constraint[:number]}] #{context.owning_class.name}.#{attribute_name}"
+    path = attribute_name ? context.parent_path + attribute_name.split('.') : context.parent_path
+    name = path.join('.')
     comments = comments(constraint)
     params = {}
 
-    if card = constraint[:cardinality]
+    if (card = constraint[:cardinality])
       params.merge! cardinality: card
     end
 
-    if value = value(constraint)
+    declared_attribute_class = get_attribute_class(context.owning_class, path - context.parent_path)
+    attribute_class = match_class(constraint, declared_attribute_class)
+    #puts "#{declared_attribute_class.name} => #{attribute_class.name}"
+    if (value = value(constraint))
+      value.merge!(_type: attribute_class.name) if attribute_class != declared_attribute_class
       params.merge! value: value
-      name = patch_name(class_name, name)
+      name = patch_name(context.class_name, name)
     end
 
-    unless constraint_useful?(constraint)
-      []
-    else
-      acc = [{
-          name: name,
-          params: params,
-          comments: comments,
-        }]
+    acc = [{
+             name: name,
+             params: params,
+             comments: comments,
+           }]
 
-      constraint.xpath('./Constraint').reduce(acc) do |acc, c|
-        child_constraints = def_constraint(class_name, c, old_name)
+    constraint_context = Context.new(context.class_name, attribute_class, path)
+    constraint.xpath('./Constraint').reduce(acc) do |acc, c|
+      child_constraints = def_constraint(constraint_context, c)
 
-        typed_constraints = child_constraints.select do |c|
-          p = c[:params][:value]
-          p.is_a?(Hash) && p.key?(:_type) && c[:name].ends_with?(".code")
-        end
-
-        if typed_constraints.size > 1
-          raise "I'm expecting one typed constraint, but got #{typed_constraints.size}:\n#{typed_constraints.inspect}"
-        end
-
-        if typed_constraints.first
-          tc = typed_constraints.first
-          child_constraints.delete(tc)
-
-          acc.first[:params][:value] = tc[:params][:value]
-        end
-
-        acc.concat child_constraints
+      typed_constraints = child_constraints.select do |c|
+        p = c[:params][:value]
+        p.is_a?(Hash) && c[:name].ends_with?('.code') && attribute_class <= Cda::CD
       end
 
-      acc.compact
+      if typed_constraints.size > 1
+        raise "I'm expecting one typed constraint, but got #{typed_constraints.size}:\n#{typed_constraints.inspect}"
+      end
+
+      if typed_constraints.first
+        tc = typed_constraints.first
+        child_constraints.delete(tc)
+
+        acc.first[:params][:value] = tc[:params][:value]
+      end
+
+      acc.concat child_constraints
     end
+
+    acc.compact
+  end
+
+  TYPE_MATCHING_PATTERNS = [
+    [Cda::IVL_TS, has_constraints_on: %w(low high)],
+    [Cda::CD, by_xpath: 'SingleValueCode/@code'],
+  ].freeze
+
+  def match_class(constraint, declared_class)
+    if (data_type = constraint[:dataType])
+      return String if data_type == 'UID'
+      return "Cda::#{Gen::Namings.mk_class_name(data_type)}".constantize
+    end
+    matching_pattern = TYPE_MATCHING_PATTERNS.find do |cls, pattern|
+      match_by(constraint, pattern.merge(from: declared_class, to: cls))
+    end
+    return matching_pattern[0] if matching_pattern
+    declared_class
+  end
+
+  def match_by(constraint, opts)
+    from_class = opts[:from]
+    to_class = opts[:to]
+    required_constraints = opts[:has_constraints_on]
+    xpath = opts[:by_xpath]
+    return nil unless to_class < from_class
+    constraint_names = constraint.xpath('./Constraint').map { |c| name(c) }
+    return nil if required_constraints && !(required_constraints - constraint_names).empty?
+    return nil if xpath && constraint.xpath(xpath).empty?
+    to_class
+  end
+
+  def get_attribute_class(owning_class, attribute_path)
+    return owning_class if attribute_path.empty?
+    attribute_name = attribute_path[0]
+    attribute = owning_class.attribute_set[attribute_name.to_sym]
+    type = attribute.respond_to?(:member_type) ? attribute.member_type : attribute.type
+    get_attribute_class(type.primitive, attribute_path[1..-1])
   end
 
   IGNORED_CONSTRAINTS = [
-    9431, 7589, 10494 # duplicated constraints
+    9431, 7589, 10494, # duplicated constraints
+    9368 # constraints on non-existing attributes
   ]
 
   def constraint_useful?(constraint)
@@ -140,7 +189,7 @@ module CcdGen
   def name(el)
     return nil if el[:context].nil?
 
-    Gen::Namings.normalize_name(el[:context].sub('@',''))
+    Gen::Namings.normalize_name(el[:context].sub('@', ''))
   end
 
   def schematron_test(el)
@@ -152,13 +201,13 @@ module CcdGen
 
   def value(constraint)
     if vc = constraint.xpath('./SingleValueCode').first
-      value = { code: vc['code'], display_name: vc['displayName'] }
+      value = {code: vc['code'], display_name: vc['displayName']}
 
       if cs = constraint.xpath('./CodeSystem').first
         value.merge! code_system: cs['oid']
       end
 
-      value.delete_if{ |k, v| v.nil? }
+      value.delete_if { |k, v| v.nil? }
 
       normalize_value(constraint, value)
     end
@@ -168,15 +217,11 @@ module CcdGen
     plain_code_contexts = ["@classCode", '@moodCode', '@typeCode']
 
     if plain_code_contexts.include?(constraint[:context]) ||
-        v.keys == [:code] ||
-        root_template_id?(constraint)
+      v.keys == [:code] ||
+      root_template_id?(constraint)
       v[:code]
     else
-      if v.keys.to_set == [:code, :display_name, :code_system].to_set
-        v.merge _type: 'Cda::CV'
-      else
-        v
-      end
+      v
     end
   end
 
@@ -198,16 +243,18 @@ module CcdGen
 
   def patch_name(class_name, name)
     case [class_name, name]
-    when ['PolicyActivity', 'performer']
-      'performer.type_code'
-    when ['USRealmHeader', 'realm_code']
-      'realm_code.code'
-    else
-      name
+      when ['PolicyActivity', 'performer']
+        'performer.type_code'
+      when ['USRealmHeader', 'realm_code']
+        'realm_code.code'
+      else
+        name
     end
   end
 
   def fwrite(path, body)
-    File.open(path, 'w') do |f| f.puts(body) end
+    File.open(path, 'w') do |f|
+      f.puts(body)
+    end
   end
 end

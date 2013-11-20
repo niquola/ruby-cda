@@ -21,22 +21,16 @@ module Ccd
     constraint 'id.root', {:cardinality=>"1..1"}
 
     # SHALL contain exactly one [1..1] code (CONF:19166).
-    constraint 'code', {:cardinality=>"1..1"}
-
-    # This code SHALL contain exactly one [1..1] @code="113015" (CONF:19167).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"113015", :display_name=>""}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"113015", :display_name=>""}}
 
     # This code SHALL contain exactly one [1..1] qualifier (CONF:26462).
     constraint 'code.qualifier', {:cardinality=>"1..1"}
 
     # This qualifier SHALL contain exactly one [1..1] name (CONF:26463).
-    constraint 'code.qualifier.name', {:cardinality=>"1..1"}
-
-    # This name SHALL contain exactly one [1..1] @code="121139" Modality (CONF:26464).
-    constraint 'code.qualifier.name.code', {:cardinality=>"1..1", :value=>{:code=>"121139", :display_name=>"Modality"}}
+    constraint 'code.qualifier.name', {:cardinality=>"1..1", :value=>{:code=>"121139", :display_name=>"Modality"}}
 
     # This name SHALL contain exactly one [1..1] @codeSystem="1.2.840.10008.2.16.4" (CodeSystem: DCM 1.2.840.10008.2.16.4) (CONF:26465).
-    constraint 'code.qualifier.name.code_system', {:cardinality=>"1..1", :value=>{:code=>"1.2.840.10008.2.16.4", :display_name=>"", :code_system=>"1.2.840.10008.2.16.4", :_type=>"Cda::CV"}}
+    constraint 'code.qualifier.name.code_system', {:cardinality=>"1..1", :value=>{:code=>"1.2.840.10008.2.16.4", :display_name=>"", :code_system=>"1.2.840.10008.2.16.4"}}
 
     # This qualifier SHALL contain exactly one [1..1] value (CONF:26466).
     constraint 'code.qualifier.value', {:cardinality=>"1..1"}

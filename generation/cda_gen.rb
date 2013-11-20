@@ -28,15 +28,11 @@ module Gen
       class_name = Namings.mk_class_name(definition[:name])
       full_class_name = 'Cda::' + class_name
       ancestor = if definition[:ancestor].present?
-                   if class_name == 'CV'
-                     'Cda::ANY' #workaround to break circular dependency
-                   else
-                     ancestor = Namings.mk_class_name(definition[:ancestor])
-                     unless Codeg.stdlib_type?(ancestor)
-                       ancestor = 'Cda::' + ancestor
-                     end
-                     ancestor
+                   ancestor = Namings.mk_class_name(definition[:ancestor])
+                   unless Codeg.stdlib_type?(ancestor)
+                     ancestor = 'Cda::' + ancestor
                    end
+                   ancestor
                  end
       plain_text = Codeg.gklass(full_class_name,
                                 ancestor: ancestor) do |number_of_indentation|

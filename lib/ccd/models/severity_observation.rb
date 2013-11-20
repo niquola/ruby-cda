@@ -14,10 +14,10 @@ module Ccd
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.22.4.8"}
 
     # SHALL contain exactly one [1..1] code (CONF:19168).
-    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"SEV", :display_name=>"", :code_system=>"2.16.840.1.113883.5.4", :_type=>"Cda::CV"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"SEV", :display_name=>"", :code_system=>"2.16.840.1.113883.5.4"}}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:7352).
-    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
+    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14"}}
 
     # SHALL contain exactly one [1..1] value with @xsi:type="CD", where the code SHALL be selected from ValueSet Problem Severity 2.16.840.1.113883.3.88.12.3221.6.8 DYNAMIC (CONF:7356).
     constraint 'value', {:cardinality=>"1..1"}

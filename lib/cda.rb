@@ -1,4 +1,4 @@
-require 'cda/autoloads'
+require 'virtus'
 require 'active_support/core_ext/string'
 require 'active_support/core_ext/object'
 require 'active_support/core_ext/hash/indifferent_access'
@@ -16,3 +16,7 @@ module Cda
   autoload :Utility, 'cda/utility'
   autoload :Base, 'cda/base'
 end
+
+require 'cda/autoloads'
+#Explicit require CR to break cyclic dependency between CV and CR
+require 'cda/models/cr'

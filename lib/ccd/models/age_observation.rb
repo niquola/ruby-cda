@@ -14,16 +14,13 @@ module Ccd
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.22.4.31"}
 
     # SHALL contain exactly one [1..1] code (CONF:7615).
-    constraint 'code', {:cardinality=>"1..1"}
-
-    # This code SHALL contain exactly one [1..1] @code="445518008" Age At Onset (CONF:16776).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"445518008", :display_name=>"Age At Onset"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"445518008", :display_name=>"Age At Onset"}}
 
     # This code SHALL contain exactly one [1..1] @codeSystem="2.16.840.1.113883.6.96" (CodeSystem: SNOMED CT 2.16.840.1.113883.6.96) (CONF:26499).
-    constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"2.16.840.1.113883.6.96", :display_name=>"", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
+    constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"2.16.840.1.113883.6.96", :display_name=>"", :code_system=>"2.16.840.1.113883.6.96"}}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:15965).
-    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
+    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14"}}
 
     # SHALL contain exactly one [1..1] value with @xsi:type="PQ" (CONF:7617).
     constraint 'value', {:cardinality=>"1..1"}

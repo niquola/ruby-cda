@@ -14,7 +14,7 @@ module Ccd
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.22.4.51"}
 
     # SHALL contain exactly one [1..1] code (CONF:19151).
-    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"59769-0", :display_name=>"Postprocedure diagnosis", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"59769-0", :display_name=>"Postprocedure diagnosis", :code_system=>"2.16.840.1.113883.6.1"}}
 
     # SHALL contain at least one [1..*] entryRelationship (CONF:8759).
     constraint 'entry_relationship', {:cardinality=>"1..*"}

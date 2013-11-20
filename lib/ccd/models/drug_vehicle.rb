@@ -11,13 +11,10 @@ module Ccd
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.22.4.24"}
 
     # SHALL contain exactly one [1..1] code (CONF:19137).
-    constraint 'code', {:cardinality=>"1..1"}
-
-    # This code SHALL contain exactly one [1..1] @code="412307009" Drug Vehicle (CONF:19138).
-    constraint 'code.code', {:cardinality=>"1..1", :value=>{:code=>"412307009", :display_name=>"Drug Vehicle"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"412307009", :display_name=>"Drug Vehicle"}}
 
     # This code SHALL contain exactly one [1..1] @codeSystem="2.16.840.1.113883.6.96" (CodeSystem: SNOMED CT 2.16.840.1.113883.6.96) (CONF:26502).
-    constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"2.16.840.1.113883.6.96", :display_name=>"", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
+    constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"2.16.840.1.113883.6.96", :display_name=>"", :code_system=>"2.16.840.1.113883.6.96"}}
 
     # SHALL contain exactly one [1..1] playingEntity (CONF:7492).
     constraint 'playing_entity', {:cardinality=>"1..1"}

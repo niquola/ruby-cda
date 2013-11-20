@@ -17,10 +17,10 @@ module Ccd
     constraint 'id', {:cardinality=>"1..*"}
 
     # SHALL contain exactly one [1..1] code (CONF:19176).
-    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"46680005", :display_name=>"Vital signs", :code_system=>"2.16.840.1.113883.6.96", :_type=>"Cda::CV"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"46680005", :display_name=>"Vital signs", :code_system=>"2.16.840.1.113883.6.96"}}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:7284).
-    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14", :_type=>"Cda::CV"}}
+    constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14"}}
 
     # The effectiveTime represents clinically effective time of the measurement, which is most likely when the measurement was performed (e.g., a BP measurement).
     # SHALL contain exactly one [1..1] effectiveTime (CONF:7288).

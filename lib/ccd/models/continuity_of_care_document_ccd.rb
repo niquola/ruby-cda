@@ -8,7 +8,7 @@ module Ccd
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.22.1.2"}
 
     # SHALL contain exactly one [1..1] code (CONF:17180).
-    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"34133-9", :display_name=>"Summarization of Episode Note", :code_system=>"2.16.840.1.113883.6.1", :_type=>"Cda::CV"}}
+    constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"34133-9", :display_name=>"Summarization of Episode Note", :code_system=>"2.16.840.1.113883.6.1"}}
 
     # SHALL contain at least one [1..*] author (CONF:9442).
     constraint 'author', {:cardinality=>"1..*"}
