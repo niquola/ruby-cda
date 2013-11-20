@@ -28,18 +28,10 @@ module Ccd
       #save_cardinality(name, opts[:cardinality]) if opts[:cardinality]
     end
 
-    def build(attrs = {}, &block)
-      super(Cda::Utility.merge_json(attrs.with_indifferent_access, defaults), &block)
-    end
-
     def dump(path)
       File.open(File.join(path, "#{self.name.underscore}.yml"), 'w') do |f|
         f.puts defaults.to_yaml
       end
-    end
-
-    def defaults
-      @defaults || {}
     end
 
     def validate!(object)
@@ -53,7 +45,7 @@ module Ccd
     end
 
     def save_default_value(name, value)
-      @defaults = Cda::Utility.merge_json(@defaults || {}, inference(name.split('.'), value))
+      self.defaults = Cda::Utility.merge_json(defaults, inference(name.split('.'), value))
     end
 
     def save_cardinality(name, value)

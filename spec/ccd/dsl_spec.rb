@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Ccd do
   context ".build" do
     example do
-      obs = Ccd::ProgressNote.build
+      obs = Ccd::ProgressNote.new
       obs.should be
     end
   end

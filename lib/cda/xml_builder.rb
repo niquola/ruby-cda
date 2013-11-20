@@ -144,14 +144,8 @@ class Cda::XmlBuilder
     case instance
       when String
         'ST'
-      when Cda::PQ
-        'PQ'
-      when Cda::IVL_PQ
-        'IVL_PQ'
-      when Cda::RTO
-        'RTO'
-      when Cda::TS
-        'TS'
+      when Cda::ANY
+        get_cda_class(instance.class).name.match(/::(\w+)$/)[1]
       else
         if instance.respond_to?(:type)
           instance.type
@@ -159,6 +153,10 @@ class Cda::XmlBuilder
           fail "Can't detect xsi:type for #{instance.inspect}"
         end
     end
+  end
+
+  def get_cda_class(cls)
+    cls.name.starts_with?('Cda::') ? cls : get_cda_class(cls.superclass)
   end
 
   def get_attributes_as_hash(model, attributes)

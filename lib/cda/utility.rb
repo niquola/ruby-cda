@@ -8,7 +8,7 @@ module Cda
 
     def hash_to_object(hash)
       return hash unless Hash === hash
-      is_array = hash.keys.all? { |x| x.is_a?(Integer) }
+      is_array = !hash.empty? && hash.keys.all? { |x| x.is_a?(Integer) }
       acc = is_array ? [] : {}
       hash.reduce(acc) { |acc, (k, v)| acc[k] = hash_to_object(v); acc }
     end

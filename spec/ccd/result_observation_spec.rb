@@ -29,7 +29,7 @@ require 'spec_helper'
 
 describe "Building ResultObservation" do
   let(:result_observation) do
-    Ccd::ResultObservation.build(result_observation_attributes)
+    Ccd::ResultObservation.new(result_observation_attributes)
   end
 
   let(:result_observation_attributes) do
