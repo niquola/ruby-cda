@@ -11,13 +11,13 @@ describe Gen do
   end
 
   it "should not generate cda classes for mapped types" do
-    File.should_not exist("#{output_path}/date.rb")
-    File.should_not exist("#{output_path}/integer.rb")
+    File.should_not exist("#{Gen::Pth.output_path}/date.rb")
+    File.should_not exist("#{Gen::Pth.output_path}/integer.rb")
   end
 
   it 'should generate at least Act and Section' do
     expect do
-      Dir["#{output_path}/**/*rb"].each do |file|
+      Dir["#{Gen::Pth.output_path}/**/models/*rb"].each do |file|
         next if file =~ /autoloads/
         require file
       end
