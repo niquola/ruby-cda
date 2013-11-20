@@ -1,6 +1,7 @@
 module Ccd
   class VitalSignsOrganizer < ::Cda::Organizer
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="CLUSTER" CLUSTER (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7279).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"CLUSTER"}
 
@@ -31,6 +32,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] Vital Sign Observation (templateId:2.16.840.1.113883.10.20.22.4.27) (CONF:15946).
     constraint 'component.observation', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "organizer"
+    end
 
     Ccd.load_extension('vital_signs_organizer.rb')
   end

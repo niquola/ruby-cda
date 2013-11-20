@@ -1,6 +1,7 @@
 module Ccd
   class AssessmentScaleSupportingObservati < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:16715).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -27,6 +28,10 @@ module Ccd
 
     # SHALL contain at least one [1..*] value (CONF:16754).
     constraint 'value', {:cardinality=>"1..*"}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('assessment_scale_supporting_observati.rb')
   end

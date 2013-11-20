@@ -1,6 +1,7 @@
 module Ccd
   class BoundaryObservation < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9282).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -13,6 +14,10 @@ module Ccd
     # Each number represents a frame for display.
     # SHALL contain at least one [1..*] value with @xsi:type="INT" (CONF:9285).
     constraint 'value', {:cardinality=>"1..*"}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('boundary_observation.rb')
   end

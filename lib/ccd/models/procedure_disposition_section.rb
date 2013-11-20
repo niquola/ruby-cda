@@ -1,6 +1,7 @@
 module Ccd
   class ProcedureDispositionSection < ::Cda::Section
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] templateId (CONF:8070) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
@@ -18,6 +19,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] text (CONF:8073).
     constraint 'text', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "section"
+    end
 
     Ccd.load_extension('procedure_disposition_section.rb')
   end

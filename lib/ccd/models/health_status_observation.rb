@@ -1,6 +1,7 @@
 module Ccd
   class HealthStatusObservation < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9057).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -21,6 +22,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] value with @xsi:type="CD", where the code SHALL be selected from ValueSet HealthStatus 2.16.840.1.113883.1.11.20.12 DYNAMIC (CONF:9075).
     constraint 'value', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('health_status_observation.rb')
   end

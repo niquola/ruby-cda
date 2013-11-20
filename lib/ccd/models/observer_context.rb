@@ -1,6 +1,7 @@
 module Ccd
   class ObserverContext < ::Cda::AssignedAuthor
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] templateId (CONF:9194) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
@@ -10,6 +11,10 @@ module Ccd
     # The id element contains the author's id or the DICOM device observer UID
     # SHALL contain at least one [1..*] id (CONF:9196).
     constraint 'id', {:cardinality=>"1..*"}
+
+    def self.template_type
+      "assignedAuthor"
+    end
 
     Ccd.load_extension('observer_context.rb')
   end

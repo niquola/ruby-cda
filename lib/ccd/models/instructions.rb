@@ -1,6 +1,7 @@
 module Ccd
   class Instructions < ::Cda::Act
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="ACT" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7391).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
 
@@ -18,6 +19,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] statusCode (CONF:7396).
     constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14"}}
+
+    def self.template_type
+      "act"
+    end
 
     Ccd.load_extension('instructions.rb')
   end

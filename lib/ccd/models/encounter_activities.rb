@@ -1,6 +1,7 @@
 module Ccd
   class EncounterActivities < ::Cda::Encounter
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="ENC" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8710).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"ENC"}
 
@@ -18,6 +19,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] effectiveTime (CONF:8715).
     constraint 'effective_time', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "encounter"
+    end
 
     Ccd.load_extension('encounter_activities.rb')
   end

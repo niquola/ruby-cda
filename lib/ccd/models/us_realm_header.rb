@@ -1,6 +1,7 @@
 module Ccd
   class USRealmHeader < ::Cda::ClinicalDocument
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] realmCode="US" (CONF:16791).
     constraint 'realm_code.code', {:cardinality=>"1..1", :value=>{:code=>"US", :display_name=>""}}
 
@@ -102,6 +103,10 @@ module Ccd
 
     # This representedCustodianOrganization SHALL contain exactly one [1..1] addr (CONF:5559).
     constraint 'custodian.assigned_custodian.represented_custodian_organization.addr', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "ClinicalDocument"
+    end
 
     Ccd.load_extension('us_realm_header.rb')
   end

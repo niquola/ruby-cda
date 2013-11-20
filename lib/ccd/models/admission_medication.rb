@@ -1,6 +1,7 @@
 module Ccd
   class AdmissionMedication < ::Cda::Act
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="ACT" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7698).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
 
@@ -24,6 +25,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] Medication Activity (templateId:2.16.840.1.113883.10.20.22.4.16) (CONF:15520).
     constraint 'entry_relationship.substance_administration', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "act"
+    end
 
     Ccd.load_extension('admission_medication.rb')
   end

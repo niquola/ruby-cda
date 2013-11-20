@@ -1,6 +1,7 @@
 module Ccd
   class ResultOrganizer < ::Cda::Organizer
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7121).
     constraint 'class_code', {:cardinality=>"1..1"}
 
@@ -30,6 +31,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] Result Observation (templateId:2.16.840.1.113883.10.20.22.4.2) (CONF:14850).
     constraint 'component.observation', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "organizer"
+    end
 
     Ccd.load_extension('result_organizer.rb')
   end

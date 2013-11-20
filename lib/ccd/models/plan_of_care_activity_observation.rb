@@ -1,6 +1,7 @@
 module Ccd
   class PlanOfCareActivityObservation < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8581).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -15,6 +16,10 @@ module Ccd
 
     # SHALL contain at least one [1..*] id (CONF:8584).
     constraint 'id', {:cardinality=>"1..*"}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('plan_of_care_activity_observation.rb')
   end

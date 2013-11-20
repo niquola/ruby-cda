@@ -1,6 +1,7 @@
 module Ccd
   class FunctionalStatusResultObservation < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:13905).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -31,6 +32,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] value (CONF:13932).
     constraint 'value', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('functional_status_result_observation.rb')
   end

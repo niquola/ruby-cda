@@ -1,6 +1,7 @@
 module Ccd
   class SubstanceOrDeviceAllergyIntolera < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:16303).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -30,6 +31,10 @@ module Ccd
 
     # This value SHALL contain exactly one [1..1] @code, which SHALL be selected from ValueSet Allergy/Adverse Event Type 2.16.840.1.113883.3.88.12.3221.6.2 DYNAMIC (CONF:16317).
     constraint 'value.code', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('substance_or_device_allergy_intolera.rb')
   end

@@ -1,6 +1,7 @@
 module Ccd
   class CaregiverCharacteristics < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:14219).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -36,6 +37,10 @@ module Ccd
 
     # This participantRole SHALL contain exactly one [1..1] @classCode="CAREGIVER" (CONF:14229).
     constraint 'participant.participant_role.class_code', {:cardinality=>"1..1", :value=>"CAREGIVER"}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('caregiver_characteristics.rb')
   end

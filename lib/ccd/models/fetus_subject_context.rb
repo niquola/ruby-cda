@@ -1,6 +1,7 @@
 module Ccd
   class FetusSubjectContext < ::Cda::RelatedSubject
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] templateId (CONF:9189) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
@@ -19,6 +20,10 @@ module Ccd
     # The name element is used to store the DICOM fetus ID, typically a pseudonym such as fetus_1.
     # This subject SHALL contain exactly one [1..1] name (CONF:15347).
     constraint 'subject.name', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "relatedSubject"
+    end
 
     Ccd.load_extension('fetus_subject_context.rb')
   end

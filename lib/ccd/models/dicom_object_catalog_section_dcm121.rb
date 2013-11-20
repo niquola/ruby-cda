@@ -1,6 +1,7 @@
 module Ccd
   class DICOMObjectCatalogSectionDCM121 < ::Cda::Section
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] templateId (CONF:8525) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
@@ -18,6 +19,10 @@ module Ccd
 
     # Such entries SHALL contain exactly one [1..1] Study Act (templateId:2.16.840.1.113883.10.20.6.2.6) (CONF:15458).
     constraint 'entry.act', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "section"
+    end
 
     Ccd.load_extension('dicom_object_catalog_section_dcm121.rb')
   end

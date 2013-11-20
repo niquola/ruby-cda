@@ -1,6 +1,7 @@
 module Ccd
   class HospitalDischargeDiagnosis < ::Cda::Act
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="ACT" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7663).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
 
@@ -24,6 +25,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] Problem Observation (templateId:2.16.840.1.113883.10.20.22.4.4) (CONF:15536).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "act"
+    end
 
     Ccd.load_extension('hospital_discharge_diagnosis.rb')
   end

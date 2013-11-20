@@ -45,9 +45,9 @@ class Cda::XmlBuilder
 
   include Helpers
 
-  def initialize(model, template_type)
+  def initialize(model)
     @model = model
-    @template_type = template_type
+    @template_type = model.class.template_type
   end
 
   def build

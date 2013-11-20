@@ -1,6 +1,7 @@
 module Ccd
   class PreoperativeDiagnosis < ::Cda::Act
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="ACT" (CONF:10090).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
 
@@ -24,6 +25,10 @@ module Ccd
 
     # Such entryRelationships SHALL contain exactly one [1..1] Problem Observation (templateId:2.16.840.1.113883.10.20.22.4.4) (CONF:15605).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "act"
+    end
 
     Ccd.load_extension('preoperative_diagnosis.rb')
   end

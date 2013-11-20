@@ -1,6 +1,7 @@
 module Ccd
   class AuthorizationActivity < ::Cda::Act
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="ACT" Act (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8944).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
 
@@ -21,6 +22,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] @typeCode="SUBJ" Has Subject (CodeSystem: HL7ActRelationshipType 2.16.840.1.113883.5.1002 STATIC) (CONF:8949).
     constraint 'entry_relationship.type_code', {:cardinality=>"1..1", :value=>"SUBJ"}
+
+    def self.template_type
+      "act"
+    end
 
     Ccd.load_extension('authorization_activity.rb')
   end

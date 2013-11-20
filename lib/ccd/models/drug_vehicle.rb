@@ -1,6 +1,7 @@
 module Ccd
   class DrugVehicle < ::Cda::ParticipantRole
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="MANU" (CodeSystem: RoleClass 2.16.840.1.113883.5.110 STATIC) (CONF:7490).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"MANU"}
 
@@ -22,6 +23,10 @@ module Ccd
     # This playingEntity/code is used to supply a coded term for the drug vehicle.
     # This playingEntity SHALL contain exactly one [1..1] code (CONF:7493).
     constraint 'playing_entity.code', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "participantRole"
+    end
 
     Ccd.load_extension('drug_vehicle.rb')
   end

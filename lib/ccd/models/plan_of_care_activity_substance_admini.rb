@@ -1,6 +1,7 @@
 module Ccd
   class PlanOfCareActivitySubstanceAdmini < ::Cda::SubstanceAdministration
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="SBADM" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8572).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"SBADM"}
 
@@ -15,6 +16,10 @@ module Ccd
 
     # SHALL contain at least one [1..*] id (CONF:8575).
     constraint 'id', {:cardinality=>"1..*"}
+
+    def self.template_type
+      "substanceAdministration"
+    end
 
     Ccd.load_extension('plan_of_care_activity_substance_admini.rb')
   end

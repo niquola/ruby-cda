@@ -1,6 +1,7 @@
 module Ccd
   class CognitiveStatusResultOrganizer < ::Cda::Organizer
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="CLUSTER", which SHALL be selected from CodeSystem HL7ActClass (2.16.840.1.113883.5.6) STATIC (CONF:14369).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"CLUSTER"}
 
@@ -27,6 +28,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] Cognitive Status Result Observation (templateId:2.16.840.1.113883.10.20.22.4.74) (CONF:14381).
     constraint 'component.observation', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "organizer"
+    end
 
     Ccd.load_extension('cognitive_status_result_organizer.rb')
   end

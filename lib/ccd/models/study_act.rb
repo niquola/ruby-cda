@@ -1,6 +1,7 @@
 module Ccd
   class StudyAct < ::Cda::Act
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="ACT" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9207).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
 
@@ -34,6 +35,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] Series Act (templateId:2.16.840.1.113883.10.20.22.4.63) (CONF:15937).
     constraint 'entry_relationship.act', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "act"
+    end
 
     Ccd.load_extension('study_act.rb')
   end

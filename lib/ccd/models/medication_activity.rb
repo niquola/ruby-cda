@@ -1,6 +1,7 @@
 module Ccd
   class MedicationActivity < ::Cda::SubstanceAdministration
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="SBADM" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7496).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"SBADM"}
 
@@ -33,6 +34,10 @@ module Ccd
 
     # This consumable SHALL contain exactly one [1..1] Medication Information (templateId:2.16.840.1.113883.10.20.22.4.23) (CONF:16085).
     constraint 'consumable.manufactured_product', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "substanceAdministration"
+    end
 
     Ccd.load_extension('medication_activity.rb')
   end

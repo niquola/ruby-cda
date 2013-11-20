@@ -1,6 +1,7 @@
 module Ccd
   class AllergyStatusObservation < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7318).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -24,6 +25,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] value with @xsi:type="CE", where the code SHALL be selected from ValueSet Problem Status 2.16.840.1.113883.3.88.12.80.68 DYNAMIC (CONF:7322).
     constraint 'value', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('allergy_status_observation.rb')
   end

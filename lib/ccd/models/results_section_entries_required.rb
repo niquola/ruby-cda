@@ -1,6 +1,7 @@
 module Ccd
   class ResultsSectionEntriesRequired < ::Cda::Section
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] templateId (CONF:7108) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
@@ -21,6 +22,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] Result Organizer (templateId:2.16.840.1.113883.10.20.22.4.1) (CONF:15516).
     constraint 'entry.organizer', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "section"
+    end
 
     Ccd.load_extension('results_section_entries_required.rb')
   end

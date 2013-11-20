@@ -1,6 +1,7 @@
 module Ccd
   class ContinuityOfCareDocumentCCD < ::Cda::ClinicalDocument
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] templateId (CONF:8450) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
@@ -33,6 +34,10 @@ module Ccd
 
     # This effectiveTime SHALL contain exactly one [1..1] high (CONF:8455).
     constraint 'documentation_of.service_event.effective_time.high', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "ClinicalDocument"
+    end
 
     Ccd.load_extension('continuity_of_care_document_ccd.rb')
   end

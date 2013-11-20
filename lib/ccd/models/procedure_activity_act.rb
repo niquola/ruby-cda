@@ -1,6 +1,7 @@
 module Ccd
   class ProcedureActivityAct < ::Cda::Act
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="ACT" Act (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8289).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
 
@@ -21,6 +22,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] statusCode, which SHALL be selected from ValueSet ProcedureAct statusCode 2.16.840.1.113883.11.20.9.22 DYNAMIC (CONF:8298).
     constraint 'status_code', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "act"
+    end
 
     Ccd.load_extension('procedure_activity_act.rb')
   end

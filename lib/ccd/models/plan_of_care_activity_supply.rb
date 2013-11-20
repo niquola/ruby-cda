@@ -1,6 +1,7 @@
 module Ccd
   class PlanOfCareActivitySupply < ::Cda::Supply
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="SPLY" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8577).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"SPLY"}
 
@@ -15,6 +16,10 @@ module Ccd
 
     # SHALL contain at least one [1..*] id (CONF:8580).
     constraint 'id', {:cardinality=>"1..*"}
+
+    def self.template_type
+      "supply"
+    end
 
     Ccd.load_extension('plan_of_care_activity_supply.rb')
   end

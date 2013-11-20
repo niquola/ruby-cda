@@ -1,6 +1,7 @@
 module Ccd
   class ChiefComplaintSection < ::Cda::Section
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] templateId (CONF:7832) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
@@ -18,6 +19,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] text (CONF:7835).
     constraint 'text', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "section"
+    end
 
     Ccd.load_extension('chief_complaint_section.rb')
   end

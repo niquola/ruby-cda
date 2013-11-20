@@ -1,6 +1,7 @@
 module Ccd
   class HospitalAdmissionMedicationsSection < ::Cda::Section
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] templateId (CONF:10098) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
@@ -15,6 +16,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] text (CONF:10101).
     constraint 'text', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "section"
+    end
 
     Ccd.load_extension('hospital_admission_medications_section.rb')
   end

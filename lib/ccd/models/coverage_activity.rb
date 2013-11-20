@@ -1,6 +1,7 @@
 module Ccd
   class CoverageActivity < ::Cda::Act
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="ACT" Act (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8872).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
 
@@ -30,6 +31,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] Policy Activity (templateId:2.16.840.1.113883.10.20.22.4.61) (CONF:15528).
     constraint 'entry_relationship.act', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "act"
+    end
 
     Ccd.load_extension('coverage_activity.rb')
   end

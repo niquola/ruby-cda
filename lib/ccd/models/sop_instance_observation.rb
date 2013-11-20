@@ -1,6 +1,7 @@
 module Ccd
   class SOPInstanceObservation < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="DGIMG" Diagnostic Image (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9240).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"DGIMG"}
 
@@ -19,6 +20,10 @@ module Ccd
 
     # This code SHALL contain exactly one [1..1] @codeSystem="1.2.840.10008.2.6.1" DCMUID (CONF:19227).
     constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"1.2.840.10008.2.6.1", :display_name=>"DCMUID"}}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('sop_instance_observation.rb')
   end

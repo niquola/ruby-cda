@@ -1,6 +1,7 @@
 module Ccd
   class QuantityMeasurementObservation < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9317).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -19,6 +20,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] value with @xsi:type="PQ" (CONF:9324).
     constraint 'value', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('quantity_measurement_observation.rb')
   end

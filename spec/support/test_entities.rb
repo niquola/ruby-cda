@@ -27,6 +27,10 @@ module Cda::TestEntities
 
     attribute :entry, Array[CdaTestModelEntry]
     attribute :entry_wrapper, Array[CdaTestModelEntryWrapper]
+
+    def self.template_type
+      "test-model"
+    end
   end
 
   def self.included(base)

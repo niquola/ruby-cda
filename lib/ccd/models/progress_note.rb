@@ -1,6 +1,7 @@
 module Ccd
   class ProgressNote < ::Cda::ClinicalDocument
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] templateId (CONF:7588) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
@@ -33,6 +34,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] component (CONF:9591).
     constraint 'component', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "ClinicalDocument"
+    end
 
     Ccd.load_extension('progress_note.rb')
   end

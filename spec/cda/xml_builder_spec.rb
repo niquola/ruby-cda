@@ -7,7 +7,7 @@ describe Cda::XmlBuilder do
   include Cda::RSpec::ValidationRules
 
   let(:builder) {
-    builder = Cda::XmlBuilder.new(test_model, 'test-model')
+    builder = Cda::XmlBuilder.new(test_model)
     builder.xml = Nokogiri::XML::Builder.new
     builder
   }

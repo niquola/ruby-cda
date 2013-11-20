@@ -1,6 +1,7 @@
 module Ccd
   class PhysicianReadingStudyPerformer < ::Cda::Performer1
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @typeCode="PRF" Performer (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8424).
     constraint 'type_code', {:cardinality=>"1..1", :value=>"PRF"}
 
@@ -15,6 +16,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] templateId/@root="2.16.840.1.113883.10.20.6.2.1" (CONF:8423).
     constraint 'template_id.root', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.10.20.6.2.1"}
+
+    def self.template_type
+      "performer"
+    end
 
     Ccd.load_extension('physician_reading_study_performer.rb')
   end

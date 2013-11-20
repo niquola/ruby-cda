@@ -1,6 +1,7 @@
 module Ccd
   class DeceasedObservation < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:14851).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -30,6 +31,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] value with @xsi:type="CD" (CONF:14857).
     constraint 'value', {:cardinality=>"1..1", :value=>{:code=>"419099009", :display_name=>"Dead", :code_system=>"2.16.840.1.113883.6.96"}}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('deceased_observation.rb')
   end

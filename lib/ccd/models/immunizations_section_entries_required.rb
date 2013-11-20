@@ -1,6 +1,7 @@
 module Ccd
   class ImmunizationsSectionEntriesRequired < ::Cda::Section
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] templateId (CONF:9015) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
@@ -21,6 +22,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] Immunization Activity (templateId:2.16.840.1.113883.10.20.22.4.52) (CONF:15495).
     constraint 'entry.substance_administration', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "section"
+    end
 
     Ccd.load_extension('immunizations_section_entries_required.rb')
   end

@@ -1,6 +1,7 @@
 module Ccd
   class EstimatedDateOfDelivery < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:444).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -24,6 +25,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] value with @xsi:type="TS" (CONF:450).
     constraint 'value', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('estimated_date_of_delivery.rb')
   end

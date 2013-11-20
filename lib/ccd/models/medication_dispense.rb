@@ -1,6 +1,7 @@
 module Ccd
   class MedicationDispense < ::Cda::Supply
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="SPLY" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7451).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"SPLY"}
 
@@ -18,6 +19,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] statusCode, which SHALL be selected from ValueSet Medication Fill Status 2.16.840.1.113883.3.88.12.80.64 DYNAMIC (CONF:7455).
     constraint 'status_code', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "supply"
+    end
 
     Ccd.load_extension('medication_dispense.rb')
   end

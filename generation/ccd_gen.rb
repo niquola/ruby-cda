@@ -42,11 +42,18 @@ module CcdGen
 
   def mk_class(template, filename)
     ancestor = '::Cda::' + Gen::Namings.mk_class_name(template[:contextType])
-    include_dsl = "extend ::Ccd::Dsl"
+    include_dsl = "extend ::Ccd::Dsl\n"
     context = Context.new(class_name(template), ancestor.constantize, [])
     attributes = mk_constraints(context, template.xpath('./Constraint'))
     extension = "Ccd.load_extension('#{filename}')"
-    body = [include_dsl, attributes, extension].join("\n")
+
+    template_type = if template[:context].present?
+                      "def self.template_type\n  #{template[:context].inspect}\nend\n"
+                    else
+                      nil
+                    end
+
+    body = [include_dsl, attributes, template_type, extension].join("\n")
 
     Gen::Codeg.gklass(class_name(template),
                       module: 'Ccd',

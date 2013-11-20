@@ -1,6 +1,7 @@
 module Ccd
   class Indication < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7480).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -21,6 +22,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] statusCode (CONF:7487).
     constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14"}}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('indication.rb')
   end

@@ -1,6 +1,7 @@
 module Ccd
   class SeriesAct < ::Cda::Act
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="ACT" Act (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:9222).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"ACT"}
 
@@ -43,6 +44,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] SOP Instance Observation (templateId:2.16.840.1.113883.10.20.6.2.8) (CONF:15927).
     constraint 'entry_relationship.observation', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "act"
+    end
 
     Ccd.load_extension('series_act.rb')
   end

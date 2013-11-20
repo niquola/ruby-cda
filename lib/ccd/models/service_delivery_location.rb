@@ -1,6 +1,7 @@
 module Ccd
   class ServiceDeliveryLocation < ::Cda::ParticipantRole
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="SDLOC" (CodeSystem: RoleCode 2.16.840.1.113883.5.111 STATIC) (CONF:7758).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"SDLOC"}
 
@@ -12,6 +13,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] code, which SHALL be selected from ValueSet HealthcareServiceLocation 2.16.840.1.113883.1.11.20275 STATIC (CONF:16850).
     constraint 'code', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "participantRole"
+    end
 
     Ccd.load_extension('service_delivery_location.rb')
   end

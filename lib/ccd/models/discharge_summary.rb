@@ -1,6 +1,7 @@
 module Ccd
   class DischargeSummary < ::Cda::ClinicalDocument
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] templateId (CONF:8463) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
@@ -27,6 +28,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] component (CONF:9539).
     constraint 'component', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "ClinicalDocument"
+    end
 
     Ccd.load_extension('discharge_summary.rb')
   end

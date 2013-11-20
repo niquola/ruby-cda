@@ -1,6 +1,7 @@
 module Ccd
   class NumberOfPressureUlcersObservation < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:14705).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -45,6 +46,10 @@ module Ccd
 
     # This observation SHALL contain exactly one [1..1] value with @xsi:type="CD", where the code SHOULD be selected from ValueSet Pressure Ulcer Stage 2.16.840.1.113883.11.20.9.35 STATIC (CONF:14725).
     constraint 'entry_relationship.observation.value', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('number_of_pressure_ulcers_observation.rb')
   end

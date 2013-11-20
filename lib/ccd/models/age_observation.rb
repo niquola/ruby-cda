@@ -1,6 +1,7 @@
 module Ccd
   class AgeObservation < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:7613).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -27,6 +28,10 @@ module Ccd
 
     # This value SHALL contain exactly one [1..1] @unit, which SHALL be selected from ValueSet AgePQ_UCUM 2.16.840.1.113883.11.20.9.21 DYNAMIC (CONF:7618).
     constraint 'value.unit', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('age_observation.rb')
   end

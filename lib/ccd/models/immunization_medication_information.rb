@@ -1,6 +1,7 @@
 module Ccd
   class ImmunizationMedicationInformation < ::Cda::ManufacturedProduct
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="MANU" (CodeSystem: RoleClass 2.16.840.1.113883.5.110 STATIC) (CONF:9002).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"MANU"}
 
@@ -15,6 +16,10 @@ module Ccd
 
     # This manufacturedMaterial SHALL contain exactly one [1..1] code, which SHALL be selected from ValueSet Vaccine Administered Value Set 2.16.840.1.113883.3.88.12.80.22 DYNAMIC (CONF:9007).
     constraint 'manufactured_material.code', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "manufacturedProduct"
+    end
 
     Ccd.load_extension('immunization_medication_information.rb')
   end

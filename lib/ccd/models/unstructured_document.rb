@@ -1,6 +1,7 @@
 module Ccd
   class UnstructuredDocument < ::Cda::ClinicalDocument
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] templateId (CONF:7710) such that it
     constraint 'template_id', {:cardinality=>"1..1"}
 
@@ -39,6 +40,10 @@ module Ccd
 
     # This custodian/assignedCustodian/representedCustodianOrganization SHALL contain exactly one [1..1] addr (CONF:7651).
     constraint 'custodian.assigned_custodian.represented_custodian_organization.addr', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "ClinicalDocument"
+    end
 
     Ccd.load_extension('unstructured_document.rb')
   end

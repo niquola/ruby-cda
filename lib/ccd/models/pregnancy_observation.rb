@@ -1,6 +1,7 @@
 module Ccd
   class PregnancyObservation < ::Cda::Observation
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="OBS" Observation (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:451).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"OBS"}
 
@@ -24,6 +25,10 @@ module Ccd
 
     # SHALL contain exactly one [1..1] value with @xsi:type="CD" (CONF:457).
     constraint 'value', {:cardinality=>"1..1", :value=>{:code=>"77386006", :display_name=>"Pregnant", :code_system=>"2.16.840.1.113883.6.96"}}
+
+    def self.template_type
+      "observation"
+    end
 
     Ccd.load_extension('pregnancy_observation.rb')
   end

@@ -1,6 +1,7 @@
 module Ccd
   class FamilyHistoryOrganizer < ::Cda::Organizer
     extend ::Ccd::Dsl
+
     # SHALL contain exactly one [1..1] @classCode="CLUSTER" Cluster (CodeSystem: HL7ActClass 2.16.840.1.113883.5.6 STATIC) (CONF:8600).
     constraint 'class_code', {:cardinality=>"1..1", :value=>"CLUSTER"}
 
@@ -36,6 +37,10 @@ module Ccd
 
     # Such components SHALL contain exactly one [1..1] Family History Observation (templateId:2.16.840.1.113883.10.20.22.4.46) (CONF:16888).
     constraint 'component.observation', {:cardinality=>"1..1"}
+
+    def self.template_type
+      "organizer"
+    end
 
     Ccd.load_extension('family_history_organizer.rb')
   end
