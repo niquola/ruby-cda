@@ -2,10 +2,12 @@ module Gen::Types
   MAPPINGS = {
     'int'             => "Integer",
     'ts'              => 'DateTime',
+    'st'              => 'String',
     'cs'              => 'String',
     'bl'              => 'Boolean',
     'bn'              => 'Boolean',
     'uid'             => 'String',
+    'real'            => 'Float',
     'xs:string'       => 'String',
     'xs:decimal'      => 'Numeric',
     'xs:float'        => 'Float',

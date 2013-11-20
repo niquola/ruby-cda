@@ -1,6 +1,3 @@
-class Cda::St < String
-
-end
 class Cda::ST < Cda::ED
   attribute :reference, Cda::TEL
   attribute :thumbnail, Cda::ED

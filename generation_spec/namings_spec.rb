@@ -3,11 +3,12 @@ require_relative 'gen_spec_helper'
 describe Gen::Namings do
   include described_class
   example do
-    normalize_name("associated_entity/class_code").should == 'associated_entity.class_code'
+    normalize_name('associated_entity/class_code').should == 'associated_entity.class_code'
   end
 
   example do
-    mk_class_name('st').should == 'St'
+    mk_class_name('st').should == 'String'
+    mk_class_name('url').should == 'Url'
     mk_class_name('ActMood').should == 'ActMood'
     mk_class_name('ADXP').should == 'ADXP'
     mk_class_name('adxp.additionalLocator').should == 'AdxpAdditionalLocator'

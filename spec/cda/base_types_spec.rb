@@ -5,5 +5,6 @@ describe "CDA Base types" do
     Cda::TS.attribute_set[:value].type.primitive.should == DateTime
     Cda::REAL.attribute_set[:value].type.primitive.should == Float
     Cda::INT.attribute_set[:value].type.primitive.should == Integer
+    Cda::II.attribute_set[:extension].type.primitive.should == String
   end
 end
