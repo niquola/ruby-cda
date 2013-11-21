@@ -18,7 +18,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"445518008", :display_name=>"Age At Onset"}}
 
     # This code SHALL contain exactly one [1..1] @codeSystem="2.16.840.1.113883.6.96" (CodeSystem: SNOMED CT 2.16.840.1.113883.6.96) (CONF:26499).
-    constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"2.16.840.1.113883.6.96", :display_name=>"", :code_system=>"2.16.840.1.113883.6.96"}}
+    constraint 'code.code_system', {:cardinality=>"1..1", :value=>"2.16.840.1.113883.6.96"}
 
     # SHALL contain exactly one [1..1] statusCode (CONF:15965).
     constraint 'status_code', {:cardinality=>"1..1", :value=>{:code=>"completed", :display_name=>"Completed", :code_system=>"2.16.840.1.113883.5.14"}}

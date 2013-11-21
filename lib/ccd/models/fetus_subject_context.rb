@@ -12,7 +12,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"121026", :display_name=>""}}
 
     # This code SHALL contain exactly one [1..1] @codeSystem="1.2.840.10008.2.16.4" (CodeSystem: DCM 1.2.840.10008.2.16.4) (CONF:26476).
-    constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"1.2.840.10008.2.16.4", :display_name=>"", :code_system=>"1.2.840.10008.2.16.4"}}
+    constraint 'code.code_system', {:cardinality=>"1..1", :value=>"1.2.840.10008.2.16.4"}
 
     # SHALL contain exactly one [1..1] subject (CONF:9191).
     constraint 'subject', {:cardinality=>"1..1"}

@@ -19,7 +19,7 @@ module Ccd
     constraint 'code.code', {:cardinality=>"1..1"}
 
     # This code SHALL contain exactly one [1..1] @codeSystem="1.2.840.10008.2.6.1" DCMUID (CONF:19227).
-    constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"1.2.840.10008.2.6.1", :display_name=>"DCMUID"}}
+    constraint 'code.code_system', {:cardinality=>"1..1", :value=>"1.2.840.10008.2.6.1"}
 
     def self.template_type
       "observation"

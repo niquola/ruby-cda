@@ -25,7 +25,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"113014", :display_name=>""}}
 
     # This code SHALL contain exactly one [1..1] @codeSystem="1.2.840.10008.2.16.4" (CodeSystem: DCM 1.2.840.10008.2.16.4) (CONF:26506).
-    constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"1.2.840.10008.2.16.4", :display_name=>"", :code_system=>"1.2.840.10008.2.16.4"}}
+    constraint 'code.code_system', {:cardinality=>"1..1", :value=>"1.2.840.10008.2.16.4"}
 
     # SHALL contain at least one [1..*] entryRelationship (CONF:9219) such that it
     constraint 'entry_relationship', {:cardinality=>"1..*"}

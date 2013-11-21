@@ -31,7 +31,7 @@ module Ccd
     constraint 'code.qualifier.name', {:cardinality=>"1..1", :value=>{:code=>"121139", :display_name=>"Modality"}}
 
     # This name SHALL contain exactly one [1..1] @codeSystem="1.2.840.10008.2.16.4" (CodeSystem: DCM 1.2.840.10008.2.16.4) (CONF:26465).
-    constraint 'code.qualifier.name.code_system', {:cardinality=>"1..1", :value=>{:code=>"1.2.840.10008.2.16.4", :display_name=>"", :code_system=>"1.2.840.10008.2.16.4"}}
+    constraint 'code.qualifier.name.code_system', {:cardinality=>"1..1", :value=>"1.2.840.10008.2.16.4"}
 
     # This qualifier SHALL contain exactly one [1..1] value (CONF:26466).
     constraint 'code.qualifier.value', {:cardinality=>"1..1"}

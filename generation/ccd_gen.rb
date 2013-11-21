@@ -221,7 +221,7 @@ module CcdGen
   end
 
   def normalize_value(constraint, v)
-    plain_code_contexts = ["@classCode", '@moodCode', '@typeCode']
+    plain_code_contexts = ["@classCode", '@moodCode', '@typeCode', '@codeSystem']
 
     if plain_code_contexts.include?(constraint[:context]) ||
       v.keys == [:code] ||

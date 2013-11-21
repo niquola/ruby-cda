@@ -12,7 +12,7 @@ module Ccd
     constraint 'code', {:cardinality=>"1..1", :value=>{:code=>"121181", :display_name=>"Dicom Object Catalog"}}
 
     # This code SHALL contain exactly one [1..1] @codeSystem="1.2.840.10008.2.16.4" (CodeSystem: DCM 1.2.840.10008.2.16.4) (CONF:26475).
-    constraint 'code.code_system', {:cardinality=>"1..1", :value=>{:code=>"1.2.840.10008.2.16.4", :display_name=>"", :code_system=>"1.2.840.10008.2.16.4"}}
+    constraint 'code.code_system', {:cardinality=>"1..1", :value=>"1.2.840.10008.2.16.4"}
 
     # SHALL contain at least one [1..*] entry (CONF:8530).
     constraint 'entry', {:cardinality=>"1..*"}
