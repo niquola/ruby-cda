@@ -103,7 +103,7 @@ class Cda::XmlParser
   end
 
   def parse_text(instance, text_element)
-    text_element.set_value(instance, parse_value(text_element))
+    text_element.set_value(instance, values_of('text()').join)
   end
 
   def instantiate_from_element(model_class)
