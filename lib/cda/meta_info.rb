@@ -28,8 +28,9 @@ class Cda::MetaInfo
 
   class Field < DelegateClass(Virtus::Attribute)
     def fully_qualified_name
+      sanitized_name = sanitize_element_name(name)
       ns = annotations[:ns]
-      !ns.nil? ? "#{ns}:#{name}" : name
+      !ns.nil? ? "#{ns}:#{sanitized_name}" : sanitized_name
     end
 
     def get_value(instance)
