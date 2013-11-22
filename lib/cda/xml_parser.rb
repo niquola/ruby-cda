@@ -102,9 +102,14 @@ class Cda::XmlParser
     end
   end
 
+  def parse_text(instance, text_element)
+    text_element.set_value(instance, parse_value(text_element))
+  end
+
   def instantiate_from_element(model_class)
     meta_info = Cda::MetaInfo.for(model_class)
     instance = model_class.new
+    parse_text(instance, meta_info.text) if meta_info.has_text?
     meta_info.attributes.each { |attr| parse_attribute(instance, attr) }
     meta_info.elements.each { |element| parse_element(instance, element) }
     instance

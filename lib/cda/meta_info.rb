@@ -1,17 +1,21 @@
 require 'delegate'
 
 class Cda::MetaInfo
-  attr_reader :elements, :attributes
+  attr_reader :elements, :attributes, :text
 
   def self.for(klass)
     new(klass)
+  end
+
+  def has_text?
+    !text.nil?
   end
 
   private
 
   def initialize(klass)
     fields = convert_to_fields(klass.attribute_set)
-    @elements, @attributes = divide_fields_by_kind(fields)
+    @elements, @attributes, @text = divide_fields_by_kind(fields)
   end
 
   def convert_to_fields(attribute_set)
@@ -21,9 +25,8 @@ class Cda::MetaInfo
   def divide_fields_by_kind(fields)
     #noinspection RubyArgCount
     allowed_fields = fields.select { |f| f.allowed? }
-    xml_elements = allowed_fields.select { |attr| attr.kind == :element }
-    xml_attributes = allowed_fields - xml_elements
-    [xml_elements, xml_attributes]
+    groups = allowed_fields.group_by { |f| (f.name == :_text) ? :text : f.kind }
+    [groups[:element] || [], groups[:attribute] || [], groups[:text] && groups[:text].first]
   end
 
   class Field < DelegateClass(Virtus::Attribute)
