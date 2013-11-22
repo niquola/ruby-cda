@@ -19,6 +19,10 @@ class Cda::XmlBuilder
       time.presence && Medapp::Formatting.format_date(time) || ''
     end
 
+    def format_array(array)
+      array.join(" ")
+    end
+
     def apply_format(value, format)
       send("format_#{format}", value)
     end
@@ -29,6 +33,8 @@ class Cda::XmlBuilder
           :datetime
         when Date
           :date
+        when Array
+          :array
         else
           nil
       end
