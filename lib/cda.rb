@@ -14,6 +14,8 @@ module Cda
   autoload :MetaInfo, "cda/meta_info"
   autoload :StrictAttributes, 'cda/strict_attributes'
   autoload :Utility, 'cda/utility'
+  autoload :ValueCoercer, 'cda/value_coercer'
+  autoload :Timestamp, 'cda/timestamp'
   autoload :Base, 'cda/base'
 end
 

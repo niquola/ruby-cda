@@ -1,7 +1,7 @@
 module Gen::Types
   MAPPINGS = {
     'int'             => "Integer",
-    'ts'              => 'DateTime',
+    'ts'              => 'Timestamp',
     'st'              => 'String',
     'cs'              => 'String',
     'bl'              => 'Boolean',

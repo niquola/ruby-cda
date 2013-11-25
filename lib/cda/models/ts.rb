@@ -1,3 +1,3 @@
 class Cda::TS < Cda::QTY
-  attribute :value, DateTime, annotations: {:use=>:optional, :kind=>:attribute}
+  attribute :value, Cda::Timestamp, annotations: {:use=>:optional, :kind=>:attribute}
 end
