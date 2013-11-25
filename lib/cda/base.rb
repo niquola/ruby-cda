@@ -8,6 +8,7 @@ module Cda
     self.defaults = {}
 
     def initialize(attrs = {}, &_)
+      attrs = {_text: attrs} if attrs.is_a?(String) && respond_to?(:_text)
       raise "Can't initialize #{self.class.name} with #{attrs.class.name} (#{attrs.inspect})" unless attrs.is_a?(Hash)
       attrs_with_defaults = Cda::Utility.merge_json(attrs.with_indifferent_access, defaults)
       super(Utility.mk_class(attrs_with_defaults))
