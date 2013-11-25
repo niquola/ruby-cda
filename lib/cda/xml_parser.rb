@@ -8,8 +8,8 @@ module Cda
       @xml = xml
     end
 
-    def parse
-      instantiate_from_element(resolve_class)
+    def parse(model_class = nil)
+      instantiate_from_element(model_class || resolve_class)
     end
 
     def within_each(xpath_or_nodes, &block)
